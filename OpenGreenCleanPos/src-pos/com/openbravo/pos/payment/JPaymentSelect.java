@@ -238,10 +238,19 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
         public String getLabelKey() { return "tab.paper"; }
         public String getIconKey() { return "/com/openbravo/images/knotes.png"; }
     }
-   
+
     public class JPaymentMagcardCreator implements JPaymentCreator {
         public JPaymentInterface createJPayment() {
             return new JPaymentMagcard(app, JPaymentSelect.this);
+        }
+        public String getKey() { return "payment.magcard"; }
+        public String getLabelKey() { return "tab.magcard"; }
+        public String getIconKey() { return "/com/openbravo/images/vcard.png"; }
+    }
+
+    public class JPaymentMagcardCreditCreator implements JPaymentCreator {
+        public JPaymentInterface createJPayment() {
+            return new JPaymentMagcardCredit(app, JPaymentSelect.this);
         }
         public String getKey() { return "payment.magcard"; }
         public String getLabelKey() { return "tab.magcard"; }
