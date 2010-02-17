@@ -232,6 +232,7 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
         btnSave = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         btnPay = new javax.swing.JButton();
+        btnAccount = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         m_jKeys = new com.openbravo.editor.JEditorKeys();
@@ -295,6 +296,20 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
             }
         });
         jPanel6.add(btnPay);
+
+        btnAccount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/kdmconfigC32.png"))); // NOI18N
+        btnAccount.setText(AppLocal.getIntString("button.pay")); // NOI18N
+        btnAccount.setFocusPainted(false);
+        btnAccount.setFocusable(false);
+        btnAccount.setMargin(new java.awt.Insets(8, 14, 8, 14));
+        btnAccount.setRequestFocusEnabled(false);
+        btnAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAccountActionPerformed(evt);
+            }
+        });
+        jPanel6.add(btnAccount);
+        btnAccount.getAccessibleContext().setAccessibleName("Account");
 
         jPanel2.add(jPanel6, java.awt.BorderLayout.LINE_START);
 
@@ -416,7 +431,7 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCurdate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,7 +464,7 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtCurdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -564,7 +579,68 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
         
 }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void btnAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountActionPerformed
+paymentdialog.setPrintSelected(true);
+
+        if (paymentdialog.showDialog(customerext.getCurdebt(), null, null, null)) {
+
+            // Save the ticket
+            TicketInfo ticket = new TicketInfo();
+            ticket.setTicketType(TicketInfo.RECEIPT_PAYMENT);
+
+            List<PaymentInfo> payments = paymentdialog.getSelectedPayments();
+
+            double total = 0.0;
+            for (PaymentInfo p : payments) {
+                total += p.getTotal();
+            }
+
+            payments.add(new PaymentInfoTicket(-total, "debtpaid"));
+
+            ticket.setPayments(payments);
+
+            ticket.setUser(app.getAppUserView().getUser().getUserInfo());
+            ticket.setActiveCash(app.getActiveCashIndex());
+            ticket.setDate(new Date());
+            ticket.setCustomer(customerext);
+            ticket.setDateReturn(paymentdialog.getrDate());
+
+            try {
+                dlsales.saveTicket(ticket, app.getInventoryLocation());
+            } catch (BasicException eData) {
+                MessageInf msg = new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.nosaveticket"), eData);
+                msg.show(this);
+            }
+
+
+            // reload customer
+            CustomerInfoExt c;
+            try {
+                c = dlsales.loadCustomerExt(customerext.getId());
+                if (c == null) {
+                    MessageInf msg = new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("message.cannotfindcustomer"));
+                    msg.show(this);
+                } else {
+                    editCustomer(c);
+                }
+            } catch (BasicException ex) {
+                c = null;
+                MessageInf msg = new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("message.cannotfindcustomer"), ex);
+                msg.show(this);
+            }
+
+            printTicket(paymentdialog.isPrintSelected()
+                    ? "Printer.CustomerPaid"
+                    : "Printer.CustomerPaid2",
+                    ticket, c);
+        }
+
+        editorcard.reset();
+        editorcard.activate();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAccountActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAccount;
     private javax.swing.JButton btnCustomer;
     private javax.swing.JButton btnPay;
     private javax.swing.JButton btnSave;
