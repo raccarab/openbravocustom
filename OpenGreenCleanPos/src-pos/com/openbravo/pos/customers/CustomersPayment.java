@@ -578,7 +578,7 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
         }
         
 }//GEN-LAST:event_btnSaveActionPerformed
-
+//Le compte
     private void btnAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountActionPerformed
 paymentdialog.setPrintSelected(true);
 
