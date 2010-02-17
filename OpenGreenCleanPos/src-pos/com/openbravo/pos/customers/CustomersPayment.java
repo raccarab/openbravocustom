@@ -31,6 +31,7 @@ import com.openbravo.pos.forms.DataLogicSales;
 import com.openbravo.pos.forms.DataLogicSystem;
 import com.openbravo.pos.forms.JPanelView;
 import com.openbravo.pos.payment.JPaymentSelect;
+import com.openbravo.pos.payment.JPaymentSelectCredit;
 import com.openbravo.pos.payment.JPaymentSelectCustomer;
 import com.openbravo.pos.payment.PaymentInfo;
 import com.openbravo.pos.payment.PaymentInfoTicket;
@@ -55,8 +56,9 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
     private DataLogicCustomers dlcustomers;
     private DataLogicSales dlsales;
     private DataLogicSystem dlsystem;
-    private TicketParser ttp;    
+    private TicketParser ttp;
     private JPaymentSelect paymentdialog;
+    private JPaymentSelect paymentdialogCredit;
     
     private CustomerInfoExt customerext;
     private DirtyManager dirty;
@@ -92,8 +94,11 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
 
     public void activate() throws BasicException {
 
-        paymentdialog = JPaymentSelectCustomer.getDialog(this);        
+        paymentdialog = JPaymentSelectCustomer.getDialog(this);
         paymentdialog.init(app);
+
+        paymentdialogCredit = JPaymentSelectCredit.getDialog(this);
+        paymentdialogCredit.init(app);
 
         resetCustomer();
 
@@ -136,8 +141,9 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
 
         dirty.setDirty(false);
 
-        btnSave.setEnabled(true);    
+        btnSave.setEnabled(true);
         btnPay.setEnabled(customer.getCurdebt() != null && customer.getCurdebt().doubleValue() > 0.0);
+        btnCredit.setEnabled(customer != null && (customer.getCurdebt() == null || customer.getCurdebt().doubleValue() <= 0.0));
     }
 
     private void resetCustomer() {
@@ -158,6 +164,7 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
 
         btnSave.setEnabled(false);
         btnPay.setEnabled(false);
+        btnCredit.setEnabled(false);
 
     }
 
@@ -232,7 +239,7 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
         btnSave = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         btnPay = new javax.swing.JButton();
-        btnAccount = new javax.swing.JButton();
+        btnCredit = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         m_jKeys = new com.openbravo.editor.JEditorKeys();
@@ -297,19 +304,19 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
         });
         jPanel6.add(btnPay);
 
-        btnAccount.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/kdmconfigC32.png"))); // NOI18N
-        btnAccount.setText(AppLocal.getIntString("button.pay")); // NOI18N
-        btnAccount.setFocusPainted(false);
-        btnAccount.setFocusable(false);
-        btnAccount.setMargin(new java.awt.Insets(8, 14, 8, 14));
-        btnAccount.setRequestFocusEnabled(false);
-        btnAccount.addActionListener(new java.awt.event.ActionListener() {
+        btnCredit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/kdmconfig.png"))); // NOI18N
+        btnCredit.setText("Pay account");
+        btnCredit.setActionCommand("btnCredit");
+        btnCredit.setMaximumSize(new java.awt.Dimension(103, 42));
+        btnCredit.setMinimumSize(new java.awt.Dimension(103, 42));
+        btnCredit.setPreferredSize(new java.awt.Dimension(103, 42));
+        btnCredit.setSize(new java.awt.Dimension(103, 42));
+        btnCredit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAccountActionPerformed(evt);
+                btnCreditActionPerformed(evt);
             }
         });
-        jPanel6.add(btnAccount);
-        btnAccount.getAccessibleContext().setAccessibleName("Account");
+        jPanel6.add(btnCredit);
 
         jPanel2.add(jPanel6, java.awt.BorderLayout.LINE_START);
 
@@ -431,7 +438,7 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCurdate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,7 +471,7 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtCurdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -578,32 +585,31 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
         }
         
 }//GEN-LAST:event_btnSaveActionPerformed
-//Le compte
-    private void btnAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountActionPerformed
-paymentdialog.setPrintSelected(true);
 
-        if (paymentdialog.showDialog(customerext.getCurdebt(), null, null, null)) {
+    private void btnCreditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreditActionPerformed
+        paymentdialogCredit.setPrintSelected(true);
+
+        if (paymentdialogCredit.showDialog(0.0, customerext, null, null)) {
 
             // Save the ticket
             TicketInfo ticket = new TicketInfo();
             ticket.setTicketType(TicketInfo.RECEIPT_PAYMENT);
 
-            List<PaymentInfo> payments = paymentdialog.getSelectedPayments();
+            List<PaymentInfo> payments = paymentdialogCredit.getSelectedPayments();
 
             double total = 0.0;
             for (PaymentInfo p : payments) {
                 total += p.getTotal();
             }
 
-            payments.add(new PaymentInfoTicket(-total, "debtpaid"));
+            payments.add(new PaymentInfoTicket(total, "creditpaid"));
 
             ticket.setPayments(payments);
-
             ticket.setUser(app.getAppUserView().getUser().getUserInfo());
             ticket.setActiveCash(app.getActiveCashIndex());
             ticket.setDate(new Date());
             ticket.setCustomer(customerext);
-            ticket.setDateReturn(paymentdialog.getrDate());
+            ticket.setDateReturn(paymentdialogCredit.getrDate());
 
             try {
                 dlsales.saveTicket(ticket, app.getInventoryLocation());
@@ -629,18 +635,19 @@ paymentdialog.setPrintSelected(true);
                 msg.show(this);
             }
 
-            printTicket(paymentdialog.isPrintSelected()
+            printTicket(paymentdialogCredit.isPrintSelected()
                     ? "Printer.CustomerPaid"
                     : "Printer.CustomerPaid2",
                     ticket, c);
         }
 
         editorcard.reset();
-        editorcard.activate();        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAccountActionPerformed
-
+        editorcard.activate();
+        
+    }//GEN-LAST:event_btnCreditActionPerformed
+//Le compte
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAccount;
+    private javax.swing.JButton btnCredit;
     private javax.swing.JButton btnCustomer;
     private javax.swing.JButton btnPay;
     private javax.swing.JButton btnSave;

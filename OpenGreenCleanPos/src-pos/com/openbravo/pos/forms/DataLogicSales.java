@@ -437,6 +437,17 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                             setTimestamp(2, ticket.getCustomer().getCurdate());
                             setString(3, ticket.getCustomer().getId());
                         }});
+                    } else if ("creditpaid".equals(p.getName())) {
+
+                        // udate customer fields...
+                        ticket.getCustomer().updateCurDebt(-p.getTotal(), ticket.getDate());
+
+                        // save customer fields...
+                        getDebtUpdate().exec(new DataParams() { public void writeValues() throws BasicException {
+                            setDouble(1, ticket.getCustomer().getCurdebt());
+                            setTimestamp(2, ticket.getCustomer().getCurdate());
+                            setString(3, ticket.getCustomer().getId());
+                        }});
                     }
                 }
 

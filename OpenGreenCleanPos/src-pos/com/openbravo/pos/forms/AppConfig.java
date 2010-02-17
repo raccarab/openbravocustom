@@ -51,6 +51,10 @@ public class AppConfig implements AppProperties {
     public AppConfig(File configfile) {
         init(configfile);
     }
+
+    public AppConfig() {
+        init(getDefaultConfig());
+    }
     
     private void init(File configfile) {
         this.configfile = configfile;

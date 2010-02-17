@@ -25,7 +25,6 @@ import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.Window;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import com.openbravo.pos.forms.AppView;
@@ -127,7 +126,6 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
             int res = JOptionPane.showConfirmDialog(this, AppLocal.getIntString("message.nocustomernodebt"), AppLocal.getIntString("title.editor"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE);
             return false;
         }
-          
 
         this.customerext = customerext;        
 
@@ -213,6 +211,15 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
         public String getLabelKey() { return "tab.cash"; }
         public String getIconKey() { return "/com/openbravo/images/cash.png"; }
     }
+
+    public class JPaymentCashCreditCreator implements JPaymentCreator {
+        public JPaymentInterface createJPayment() {
+            return new JPaymentCashPosCredit(JPaymentSelect.this, dlSystem);
+        }
+        public String getKey() { return "payment.cash"; }
+        public String getLabelKey() { return "tab.cash"; }
+        public String getIconKey() { return "/com/openbravo/images/cash.png"; }
+    }
         
     public class JPaymentChequeCreator implements JPaymentCreator {
         public JPaymentInterface createJPayment() {
@@ -257,14 +264,6 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
         public String getKey() { return "payment.debt"; }
         public String getLabelKey() { return "tab.debt"; }
         public String getIconKey() { return "/com/openbravo/images/kdmconfig32.png"; }
-    }
-    public class JPaymentCreditCreator implements JPaymentCreator {
-        public JPaymentInterface createJPayment() {
-            return new JPaymentCredit(JPaymentSelect.this);
-        }
-        public String getKey() { return "payment.credit"; }
-        public String getLabelKey() { return "tab.credit"; }
-        public String getIconKey() { return "/com/openbravo/images/kdmconfigC32.png"; }
     }
 
     public class JPaymentCashRefundCreator implements JPaymentCreator {
