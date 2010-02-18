@@ -74,7 +74,7 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
     }
 
     JPaymentMagcardCredit(AppView app, JPaymentSelect aThis) {
-        throw new UnsupportedOperationException("Not yet implemented");
+      //  throw new UnsupportedOperationException("Not yet implemented");
     }
     
     public void activate(CustomerInfoExt customerext, double dTotal, String transID) {

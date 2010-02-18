@@ -602,8 +602,6 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
                 total += p.getTotal();
             }
 
-            payments.add(new PaymentInfoTicket(total, "creditpaid"));
-
             ticket.setPayments(payments);
             ticket.setUser(app.getAppUserView().getUser().getUserInfo());
             ticket.setActiveCash(app.getActiveCashIndex());
