@@ -47,14 +47,30 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
     private JPaymentNotifier m_notifier;
 
     private double m_dPaid;
-    private double m_dTotal;    
+    private double m_dTotal;
+
+     private PaymentPanel m_cardpanel;
+    private PaymentGateway m_paymentgateway;
+    private String transaction;
     
     /** Creates new form JPaymentCash */
-    public JPaymentMagcardCredit(JPaymentNotifier notifier, DataLogicSystem dlSystem) {
+    public JPaymentMagcardCredit(AppView app, JPaymentNotifier notifier, DataLogicSystem dlSystem) {
         
         m_notifier = notifier;
         
-        initComponents();  
+        initComponents();
+        
+        m_paymentgateway = PaymentGatewayFac.getPaymentGateway(app.getProperties());
+
+        if (m_paymentgateway == null) {
+            jlblMessage.setText(AppLocal.getIntString("message.nopaymentgateway"));
+        } else {
+            // Se van a poder efectuar pagos con tarjeta
+            m_cardpanel = PaymentPanelFac.getPaymentPanel(app.getProperties().getProperty("payment.magcardreader"), notifier);
+            add(m_cardpanel.getComponent(), BorderLayout.CENTER);
+            jlblMessage.setText(null);
+            // jlblMessage.setText(AppLocal.getIntString("message.nocardreader"));
+        }
         
         m_jTendered.addPropertyChangeListener("Edition", new RecalculateState());
         m_jTendered.addEditorKeys(m_jKeys);
@@ -72,10 +88,6 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
         }
         
     }
-
-    JPaymentMagcardCredit(AppView app, JPaymentSelect aThis) {
-      //  throw new UnsupportedOperationException("Not yet implemented");
-    }
     
     public void activate(CustomerInfoExt customerext, double dTotal, String transID) {
         
@@ -87,8 +99,17 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
         printState();        
     }
     public PaymentInfo executePayment() {
-            return new PaymentInfoCash(m_dPaid, m_dPaid);
-        
+        jlblMessage.setText(null);
+
+        PaymentInfoMagcard payinfo = m_cardpanel.getPaymentInfoMagcard();
+
+        m_paymentgateway.execute(payinfo);
+        if (payinfo.isPaymentOK()) {
+            return payinfo;
+        } else {
+            jlblMessage.setText(payinfo.getMessage());
+            return null;
+        }
     }
     public Component getComponent() {
         return this;
@@ -176,6 +197,8 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
         m_jKeys = new com.openbravo.editor.JEditorKeys();
         jPanel3 = new javax.swing.JPanel();
         m_jTendered = new com.openbravo.editor.JEditorCurrencyPositive();
+        jPanel7 = new javax.swing.JPanel();
+        jlblMessage = new javax.swing.JTextArea();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -217,6 +240,17 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
         jPanel2.add(jPanel1, java.awt.BorderLayout.NORTH);
 
         add(jPanel2, java.awt.BorderLayout.LINE_END);
+
+        jlblMessage.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        jlblMessage.setEditable(false);
+        jlblMessage.setLineWrap(true);
+        jlblMessage.setWrapStyleWord(true);
+        jlblMessage.setFocusable(false);
+        jlblMessage.setPreferredSize(new java.awt.Dimension(300, 72));
+        jlblMessage.setRequestFocusEnabled(false);
+        jPanel7.add(jlblMessage);
+
+        add(jPanel7, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
     
     
@@ -228,6 +262,8 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JTextArea jlblMessage;
     private com.openbravo.editor.JEditorKeys m_jKeys;
     private javax.swing.JLabel m_jMoneyEuros;
     private com.openbravo.editor.JEditorCurrencyPositive m_jTendered;

@@ -250,7 +250,7 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
 
     public class JPaymentMagcardCreditCreator implements JPaymentCreator {
         public JPaymentInterface createJPayment() {
-            return new JPaymentMagcardCredit(app, JPaymentSelect.this);
+            return new JPaymentMagcardCredit(app,JPaymentSelect.this, dlSystem);
         }
         public String getKey() { return "payment.magcard"; }
         public String getLabelKey() { return "tab.magcard"; }

@@ -417,7 +417,18 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                     , "INSERT INTO PAYMENTS (ID, RECEIPT, PAYMENT, TOTAL, TRANSID, RETURNMSG) VALUES (?, ?, ?, ?, ?, ?)"
                     , SerializerWriteParams.INSTANCE);
                 for (final PaymentInfo p : ticket.getPayments()) {
-                    paymentinsert.exec(new DataParams() { public void writeValues() throws BasicException {
+                    
+//                    if ("creditpaid".equals(p.getName())) {
+//                        paymentinsert.exec(new DataParams() { public void writeValues() throws BasicException {
+//                        setString(1, UUID.randomUUID().toString());
+//                        setString(2, ticket.getId());
+//                        setString(3, p.getName());
+//                        setDouble(4, 0.0);
+//                        setString(5, ticket.getTransactionID());
+//                        setBytes(6, (byte[]) Formats.BYTEA.parseValue(ticket.getReturnMessage()));
+//                    }});
+//                    } else {
+                        paymentinsert.exec(new DataParams() { public void writeValues() throws BasicException {
                         setString(1, UUID.randomUUID().toString());
                         setString(2, ticket.getId());
                         setString(3, p.getName());
@@ -425,6 +436,9 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                         setString(5, ticket.getTransactionID());
                         setBytes(6, (byte[]) Formats.BYTEA.parseValue(ticket.getReturnMessage()));
                     }});
+//                    }
+
+                    
 
                     if ("debt".equals(p.getName()) || "debtpaid".equals(p.getName())) {
 
