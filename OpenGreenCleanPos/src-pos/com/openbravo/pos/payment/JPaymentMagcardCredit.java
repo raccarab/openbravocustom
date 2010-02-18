@@ -18,7 +18,6 @@
 //    along with GreenPressing POS.  If not, see <http://www.gnu.org/licenses/>.
 
 package com.openbravo.pos.payment;
-import com.openbravo.pos.forms.AppView;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -26,6 +25,7 @@ import com.openbravo.data.gui.MessageInf;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.format.Formats;
 import com.openbravo.pos.customers.CustomerInfoExt;
+import com.openbravo.pos.forms.AppView;
 import com.openbravo.pos.forms.DataLogicSystem;
 import com.openbravo.pos.scripting.ScriptEngine;
 import com.openbravo.pos.scripting.ScriptException;
@@ -49,7 +49,7 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
     private double m_dPaid;
     private double m_dTotal;
 
-     private PaymentPanel m_cardpanel;
+    private PaymentPanel m_cardpanel;
     private PaymentGateway m_paymentgateway;
     private String transaction;
     
@@ -58,19 +58,7 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
         
         m_notifier = notifier;
         
-        initComponents();
-        
-        m_paymentgateway = PaymentGatewayFac.getPaymentGateway(app.getProperties());
-
-        if (m_paymentgateway == null) {
-            jlblMessage.setText(AppLocal.getIntString("message.nopaymentgateway"));
-        } else {
-            // Se van a poder efectuar pagos con tarjeta
-            m_cardpanel = PaymentPanelFac.getPaymentPanel(app.getProperties().getProperty("payment.magcardreader"), notifier);
-            add(m_cardpanel.getComponent(), BorderLayout.CENTER);
-            jlblMessage.setText(null);
-            // jlblMessage.setText(AppLocal.getIntString("message.nocardreader"));
-        }
+        initComponents();  
         
         m_jTendered.addPropertyChangeListener("Edition", new RecalculateState());
         m_jTendered.addEditorKeys(m_jKeys);
@@ -86,6 +74,17 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
                 msg.show(this);
             }
         }
+        m_paymentgateway = PaymentGatewayFac.getPaymentGateway(app.getProperties());
+        
+//        if (m_paymentgateway == null) {
+//            jlblMessage.setText(AppLocal.getIntString("message.nopaymentgateway"));
+//        } else {
+//            // Se van a poder efectuar pagos con tarjeta
+//            m_cardpanel = PaymentPanelFac.getPaymentPanel(app.getProperties().getProperty("payment.magcardreader"), notifier);
+//            add(m_cardpanel.getComponent(), BorderLayout.CENTER);
+//            jlblMessage.setText(null);
+//            // jlblMessage.setText(AppLocal.getIntString("message.nocardreader"));
+//        }
         
     }
     
@@ -99,9 +98,11 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
         printState();        
     }
     public PaymentInfo executePayment() {
+
+        m_dTotal=m_dPaid;
         jlblMessage.setText(null);
 
-        PaymentInfoMagcard payinfo = m_cardpanel.getPaymentInfoMagcard();
+        PaymentInfoMagcard payinfo = new PaymentInfoMagcard("0", "0", "0", "0", m_dTotal);
 
         m_paymentgateway.execute(payinfo);
         if (payinfo.isPaymentOK()) {
@@ -110,6 +111,7 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
             jlblMessage.setText(payinfo.getMessage());
             return null;
         }
+        
     }
     public Component getComponent() {
         return this;
@@ -192,13 +194,13 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
         jLabel8 = new javax.swing.JLabel();
         m_jMoneyEuros = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jlblMessage = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         m_jKeys = new com.openbravo.editor.JEditorKeys();
         jPanel3 = new javax.swing.JPanel();
         m_jTendered = new com.openbravo.editor.JEditorCurrencyPositive();
-        jPanel7 = new javax.swing.JPanel();
-        jlblMessage = new javax.swing.JTextArea();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -224,6 +226,17 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
         jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         jPanel5.add(jPanel6, java.awt.BorderLayout.CENTER);
 
+        jlblMessage.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        jlblMessage.setEditable(false);
+        jlblMessage.setLineWrap(true);
+        jlblMessage.setWrapStyleWord(true);
+        jlblMessage.setFocusable(false);
+        jlblMessage.setPreferredSize(new java.awt.Dimension(300, 72));
+        jlblMessage.setRequestFocusEnabled(false);
+        jPanel7.add(jlblMessage);
+
+        jPanel5.add(jPanel7, java.awt.BorderLayout.SOUTH);
+
         add(jPanel5, java.awt.BorderLayout.CENTER);
 
         jPanel2.setLayout(new java.awt.BorderLayout());
@@ -240,17 +253,6 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
         jPanel2.add(jPanel1, java.awt.BorderLayout.NORTH);
 
         add(jPanel2, java.awt.BorderLayout.LINE_END);
-
-        jlblMessage.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
-        jlblMessage.setEditable(false);
-        jlblMessage.setLineWrap(true);
-        jlblMessage.setWrapStyleWord(true);
-        jlblMessage.setFocusable(false);
-        jlblMessage.setPreferredSize(new java.awt.Dimension(300, 72));
-        jlblMessage.setRequestFocusEnabled(false);
-        jPanel7.add(jlblMessage);
-
-        add(jPanel7, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
     
     
