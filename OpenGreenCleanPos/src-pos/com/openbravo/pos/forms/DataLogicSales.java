@@ -443,6 +443,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                     if ("debt".equals(p.getName()) || "debtpaid".equals(p.getName())) {
 
                         // udate customer fields...
+
                         ticket.getCustomer().updateCurDebt(p.getTotal(), ticket.getDate());
 
                         // save customer fields...

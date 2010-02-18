@@ -91,7 +91,8 @@ public class JPaymentDebt extends javax.swing.JPanel implements JPaymentInterfac
         
     }
     public PaymentInfo executePayment() {
-        return new PaymentInfoTicket(m_dPaid, "debt");      
+        // This is to avoid the decimals problem
+        return new PaymentInfoTicket(((Math.rint(((Double) m_dPaid)*100))/100), "debt");
     }
     public Component getComponent() {
         return this;
