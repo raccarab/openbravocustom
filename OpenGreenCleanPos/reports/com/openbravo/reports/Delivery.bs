@@ -26,7 +26,6 @@ report.setResourceBundle("com/openbravo/reports/Delivery_messages");
 
 report.setSentence("SELECT " +
                 "CUSTOMERS.SEARCHKEY, " +
-                "CUSTOMERS.CURDEBT, " +
                 "CUSTOMERS.NAME AS NAMECUST, " +
                 "TICKETS.TICKETID, " +
                 "TICKETS.DATERETURN, " +
