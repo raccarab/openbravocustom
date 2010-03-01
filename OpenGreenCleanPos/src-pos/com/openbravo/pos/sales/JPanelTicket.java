@@ -1185,12 +1185,11 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jPanTicket = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        m_jUp = new javax.swing.JButton();
-        m_jDown = new javax.swing.JButton();
         m_jDelete = new javax.swing.JButton();
         m_jList = new javax.swing.JButton();
         m_jEditLine = new javax.swing.JButton();
         jEditAttributes = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         m_jPanelCentral = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         m_jPanTotals = new javax.swing.JPanel();
@@ -1293,36 +1292,9 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 5));
         jPanel2.setMinimumSize(new java.awt.Dimension(74, 280));
-        jPanel2.setPreferredSize(new java.awt.Dimension(60, 240));
+        jPanel2.setPreferredSize(new java.awt.Dimension(60, 225));
         jPanel2.setRequestFocusEnabled(false);
         jPanel2.setLayout(new java.awt.GridLayout(0, 1, 5, 5));
-
-        m_jUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/1uparrow22.png"))); // NOI18N
-        m_jUp.setFocusPainted(false);
-        m_jUp.setFocusable(false);
-        m_jUp.setMargin(new java.awt.Insets(8, 14, 8, 14));
-        m_jUp.setMaximumSize(new java.awt.Dimension(30, 25));
-        m_jUp.setMinimumSize(new java.awt.Dimension(30, 25));
-        m_jUp.setPreferredSize(new java.awt.Dimension(30, 25));
-        m_jUp.setRequestFocusEnabled(false);
-        m_jUp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                m_jUpActionPerformed(evt);
-            }
-        });
-        jPanel2.add(m_jUp);
-
-        m_jDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/1downarrow22.png"))); // NOI18N
-        m_jDown.setFocusPainted(false);
-        m_jDown.setFocusable(false);
-        m_jDown.setMargin(new java.awt.Insets(8, 14, 8, 14));
-        m_jDown.setRequestFocusEnabled(false);
-        m_jDown.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                m_jDownActionPerformed(evt);
-            }
-        });
-        jPanel2.add(m_jDown);
 
         m_jDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/locationbar_erase.png"))); // NOI18N
         m_jDelete.setFocusPainted(false);
@@ -1372,6 +1344,9 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         });
         jPanel2.add(jEditAttributes);
 
+        jButton1.setText("jButton1");
+        jPanel2.add(jButton1);
+
         jPanel5.add(jPanel2, java.awt.BorderLayout.NORTH);
 
         m_jPanTicket.add(jPanel5, java.awt.BorderLayout.LINE_END);
@@ -1393,7 +1368,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jPanTotals.add(m_jTaxesEuros);
 
         m_jLblTotalEuros3.setText(AppLocal.getIntString("label.subtotalcash")); // NOI18N
-        m_jLblTotalEuros3.setPreferredSize(new java.awt.Dimension(60, 16));
         m_jPanTotals.add(m_jLblTotalEuros3);
 
         m_jSubtotalEuros.setBackground(java.awt.Color.white);
@@ -1409,7 +1383,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jPanTotals.add(m_jLblTotalEuros1);
 
         m_jTotalEuros.setBackground(java.awt.Color.white);
-        m_jTotalEuros.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        m_jTotalEuros.setFont(new java.awt.Font("Dialog", 1, 14));
         m_jTotalEuros.setForeground(new java.awt.Color(255, 0, 51));
         m_jTotalEuros.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         m_jTotalEuros.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow")), javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4)));
@@ -1595,18 +1569,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         
     }//GEN-LAST:event_m_jDeleteActionPerformed
 
-    private void m_jUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jUpActionPerformed
-        
-        m_ticketlines.selectionUp();
-
-    }//GEN-LAST:event_m_jUpActionPerformed
-
-    private void m_jDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jDownActionPerformed
-
-        m_ticketlines.selectionDown();
-
-    }//GEN-LAST:event_m_jDownActionPerformed
-
     private void m_jListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jListActionPerformed
 
         ProductInfoExt prod = JProductFinder.showMessage(JPanelTicket.this, dlSales);    
@@ -1683,6 +1645,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     private javax.swing.JButton btnCustomer;
     private javax.swing.JButton btnSplit;
     private javax.swing.JPanel catcontainer;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jEditAttributes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -1693,7 +1656,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     private javax.swing.JPanel m_jButtonsExt;
     private javax.swing.JPanel m_jContEntries;
     private javax.swing.JButton m_jDelete;
-    private javax.swing.JButton m_jDown;
     private javax.swing.JButton m_jEditLine;
     private javax.swing.JButton m_jEnter;
     private javax.swing.JTextField m_jKeyFactory;
@@ -1717,7 +1679,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     private javax.swing.JLabel m_jTaxesEuros;
     private javax.swing.JLabel m_jTicketId;
     private javax.swing.JLabel m_jTotalEuros;
-    private javax.swing.JButton m_jUp;
     private javax.swing.JToggleButton m_jaddtax;
     private javax.swing.JButton m_jbtnScale;
     // End of variables declaration//GEN-END:variables
