@@ -1648,10 +1648,11 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 }//GEN-LAST:event_jEditAttributesActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          double discountrate = JNumberDialog.showEditNumber(this, AppLocal.getIntString("label.remise"), AppLocal.getIntString("label.remiseinput"), new ImageIcon(ScaleDialog.class.getResource("/com/openbravo/images/inbox.png")));
+          Double discountrate = JNumberDialog.showEditNumber(this, AppLocal.getIntString("label.remise"), AppLocal.getIntString("label.remiseinput"), new ImageIcon(ScaleDialog.class.getResource("/com/openbravo/images/inbox.png")));
 
-          if (discountrate<0 || discountrate>100)
-              return;
+          if (discountrate == null) return;
+
+          if (discountrate>0 && discountrate<100) {
 
           discountrate/=100;
 
@@ -1680,6 +1681,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
           } else {
              java.awt.Toolkit.getDefaultToolkit().beep();
          }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
