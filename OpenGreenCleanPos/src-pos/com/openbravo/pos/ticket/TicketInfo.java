@@ -373,6 +373,24 @@ public class TicketInfo implements SerializableRead, Externalizable {
         return dArticles;
     }
 
+
+    public double getPiecesCount() {
+        double dArticles = 0.0;
+        TicketLineInfo oLine;
+
+        for (Iterator<TicketLineInfo> i = m_aLines.iterator(); i.hasNext();) {
+            oLine = i.next();
+            if (oLine.getTaxInfo().getName().compareTo("Tax Pressing") == 0) {
+                dArticles += Math.ceil(oLine.getMultiply());
+                if ( !(oLine.getProductAttSetInstId()==null)) {
+                        dArticles *= parseAttributePieces(oLine.getProductAttSetInstDesc());
+                }
+            }
+        }
+
+        return dArticles;
+    }
+
     public double getSubTotal() {
         double sum = 0.0;
         for (TicketLineInfo line : m_aLines) {
@@ -423,6 +441,22 @@ public class TicketInfo implements SerializableRead, Externalizable {
         m_aLines = l;
     }
 
+    /**
+     *
+     * @return
+     */
+    private int parseAttributePieces(String att) {
+
+        if(
+                          att.substring(0,1).matches("[1-9]")
+                          && att.substring(1).matches(" Pieces")
+                          && (att.length() == "2 Pieces".length())
+                          ){
+            return Integer.parseInt(att.substring(0,1));
+            }
+        return 1;
+    }
+
     /*
      *Méthode qui retourne une liste de ticket
      *
@@ -432,30 +466,23 @@ public class TicketInfo implements SerializableRead, Externalizable {
 
         TicketLineInfo oLine;
         double cpt;
+        double pieces = 0;
+        double totalPieces = getPiecesCount();
 
          for (Iterator<TicketLineInfo> i = m_aLines.iterator(); i.hasNext();) {
 
-             cpt = 0;
+             
              oLine = i.next();
 
              if (oLine.getTaxInfo().getName().compareTo("Tax Pressing") == 0) {
-                  cpt = oLine.getMultiply();
-
+                  cpt = 0 + Math.ceil(oLine.getMultiply());
+                  pieces++;
                  if ( !(oLine.getProductAttSetInstId()==null)) {
-
-                     String att = oLine.getProductAttSetInstDesc();
-
-                     if(
-                          att.substring(0,1).matches("[1-9]")
-                          && att.substring(1).matches(" Pieces")
-                          && (att.length() == "2 Pieces".length())
-                          ){
-                         cpt *= Integer.parseInt(att.substring(0,1));
-                     }
+                    cpt *= parseAttributePieces(oLine.getProductAttSetInstDesc());   
                  }
-
+                  
                  for (int j = 0; j < cpt; j++) {
-                     String desc = " "+(j+1)+"/"+((int) cpt)+" Pieces";
+                     String desc = " "+pieces+"/"+((int) totalPieces)+" Pieces";
                      TicketLineInfo newline = oLine.copyTicketLine();
                      newline.setProductAttSetInstDesc(desc);
 
@@ -466,6 +493,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
          }
         return newList;
      }
+
 
 
     public List<PaymentInfo> getPayments() {
