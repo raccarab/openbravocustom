@@ -105,8 +105,11 @@
               <SubComponents>
                 <Component class="com.openbravo.editor.JEditorKeys" name="m_jKeys">
                   <Properties>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[222, 270]"/>
+                    </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[280, 320]"/>
+                      <Dimension value="[250, 300]"/>
                     </Property>
                   </Properties>
                   <Events>

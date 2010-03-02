@@ -36,6 +36,7 @@ import com.openbravo.pos.scale.ScaleException;
 import com.openbravo.pos.payment.JPaymentSelect;
 import com.openbravo.basic.BasicException;
 import com.openbravo.beans.JCalendarDialog;
+import com.openbravo.beans.JNumberDialog;
 import com.openbravo.data.gui.ListKeyed;
 import com.openbravo.data.loader.SentenceList;
 import com.openbravo.format.Formats;
@@ -52,6 +53,7 @@ import com.openbravo.pos.forms.BeanFactoryException;
 import com.openbravo.pos.inventory.TaxCategoryInfo;
 import com.openbravo.pos.payment.JPaymentSelectReceipt;
 import com.openbravo.pos.payment.JPaymentSelectRefund;
+import com.openbravo.pos.scale.ScaleDialog;
 import com.openbravo.pos.ticket.ProductInfoExt;
 import com.openbravo.pos.ticket.TaxInfo;
 import com.openbravo.pos.ticket.TicketInfo;
@@ -1344,7 +1346,12 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         });
         jPanel2.add(jEditAttributes);
 
-        jButton1.setText("jButton1");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/inbox.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1);
 
         jPanel5.add(jPanel2, java.awt.BorderLayout.NORTH);
@@ -1639,6 +1646,41 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         }
         
 }//GEN-LAST:event_jEditAttributesActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+          double discountrate = JNumberDialog.showEditNumber(this, AppLocal.getIntString("label.remise"), AppLocal.getIntString("label.remiseinput"), new ImageIcon(ScaleDialog.class.getResource("/com/openbravo/images/inbox.png")));
+
+          if (discountrate<0 || discountrate>100)
+              return;
+
+          discountrate/=100;
+
+          int index = m_ticketlines.getSelectedIndex();
+          String sdiscount;
+        TicketLineInfo remise;
+
+          if (index >= 0) {
+             TicketLineInfo line = m_oTicket.getLine(index);
+             if (line.getPrice() > 0.0 && discountrate > 0.0) {
+
+                 sdiscount = Formats.PERCENT.formatValue(discountrate);
+                remise = new TicketLineInfo("Remise " + line.getProductName() + " " + sdiscount,
+                     line.getProductTaxCategoryID(),
+                     line.getMultiply(),
+                     -line.getPrice () * discountrate,
+                     line.getTaxInfo()); 
+                int i = index + 1;
+                 m_oTicket.insertLine(i, remise);
+                 refreshTicket();
+                  setSelectedIndex(i);
+             }
+             else {
+                  java.awt.Toolkit.getDefaultToolkit().beep();
+             }
+          } else {
+             java.awt.Toolkit.getDefaultToolkit().beep();
+         }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
