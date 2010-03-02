@@ -374,16 +374,18 @@ public class TicketInfo implements SerializableRead, Externalizable {
     }
 
 
-    public double getPiecesCount() {
-        double dArticles = 0.0;
+    public int getPiecesCount() {
+        int dArticles = 0;
         TicketLineInfo oLine;
 
         for (Iterator<TicketLineInfo> i = m_aLines.iterator(); i.hasNext();) {
             oLine = i.next();
             if (oLine.getTaxInfo().getName().compareTo("Tax Pressing") == 0) {
-                dArticles += Math.ceil(oLine.getMultiply());
                 if ( !(oLine.getProductAttSetInstId()==null)) {
-                        dArticles *= parseAttributePieces(oLine.getProductAttSetInstDesc());
+                        dArticles += (oLine.getMultiply() * parseAttributePieces(oLine.getProductAttSetInstDesc()));
+                } else {
+                    dArticles += Math.ceil(oLine.getMultiply());
+
                 }
             }
         }
@@ -466,7 +468,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
 
         TicketLineInfo oLine;
         double cpt;
-        double pieces = 0;
+        int pieces = 1;
         double totalPieces = getPiecesCount();
 
          for (Iterator<TicketLineInfo> i = m_aLines.iterator(); i.hasNext();) {
@@ -476,18 +478,19 @@ public class TicketInfo implements SerializableRead, Externalizable {
 
              if (oLine.getTaxInfo().getName().compareTo("Tax Pressing") == 0) {
                   cpt = 0 + Math.ceil(oLine.getMultiply());
-                  pieces++;
+              
                  if ( !(oLine.getProductAttSetInstId()==null)) {
                     cpt *= parseAttributePieces(oLine.getProductAttSetInstDesc());   
                  }
                   
                  for (int j = 0; j < cpt; j++) {
-                     String desc = " "+pieces+"/"+((int) totalPieces)+" Pieces";
+
+                     String desc = " "+pieces+"/"+((int) totalPieces)+" P.";
                      TicketLineInfo newline = oLine.copyTicketLine();
                      newline.setProductAttSetInstDesc(desc);
 
                      newList.add(newline);
-
+                     pieces++;
                  }
              }
          }
