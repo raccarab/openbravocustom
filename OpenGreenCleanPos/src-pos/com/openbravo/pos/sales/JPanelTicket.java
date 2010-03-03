@@ -19,6 +19,7 @@
 
 package com.openbravo.pos.sales;
 
+import com.openbravo.pos.ticket.TicketTaxInfo;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -1179,6 +1180,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jTicketId = new javax.swing.JLabel();
         btnCustomer = new javax.swing.JButton();
         btnSplit = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         m_jPanelScripts = new javax.swing.JPanel();
         m_jButtonsExt = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -1226,15 +1228,16 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jTicketId.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         m_jTicketId.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow")), javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4)));
         m_jTicketId.setOpaque(true);
-        m_jTicketId.setPreferredSize(new java.awt.Dimension(160, 25));
+        m_jTicketId.setPreferredSize(new java.awt.Dimension(150, 25));
         m_jTicketId.setRequestFocusEnabled(false);
         m_jButtons.add(m_jTicketId);
 
         btnCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/kuser.png"))); // NOI18N
+        btnCustomer.setToolTipText("Clients");
         btnCustomer.setFocusPainted(false);
         btnCustomer.setFocusable(false);
         btnCustomer.setMargin(new java.awt.Insets(8, 14, 8, 14));
-        btnCustomer.setPreferredSize(new java.awt.Dimension(56, 35));
+        btnCustomer.setPreferredSize(new java.awt.Dimension(46, 35));
         btnCustomer.setRequestFocusEnabled(false);
         btnCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1244,10 +1247,11 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jButtons.add(btnCustomer);
 
         btnSplit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/editcut.png"))); // NOI18N
+        btnSplit.setToolTipText("Diviser ticket");
         btnSplit.setFocusPainted(false);
         btnSplit.setFocusable(false);
         btnSplit.setMargin(new java.awt.Insets(8, 14, 8, 14));
-        btnSplit.setPreferredSize(new java.awt.Dimension(56, 35));
+        btnSplit.setPreferredSize(new java.awt.Dimension(46, 35));
         btnSplit.setRequestFocusEnabled(false);
         btnSplit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1255,6 +1259,16 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
             }
         });
         m_jButtons.add(btnSplit);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/inbox.png"))); // NOI18N
+        jButton2.setToolTipText("Remise totale");
+        jButton2.setPreferredSize(new java.awt.Dimension(46, 35));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        m_jButtons.add(jButton2);
 
         m_jOptions.add(m_jButtons, java.awt.BorderLayout.LINE_START);
 
@@ -1267,8 +1281,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jbtnScale.setFocusPainted(false);
         m_jbtnScale.setFocusable(false);
         m_jbtnScale.setMargin(new java.awt.Insets(8, 14, 8, 14));
-        m_jbtnScale.setPreferredSize(new java.awt.Dimension(87, 25));
-        m_jbtnScale.setRequestFocusEnabled(false);
+        m_jbtnScale.setPreferredSize(new java.awt.Dimension(46, 35));
         m_jbtnScale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 m_jbtnScaleActionPerformed(evt);
@@ -1299,6 +1312,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         jPanel2.setLayout(new java.awt.GridLayout(0, 1, 5, 5));
 
         m_jDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/locationbar_erase.png"))); // NOI18N
+        m_jDelete.setToolTipText("Effacer ligne");
         m_jDelete.setFocusPainted(false);
         m_jDelete.setFocusable(false);
         m_jDelete.setMargin(new java.awt.Insets(8, 14, 8, 14));
@@ -1311,6 +1325,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         jPanel2.add(m_jDelete);
 
         m_jList.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/search22.png"))); // NOI18N
+        m_jList.setToolTipText("Chercher produit");
         m_jList.setFocusPainted(false);
         m_jList.setFocusable(false);
         m_jList.setMargin(new java.awt.Insets(8, 14, 8, 14));
@@ -1323,6 +1338,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         jPanel2.add(m_jList);
 
         m_jEditLine.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/color_line.png"))); // NOI18N
+        m_jEditLine.setToolTipText("Editer ligne");
         m_jEditLine.setFocusPainted(false);
         m_jEditLine.setFocusable(false);
         m_jEditLine.setMargin(new java.awt.Insets(8, 14, 8, 14));
@@ -1335,6 +1351,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         jPanel2.add(m_jEditLine);
 
         jEditAttributes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/colorize.png"))); // NOI18N
+        jEditAttributes.setToolTipText("Attributs");
         jEditAttributes.setFocusPainted(false);
         jEditAttributes.setFocusable(false);
         jEditAttributes.setMargin(new java.awt.Insets(8, 14, 8, 14));
@@ -1347,6 +1364,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         jPanel2.add(jEditAttributes);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/inbox.png"))); // NOI18N
+        jButton1.setToolTipText("Remise ligne");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -1684,12 +1702,48 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+// % Remise globale sur ticket
+        Double discountrate = JNumberDialog.showEditNumber(this, AppLocal.getIntString("label.remise"), AppLocal.getIntString("label.remiseinput"), new ImageIcon(ScaleDialog.class.getResource("/com/openbravo/images/inbox.png")));
+
+        if (discountrate == null) {
+            return;
+        }
+        TicketTaxInfo[] taxes;
+        TicketTaxInfo taxline;
+
+        if (discountrate > 0 && discountrate < 100) {
+            discountrate/=100;
+            double total = m_oTicket.getTotal();
+            if (total > 0.0 && discountrate > 0.0) {
+                String sdiscount = Formats.PERCENT.formatValue(discountrate);
+
+                taxes = m_oTicket.getTaxLines();
+                for (int i = 0; i < taxes.length; i++) {
+                    taxline = taxes[i];
+                    m_oTicket.insertLine(m_oTicket.getLinesCount(),
+                            new TicketLineInfo(
+                            "Remise totale " + sdiscount,
+                            taxline.getTaxInfo().getTaxCategoryID(),
+                            1.0,
+                            -taxline.getSubTotal() * discountrate,
+                            taxline.getTaxInfo()));
+                }
+                refreshTicket();
+                setSelectedIndex(m_oTicket.getLinesCount() - 1);
+            } else {
+                java.awt.Toolkit.getDefaultToolkit().beep();
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCustomer;
     private javax.swing.JButton btnSplit;
     private javax.swing.JPanel catcontainer;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jEditAttributes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

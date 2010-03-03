@@ -1,667 +1,139 @@
--- phpMyAdmin SQL Dump
--- version 3.2.0.1
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Jan 23, 2010 at 06:21 PM
--- Server version: 5.1.37
--- PHP Version: 5.2.10
+INSERT INTO `CATEGORIES` (`ID`, `NAME`, `PARENTID`, `IMAGE`) VALUES
+('1c48ea28-b7c0-4051-b731-b3e2cbf85292', 'Tapis Cuir Daim', NULL, NULL),
+('6c98cbc9-739e-44c6-890b-47e365838663', 'mixte', NULL, NULL),
+('6d24b412-05e9-447d-a7ed-5361e605ccf0', 'Homme', '000', NULL),
+('997278bb-44ae-4229-b4b5-5116e2d24c7c', 'Blanchisserie', NULL, NULL),
+('9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', 'Produits', NULL, NULL),
+('d34dff82-2c8a-476a-8f17-22da5cc88c98', 'Femme', NULL, NULL),
+('fa938625-e34c-47a9-9343-55f652dab62e', 'Ameublement', NULL, NULL);
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `greenpos`
---
-
---
--- Dumping data for table `PRODUCTS`
---
-
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4878', 'CHALE', '000000003', 'NULL', 'Chale', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, '\0', '\0', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4879', 'PANTALO', '000000001', NULL, 'Pantalo', 4.96, 4.96, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', NULL, NULL, NULL, '\0', '\0', NULL);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4880', 'CHEMISOIE', '000000004', 'NULL', 'Chemisier Soie', 8, 8, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4881', 'JUPE', '000000005', 'NULL', 'Jupe', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4882', 'JUPE CULO', '000000006', 'NULL', 'Jupe Culotte', 7, 7, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4883', 'JUPE LONG', '000000007', 'NULL', 'Jupe Longue', 7, 7, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4884', 'JUPE PLI', '000000008', 'NULL', 'Jupe PlissÚe', 11, 11, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4885', 'PANT', '000000009', 'NULL', 'Pantalon', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4886', 'ROBE', '000000010', 'NULL', 'Robe', 12, 12, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4887', 'ROBE LONG', '000000011', 'NULL', 'Robe Longue', 15, 15, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4888', 'ROBE PLISE', '000000012', 'NULL', 'Robe PlisÚe', 17, 17, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4889', 'SALOPETTE', '000000013', 'NULL', 'Salopette', 14, 14, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4890', 'VESTE', '000000014', 'NULL', 'Veste', 8, 8, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4891', 'T-SHIRT', '000000015', 'NULL', 'T-shirt', 2, 2, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4892', 'CASQUETTE', '000000016', 'NULL', 'Casquette', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4893', 'BONNET', '000000017', 'NULL', 'Bonnet', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4894', 'GILET COST', '000000018', 'NULL', 'Gilet Costume', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4895', 'PAPILLON', '000000019', 'NULL', 'Papillon', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4896', 'CRAVATE', '000000020', 'NULL', 'Cravate', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4897', 'T-SHRT SM', '000000021', 'NULL', 'T-shirt S/m', 1, 1, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4898', 'ANORAK', '000000022', 'NULL', 'Anorak', 10, 10, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, '\0', '\0', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4899', 'ANORAK DUV', '000000023', 'NULL', 'Anorak Duvet', 15, 15, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, '\0', '\0', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4900', 'DIVERS NET', '000000024', 'NULL', 'Divers Nettoyage', 0, 0, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4901', 'BLOUSON', '000000025', 'NULL', 'Blouson', 12, 12, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4902', 'CAPE', '000000026', 'NULL', 'Cape', 11, 11, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4903', 'COMBI SKI', '000000027', 'NULL', 'Combi Ski', 14, 14, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4904', 'ECHARPE', '000000028', 'NULL', 'Echarpe', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4905', 'FOULARD', '000000029', 'NULL', 'Foulard', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4906', 'GILET S/M', '000000030', 'NULL', 'Gilet S/m', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4907', 'GILET', '000000031', 'NULL', 'Gilet', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4908', 'MANTEAU', '000000032', 'NULL', 'Manteau', 14, 14, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4909', 'PEIGNOIR', '000000033', 'NULL', 'Peignoir', 8, 8, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4910', 'POLO', '000000034', 'NULL', 'Polo', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4911', 'PULL', '000000035', 'NULL', 'Pull', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4912', 'SHORT', '000000036', 'NULL', 'Short', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4913', 'TRENCH', '000000037', 'NULL', 'Trench', 15, 15, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4914', 'COUV 1P', '000000038', 'NULL', 'Couverture 1p', 15, 15, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4915', 'COUVE 2P', '000000039', 'NULL', 'Couverture 2p', 18, 18, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4916', 'COUVRE LIT', '000000040', 'NULL', 'Couvre Lit', 13, 13, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4917', 'COUETTE DU', '000000041', 'NULL', 'Edredon Duvet 1 Personne', 17, 17, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4918', 'COUT DU 2', '000000042', 'NULL', 'Edredon Duvet 2 Personne', 25, 25, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4919', 'COUET SYN1', '000000043', 'NULL', 'Edredon Synthetique 1 Personne', 15, 15, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4920', 'COUE SYN2', '000000044', 'NULL', 'Edredon Synthetique 2per', 18, 18, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4921', 'TENTURE M', '000000045', 'NULL', 'Tenture M2 Simple', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4922', 'TENTURE D', '000000046', 'NULL', 'Tenture M2 DoublÚe', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4923', 'OREILLER', '000000047', 'NULL', 'Oreiller', 8, 8, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4924', 'SUPLE SOIE', '000000048', 'NULL', 'SupplÚment Soie', 2, 2, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4925', 'DETACHAGE', '000000049', 'NULL', 'DÚtachage', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4926', 'IMPERM?A', '000000050', 'NULL', 'ImpermÚabilisation', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4927', 'CHEMISE', '000000051', 'NULL', 'Chemise', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4928', 'VESTON', '000000052', 'NULL', 'Veston', 8, 8, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4929', 'CHEMISE P', '000000053', 'NULL', 'Chemise Promo', 2, 2, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4930', 'REMISE', '000000054', 'NULL', 'Remise', 0, 0, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4931', 'UTILIA', '000000055', 'NULL', 'Utilia Roll Complet', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4932', 'UTILIA R', '000000056', 'NULL', 'Utilia Recharche', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4933', 'TEE', '000000057', 'NULL', 'Tee Shirt', 1, 1, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4934', 'VESTE C', '000000058', 'NULL', 'Veste Cuisine', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4935', 'PANT C', '000000059', 'NULL', 'Pant Cuisine', 2, 2, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4936', 'ESSUIS', '000000060', 'NULL', 'Essuis Cuisine', 1, 1, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4937', 'TABLIER', '000000061', 'NULL', 'Tablier Cuisine', 2, 2, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4938', 'VESTE REP', '000000062', 'NULL', 'Veste Repassage', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4939', 'REPAS PANT', '000000063', 'NULL', 'Repas Pantalon', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4940', 'REPAS ROBE', '000000064', 'NULL', 'Repas Robe', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4941', 'COUTURI?RE', '000000065', 'NULL', 'CouturiÞre', 0, 0, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4942', 'MANTEAU PR', '000000066', 'NULL', 'Manteau Promo', 9, 9, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4943', '4 ROBE MAE', '000000067', 'NULL', '5 Robe Mariee', 70, 70, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, '\0', '\0', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4944', 'ESS EPONGE', '000000068', 'NULL', 'Ess Eponge Petit', 0, 0, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4945', 'GRAND ESSP', '000000069', 'NULL', 'Grand Essuie Eponge', 1, 1, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4946', 'HOSSE EPOE', '000000070', 'NULL', 'Housse ?ponge', 1, 1, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4947', 'PROMO MANU', '000000071', 'NULL', 'Promo Manteau', 9, 9, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4948', 'MANTEAU EF', '000000072', 'NULL', 'Manteau Enfant', 0, 0, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4949', 'MANTEAU EN', '000000073', 'NULL', 'Manteau EN', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4950', 'SIEGE POU', '000000074', 'NULL', 'Siege Poussette', 7, 7, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4951', 'PE HOUS CA', '000000075', 'NULL', 'Petite Housse Canape', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4952', 'GR HOUS CA', '000000076', 'NULL', 'Grande Housse Canape', 8, 8, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4953', 'COUT', '000000077', 'NULL', 'Couture Accompte', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4954', 'PROMO CH', '000000078', 'NULL', 'Promo Chemise', 2, 2, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4955', 'PLIEE CH', '000000079', 'NULL', 'Pliee Chemise', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4956', 'VESTE N D', '000000080', 'NULL', 'Veste Non Doublee', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4957', 'CHEMI PLIE', '000000081', 'NULL', 'Chemise Pliee', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4958', 'BAPTEME', '000000082', 'NULL', 'Bapteme', 7, 7, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4959', 'CALOT', '000000083', 'NULL', 'Calot Cuisinier', 2, 2, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4960', 'TENTURE ND', '000000084', 'NULL', 'Tenture Ndoublee', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4961', 'PLAID', '000000085', 'NULL', 'Plaid', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4962', 'COUVERT FI', '000000086', 'NULL', 'Couverture Fine', 10, 10, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4963', 'OURS GROS', '000000087', 'NULL', 'Ours Gros', 7, 7, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4964', 'SAC', '000000088', 'NULL', 'Sac De Couchage', 15, 15, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4965', 'FONT TENTU', '000000089', 'NULL', 'Tentures Doublee 5,77 M2', 28, 28, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4966', 'TENT', '000000090', 'NULL', 'Tenture 2,50 M2', 0, 0, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4967', 'TEN', '000000091', 'NULL', 'Tenture Non Dou 2,50 M2', 11, 11, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4968', 'HOU', '000000092', 'NULL', 'Housse Matelas 1 Pers', 17, 17, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4969', 'HOUS', '000000093', 'NULL', 'Housse Matelas 2 Pers', 22, 22, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4970', 'SAC A M', '000000094', 'NULL', 'Sac A Main', 7, 7, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4971', 'NAPPERON', '000000095', 'NULL', 'Napperon', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4972', 'HOUS CAN', '000000096', 'NULL', 'Housse Canape 2-3 Pers', 12, 12, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4973', 'CARPETTE', '000000097', 'NULL', 'Carpette', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4974', 'COUV PI', '000000098', 'NULL', 'Couv Piquee 1 Pers', 25, 25, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4975', 'SLIP', '000000099', 'NULL', 'Slip', 0, 0, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4976', 'PAIRE C', '000000100', 'NULL', 'Paire Chaussettes', 1, 1, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4977', 'AUBE', '000000101', 'NULL', 'Aube', 13, 13, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4978', 'SANS GARAE', '000000102', 'NULL', 'Sans Garantie', 0, 0, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4979', 'SUPP BAN', '000000103', 'NULL', 'Supp Bancontact', 0, 0, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4980', 'TONNELLE G', '000000104', 'NULL', 'Tonnelle Grande', 12, 12, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4981', 'TONNELLE P', '000000105', 'NULL', 'Tonnelle Petite', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4982', 'PANT TRA', '000000106', 'NULL', 'Pantalon  Travail', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4983', 'DRAP BLANC', '000000107', 'NULL', 'Drap De Lit', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4984', 'VESRE D', '000000108', 'NULL', 'Veste Daim', 20, 20, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4985', 'STOP MOT', '000000109', 'NULL', 'Stop Mot', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4986', 'BOULE LAVE', '000000110', 'NULL', 'Parfum Dressing', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4987', 'FEUTRE UT', '000000111', 'NULL', 'Feutre Utilia', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4988', 'COU PI 1P', '000000112', 'NULL', 'Couverture Piquee 1p', 25, 25, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4989', 'COUVERT', '000000113', 'NULL', 'Couverture Piquee', 30, 30, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4990', 'HOUSSE TAB', '000000114', 'NULL', 'Housse De Table', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4991', 'POL T', '000000115', 'NULL', 'Tapis Clean Thiry', 49, 49, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4992', 'DRAP LIT', '000000116', 'NULL', 'Drap Lit', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4993', 'DRAPHOUSSE', '000000117', 'NULL', 'Drap Housse', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4994', 'HOUSSE COU', '000000118', 'NULL', 'Housse De Couette', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4995', 'PULL OVER', '000000119', 'NULL', 'Pull Over', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4996', 'PARFUM DRE', '000000120', 'NULL', 'Parfum Dressing 2', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4997', 'BROSSE TEX', '000000121', 'NULL', 'Brosse Textile', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4998', 'DEBOULOCHE', '000000122', 'NULL', 'Deboulocheur', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a4999', 'TACHE ENC', '000000123', 'NULL', 'Tache Encre', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5000', 'SUPP SOIE', '000000124', 'NULL', 'Supplement Soie', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5001', 'HOU COUSSN', '000000125', 'NULL', 'Housse Coussin', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5002', 'TAPIS ACC', '000000126', 'NULL', 'Tapis Accompte', 10, 10, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5003', 'VESTE CUIR', '000000127', 'NULL', 'Veste Cuire', 0, 0, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5004', 'VESTE DAIM', '000000128', 'NULL', 'Daim+90', 59, 59, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5005', 'DAIM-90', '000000129', 'NULL', 'Daim-90', 49, 49, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5006', 'CUIR+90', '000000130', 'NULL', 'Cuir+90', 71, 71, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5007', 'CUIR-90', '000000131', 'NULL', 'Cuir-90', 65, 65, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5008', 'TENTURESM2', '000000132', 'NULL', 'Tentures Simple M2', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5009', 'TENTURES D', '000000133', 'NULL', 'Tentures Doublee M2', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5010', 'VIDE', '000000134', 'NULL', 'Vide', 0, 0, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5011', 'DEBOULO', '000000135', 'NULL', 'Deboulocheur 2', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5012', 'SUPP TACHE', '000000136', 'NULL', 'Supplement Tache', 1, 1, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5013', 'TAIE', '000000137', 'NULL', 'Taie Oreiller', 2, 2, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5014', 'NAPPE', '000000138', 'NULL', 'Nappe', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5015', 'NAPPE+8', '000000139', 'NULL', 'Nappe+8', 9, 9, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5016', 'BOLERO', '000000140', 'NULL', 'Bolero', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5017', 'CHEM LONG', '000000141', 'NULL', 'Chemier Long', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5018', 'BLOU SKI', '000000142', 'NULL', 'Blouson Ski', 9, 9, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5019', 'PANTA SKI', '000000143', 'NULL', 'Pantalon Ski', 8, 8, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5020', 'PAN SKI EN', '000000144', 'NULL', 'Pantalon Ski Enfant', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5021', 'BLO SKI EN', '000000145', 'NULL', 'Blouson Ski Enfant', 7, 7, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5022', 'SAC  M', '000000146', 'NULL', 'Sac  Main', 30, 30, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5023', 'ESSUIE B', '000000147', 'NULL', 'Essuie Bain', 2, 2, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5024', 'SUP SOIE3', '000000148', 'NULL', 'Supp Soie3', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5025', 'BODY SOIE', '000000149', 'NULL', 'Body Soie', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5026', 'SAC A DOS', '000000150', 'NULL', 'Sac A Dos', 8, 8, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5027', 'PANTA LUX', '000000151', 'NULL', 'Pantalon Lux', 8, 8, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5028', 'JUPE LUX', '000000152', 'NULL', 'Jupe Lux', 8, 8, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5029', 'VESTE LUX', '000000153', 'NULL', 'Veste Lux', 10, 10, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5030', 'HOUSSE', '000000154', 'NULL', 'Housse Green Clean', 0, 0, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5031', 'ACCOMPTE', '000000155', 'NULL', 'Accompte', 10, 10, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, '\0', '\0', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5032', 'BLAN KG', '000000156', 'NULL', 'Blan Kg', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5033', 'STOP MOP', '000000157', 'NULL', 'Stop Mop Cintre', 5, 5, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5034', 'CHALE NEUF', '000000158', 'NULL', 'Chale Neuf', 12, 12, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5035', 'MARQUE PAE', '000000159', 'NULL', 'Marque Page', 4, 4, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5036', 'PORTE MONE', '000000160', 'NULL', 'Porte Monnaie', 15, 15, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5037', 'SAV MAR', '000000161', 'NULL', 'Savon De Marseille', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5038', 'BAUME BOBO', '000000162', 'NULL', 'Baume ? Bobos', 31, 31, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5039', 'DENTIFRICE', '000000163', 'NULL', 'Dentifrice', 11, 11, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5040', 'SHAMPOOING', '000000164', 'NULL', 'Shampooing Douche', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5041', 'DEMELANT', '000000165', 'NULL', 'Baume DÚmÚlant', 11, 11, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5042', 'SHAMPOO', '000000166', 'NULL', 'Shampooing Gras/sec', 9, 9, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5043', 'SHAMP FREQ', '000000167', 'NULL', 'Shampooing Cheveux Normaux', 12, 12, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5044', 'SA MAR LIQ', '000000168', 'NULL', 'Savon Marseille Liquide Corporelle', 15, 15, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5045', 'CREME SOIN', '000000169', 'NULL', 'Creme Soin Mains', 17, 17, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5046', 'COSMOUSSE', '000000170', 'NULL', 'Cosmousse', 9, 9, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5047', 'COSMOUS RE', '000000171', 'NULL', 'Cosmousse Recharge', 9, 9, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5048', 'SAV ALEP40', '000000172', 'NULL', 'Savon D''alep 40%', 8, 8, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5049', 'SAV ALEP35', '000000173', 'NULL', 'Savon D''alep 35%', 7, 7, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5050', 'SAV AL TRA', '000000174', 'NULL', 'Savon D''alep Traditionel', 2, 2, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5051', 'SAV AL PUR', '000000175', 'NULL', 'Savon D''alep Pur', 3, 3, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5052', 'LESSIVE PO', '000000176', 'NULL', 'Lessive Poudre', 15, 15, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5053', 'LESSIVE LI', '000000177', 'NULL', 'Lessive Liquide', 8, 8, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5054', 'LAINAGE', '000000178', 'NULL', 'Lainage Textile Delicat', 9, 9, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5055', 'ASS AGRUME', '000000179', 'NULL', 'Assouplissant Agrume', 7, 7, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5056', 'ASS LAVAND', '000000180', 'NULL', 'Assouplissant Lavande', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5057', 'HYGIENE+', '000000181', 'NULL', 'Hygiene+', 10, 10, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5058', 'TOUT NET', '000000182', 'NULL', 'Tout Net Degraissant', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5059', 'AIR DELYS', '000000183', 'NULL', 'Air Delys', 11, 11, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, '\0', '\0', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5060', 'DELYS DEST', '000000184', 'NULL', 'Air Delys Destucteur', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5061', 'PUR ASPI', '000000185', 'NULL', 'Purrificateur Aspirateur', 6, 6, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5062', 'ALEP LIQ', '000000186', 'NULL', 'Alep Liquide Mage', 11, 11, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, '\0', '\0', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5063', 'LESS B?B?', '000000187', 'NULL', 'Lessive BÚbÚ', 15, 15, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5064', 'LAIT B?B?', '000000188', 'NULL', 'Lait BÚbÚ', 19, 19, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5065', 'BIOLINI', '000000189', 'NULL', 'Bioliniment', 9, 9, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5066', 'COSSM BEBE', '000000190', 'NULL', 'Cossmousse  Bebe', 12, 12, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5067', 'CR?ME BEBE', '000000191', 'NULL', 'CrÞme Bebe', 17, 17, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5068', 'DEO AGRUME', '000000192', 'NULL', 'Deo Agrumes', 10, 10, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5069', 'DEO BILLE', '000000193', 'NULL', 'Deo Bille', 11, 11, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5070', 'RECHA AGR', '000000194', 'NULL', 'Recharge Deo Agrume', 7, 7, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5071', 'RECH BILLE', '000000195', 'NULL', 'Recharge Deo ? Bille', 7, 7, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5072', 'TEKPEIGNE', '000000196', 'NULL', 'Tek Peigne', 13, 13, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5073', 'BROSS RECT', '000000197', 'NULL', 'Bross Rectangulaire', 30, 30, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5074', 'BROSS RON', '000000198', 'NULL', 'Brosse Ronde', 28, 28, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5075', 'BROSSE OVA', '000000199', 'NULL', 'Brosse Oval', 36, 36, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5076', 'BROSSE COU', '000000200', 'NULL', 'Brosse Couleur', 26, 26, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5077', 'LIVRES', '000000201', 'NULL', 'Livres', 16, 16, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5078', 'PAP ARME', '000000202', 'NULL', 'Pap Armenie', 2, 2, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5079', 'TENTURE AC', '000000203', 'NULL', 'Tenture Ac', 10, 10, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-INSERT INTO `PRODUCTS` VALUES('c304dfaa-19b2-409a-b682-d38eb10a5080', 'DIVERS', '000000204', 'NULL', 'Divers', 1, 1, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, 0x4e554c4c, '', '', 0x4e554c4c);
-
---
--- Dumping data for table `STOCKCURRENT`
---
-
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4879', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4880', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4881', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4882', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4883', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4884', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4885', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4886', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4887', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4888', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4889', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4890', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4891', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4892', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4893', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4894', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4895', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4896', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4897', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4898', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4899', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4900', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4901', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4902', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4903', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4904', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4905', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4906', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4907', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4908', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4909', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4910', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4911', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4912', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4913', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4914', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4915', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4916', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4917', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4918', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4919', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4920', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4921', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4922', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4923', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4924', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4925', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4926', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4927', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4928', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4929', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4930', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4931', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4932', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4933', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4934', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4935', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4936', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4937', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4938', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4939', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4940', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4941', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4942', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4943', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4944', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4945', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4946', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4947', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4948', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4949', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4950', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4951', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4952', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4953', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4954', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4955', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4956', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4957', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4958', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4959', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4960', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4961', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4962', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4963', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4964', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4965', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4966', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4967', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4968', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4969', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4970', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4971', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4972', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4973', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4974', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4975', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4976', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4977', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4978', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4979', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4980', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4981', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4982', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4983', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4984', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4985', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4986', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4987', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4988', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4989', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4990', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4991', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4992', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4993', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4994', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4995', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4996', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4997', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4998', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4999', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5000', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5001', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5002', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5003', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5004', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5005', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5006', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5007', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5008', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5009', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5010', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5011', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5012', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5013', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5014', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5015', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5016', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5017', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5018', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5019', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5020', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5021', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5022', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5023', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5024', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5025', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5026', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5027', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5028', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5029', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5030', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5031', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5032', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5033', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5034', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5035', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5036', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5037', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5038', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5039', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5040', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5041', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5042', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5043', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5044', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5045', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5046', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5047', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5048', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5049', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5050', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5051', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5052', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5053', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5054', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5055', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5056', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5057', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5058', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5059', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5060', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5061', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5062', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5063', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5064', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5065', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5066', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5067', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5068', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5069', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5070', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5071', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5072', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5073', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5074', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5075', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5076', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5077', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5078', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5079', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5080', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4943', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5031', NULL, -2);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5059', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5062', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4898', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4899', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a5055', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4879', NULL, -1);
-INSERT INTO `STOCKCURRENT` VALUES('0', 'c304dfaa-19b2-409a-b682-d38eb10a4878', NULL, -2);
-
---
--- Dumping data for table `STOCKDIARY`
---
-
-INSERT INTO `STOCKDIARY` VALUES('11c7cafb-0cea-4fc0-ba96-b8d63ff74d14', '2010-01-23 18:20:03', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4879', NULL, -1, 4.96);
-INSERT INTO `STOCKDIARY` VALUES('26e502a3-eb41-4882-bb2a-a5a213e41663', '2010-01-23 18:20:03', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4898', NULL, -1, 10);
-INSERT INTO `STOCKDIARY` VALUES('3aabf77c-8c21-4fa6-8dbb-61bb94723d67', '2010-01-23 18:20:03', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5055', NULL, -1, 7);
-INSERT INTO `STOCKDIARY` VALUES('50103666-765d-4aea-8d7a-b60b0b3f964e', '2010-01-23 18:20:03', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4878', NULL, -1, 6);
-INSERT INTO `STOCKDIARY` VALUES('5d57f373-954e-4665-844d-09ee6cdb48a6', '2010-01-23 18:20:03', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4899', NULL, -1, 15);
-INSERT INTO `STOCKDIARY` VALUES('8161cfb6-8df3-4d3e-a20b-8c954131aa0e', '2010-01-23 18:20:03', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5031', NULL, -1, 10);
-INSERT INTO `STOCKDIARY` VALUES('83bbcb6c-f352-4e86-a440-a5da8f9fb7bf', '2010-01-23 18:20:03', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5059', NULL, -1, 11);
-INSERT INTO `STOCKDIARY` VALUES('9b7ddd42-7fcb-4c4b-86df-61bced3325cc', '2010-01-23 18:20:03', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4943', NULL, -1, 70);
-INSERT INTO `STOCKDIARY` VALUES('b04de326-569e-48bd-9e04-47a1ffe565f0', '2010-01-23 18:20:03', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5031', NULL, -1, 10);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1000', '2026-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4941', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1001', '2027-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4942', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1002', '2028-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4943', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1003', '2029-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4944', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1004', '2030-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4945', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1005', '2031-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4946', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1006', '2001-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4947', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1007', '2002-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4948', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1008', '2003-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4949', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1009', '2004-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4950', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1010', '2005-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4951', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1011', '2006-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4952', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1012', '2007-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4953', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1013', '2008-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4954', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1014', '2009-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4955', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1015', '2010-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4956', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1016', '2011-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4957', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1017', '2012-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4958', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1018', '2013-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4959', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1019', '2014-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4960', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1020', '2015-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4961', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1021', '2016-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4962', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1022', '2017-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4963', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1023', '2018-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4964', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1024', '2019-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4965', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1025', '2020-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4966', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1026', '2021-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4967', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1027', '2022-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4968', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1028', '2023-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4969', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1029', '2024-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4970', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1030', '2025-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4971', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1031', '2026-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4972', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1032', '2027-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4973', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1033', '2028-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4974', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1034', '2029-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4975', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1035', '2030-04-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4976', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1036', '2001-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4977', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1037', '2002-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4978', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1038', '2003-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4979', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1039', '2004-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4980', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1040', '2005-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4981', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1041', '2006-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4982', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1042', '2007-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4983', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1043', '2008-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4984', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1044', '2009-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4985', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1045', '2010-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4986', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1046', '2011-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4987', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1047', '2012-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4988', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1048', '2013-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4989', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1049', '2014-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4990', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1050', '2015-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4991', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1051', '2016-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4992', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1052', '2017-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4993', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1053', '2018-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4994', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1054', '2019-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4995', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1055', '2020-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4996', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1056', '2021-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4997', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1057', '2022-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4998', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1058', '2023-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4999', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1059', '2024-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5000', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1060', '2025-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5001', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1061', '2026-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5002', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1062', '2027-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5003', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1063', '2028-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5004', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1064', '2029-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5005', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1065', '2030-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5006', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1066', '2031-05-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5007', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1067', '2001-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5008', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1068', '2002-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5009', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1069', '2003-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5010', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1070', '2004-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5011', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1071', '2005-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5012', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1072', '2006-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5013', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1073', '2007-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5014', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1074', '2008-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5015', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1075', '2009-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5016', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1076', '2010-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5017', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1077', '2011-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5018', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1078', '2012-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5019', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1079', '2013-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5020', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1080', '2014-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5021', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1081', '2015-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5022', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1082', '2016-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5023', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1083', '2017-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5024', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1084', '2018-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5025', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1085', '2019-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5026', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1086', '2020-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5027', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1087', '2021-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5028', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1088', '2022-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5029', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1089', '2023-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5030', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1090', '2024-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5031', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1091', '2025-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5032', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1092', '2026-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5033', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1093', '2027-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5034', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1094', '2028-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5035', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1095', '2029-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5036', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1096', '2030-06-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5037', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1097', '2001-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5038', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1098', '2002-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5039', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1099', '2003-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5040', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1100', '2004-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5041', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1101', '2005-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5042', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1102', '2006-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5043', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1103', '2007-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5044', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1104', '2008-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5045', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1105', '2009-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5046', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1106', '2010-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5047', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1107', '2011-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5048', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1108', '2012-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5049', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1109', '2013-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5050', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1110', '2014-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5051', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1111', '2015-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5052', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1112', '2016-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5053', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1113', '2017-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5054', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1114', '2018-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5055', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1115', '2019-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5056', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1116', '2020-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5057', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1117', '2021-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5058', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1118', '2022-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5059', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1119', '2023-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5060', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1120', '2024-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5061', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1121', '2025-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5062', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1122', '2026-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5063', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1123', '2027-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5064', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1124', '2028-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5065', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1125', '2029-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5066', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1126', '2030-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5067', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1127', '2031-07-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5068', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1128', '2001-08-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5069', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1129', '2002-08-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5070', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1130', '2003-08-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5071', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1131', '2004-08-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5072', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1132', '2005-08-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5073', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1133', '2006-08-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5074', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1134', '2007-08-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5075', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1135', '2008-08-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5076', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1136', '2009-08-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5077', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1137', '2010-08-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5078', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1138', '2011-08-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5079', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf1139', '2012-08-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5080', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf938', '2010-01-23 14:04:46', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4879', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf939', '2024-01-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4880', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf940', '2025-01-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4881', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf941', '2026-01-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4882', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf942', '2027-01-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4883', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf943', '2028-01-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4884', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf944', '2029-01-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4885', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf945', '2030-01-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4886', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf946', '2031-01-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4887', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf947', '2001-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4888', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf948', '2002-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4889', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf949', '2003-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4890', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf950', '2004-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4891', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf951', '2005-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4892', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf952', '2006-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4893', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf953', '2007-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4894', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf954', '2008-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4895', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf955', '2009-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4896', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf956', '2010-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4897', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf957', '2011-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4898', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf958', '2012-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4899', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf959', '2013-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4900', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf960', '2014-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4901', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf961', '2015-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4902', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf962', '2016-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4903', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf963', '2017-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4904', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf964', '2018-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4905', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf965', '2019-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4906', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf966', '2020-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4907', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf967', '2021-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4908', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf968', '2022-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4909', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf969', '2023-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4910', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf970', '2024-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4911', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf971', '2025-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4912', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf972', '2026-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4913', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf973', '2027-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4914', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf974', '2028-02-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4915', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf975', '2001-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4916', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf976', '2002-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4917', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf977', '2003-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4918', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf978', '2004-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4919', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf979', '2005-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4920', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf980', '2006-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4921', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf981', '2007-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4922', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf982', '2008-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4923', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf983', '2009-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4924', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf984', '2010-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4925', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf985', '2011-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4926', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf986', '2012-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4927', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf987', '2013-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4928', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf988', '2014-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4929', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf989', '2015-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4930', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf990', '2016-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4931', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf991', '2017-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4932', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf992', '2018-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4933', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf993', '2019-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4934', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf994', '2020-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4935', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf995', '2021-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4936', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf996', '2022-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4937', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf997', '2023-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4938', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf998', '2024-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4939', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b4a3e04e-3ecb-4f2b-8282-b9ddb2faf999', '2025-03-10 14:04:00', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4940', NULL, -1, 1);
-INSERT INTO `STOCKDIARY` VALUES('b5cc68a2-848a-4344-b77a-2e4dc6517575', '2010-01-23 18:20:03', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a5062', NULL, -1, 11);
-INSERT INTO `STOCKDIARY` VALUES('de9e3135-5c6f-4fa9-9228-5843c82fd3ad', '2010-01-23 18:20:03', -1, '0', 'c304dfaa-19b2-409a-b682-d38eb10a4878', NULL, -1, 6);
-
---
--- Dumping data for table `STOCKLEVEL`
---
+INSERT INTO `PRODUCTS` (`ID`, `REFERENCE`, `CODE`, `CODETYPE`, `NAME`, `PRICEBUY`, `PRICESELL`, `CATEGORY`, `TAXCAT`, `ATTRIBUTESET_ID`, `STOCKCOST`, `STOCKVOLUME`, `IMAGE`, `ISCOM`, `ISSCALE`, `ATTRIBUTES`) VALUES
+('764cfbb9-be41-4487-8ea1-04a664f6d7a9', 'HOUSS', '', NULL, 'Housse Green and clean', 2, 2.89256198347107, '6c98cbc9-739e-44c6-890b-47e365838663', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', NULL, NULL, NULL, b'0', b'0', NULL),
+('c304dfaa-19b2-409a-b682-d38eb10a4878', 'CHALE', '000000003', 'NULL', 'Chale', 6, 4.95867768595041, 'd34dff82-2c8a-476a-8f17-22da5cc88c98', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4880', 'CHEMISOIE', '000000004', 'NULL', 'Chemisier Soie', 8, 8, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4881', 'JUPE', '000000005', 'NULL', 'Jupe', 6, 4.95867768595041, 'd34dff82-2c8a-476a-8f17-22da5cc88c98', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4882', 'JUPE CULO', '000000006', 'NULL', 'Jupe Culotte', 7, 6.19834710743802, 'd34dff82-2c8a-476a-8f17-22da5cc88c98', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4883', 'JUPE LONG', '000000007', 'NULL', 'Jupe Longue', 7, 12.396694214876, 'd34dff82-2c8a-476a-8f17-22da5cc88c98', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4884', 'JUPE PLI', '000000008', 'NULL', 'Jupe Pliss', 11, 14.0495867768595, 'd34dff82-2c8a-476a-8f17-22da5cc88c98', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4885', 'PANT', '000000009', 'NULL', 'Pantalon', 6, 4.95867768595041, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4886', 'ROBE', '000000010', 'NULL', 'Robe', 12, 9.91735537190083, 'd34dff82-2c8a-476a-8f17-22da5cc88c98', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4887', 'ROBE LONG', '000000011', 'NULL', 'Robe Longue', 15, 12.396694214876, 'd34dff82-2c8a-476a-8f17-22da5cc88c98', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4889', 'SALOPETTE', '000000013', 'NULL', 'Salopette', 14, 11.5702479338843, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4891', 'T-SHIRT', '000000015', 'NULL', 'T-shirt', 2, 1.65289256198347, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4892', 'CASQUETTE', '000000016', 'NULL', 'Casquette', 4, 3.71900826446281, '6d24b412-05e9-447d-a7ed-5361e605ccf0', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4893', 'BONNET', '000000017', 'NULL', 'Bonnet', 4, 3.30578512396694, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4894', 'GILET COST', '000000018', 'NULL', 'Gilet Costume', 6, 4.95867768595041, '6d24b412-05e9-447d-a7ed-5361e605ccf0', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4895', 'PAPILLON', '000000019', 'NULL', 'Papillon', 3, 2.8099173553719, '6d24b412-05e9-447d-a7ed-5361e605ccf0', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4896', 'CRAVATE', '000000020', 'NULL', 'Cravate', 5, 4.13223140495868, '6d24b412-05e9-447d-a7ed-5361e605ccf0', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4898', 'ANORAK', '000000022', 'NULL', 'Anorak', 10, 8.26446280991735, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'1', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4899', 'ANORAK DUV', '000000023', 'NULL', 'Anorak Duvet', 15, 12.396694214876, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4901', 'BLOUSON', '000000025', 'NULL', 'Blouson', 12, 9.91735537190083, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4902', 'CAPE', '000000026', 'NULL', 'Cape', 11, 11, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4903', 'COMBI SKI', '000000027', 'NULL', 'Combi Ski', 14, 7.02479338842975, 'd34dff82-2c8a-476a-8f17-22da5cc88c98', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4904', 'ECHARPE', '000000028', 'NULL', 'Echarpe', 4, 3.71900826446281, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4905', 'FOULARD', '000000029', 'NULL', 'Foulard', 5, 4.3801652892562, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4906', 'GILET S/M', '000000030', 'NULL', 'Gilet S/m', 5, 4.13223140495868, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4907', 'GILET', '000000031', 'NULL', 'Gilet', 5, 4.71074380165289, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4908', 'MANTEAU', '000000032', 'NULL', 'Manteau', 14, 11.5702479338843, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4909', 'PEIGNOIR', '000000033', 'NULL', 'Peignoir', 8, 6.61157024793389, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4910', 'POLO', '000000034', 'NULL', 'Polo', 3, 2.89256198347107, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4911', 'PULL', '000000035', 'NULL', 'Pull', 5, 4.3801652892562, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4912', 'SHORT', '000000036', 'NULL', 'Short', 5, 4.54545454545455, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4913', 'TRENCH', '000000037', 'NULL', 'Trench', 15, 12.396694214876, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4914', 'COUV 1P', '000000038', 'NULL', 'Couverture 1p', 15, 12.8099173553719, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4915', 'COUVE 2P', '000000039', 'NULL', 'Couverture 2p', 18, 14.8760330578512, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4916', 'COUVRE LIT', '000000040', 'NULL', 'Couvre Lit', 13, 10.7438016528926, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4917', 'COUETTE DU', '000000041', 'NULL', 'Edredon Duvet 1 Personne', 17, 14.0495867768595, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4918', 'COUT DU 2', '000000042', 'NULL', 'Edredon Duvet 2 Personne', 25, 20.6611570247934, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4919', 'COUET SYN1', '000000043', 'NULL', 'Edredon Synthetique 1 Personne', 15, 12.8099173553719, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4920', 'COUE SYN2', '000000044', 'NULL', 'Edredon Synthetique 2per', 18, 15.2892561983471, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4923', 'OREILLER', '000000047', 'NULL', 'Oreiller', 8, 6.61157024793389, 'fa938625-e34c-47a9-9343-55f652dab62e', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4924', 'SUPLE SOIE', '000000048', 'NULL', 'Suppl', 2, 1.2396694214876, '6c98cbc9-739e-44c6-890b-47e365838663', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4925', 'DETACHAGE', '000000049', 'NULL', 'D', 3, 2.47933884297521, '6c98cbc9-739e-44c6-890b-47e365838663', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4926', 'IMPERMNULLA', '000000050', 'NULL', 'Imperm', 3, 3.14049586776859, '6c98cbc9-739e-44c6-890b-47e365838663', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4927', 'CHEMISE', '000000051', 'NULL', 'Chemise', 3, 2.89256198347107, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4928', 'VESTON', '000000052', 'NULL', 'Veston', 8, 7.02479338842975, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4931', 'UTILIA', '000000055', 'NULL', 'Utilia Roll Complet', 6, 4.95867768595041, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4932', 'UTILIA R', '000000056', 'NULL', 'Utilia Recharche', 3, 2.47933884297521, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4936', 'ESSUIS', '000000060', 'NULL', 'Essuis Cuisine', 1, 0.826446280991736, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4937', 'TABLIER', '000000061', 'NULL', 'Tablier Cuisine', 2, 1.65289256198347, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4943', '4 ROBE MAE', '000000067', 'NULL', '5 Robe Mariee', 70, 57.8512396694215, 'd34dff82-2c8a-476a-8f17-22da5cc88c98', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4952', 'GR HOUS CA', '000000076', 'NULL', 'Grande Housse Canape', 8, 6.61157024793389, 'fa938625-e34c-47a9-9343-55f652dab62e', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4957', 'CHEMI PLIE', '000000081', 'NULL', 'Chemise Pliee', 4, 3.47107438016529, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4963', 'OURS GROS', '000000087', 'NULL', 'Ours Gros', 7, 5.78512396694215, 'fa938625-e34c-47a9-9343-55f652dab62e', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4964', 'SAC', '000000088', 'NULL', 'Sac De Couchage', 15, 12.396694214876, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4968', 'HOU', '000000092', 'NULL', 'Housse Matelas 1 Pers', 17, 14.0495867768595, 'fa938625-e34c-47a9-9343-55f652dab62e', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4969', 'HOUS', '000000093', 'NULL', 'Housse Matelas 2 Pers', 18, 14.8760330578512, 'fa938625-e34c-47a9-9343-55f652dab62e', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4971', 'NAPPERON', '000000095', 'NULL', 'Napperon', 4, 3.30578512396694, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4972', 'HOUS CAN', '000000096', 'NULL', 'Housse Canape 2-3 Pers', 12, 9.91735537190083, 'fa938625-e34c-47a9-9343-55f652dab62e', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4973', 'CARPETTE', '000000097', 'NULL', 'Carpette', 6, 4.95867768595041, 'd34dff82-2c8a-476a-8f17-22da5cc88c98', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4974', 'COUV PI', '000000098', 'NULL', 'Couv Piquee 1 Pers', 25, 20.6611570247934, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4976', 'PAIRE C', '000000100', 'NULL', 'Paire Chaussettes', 1, 0.826446280991736, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4983', 'DRAP BLANC', '000000107', 'NULL', 'Drap De Lit', 3, 2.8099173553719, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4986', 'BOULE LAVE', '000000110', 'NULL', 'Parfum Dressing', 4, 3.30578512396694, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4987', 'FEUTRE UT', '000000111', 'NULL', 'Feutre Utilia', 5, 4.13223140495868, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4988', 'COU PI 1P', '000000112', 'NULL', 'Couverture Piquee 1p', 25, 20.6611570247934, 'fa938625-e34c-47a9-9343-55f652dab62e', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4993', 'DRAPHOUSSE', '000000117', 'NULL', 'Drap Housse', 3, 2.97520661157025, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4994', 'HOUSSE COU', '000000118', 'NULL', 'Housse De Couette', 5, 4.62809917355372, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4996', 'PARFUM DRE', '000000120', 'NULL', 'Parfum Dressing 2', 4, 3.30578512396694, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4997', 'BROSSE TEX', '000000121', 'NULL', 'Brosse Textile', 6, 4.95867768595041, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a4999', 'TACHE ENC', '000000123', 'NULL', 'Tache Encre', 3, 2.47933884297521, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5001', 'HOU COUSSN', '000000125', 'NULL', 'Housse Coussin', 6, 4.95867768595041, 'fa938625-e34c-47a9-9343-55f652dab62e', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5004', 'VESTE DAIM', '000000128', 'NULL', 'Daim+90', 59, 48.7603305785124, '1c48ea28-b7c0-4051-b731-b3e2cbf85292', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5005', 'DAIM-90', '000000129', 'NULL', 'Daim-90', 49, 40.495867768595, '1c48ea28-b7c0-4051-b731-b3e2cbf85292', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5006', 'CUIR+90', '000000130', 'NULL', 'Cuir+90', 71, 58.6776859504132, '1c48ea28-b7c0-4051-b731-b3e2cbf85292', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5007', 'CUIR-90', '000000131', 'NULL', 'Cuir-90', 65, 53.7190082644628, '1c48ea28-b7c0-4051-b731-b3e2cbf85292', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5010', 'VIDE', '000000134', 'NULL', 'Vide', 0, 0, '000', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5011', 'DEBOULO', '000000135', 'NULL', 'Deboulocheur 2', 5, 4.13223140495868, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5013', 'TAIE', '000000137', 'NULL', 'Taie Oreiller', 2, 1.65289256198347, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5014', 'NAPPE', '000000138', 'NULL', 'Nappe', 6, 4.95867768595041, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5015', 'NAPPE+8', '000000139', 'NULL', 'Nappe+8', 9, 7.56198347107438, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5016', 'BOLERO', '000000140', 'NULL', 'Bolero', 6, 4.95867768595041, 'd34dff82-2c8a-476a-8f17-22da5cc88c98', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5017', 'CHEM LONG', '000000141', 'NULL', 'Chemier Long', 6, 4.95867768595041, 'd34dff82-2c8a-476a-8f17-22da5cc88c98', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5019', 'PANTA SKI', '000000143', 'NULL', 'Pantalon Ski', 8, 6.61157024793389, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5022', 'SAC  M', '000000146', 'NULL', 'Sac  Main', 30, 24.7933884297521, 'fa938625-e34c-47a9-9343-55f652dab62e', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5023', 'ESSUIE B', '000000147', 'NULL', 'Essuie Bain', 2, 2, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5025', 'BODY SOIE', '000000149', 'NULL', 'Body Soie', 6, 4.13223140495868, 'd34dff82-2c8a-476a-8f17-22da5cc88c98', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5032', 'BLAN KG', '000000156', 'NULL', 'Blan Kg', 4, 3.80165289256198, '997278bb-44ae-4229-b4b5-5116e2d24c7c', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5033', 'STOP MOP', '000000157', 'NULL', 'Stop Mop Cintre', 5, 4.13223140495868, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5035', 'MARQUE PAE', '000000159', 'NULL', 'Marque Page', 4, 3.30578512396694, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5036', 'PORTE MONE', '000000160', 'NULL', 'Porte Monnaie', 15, 12.396694214876, 'fa938625-e34c-47a9-9343-55f652dab62e', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5037', 'SAV MAR', '000000161', 'NULL', 'Savon De Marseille', 6, 4.95867768595041, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5038', 'BAUME BOBO', '000000162', 'NULL', 'Baume NULL Bobos', 31, 25.6198347107438, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5039', 'DENTIFRICE', '000000163', 'NULL', 'Dentifrice', 11, 9.09090909090909, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5040', 'SHAMPOOING', '000000164', 'NULL', 'Shampooing Douche', 6, 4.95867768595041, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5041', 'DEMELANT', '000000165', 'NULL', 'Baume D', 11, 9.09090909090909, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5042', 'SHAMPOO', '000000166', 'NULL', 'Shampooing Gras/sec', 9, 7.43801652892562, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5043', 'SHAMP FREQ', '000000167', 'NULL', 'Shampooing Cheveux Normaux', 12, 9.91735537190083, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5044', 'SA MAR LIQ', '000000168', 'NULL', 'Savon Marseille Liquide Corporelle', 15, 12.396694214876, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5045', 'CREME SOIN', '000000169', 'NULL', 'Creme Soin Mains', 17, 14.0495867768595, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5046', 'COSMOUSSE', '000000170', 'NULL', 'Cosmousse', 9, 7.43801652892562, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5047', 'COSMOUS RE', '000000171', 'NULL', 'Cosmousse Recharge', 9, 7.43801652892562, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5048', 'SAV ALEP40', '000000172', 'NULL', 'Savon D''alep 40%', 8, 6.61157024793389, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5049', 'SAV ALEP35', '000000173', 'NULL', 'Savon D''alep 35%', 7, 5.78512396694215, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5050', 'SAV AL TRA', '000000174', 'NULL', 'Savon D''alep Traditionel', 2, 2, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5051', 'SAV AL PUR', '000000175', 'NULL', 'Savon D''alep Pur', 3, 2.47933884297521, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5052', 'LESSIVE PO', '000000176', 'NULL', 'Lessive Poudre', 15, 12.396694214876, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5053', 'LESSIVE LI', '000000177', 'NULL', 'Lessive Liquide', 8, 6.61157024793389, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5055', 'ASS AGRUME', '000000179', 'NULL', 'Assouplissant Agrume', 7, 5.78512396694215, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5056', 'ASS LAVAND', '000000180', 'NULL', 'Assouplissant Lavande', 6, 4.95867768595041, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5057', 'HYGIENE+', '000000181', 'NULL', 'Hygiene+', 10, 8.26446280991735, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5059', 'AIR DELYS', '000000183', 'NULL', 'Air Delys', 11, 9.09090909090909, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5060', 'DELYS DEST', '000000184', 'NULL', 'Air Delys Destucteur', 6, 4.95867768595041, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5061', 'PUR ASPI', '000000185', 'NULL', 'Purrificateur Aspirateur', 6, 4.95867768595041, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5062', 'ALEP LIQ', '000000186', 'NULL', 'Alep Liquide Mage', 11, 9.09090909090909, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5065', 'BIOLINI', '000000189', 'NULL', 'Bioliniment', 9, 7.43801652892562, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5066', 'COSSM BEBE', '000000190', 'NULL', 'Cossmousse  Bebe', 12, 9.91735537190083, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5067', 'CRNULLME BEBE', '000000191', 'NULL', 'Cr', 17, 14.0495867768595, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5068', 'DEO AGRUME', '000000192', 'NULL', 'Deo Agrumes', 10, 8.67768595041322, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5069', 'DEO BILLE', '000000193', 'NULL', 'Deo Bille', 11, 9.09090909090909, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5070', 'RECHA AGR', '000000194', 'NULL', 'Recharge Deo Agrume', 7, 5.78512396694215, '6c98cbc9-739e-44c6-890b-47e365838663', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5071', 'RECH BILLE', '000000195', 'NULL', 'Recharge Deo NULL Bille', 7, 5.78512396694215, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5072', 'TEKPEIGNE', '000000196', 'NULL', 'Tek Peigne', 13, 10.7438016528926, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5073', 'BROSS RECT', '000000197', 'NULL', 'Bross Rectangulaire', 30, 24.7933884297521, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5074', 'BROSS RON', '000000198', 'NULL', 'Brosse Ronde', 28, 23.1404958677686, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5075', 'BROSSE OVA', '000000199', 'NULL', 'Brosse Oval', 36, 29.7520661157025, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5076', 'BROSSE COU', '000000200', 'NULL', 'Brosse Couleur', 26, 21.4876033057851, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5077', 'LIVRES', '000000201', 'NULL', 'Livres', 16, 13.2231404958678, '9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3', '002', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c),
+('c304dfaa-19b2-409a-b682-d38eb10a5080', 'DIVERS', '000000204', 'NULL', 'Divers', 1, 0.826446280991736, '6c98cbc9-739e-44c6-890b-47e365838663', '001', '02c6eb16-e174-4c11-a149-2fe328e13a44', 0, 0, NULL, b'0', b'0', 0x4e554c4c);
 
