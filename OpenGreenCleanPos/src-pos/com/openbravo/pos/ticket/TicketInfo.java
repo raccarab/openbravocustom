@@ -344,7 +344,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
         for (Iterator<TicketLineInfo> i = m_aLines.iterator(); i.hasNext();) {
 
              oLine = i.next();
-             if (oLine.getTaxInfo().getName().compareTo("Tax Pressing") == 0) {
+             if (oLine.isPressing()) {
                 return true;
             }
        }
@@ -380,7 +380,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
 
         for (Iterator<TicketLineInfo> i = m_aLines.iterator(); i.hasNext();) {
             oLine = i.next();
-            if (oLine.getTaxInfo().getName().compareTo("Tax Pressing") == 0) {
+            if (oLine.isPressing()) {
                 if ( !(oLine.getProductAttSetInstId()==null)) {
                         dArticles += (oLine.getMultiply() * parseAttributePieces(oLine.getProductAttSetInstDesc()));
                 } else {
@@ -449,12 +449,19 @@ public class TicketInfo implements SerializableRead, Externalizable {
      */
     private int parseAttributePieces(String att) {
 
-        if(
-                          att.substring(0,1).matches("[1-9]")
-                          && att.substring(1).matches(" Pieces")
-                          && (att.length() == "2 Pieces".length())
-                          ){
-            return Integer.parseInt(att.substring(0,1));
+        if (att.substring(0, 1).equals(" ") && att.substring(1, 2).matches("[1-9]")
+                && att.substring(2).matches(" Pieces")
+                && (att.length() == " 2 Pieces".length())) {
+            return Integer.parseInt(att.substring(1, 2));
+        } else if (att.substring(0, 1).matches("[1-9]")  && att.substring(1, 2).matches("[0-9]")
+                && att.substring(2).matches(" Pieces")
+                && (att.length() == "20 Pieces".length())) {
+            return Integer.parseInt(att.substring(0, 2));
+
+        } else if (att.substring(0, 1).matches("[1-9]") && att.substring(1, 2).matches("[0-9]") && att.substring(2, 3).matches("[0-9]")
+                && att.substring(3).matches(" Pieces")
+                && (att.length() == "200 Pieces".length())) {
+            return Integer.parseInt(att.substring(0, 3));
             }
         return 1;
     }
@@ -476,7 +483,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
              
              oLine = i.next();
 
-             if (oLine.getTaxInfo().getName().compareTo("Tax Pressing") == 0) {
+             if (oLine.isPressing()) {
                   cpt = 0 + Math.ceil(oLine.getMultiply());
               
                  if ( !(oLine.getProductAttSetInstId()==null)) {

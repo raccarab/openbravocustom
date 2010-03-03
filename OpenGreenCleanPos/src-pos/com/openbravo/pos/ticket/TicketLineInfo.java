@@ -293,6 +293,10 @@ public class TicketLineInfo implements SerializableWrite, SerializableRead, Seri
         return price * multiply * (1.0 + getTaxRate());
     }
 
+    public boolean isPressing() {
+        return ( (this.getTaxInfo().getName().compareTo("Tax Pressing") == 0) && (this.getPriceTax()>=0.0));
+    }
+
     public String printName() {
         return StringUtils.encodeXML(attributes.getProperty("product.name"));
     }
