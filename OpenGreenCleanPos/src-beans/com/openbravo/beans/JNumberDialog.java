@@ -65,7 +65,7 @@ public class JNumberDialog extends javax.swing.JDialog {
         
         m_jPanelTitle.setBorder(RoundedBorder.createGradientBorder());
 
-        m_value = null;
+        m_value = 0.;
     }
     
     private void setTitle(String title, String message, Icon icon) {
@@ -116,6 +116,7 @@ public class JNumberDialog extends javax.swing.JDialog {
         m_jPanelTitle = new javax.swing.JPanel();
         m_lblMessage = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(250, 400));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -163,6 +164,8 @@ public class JNumberDialog extends javax.swing.JDialog {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jPanel4.setLayout(new java.awt.BorderLayout());
+
+        m_jnumber.setPreferredSize(new java.awt.Dimension(250, 25));
         jPanel4.add(m_jnumber, java.awt.BorderLayout.CENTER);
 
         jPanel3.add(jPanel4);
