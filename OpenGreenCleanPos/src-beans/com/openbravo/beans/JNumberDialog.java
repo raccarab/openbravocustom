@@ -184,7 +184,7 @@ public class JNumberDialog extends javax.swing.JDialog {
         getContentPane().add(m_jPanelTitle, java.awt.BorderLayout.NORTH);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-404)/2, (screenSize.height-484)/2, 404, 484);
+        setBounds((screenSize.width-302)/2, (screenSize.height-461)/2, 302, 461);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcmdOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmdOKActionPerformed

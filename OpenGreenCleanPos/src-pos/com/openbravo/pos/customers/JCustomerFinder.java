@@ -96,8 +96,6 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
         getRootPane().setDefaultButton(jcmdOK);
 
         selectedCustomer = null;
-
-        executeSearch();
     }
     
     public void search(CustomerInfo customer) {

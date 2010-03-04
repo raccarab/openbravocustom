@@ -59,9 +59,24 @@ public class JCatalogTab extends javax.swing.JPanel {
         btn.setRequestFocusEnabled(false);
         btn.setHorizontalTextPosition(SwingConstants.CENTER);
         btn.setVerticalTextPosition(SwingConstants.BOTTOM);
-        btn.setMargin(new Insets(2, 2, 2, 2));
+        btn.setMargin(new Insets(1, 1, 1, 1));
         btn.addActionListener(al);
-        flowpanel.add(btn);        
+        flowpanel.add(btn);
+    }
+
+        public void addButton(Icon ico, ActionListener al, String tooltip) {
+        JButton btn = new JButton();
+        btn.applyComponentOrientation(getComponentOrientation());
+        btn.setIcon(ico);
+        btn.setFocusPainted(false);
+        btn.setFocusable(false);
+        btn.setRequestFocusEnabled(false);
+        btn.setHorizontalTextPosition(SwingConstants.CENTER);
+        btn.setToolTipText(tooltip);
+        btn.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btn.setMargin(new Insets(1, 1, 1, 1));
+        btn.addActionListener(al);
+        flowpanel.add(btn);
     }
     
     /** This method is called from within the constructor to
