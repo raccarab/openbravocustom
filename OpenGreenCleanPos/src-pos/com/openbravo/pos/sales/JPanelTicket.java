@@ -1260,7 +1260,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         });
         m_jButtons.add(btnSplit);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/inbox.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/btnpercent.png"))); // NOI18N
         jButton2.setToolTipText("Remise totale");
         jButton2.setPreferredSize(new java.awt.Dimension(46, 35));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -1363,7 +1363,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         });
         jPanel2.add(jEditAttributes);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/inbox.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/btnpercent.png"))); // NOI18N
         jButton1.setToolTipText("Remise ligne");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
