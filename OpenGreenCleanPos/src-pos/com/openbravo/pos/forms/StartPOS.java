@@ -19,7 +19,6 @@
 
 package com.openbravo.pos.forms;
 
-import com.openbravo.data.gui.MessageInf;
 import java.util.Locale;
 import javax.swing.UIManager;
 import com.openbravo.format.Formats;
@@ -107,6 +106,7 @@ public class StartPOS {
                     JRootFrame rootframe = new JRootFrame(); 
                     rootframe.initFrame(config);
                 }
+
             }
         });    
     }    
