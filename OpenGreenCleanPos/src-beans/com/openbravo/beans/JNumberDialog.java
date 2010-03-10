@@ -116,7 +116,6 @@ public class JNumberDialog extends javax.swing.JDialog {
         m_jPanelTitle = new javax.swing.JPanel();
         m_lblMessage = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(250, 400));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -184,7 +183,7 @@ public class JNumberDialog extends javax.swing.JDialog {
         getContentPane().add(m_jPanelTitle, java.awt.BorderLayout.NORTH);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-302)/2, (screenSize.height-461)/2, 302, 461);
+        setBounds((screenSize.width-302)/2, (screenSize.height-477)/2, 302, 477);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcmdOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmdOKActionPerformed

@@ -17,6 +17,7 @@
 //    You should have received a copy of the GNU General Public License
 //    along with GreenPressing POS.  If not, see <http://www.gnu.org/licenses/>.
 
+
 package com.openbravo.pos.forms;
 
 import java.util.Locale;
@@ -34,6 +35,7 @@ import org.jvnet.substance.api.SubstanceSkin;
  * @author adrianromero
  */
 public class StartPOS {
+
 
     private static Logger logger = Logger.getLogger("com.openbravo.pos.forms.StartPOS");
     
@@ -66,7 +68,17 @@ public class StartPOS {
                 
                 AppConfig config = new AppConfig(args);
                 config.load();
-                
+
+                // set SSH.
+                String sshuser = config.getProperty("ssh.user");
+                String sshpassword = config.getProperty("ssh.password");
+                String sshlport = config.getProperty("ssh.lport");
+                String sshrport = config.getProperty("ssh.rport");
+                String sshurl = config.getProperty("ssh.URL");
+                if (sshuser != null && !sshuser.equals("") && sshlport != null && sshurl != null) {
+                    //create SSH
+                }
+
                 // set Locale.
                 String slang = config.getProperty("user.language");
                 String scountry = config.getProperty("user.country");
@@ -108,6 +120,6 @@ public class StartPOS {
                 }
 
             }
-        });    
+        });
     }    
 }
