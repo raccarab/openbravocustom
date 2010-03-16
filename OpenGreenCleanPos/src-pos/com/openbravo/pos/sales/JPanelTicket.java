@@ -24,6 +24,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Date;
+import java.util.List;
 
 import com.openbravo.data.gui.ComboBoxValModel;
 import com.openbravo.data.gui.MessageInf;
@@ -75,6 +76,9 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRMapArrayDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -137,6 +141,9 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         
         initComponents ();
     }
+
+    private static Logger logger = Logger.getLogger("com.openbravo.pos.forms.JPrincipalApp");
+
    
     public void init(AppView app) throws BeanFactoryException {
         
@@ -177,7 +184,13 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         
         // inicializamos
         m_oTicket = null;
-        m_oTicketExt = null;      
+        m_oTicketExt = null;
+
+/*
+ * UNCOMMENT FOR HIDING TakeAway Button
+ *
+ */
+       // jButton3.hide();
     }
     
     public Object getBean() {
@@ -1181,6 +1194,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         btnCustomer = new javax.swing.JButton();
         btnSplit = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         m_jPanelScripts = new javax.swing.JPanel();
         m_jButtonsExt = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -1269,6 +1283,17 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
             }
         });
         m_jButtons.add(jButton2);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/launch.png"))); // NOI18N
+        jButton3.setText("TakeAway");
+        jButton3.setPreferredSize(new java.awt.Dimension(100, 35));
+        jButton3.setSize(new java.awt.Dimension(120, 35));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        m_jButtons.add(jButton3);
 
         m_jOptions.add(m_jButtons, java.awt.BorderLayout.LINE_START);
 
@@ -1720,6 +1745,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
                 taxes = m_oTicket.getTaxLines();
                 for (int i = 0; i < taxes.length; i++) {
+
                     taxline = taxes[i];
                     m_oTicket.insertLine(m_oTicket.getLinesCount(),
                             new TicketLineInfo(
@@ -1737,6 +1763,86 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        List<TicketLineInfo> tLines;
+        // TicketLineInfo currentLine;
+        TicketTaxInfo[] taxes;
+        TaxInfo taxline;
+        Double marge;
+
+/*
+ * Mettre le client à Emporter à "invisible"
+ * remplacer les données ci-dessous par les bonnes
+ *
+ * 
+ *
+ */
+        Double taxTakeAway = 1.06;  //taxe à emporter = 6%
+        String takeAwayID = "00000000-0000-0000-0000-000000000000"; // ID du client "A Emporter"
+        String taxTakeAwayName = "Sur Place"; // Nom de la taxe "Sur Place"
+
+        double total = m_oTicket.getTotal();
+        if (total <= 0.0) {
+            java.awt.Toolkit.getDefaultToolkit().beep();
+            return;
+        }
+
+        tLines = m_oTicket.getLines();
+
+        try {
+            m_oTicket.setCustomer(dlSales.loadCustomerExt(takeAwayID));
+
+        } catch (BasicException e) {
+            MessageInf msg = new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("message.cannotfindcustomer"), e);
+            msg.show(this);
+        }
+
+//        refreshTicket();
+            
+        for (int i = 0; i < tLines.size(); i++) {
+
+            TicketLineInfo currentLine = tLines.get(i);
+            taxline = currentLine.getTaxInfo();
+            
+            if (taxline.getName().contains(taxTakeAwayName)) {
+
+                marge = (currentLine.getPriceTax() / taxTakeAway);
+                currentLine.setPrice(marge);
+                m_oTicket.setLine(i, currentLine);
+            }
+        }
+
+
+        refreshTicket();
+        if (closeTicket(m_oTicket, m_oTicketExt)) {
+            m_ticketsbag.deleteTicket();
+
+        } else {
+            m_oTicket.setCustomer(null);
+             refreshTicket();
+            for (int i = 0; i < tLines.size(); i++) {
+
+                // taxline = taxes[i];
+                TicketLineInfo currentLine = tLines.get(i);
+                taxline = currentLine.getTaxInfo();
+
+                
+                if (taxline.getName().contains(taxTakeAwayName)) {
+                    Double tax = (taxline.getRate())+1.0;
+
+                    marge = ((currentLine.getPrice()*taxTakeAway) / tax);
+                    currentLine.setPrice(marge);
+
+                    m_oTicket.setLine(i, currentLine);
+                }
+
+            }
+        }
+
+        refreshTicket();
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCustomer;
@@ -1744,6 +1850,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     private javax.swing.JPanel catcontainer;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jEditAttributes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

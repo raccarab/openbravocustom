@@ -596,7 +596,7 @@ public class ProductsEditor extends JPanel implements EditorRecord {
         add(m_jName);
         m_jName.setBounds(400, 0, 190, 28);
 
-        m_jTitle.setFont(new java.awt.Font("SansSerif", 3, 18)); // NOI18N
+        m_jTitle.setFont(new java.awt.Font("SansSerif", 3, 18));
         add(m_jTitle);
         m_jTitle.setBounds(0, 0, 210, 30);
 
