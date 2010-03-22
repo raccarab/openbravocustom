@@ -41,6 +41,7 @@ report.setSentence("SELECT " +
 report.addParameter("TICKETS.DATERETURN");
 report.addParameter("TICKETS.DATERETURN");
 report.addQBFFilter(new com.openbravo.pos.reports.JParamsDatesInterval());
+report.addQBFFilter(new com.openbravo.pos.ticket.HostFilter());
 
 report.addField("SEARCHKEY", com.openbravo.data.loader.Datas.STRING);
 report.addField("NAMECUST", com.openbravo.data.loader.Datas.STRING);
