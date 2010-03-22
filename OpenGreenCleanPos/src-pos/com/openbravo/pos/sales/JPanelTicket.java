@@ -1286,7 +1286,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jButtons.add(jButton2);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/btnplus.png"))); // NOI18N
-        jButton4.setToolTipText("Remise totale");
+        jButton4.setToolTipText("Supplément totale");
         jButton4.setPreferredSize(new java.awt.Dimension(46, 35));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
