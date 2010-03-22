@@ -7,11 +7,11 @@
 	<import value="net.sf.jasperreports.engine.data.*"/>
 	<parameter name="ARG" class="java.lang.Object" isForPrompting="false"/>
 	<queryString>
-		<![CDATA[SELECT CUSTOMERS.SEARCHKEY, CUSTOMERS.NAME AS NAMECUST, TICKETS.TICKETID, TICKETS.DATERETURN, PRODUCTS.REFERENCE, PRODUCTS.NAME, SUM(TICKETLINES.UNITS) AS UNITS, SUM(TICKETLINES.UNITS * TICKETLINES.PRICE) AS TOTAL
-FROM RECEIPTS, TICKETS LEFT OUTER JOIN CUSTOMERS ON CUSTOMERS.ID = TICKETS.CUSTOMER, TICKETLINES LEFT OUTER JOIN PRODUCTS ON TICKETLINES.PRODUCT = PRODUCTS.ID
-WHERE RECEIPTS.ID = TICKETS.ID AND TICKETS.ID = TICKETLINES.TICKET AND PRODUCTS.TAXCAT = '001'
-GROUP BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.REFERENCE, PRODUCTS.NAME
-ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
+		<![CDATA[SELECT CUSTOMERS.SEARCHKEY, CUSTOMERS.NAME AS NAMECUST, TICKETS.TICKETID, TICKETS.DATERETURN, PRODUCTS.REFERENCE, PRODUCTS.NAME, SUM( TICKETLINES.UNITS ) AS UNITS, SUM( TICKETLINES.UNITS * TICKETLINES.PRICE ) AS TOTAL, CLOSEDCASH.HOST
+FROM RECEIPTS, CLOSEDCASH, TICKETS LEFT OUTER JOIN CUSTOMERS ON CUSTOMERS.ID = TICKETS.CUSTOMER, TICKETLINES LEFT OUTER JOIN PRODUCTS ON TICKETLINES.PRODUCT = PRODUCTS.ID
+WHERE RECEIPTS.ID = TICKETS.ID AND RECEIPTS.MONEY = CLOSEDCASH.MONEY AND TICKETS.ID = TICKETLINES.TICKET AND PRODUCTS.TAXCAT = '001'
+GROUP BY TICKETS.TICKETID, CUSTOMERS.SEARCHKEY, PRODUCTS.REFERENCE
+ORDER BY CLOSEDCASH.HOST]]>
 	</queryString>
 	<field name="SEARCHKEY" class="java.lang.String"/>
 	<field name="NAMECUST" class="java.lang.String"/>
@@ -21,6 +21,7 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 	<field name="NAME" class="java.lang.String"/>
 	<field name="UNITS" class="java.lang.Double"/>
 	<field name="TOTAL" class="java.lang.Double"/>
+    <field name="HOST" class="java.lang.String"/>
 	<variable name="BIGTOTAL" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{TOTAL}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Double(0.0)]]></initialValueExpression>
@@ -29,6 +30,29 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 		<variableExpression><![CDATA[$F{TOTAL}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Double(0.0)]]></initialValueExpression>
 	</variable>
+	<group name="Host">
+		<groupExpression><![CDATA[$F{HOST}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-1" mode="Opaque" x="13" y="14" width="156" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Dialog" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{HOST}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50"/>
+		</groupFooter>
+	</group>
 	<group name="Ticket">
 		<groupExpression><![CDATA[$F{TICKETID}]]></groupExpression>
 		<groupHeader>
@@ -101,7 +125,7 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 		<band/>
 	</background>
 	<title>
-		<band height="93">
+		<band height="138">
 			<textField pattern="" isBlankWhenNull="true">
 				<reportElement key="textField-8" mode="Transparent" x="390" y="43" width="140" height="20"/>
 				<box>
@@ -198,7 +222,7 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$R{label.startdate}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement key="textField-9" mode="Transparent" x="35" y="43" width="181" height="40"/>
+				<reportElement key="textField-9" mode="Transparent" x="35" y="43" width="148" height="40"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>

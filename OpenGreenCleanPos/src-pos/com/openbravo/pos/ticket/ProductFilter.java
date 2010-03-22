@@ -158,6 +158,12 @@ public class ProductFilter extends javax.swing.JPanel implements ReportEditorCre
 
         jLabel4.setText(AppLocal.getIntString("label.prodpricebuy")); // NOI18N
 
+        m_jCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_jCategoryActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText(AppLocal.getIntString("label.prodname")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -190,7 +196,7 @@ public class ProductFilter extends javax.swing.JPanel implements ReportEditorCre
                             .addComponent(m_jCboPriceSell, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(m_jPriceSell, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,6 +237,10 @@ public class ProductFilter extends javax.swing.JPanel implements ReportEditorCre
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void m_jCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jCategoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_m_jCategoryActionPerformed
    
     
     
