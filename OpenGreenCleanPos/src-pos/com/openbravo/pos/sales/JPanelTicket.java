@@ -1194,6 +1194,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         btnCustomer = new javax.swing.JButton();
         btnSplit = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         m_jPanelScripts = new javax.swing.JPanel();
         m_jButtonsExt = new javax.swing.JPanel();
@@ -1284,10 +1285,19 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         });
         m_jButtons.add(jButton2);
 
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/btnplus.png"))); // NOI18N
+        jButton4.setToolTipText("Remise totale");
+        jButton4.setPreferredSize(new java.awt.Dimension(46, 35));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        m_jButtons.add(jButton4);
+
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/launch.png"))); // NOI18N
         jButton3.setText("TakeAway");
-        jButton3.setPreferredSize(new java.awt.Dimension(100, 35));
-        jButton3.setSize(new java.awt.Dimension(120, 35));
+        jButton3.setPreferredSize(new java.awt.Dimension(46, 35));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -1843,6 +1853,44 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // % Supplément globale sur ticket
+        Double discountrate = JNumberDialog.showEditNumber(this, AppLocal.getIntString("label.extra"), AppLocal.getIntString("label.remiseinput"), new ImageIcon(ScaleDialog.class.getResource("/com/openbravo/images/inbox.png")));
+
+        if (discountrate == null) {
+            return;
+        }
+        TicketTaxInfo[] taxes;
+        TicketTaxInfo taxline;
+
+        if (discountrate > 0 && discountrate < 100) {
+            discountrate/=100;
+            double total = m_oTicket.getTotal();
+            if (total > 0.0 && discountrate > 0.0) {
+                String sdiscount = Formats.PERCENT.formatValue(discountrate);
+
+                taxes = m_oTicket.getTaxLines();
+                for (int i = 0; i < taxes.length; i++) {
+
+                    taxline = taxes[i];
+                    m_oTicket.insertLine(m_oTicket.getLinesCount(),
+                            new TicketLineInfo(
+                            "Supplément totale " + sdiscount,
+                            taxline.getTaxInfo().getTaxCategoryID(),
+                            1.0,
+                            +taxline.getSubTotal() * discountrate,
+                            taxline.getTaxInfo()));
+                }
+                refreshTicket();
+                setSelectedIndex(m_oTicket.getLinesCount() - 1);
+            } else {
+                java.awt.Toolkit.getDefaultToolkit().beep();
+            }
+        }
+
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCustomer;
@@ -1851,6 +1899,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jEditAttributes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
