@@ -42,6 +42,7 @@ import com.openbravo.pos.mant.FloorsInfo;
 import com.openbravo.pos.payment.PaymentInfo;
 import com.openbravo.pos.payment.PaymentInfoTicket;
 import com.openbravo.pos.ticket.FindTicketsInfo;
+import com.openbravo.pos.ticket.HostInfo;
 import com.openbravo.pos.ticket.TicketTaxInfo;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -226,6 +227,12 @@ public class DataLogicSales extends BeanFactoryDataSingle {
             , "SELECT ID, NAME, IMAGE FROM CATEGORIES ORDER BY NAME"
             , null
             , CategoryInfo.getSerializerRead());
+    }
+    public final SentenceList getHostList() {
+        return new StaticSentence(s
+            , "SELECT DISTINCT MONEY, HOST, HOSTSEQUENCE FROM `CLOSEDCASH` GROUP BY HOST"
+            , null
+            , HostInfo.getSerializerRead());
     }
     public final SentenceList getTaxCustCategoriesList() {
         return new StaticSentence(s
