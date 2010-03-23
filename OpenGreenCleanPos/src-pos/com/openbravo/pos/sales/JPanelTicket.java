@@ -1194,9 +1194,9 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jTicketId = new javax.swing.JLabel();
         btnCustomer = new javax.swing.JButton();
         btnSplit = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jRebateTotal = new javax.swing.JButton();
+        jAddPercent = new javax.swing.JButton();
+        jTakeAway = new javax.swing.JButton();
         m_jPanelScripts = new javax.swing.JPanel();
         m_jButtonsExt = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -1209,7 +1209,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jList = new javax.swing.JButton();
         m_jEditLine = new javax.swing.JButton();
         jEditAttributes = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jRebateLine = new javax.swing.JButton();
         m_jPanelCentral = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         m_jPanTotals = new javax.swing.JPanel();
@@ -1276,35 +1276,35 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         });
         m_jButtons.add(btnSplit);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/btnpercent.png"))); // NOI18N
-        jButton2.setToolTipText("Remise totale");
-        jButton2.setPreferredSize(new java.awt.Dimension(46, 35));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jRebateTotal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/btnpercent.png"))); // NOI18N
+        jRebateTotal.setToolTipText("Remise totale");
+        jRebateTotal.setPreferredSize(new java.awt.Dimension(46, 35));
+        jRebateTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jRebateTotalActionPerformed(evt);
             }
         });
-        m_jButtons.add(jButton2);
+        m_jButtons.add(jRebateTotal);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/btnplus.png"))); // NOI18N
-        jButton4.setToolTipText("Supplément totale");
-        jButton4.setPreferredSize(new java.awt.Dimension(46, 35));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jAddPercent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/btnplus.png"))); // NOI18N
+        jAddPercent.setToolTipText("Supplément totale");
+        jAddPercent.setPreferredSize(new java.awt.Dimension(46, 35));
+        jAddPercent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jAddPercentActionPerformed(evt);
             }
         });
-        m_jButtons.add(jButton4);
+        m_jButtons.add(jAddPercent);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/launch.png"))); // NOI18N
-        jButton3.setText("TakeAway");
-        jButton3.setPreferredSize(new java.awt.Dimension(46, 35));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jTakeAway.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/launch.png"))); // NOI18N
+        jTakeAway.setText("TakeAway");
+        jTakeAway.setPreferredSize(new java.awt.Dimension(46, 35));
+        jTakeAway.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jTakeAwayActionPerformed(evt);
             }
         });
-        m_jButtons.add(jButton3);
+        m_jButtons.add(jTakeAway);
 
         m_jOptions.add(m_jButtons, java.awt.BorderLayout.LINE_START);
 
@@ -1399,14 +1399,14 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         });
         jPanel2.add(jEditAttributes);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/btnpercent.png"))); // NOI18N
-        jButton1.setToolTipText("Remise ligne");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jRebateLine.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/btnpercent.png"))); // NOI18N
+        jRebateLine.setToolTipText("Remise ligne");
+        jRebateLine.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jRebateLineActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
+        jPanel2.add(jRebateLine);
 
         jPanel5.add(jPanel2, java.awt.BorderLayout.NORTH);
 
@@ -1701,7 +1701,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         
 }//GEN-LAST:event_jEditAttributesActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jRebateLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRebateLineActionPerformed
 
         if (m_oTicket.getTotal()<=0.0) return;
         
@@ -1739,9 +1739,9 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
              java.awt.Toolkit.getDefaultToolkit().beep();
          }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jRebateLineActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jRebateTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRebateTotalActionPerformed
 // % Remise globale sur ticket
 
         if (m_oTicket.getTotal()<=0.0) return;
@@ -1779,9 +1779,9 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 java.awt.Toolkit.getDefaultToolkit().beep();
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jRebateTotalActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jTakeAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTakeAwayActionPerformed
         List<TicketLineInfo> tLines;
         // TicketLineInfo currentLine;
         TicketTaxInfo[] taxes;
@@ -1859,9 +1859,9 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
         refreshTicket();
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jTakeAwayActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jAddPercentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddPercentActionPerformed
         // % Supplément globale sur ticket
 
         if (m_oTicket.getTotal()<=0.0) return;
@@ -1900,23 +1900,23 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         }
 
 
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jAddPercentActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCustomer;
     private javax.swing.JButton btnSplit;
     private javax.swing.JPanel catcontainer;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jAddPercent;
     private javax.swing.JButton jEditAttributes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JButton jRebateLine;
+    private javax.swing.JButton jRebateTotal;
+    private javax.swing.JButton jTakeAway;
     private javax.swing.JPanel m_jButtons;
     private javax.swing.JPanel m_jButtonsExt;
     private javax.swing.JPanel m_jContEntries;
