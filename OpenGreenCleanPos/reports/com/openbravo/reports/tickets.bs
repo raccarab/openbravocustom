@@ -19,7 +19,7 @@
 
 report = new com.openbravo.pos.reports.PanelReportBean();
 
-report.setTitleKey("Menu.Delivery");
+report.setTitleKey("Menu.Ticket");
 report.setReport("/com/openbravo/reports/tickets");
 report.setResourceBundle("com/openbravo/reports/tickets_messages");
 
