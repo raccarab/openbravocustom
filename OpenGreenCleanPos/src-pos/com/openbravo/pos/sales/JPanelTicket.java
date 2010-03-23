@@ -39,6 +39,7 @@ import com.openbravo.pos.payment.JPaymentSelect;
 import com.openbravo.basic.BasicException;
 import com.openbravo.beans.JCalendarDialog;
 import com.openbravo.beans.JNumberDialog;
+import com.openbravo.beans.JPercentDialog;
 import com.openbravo.data.gui.ListKeyed;
 import com.openbravo.data.loader.SentenceList;
 import com.openbravo.format.Formats;
@@ -1701,7 +1702,10 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 }//GEN-LAST:event_jEditAttributesActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          Double discountrate = JNumberDialog.showEditNumber(this, AppLocal.getIntString("label.remise"), AppLocal.getIntString("label.remiseinput"), new ImageIcon(ScaleDialog.class.getResource("/com/openbravo/images/inbox.png")));
+
+        if (m_oTicket.getTotal()<=0.0) return;
+        
+        Double discountrate = JPercentDialog.showEditNumber(this, AppLocal.getIntString("label.remise"), AppLocal.getIntString("label.remiseinput"), new ImageIcon(ScaleDialog.class.getResource("/com/openbravo/images/inbox.png")));
 
           if (discountrate == null) return;
 
@@ -1739,7 +1743,11 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 // % Remise globale sur ticket
-        Double discountrate = JNumberDialog.showEditNumber(this, AppLocal.getIntString("label.remise"), AppLocal.getIntString("label.remiseinput"), new ImageIcon(ScaleDialog.class.getResource("/com/openbravo/images/inbox.png")));
+
+        if (m_oTicket.getTotal()<=0.0) return;
+
+        
+        Double discountrate = JPercentDialog.showEditNumber(this, AppLocal.getIntString("label.remise"), AppLocal.getIntString("label.remiseinput"), new ImageIcon(ScaleDialog.class.getResource("/com/openbravo/images/inbox.png")));
 
         if (discountrate == null) {
             return;
@@ -1855,7 +1863,10 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // % Supplément globale sur ticket
-        Double discountrate = JNumberDialog.showEditNumber(this, AppLocal.getIntString("label.extra"), AppLocal.getIntString("label.remiseinput"), new ImageIcon(ScaleDialog.class.getResource("/com/openbravo/images/inbox.png")));
+
+        if (m_oTicket.getTotal()<=0.0) return;
+        
+        Double discountrate = JPercentDialog.showEditNumber(this, AppLocal.getIntString("label.extra"), AppLocal.getIntString("label.remiseinput"), new ImageIcon(ScaleDialog.class.getResource("/com/openbravo/images/inbox.png")));
 
         if (discountrate == null) {
             return;
@@ -1875,7 +1886,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                     taxline = taxes[i];
                     m_oTicket.insertLine(m_oTicket.getLinesCount(),
                             new TicketLineInfo(
-                            "Supplément totale " + sdiscount,
+                            "Service supp. " + sdiscount,
                             taxline.getTaxInfo().getTaxCategoryID(),
                             1.0,
                             +taxline.getSubTotal() * discountrate,
