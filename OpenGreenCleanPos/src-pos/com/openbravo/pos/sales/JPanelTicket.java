@@ -191,7 +191,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
  * UNCOMMENT FOR HIDING TakeAway Button
  *
  */
-       // jButton3.hide();
+        jTakeAway.hide();
     }
     
     public Object getBean() {
@@ -1244,7 +1244,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jTicketId.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         m_jTicketId.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow")), javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4)));
         m_jTicketId.setOpaque(true);
-        m_jTicketId.setPreferredSize(new java.awt.Dimension(150, 25));
+        m_jTicketId.setPreferredSize(new java.awt.Dimension(150, 35));
         m_jTicketId.setRequestFocusEnabled(false);
         m_jButtons.add(m_jTicketId);
 
@@ -1412,6 +1412,8 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
         m_jPanTicket.add(jPanel5, java.awt.BorderLayout.LINE_END);
 
+        m_jPanelCentral.setForeground(new java.awt.Color(0, 102, 51));
+        m_jPanelCentral.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         m_jPanelCentral.setLayout(new java.awt.BorderLayout());
 
         jPanel4.setLayout(new java.awt.BorderLayout());
@@ -1649,6 +1651,10 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
             m_oTicket.setCustomer(finder.getSelectedCustomer() == null
                     ? null
                     : dlSales.loadCustomerExt(finder.getSelectedCustomer().getId()));
+            if (m_oTicket.getCustomer()==null)
+                 m_jTicketId.setBackground(Color.white);
+            else
+               m_jTicketId.setBackground(Color.GREEN);
         } catch (BasicException e) {
             MessageInf msg = new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("message.cannotfindcustomer"), e);
             msg.show(this);            
