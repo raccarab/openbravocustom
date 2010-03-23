@@ -187,6 +187,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_oTicket = null;
         m_oTicketExt = null;
 
+
 /*
  * UNCOMMENT FOR HIDING TakeAway Button
  *
@@ -248,7 +249,9 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jNumberKeys.setEqualsEnabled(m_App.getAppUserView().getUser().hasPermission("sales.Total"));
         m_jbtnconfig.setPermissions(m_App.getAppUserView().getUser());  
                
-        m_ticketsbag.activate();        
+        m_ticketsbag.activate();
+
+        colorizeCustomer();
     }
     
     public boolean deactivate() {
@@ -1107,6 +1110,13 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
             m_ticketlines.setSelectedIndex(m_oTicket.getLinesCount() - 1);
         }    
     }
+
+    private void colorizeCustomer() {
+        if (m_jTicketId.getText().contains(" - "))
+                 m_jTicketId.setBackground(Color.GREEN);
+            else
+               m_jTicketId.setBackground(Color.WHITE);
+    }
      
     public static class ScriptArg {
         private String key;
@@ -1651,16 +1661,15 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
             m_oTicket.setCustomer(finder.getSelectedCustomer() == null
                     ? null
                     : dlSales.loadCustomerExt(finder.getSelectedCustomer().getId()));
-            if (m_oTicket.getCustomer()==null)
-                 m_jTicketId.setBackground(Color.white);
-            else
-               m_jTicketId.setBackground(Color.GREEN);
+          
         } catch (BasicException e) {
             MessageInf msg = new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("message.cannotfindcustomer"), e);
             msg.show(this);            
         }
 
+
         refreshTicket();
+          colorizeCustomer();
         
 }//GEN-LAST:event_btnCustomerActionPerformed
 

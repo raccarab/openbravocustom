@@ -159,7 +159,7 @@ public class JPercentDialog extends javax.swing.JDialog {
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
 
         m_jKeys.setMinimumSize(new java.awt.Dimension(222, 270));
-        m_jKeys.setPreferredSize(new java.awt.Dimension(250, 300));
+        m_jKeys.setPreferredSize(new java.awt.Dimension(200, 300));
         m_jKeys.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 m_jKeysActionPerformed(evt);
@@ -171,10 +171,12 @@ public class JPercentDialog extends javax.swing.JDialog {
         jPanel4.setLayout(new java.awt.BorderLayout());
         jPanel3.add(jPanel4);
 
+        jPanel5.setPreferredSize(new java.awt.Dimension(280, 60));
+
         jBt10.setText("10");
         jBt10.setMaximumSize(new java.awt.Dimension(45, 45));
         jBt10.setMinimumSize(new java.awt.Dimension(25, 25));
-        jBt10.setPreferredSize(new java.awt.Dimension(45, 45));
+        jBt10.setPreferredSize(new java.awt.Dimension(50, 45));
         jBt10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBt10ActionPerformed(evt);
@@ -185,7 +187,7 @@ public class JPercentDialog extends javax.swing.JDialog {
         jBt15.setText("15");
         jBt15.setMaximumSize(new java.awt.Dimension(45, 45));
         jBt15.setMinimumSize(new java.awt.Dimension(25, 25));
-        jBt15.setPreferredSize(new java.awt.Dimension(45, 45));
+        jBt15.setPreferredSize(new java.awt.Dimension(50, 45));
         jBt15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBt15ActionPerformed(evt);
@@ -196,7 +198,7 @@ public class JPercentDialog extends javax.swing.JDialog {
         jBt20.setText("20");
         jBt20.setMaximumSize(new java.awt.Dimension(45, 45));
         jBt20.setMinimumSize(new java.awt.Dimension(25, 25));
-        jBt20.setPreferredSize(new java.awt.Dimension(45, 45));
+        jBt20.setPreferredSize(new java.awt.Dimension(50, 45));
         jBt20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBt20ActionPerformed(evt);
@@ -207,7 +209,7 @@ public class JPercentDialog extends javax.swing.JDialog {
         jBt25.setText("25");
         jBt25.setMaximumSize(new java.awt.Dimension(45, 45));
         jBt25.setMinimumSize(new java.awt.Dimension(25, 25));
-        jBt25.setPreferredSize(new java.awt.Dimension(45, 45));
+        jBt25.setPreferredSize(new java.awt.Dimension(50, 45));
         jBt25.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBt25ActionPerformed(evt);
@@ -218,7 +220,7 @@ public class JPercentDialog extends javax.swing.JDialog {
         jBt50.setText("50");
         jBt50.setMaximumSize(new java.awt.Dimension(45, 45));
         jBt50.setMinimumSize(new java.awt.Dimension(25, 25));
-        jBt50.setPreferredSize(new java.awt.Dimension(45, 45));
+        jBt50.setPreferredSize(new java.awt.Dimension(50, 45));
         jBt50.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBt50ActionPerformed(evt);
@@ -245,7 +247,7 @@ public class JPercentDialog extends javax.swing.JDialog {
         getContentPane().add(m_jPanelTitle, java.awt.BorderLayout.NORTH);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-302)/2, (screenSize.height-536)/2, 302, 536);
+        setBounds((screenSize.width-365)/2, (screenSize.height-536)/2, 365, 536);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcmdOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmdOKActionPerformed
