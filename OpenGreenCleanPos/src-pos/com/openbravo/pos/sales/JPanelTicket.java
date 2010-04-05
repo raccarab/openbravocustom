@@ -192,7 +192,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
  * UNCOMMENT FOR HIDING TakeAway Button
  *
  */
-        jTakeAway.hide();
+      //  jTakeAway.hide();
     }
     
     public Object getBean() {
@@ -1309,7 +1309,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
         jTakeAway.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/launch.png"))); // NOI18N
         jTakeAway.setText("TakeAway");
-        jTakeAway.setPreferredSize(new java.awt.Dimension(46, 35));
+        jTakeAway.setPreferredSize(new java.awt.Dimension(100, 35));
         jTakeAway.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTakeAwayActionPerformed(evt);
@@ -1433,14 +1433,13 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
             }
         });
         jPanel2.add(jRebateLine1);
-        jRebateLine1.getAccessibleContext().setAccessibleDescription("Supplement ligne");
 
         jPanel5.add(jPanel2, java.awt.BorderLayout.NORTH);
 
         m_jPanTicket.add(jPanel5, java.awt.BorderLayout.LINE_END);
 
         m_jPanelCentral.setForeground(new java.awt.Color(0, 102, 51));
-        m_jPanelCentral.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        m_jPanelCentral.setFont(new java.awt.Font("SansSerif", 1, 14));
         m_jPanelCentral.setLayout(new java.awt.BorderLayout());
 
         jPanel4.setLayout(new java.awt.BorderLayout());
@@ -1828,7 +1827,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
  *
  */
         Double taxTakeAway = 1.06;  //taxe à emporter = 6%
-        String takeAwayID = "00000000-0000-0000-0000-000000000000"; // ID du client "A Emporter"
+        String takeAwayID = "8ba8e7e2-197f-4296-9531-ed27ad875ad8"; // ID du client "A Emporter"
         String taxTakeAwayName = "Sur Place"; // Nom de la taxe "Sur Place"
 
         double total = m_oTicket.getTotal();

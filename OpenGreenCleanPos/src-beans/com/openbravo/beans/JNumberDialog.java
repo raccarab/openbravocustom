@@ -65,7 +65,7 @@ public class JNumberDialog extends javax.swing.JDialog {
         
         m_jPanelTitle.setBorder(RoundedBorder.createGradientBorder());
 
-        m_value = 0.;
+//        m_value = 0.;
     }
     
     private void setTitle(String title, String message, Icon icon) {

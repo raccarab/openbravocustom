@@ -27,10 +27,18 @@ import java.awt.Component;
 public class DeviceScale {
     
     private Scale m_scale;
+    private double scaleDiv=1;
     
     /** Creates a new instance of DeviceScale */
     public DeviceScale(Component parent, AppProperties props) {
         StringParser sd = new StringParser(props.getProperty("machine.scale"));
+        try {
+            scaleDiv = Double.parseDouble(props.getProperty("machine.scaledivider"));
+            
+        } catch (NumberFormatException nfe) {
+          
+        }
+
         String sScaleType = sd.nextToken(':');
         String sScaleParam1 = sd.nextToken(',');
         // String sScaleParam2 = sd.nextToken(',');
@@ -62,10 +70,10 @@ public class DeviceScale {
                 return null; // Canceled by the user / scale
             } else if (result.doubleValue() < 0.002) {
                 // invalid result. nothing on the scale
-                throw new ScaleException(AppLocal.getIntString("scale.invalidvalue"));                
+                throw new ScaleException(AppLocal.getIntString("scale.invalidvalue"));
             } else {
                 // valid result
-                return result;
+                return result/scaleDiv;
             }
         }
     }    

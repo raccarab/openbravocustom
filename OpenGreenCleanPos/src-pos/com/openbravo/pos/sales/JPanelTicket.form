@@ -155,7 +155,7 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="TakeAway"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[46, 35]"/>
+                      <Dimension value="[100, 35]"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -381,9 +381,6 @@
                           <Dimension value="[47, 25]"/>
                         </Property>
                       </Properties>
-                      <AccessibilityProperties>
-                        <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value="Supplement ligne"/>
-                      </AccessibilityProperties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRebateLine1ActionPerformed"/>
                       </Events>
