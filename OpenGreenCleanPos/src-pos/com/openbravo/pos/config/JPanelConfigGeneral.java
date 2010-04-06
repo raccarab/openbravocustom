@@ -280,6 +280,7 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
 
         jtxtMachineHostname.setText(config.getProperty("machine.hostname"));
         jScaleDivider.setText(config.getProperty("machine.scaledivider"));
+        jchkTakeAway.setSelected(Boolean.valueOf(config.getProperty("label.takeaway")).booleanValue());
 
         String lafclass = config.getProperty("swing.defaultlaf");
         jcboLAF.setSelectedItem(null);
@@ -390,6 +391,7 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
 
         config.setProperty("machine.hostname", jtxtMachineHostname.getText());
         config.setProperty("machine.scaledivider", jScaleDivider.getText());
+        config.setProperty("label.takeaway", Boolean.toString(jchkTakeAway.isSelected()));
 
         LAFInfo laf = (LAFInfo) jcboLAF.getSelectedItem();
         config.setProperty("swing.defaultlaf", laf == null
@@ -614,6 +616,7 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
         jcboSerialScanner = new javax.swing.JComboBox();
         jlblPrinterPort6 = new javax.swing.JLabel();
         jScaleDivider = new javax.swing.JTextField();
+        jchkTakeAway = new javax.swing.JCheckBox();
 
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(AppLocal.getIntString("Label.CashMachine"))); // NOI18N
 
@@ -1004,6 +1007,8 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pos_messages"); // NOI18N
         jlblPrinterPort6.setText(bundle.getString("label.scaledivider")); // NOI18N
 
+        jchkTakeAway.setText(AppLocal.getIntString("label.takeaway")); // NOI18N
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -1073,7 +1078,8 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jcboMachineScanner, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(m_jScannerParams, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)))
+                        .addComponent(m_jScannerParams, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+                    .addComponent(jchkTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
@@ -1141,7 +1147,9 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
                             .addComponent(jLabel1)
                             .addComponent(cboPrinters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(m_jScannerParams, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jchkTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1293,6 +1301,7 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
     private javax.swing.JComboBox jcboSerialScale;
     private javax.swing.JComboBox jcboSerialScanner;
     private javax.swing.JComboBox jcboTicketsBag;
+    private javax.swing.JCheckBox jchkTakeAway;
     private javax.swing.JLabel jlblConnDisplay;
     private javax.swing.JLabel jlblConnPrinter;
     private javax.swing.JLabel jlblConnPrinter2;

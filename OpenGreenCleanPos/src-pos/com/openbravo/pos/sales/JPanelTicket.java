@@ -78,7 +78,6 @@ import net.sf.jasperreports.engine.data.JRMapArrayDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -187,12 +186,8 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_oTicket = null;
         m_oTicketExt = null;
 
-
-/*
- * UNCOMMENT FOR HIDING TakeAway Button
- *
- */
-      //  jTakeAway.hide();
+        if (! Boolean.valueOf(m_App.getProperties().getProperty("label.takeaway")).booleanValue())
+            jTakeAway.hide();
     }
     
     public Object getBean() {

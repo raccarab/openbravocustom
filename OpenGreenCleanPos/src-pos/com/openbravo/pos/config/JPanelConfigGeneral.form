@@ -130,6 +130,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="m_jScannerParams" pref="242" max="32767" attributes="0"/>
                       </Group>
+                      <Component id="jchkTakeAway" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -220,7 +221,9 @@
                       </Group>
                       <Component id="m_jScannerParams" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="40" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jchkTakeAway" min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -994,6 +997,13 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jScaleDivider">
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="jchkTakeAway">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="pos_messages.properties" key="label.takeaway" replaceFormat="AppLocal.getIntString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
