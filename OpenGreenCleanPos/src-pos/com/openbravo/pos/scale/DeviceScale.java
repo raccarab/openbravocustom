@@ -37,6 +37,8 @@ public class DeviceScale {
             
         } catch (NumberFormatException nfe) {
           
+        } catch (Exception e) {
+            
         }
 
         String sScaleType = sd.nextToken(':');
