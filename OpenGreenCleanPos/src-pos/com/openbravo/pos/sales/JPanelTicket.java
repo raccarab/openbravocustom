@@ -1112,10 +1112,14 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     }
 
     private void colorizeCustomer() {
-        if (m_jTicketId.getText().contains(" - "))
+        try {
+            if (m_jTicketId.getText().contains(" - "))
                  m_jTicketId.setBackground(Color.GREEN);
             else
                m_jTicketId.setBackground(Color.WHITE);
+        }catch (NullPointerException npe) {
+            m_jTicketId.setBackground(Color.WHITE);
+        }
     }
      
     public static class ScriptArg {

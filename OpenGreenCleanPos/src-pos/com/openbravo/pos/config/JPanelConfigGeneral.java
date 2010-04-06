@@ -1001,7 +1001,8 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
 
         m_jScannerParams.add(jPanel19, "comm");
 
-        jlblPrinterPort6.setText("Divider");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pos_messages"); // NOI18N
+        jlblPrinterPort6.setText(bundle.getString("label.scaledivider")); // NOI18N
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
