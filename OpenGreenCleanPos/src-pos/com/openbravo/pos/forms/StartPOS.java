@@ -24,6 +24,7 @@ import java.util.Locale;
 import javax.swing.UIManager;
 import com.openbravo.format.Formats;
 import com.openbravo.pos.instance.InstanceQuery;
+import com.openbravo.pos.ticket.TicketInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.LookAndFeel;
@@ -109,7 +110,10 @@ public class StartPOS {
                 } catch (Exception e) {
                     logger.log(Level.WARNING, "Cannot set look and feel", e);
                 }
-                
+
+                // For printing the Hostname in the ticke
+                 TicketInfo.setHostname(config.getProperty("machine.hostname"));
+
                 String screenmode = config.getProperty("machine.screenmode");
                 if ("fullscreen".equals(screenmode)) {
                     JRootKiosk rootkiosk = new JRootKiosk();

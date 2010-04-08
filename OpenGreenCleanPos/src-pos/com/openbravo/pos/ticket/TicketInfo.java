@@ -65,6 +65,16 @@ public class TicketInfo implements SerializableRead, Externalizable {
     
     private static Logger logger = Logger.getLogger("com.openbravo.pos.ticket.TicketInfo");
 
+    private static String Hostname;
+
+    public static void setHostname(String name) {
+        Hostname=name;
+    }
+
+    public String getHostname() {
+        return Hostname;
+    }
+
     /** Creates new TicketModel */
     public TicketInfo() {
         m_sId = tsUUID.randomUUID().toString();
