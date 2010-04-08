@@ -33,20 +33,35 @@
     #foreach($item in $list)
     <ticket>
         #if ($item == "1")
-        <image>Printer.Ticket.Logo</image>
-        <line></line>
-        <line>
-            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
-        </line>
-        <line>
-            <text align="center" length="42">Square du Vieux Tilleul 8</text>
-        </line>
-        <line>
-            <text align="center" length="42">1050 Bruxelles</text>
-        </line>
-        <line>
-            <text align="center" length="42">Tel : 02/660.25.00</text>
-        </line>
+            <image>Printer.Ticket.Logo</image>
+            <line></line>
+            #if (${ticket.getHostname()} == "TIITEST")
+            <line>
+                <text align="center" length="42" bold="true">TII POS</text>
+            </line>
+            <line>
+                <text align="center" length="42">Square du Vieux Tilleul 8</text>
+            </line>
+            <line>
+                <text align="center" length="42">1050 Bruxelles</text>
+            </line>
+            <line>
+                <text align="center" length="42">Tel : 02/660.25.00</text>
+            </line>
+            #else if (${ticket.getHostname()} == "HOSTNAME")
+                <line>
+                    <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+                </line>
+                <line>
+                    <text align="center" length="42">Square du Vieux Tilleul 8</text>
+                </line>
+                <line>
+                    <text align="center" length="42">1050 Bruxelles</text>
+                </line>
+                <line>
+                    <text align="center" length="42">Tel : 02/660.25.00</text>
+                </line>
+            #end
         #else
         <line></line>
         <line>
@@ -56,8 +71,9 @@
         #end
         #if (${ticket.ticketType} == 0)     
         <line>
+            <text align="left" length="10">${ticket.getHostname()}</text>
             <text align="left" length="20">Facture:</text>
-            <text align="right" length="22">${ticket.printId()}</text>
+            <text align="right" length="12">${ticket.printId()}</text>
         </line>
         #end
         #if (${ticket.ticketType} == 1)
