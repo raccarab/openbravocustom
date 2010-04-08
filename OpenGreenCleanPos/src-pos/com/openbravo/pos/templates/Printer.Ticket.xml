@@ -65,15 +65,15 @@
         #else
         <line></line>
         <line>
+            <text align="left" length="10">${ticket.getHostname()}</text>
             <text align="left" length="20" bold="true">Copie ticket </text>
-            <text align="left" length="22" bold="true">$item</text>
+            <text align="left" length="12" bold="true">$item</text>
         </line>
         #end
         #if (${ticket.ticketType} == 0)     
         <line>
-            <text align="left" length="10">${ticket.getHostname()}</text>
             <text align="left" length="20">Facture:</text>
-            <text align="right" length="12">${ticket.printId()}</text>
+            <text align="right" length="22">${ticket.printId()}</text>
         </line>
         #end
         #if (${ticket.ticketType} == 1)
