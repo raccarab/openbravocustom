@@ -35,20 +35,7 @@
         #if ($item == "1")
             <image>Printer.Ticket.Logo</image>
             <line></line>
-            #if (${ticket.getHostname()} == "TIITEST")
-            <line>
-                <text align="center" length="42" bold="true">TII POS</text>
-            </line>
-            <line>
-                <text align="center" length="42">Square du Vieux Tilleul 8</text>
-            </line>
-            <line>
-                <text align="center" length="42">1050 Bruxelles</text>
-            </line>
-            <line>
-                <text align="center" length="42">Tel : 02/660.25.00</text>
-            </line>
-            #else if (${ticket.getHostname()} == "HOSTNAME")
+            #if (${ticket.getHostname()} == "Ixelles")
                 <line>
                     <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
                 </line>
@@ -61,7 +48,56 @@
                 <line>
                     <text align="center" length="42">Tel : 02/660.25.00</text>
                 </line>
+            #else
+                #if (${ticket.getHostname()} == "Fort-Jacos")
+                     <line>
+                        <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+                    </line>
+                    <line>
+                        <text align="center" length="42">Chaussée de waterloo 1411</text>
+                    </line>
+                    <line>
+                        <text align="center" length="42">1180 Uccle</text>
+                    </line>
+                    <line>
+                        <text align="center" length="42">Tel : 02/375.06.79</text>
+                    </line>
+                #else
+                    #if (${ticket.getHostname()} == "Van-eik")
+                         <line>
+                            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+                        </line>
+                        <line>
+                            <text align="center" length="42">Chaussée de waterloo 1411</text>
+                        </line>
+                        <line>
+                            <text align="center" length="42">1180 Uccle</text>
+                        </line>
+                        <line>
+                            <text align="center" length="42">Tel : 02/375.06.79</text>
+                        </line>
+                    #else
+                        #if (${ticket.getHostname()} == "Glaverbel")
+                             <line>
+                                <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+                            </line>
+                            <line>
+                                <text align="center" length="42">Chaussée de waterloo 1411</text>
+                            </line>
+                            <line>
+                                <text align="center" length="42">1180 Uccle</text>
+                            </line>
+                            <line>
+                                <text align="center" length="42">Tel : 02/375.06.79</text>
+                            </line>
+
+                        #end
+                    #end
+                 #end
+
             #end
+            
+            
         #else
         <line></line>
         <line>
