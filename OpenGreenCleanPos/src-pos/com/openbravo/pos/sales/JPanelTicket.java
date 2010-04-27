@@ -37,8 +37,6 @@ import com.openbravo.pos.panels.JProductFinder;
 import com.openbravo.pos.scale.ScaleException;
 import com.openbravo.pos.payment.JPaymentSelect;
 import com.openbravo.basic.BasicException;
-import com.openbravo.beans.JCalendarDialog;
-import com.openbravo.beans.JNumberDialog;
 import com.openbravo.beans.JPercentDialog;
 import com.openbravo.data.gui.ListKeyed;
 import com.openbravo.data.loader.SentenceList;
@@ -894,7 +892,8 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                     JPaymentSelect paymentdialog = ticket.getTicketType() == TicketInfo.RECEIPT_NORMAL
                             ? paymentdialogreceipt
                             : paymentdialogrefund;
-                    paymentdialog.setPrintSelected("true".equals(m_jbtnconfig.getProperty("printselected", "true")));
+                    paymentdialog.setPrintSelected((!m_App.getProperties().getProperty("machine.printerenabled").equals("false"))
+                                                && "true".equals(m_jbtnconfig.getProperty("printselected", "true")));
 
                     paymentdialog.setTransactionID(ticket.getTransactionID());
 
@@ -922,9 +921,9 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                             executeEvent(ticket, ticketext, "ticket.close", new ScriptArg("print", paymentdialog.isPrintSelected()));
 
                             // Print receipt.
-                            printTicket(paymentdialog.isPrintSelected()
-                                    ? "Printer.Ticket"
-                                    : "Printer.Ticket2", ticket, ticketext);
+                                printTicket(paymentdialog.isPrintSelected()
+                                        ? "Printer.Ticket"
+                                        : "Printer.Ticket2", ticket, ticketext);
                             resultok = true;
                         }
                     }

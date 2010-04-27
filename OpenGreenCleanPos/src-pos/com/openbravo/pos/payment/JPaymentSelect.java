@@ -70,9 +70,7 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
     private Map<String, JPaymentInterface> payments = new HashMap<String, JPaymentInterface>();
     private String m_sTransactionID;
     
-    private static Logger logger = Logger.getLogger("com.openbravo.data.loader.PreparedSentence");
-
-
+//    private static Logger logger = Logger.getLogger("com.openbravo.data.loader.PreparedSentence");
 
     /** Creates new form JPaymentSelect */
     protected JPaymentSelect(java.awt.Frame parent, boolean modal, ComponentOrientation o) {
@@ -96,6 +94,13 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
         this.app = app;
         dlSystem = (DataLogicSystem) app.getBean("com.openbravo.pos.forms.DataLogicSystem");
         printselected = true;
+       
+        if(app.getProperties().getProperty("machine.printerenabled").compareTo("false")==0 ){
+            printselected = false;
+ //            logger.info("***************"+app.getProperties().getProperty("machine.printerenabled"));
+        }
+
+
     }
     
     public void setPrintSelected(boolean value) {

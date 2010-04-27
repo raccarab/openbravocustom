@@ -42,6 +42,7 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Window;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -292,12 +293,16 @@ public class JTicketsFinder extends javax.swing.JDialog implements EditorCreator
         jtxtCustomer = new javax.swing.JTextField();
         btnCustomer = new javax.swing.JButton();
         jComboBoxTicket = new javax.swing.JComboBox();
-        jPanel6 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListTickets = new javax.swing.JList();
+        jPanel6 = new javax.swing.JPanel();
+        jFilterMonth = new javax.swing.JButton();
+        jFilterWeek = new javax.swing.JButton();
+        jFilterToday = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jcmdOK = new javax.swing.JButton();
@@ -411,7 +416,7 @@ public class JTicketsFinder extends javax.swing.JDialog implements EditorCreator
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
                     .addComponent(jtxtTicketID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -445,28 +450,6 @@ public class JTicketsFinder extends javax.swing.JDialog implements EditorCreator
 
         jPanel5.add(jPanel7, java.awt.BorderLayout.CENTER);
 
-        jButton1.setText(AppLocal.getIntString("button.clean")); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel6.add(jButton1);
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/launch.png"))); // NOI18N
-        jButton3.setText(AppLocal.getIntString("button.executefilter")); // NOI18N
-        jButton3.setFocusPainted(false);
-        jButton3.setFocusable(false);
-        jButton3.setRequestFocusEnabled(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel6.add(jButton3);
-
-        jPanel5.add(jPanel6, java.awt.BorderLayout.SOUTH);
-
         jPanel3.add(jPanel5, java.awt.BorderLayout.PAGE_START);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -487,6 +470,60 @@ public class JTicketsFinder extends javax.swing.JDialog implements EditorCreator
         jScrollPane1.setViewportView(jListTickets);
 
         jPanel4.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pos_messages"); // NOI18N
+        jFilterMonth.setText(bundle.getString("label.month")); // NOI18N
+        jFilterMonth.setPreferredSize(new java.awt.Dimension(65, 29));
+        jFilterMonth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFilterMonthActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jFilterMonth);
+
+        jFilterWeek.setText(bundle.getString("label.week")); // NOI18N
+        jFilterWeek.setPreferredSize(new java.awt.Dimension(65, 29));
+        jFilterWeek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFilterWeekActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jFilterWeek);
+
+        jFilterToday.setText(bundle.getString("label.today")); // NOI18N
+        jFilterToday.setPreferredSize(new java.awt.Dimension(65, 29));
+        jFilterToday.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFilterTodayActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jFilterToday);
+
+        jSeparator1.setPreferredSize(new java.awt.Dimension(10, 12));
+        jPanel6.add(jSeparator1);
+
+        jButton1.setText(AppLocal.getIntString("button.clean")); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jButton1);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/launch.png"))); // NOI18N
+        jButton3.setText(AppLocal.getIntString("button.executefilter")); // NOI18N
+        jButton3.setFocusPainted(false);
+        jButton3.setFocusable(false);
+        jButton3.setPreferredSize(new java.awt.Dimension(106, 29));
+        jButton3.setRequestFocusEnabled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jButton3);
+
+        jPanel4.add(jPanel6, java.awt.BorderLayout.PAGE_START);
 
         jPanel3.add(jPanel4, java.awt.BorderLayout.CENTER);
 
@@ -607,6 +644,46 @@ private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 
 }//GEN-LAST:event_btnCustomerActionPerformed
 
+private Date getDateForSelection (int daysToAdd, Date date) {
+        Date newDate;
+        if (date == null) {
+            newDate = new Date();
+        } else {
+            newDate = date;
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date(newDate.getYear(), newDate.getMonth(), newDate.getDate()));
+
+        cal.add(Calendar.DATE, daysToAdd);
+
+        return  cal.getTime();
+}
+
+private void jFilterTodayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFilterTodayActionPerformed
+    Date filterDate=new Date();
+    filterDate.setHours(0);
+    filterDate.setMinutes(0);
+    filterDate.setSeconds(0);
+
+    jTxtStartDate.setText(Formats.TIMESTAMP.formatValue(filterDate));
+    executeSearch();
+}//GEN-LAST:event_jFilterTodayActionPerformed
+
+private void jFilterWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFilterWeekActionPerformed
+          Date filterDate=getDateForSelection (-7, new Date());
+
+    jTxtStartDate.setText(Formats.TIMESTAMP.formatValue(filterDate));
+    executeSearch();
+}//GEN-LAST:event_jFilterWeekActionPerformed
+
+private void jFilterMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFilterMonthActionPerformed
+           Date filterDate=getDateForSelection (-30, new Date());
+
+    jTxtStartDate.setText(Formats.TIMESTAMP.formatValue(filterDate));
+    executeSearch();
+}//GEN-LAST:event_jFilterMonthActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCustomer;
     private javax.swing.JButton btnDateEnd;
@@ -614,6 +691,9 @@ private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBoxTicket;
+    private javax.swing.JButton jFilterMonth;
+    private javax.swing.JButton jFilterToday;
+    private javax.swing.JButton jFilterWeek;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -629,6 +709,7 @@ private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTxtEndDate;
     private javax.swing.JTextField jTxtStartDate;
     private javax.swing.JComboBox jcboMoney;
