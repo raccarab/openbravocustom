@@ -95,10 +95,15 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
         dlSystem = (DataLogicSystem) app.getBean("com.openbravo.pos.forms.DataLogicSystem");
         printselected = true;
        
-        if(app.getProperties().getProperty("machine.printerenabled").compareTo("false")==0 ){
-            printselected = false;
+        try {
+            if(app.getProperties().getProperty("machine.printerenabled").compareTo("false")==0 ){
+                printselected = false;
  //            logger.info("***************"+app.getProperties().getProperty("machine.printerenabled"));
+            } 
+        } catch (NullPointerException npe) {
+            //configuration not set > print = true !
         }
+
 
 
     }
