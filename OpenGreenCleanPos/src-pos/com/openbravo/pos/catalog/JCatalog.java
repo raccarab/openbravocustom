@@ -447,7 +447,7 @@ public class JCatalog extends JPanel implements ListSelectionListener, CatalogSe
         setLayout(new java.awt.BorderLayout());
 
         m_jCategories.setMaximumSize(new java.awt.Dimension(275, 600));
-        m_jCategories.setPreferredSize(new java.awt.Dimension(275, 600));
+        m_jCategories.setPreferredSize(new java.awt.Dimension(255, 600));
         m_jCategories.setLayout(new java.awt.CardLayout());
 
         m_jRootCategories.setLayout(new java.awt.BorderLayout());
