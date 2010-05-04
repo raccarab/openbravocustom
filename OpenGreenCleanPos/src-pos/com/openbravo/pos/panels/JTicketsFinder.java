@@ -534,10 +534,10 @@ public class JTicketsFinder extends javax.swing.JDialog implements EditorCreator
 
         jPanel5.add(jPanel7, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setPreferredSize(new java.awt.Dimension(200, 250));
+        jPanel2.setPreferredSize(new java.awt.Dimension(220, 270));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        m_jKeys.setMinimumSize(new java.awt.Dimension(232, 250));
+        m_jKeys.setMinimumSize(new java.awt.Dimension(232, 270));
         m_jKeys.setPreferredSize(new java.awt.Dimension(248, 250));
         jPanel2.add(m_jKeys, java.awt.BorderLayout.NORTH);
 
@@ -564,9 +564,7 @@ public class JTicketsFinder extends javax.swing.JDialog implements EditorCreator
 
         jPanel4.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        jPanel3.add(jPanel4, java.awt.BorderLayout.CENTER);
-
-        jPanel8.setLayout(new java.awt.BorderLayout());
+        jPanel8.setLayout(new java.awt.GridLayout());
 
         jcmdOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/button_ok.png"))); // NOI18N
         jcmdOK.setText(AppLocal.getIntString("Button.OK")); // NOI18N
@@ -595,9 +593,11 @@ public class JTicketsFinder extends javax.swing.JDialog implements EditorCreator
         });
         jPanel1.add(jcmdCancel);
 
-        jPanel8.add(jPanel1, java.awt.BorderLayout.LINE_END);
+        jPanel8.add(jPanel1);
 
-        jPanel3.add(jPanel8, java.awt.BorderLayout.SOUTH);
+        jPanel4.add(jPanel8, java.awt.BorderLayout.PAGE_END);
+
+        jPanel3.add(jPanel4, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 

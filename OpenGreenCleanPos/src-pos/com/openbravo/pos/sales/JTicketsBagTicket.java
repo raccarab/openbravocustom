@@ -359,7 +359,9 @@ public class JTicketsBagTicket extends JTicketsBag {
         m_jButtons.add(jDebt);
 
         m_jRendu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/yast_group_add.png"))); // NOI18N
-        m_jRendu.setText("Rendu");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pos_messages"); // NOI18N
+        m_jRendu.setText(bundle.getString("label.rendu")); // NOI18N
+        m_jRendu.setActionCommand(bundle.getString("label.rendu")); // NOI18N
         m_jRendu.setPreferredSize(new java.awt.Dimension(85, 44));
         m_jRendu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
