@@ -288,7 +288,7 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pos_messages"); // NOI18N
         jLabel2.setText(bundle.getString("label.account")); // NOI18N
 
-        jcboAccount.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Debt", "Credit", " " }));
+        jcboAccount.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Debt", "Credit" }));
         jcboAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcboAccountActionPerformed(evt);
@@ -452,7 +452,9 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         m_jtxtSearchKey.reset();
         m_jtxtName.reset();
 
-        m_jtxtTaxID.activate();    
+        m_jtxtTaxID.activate();
+
+        jcboAccount.setSelectedIndex(0);
 
         cleanSearch();           
 }//GEN-LAST:event_jButton1ActionPerformed
