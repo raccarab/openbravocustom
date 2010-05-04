@@ -60,15 +60,25 @@ public class FindTicketsInfo implements SerializableRead {
     public String toString(){
         
         String sCustomer = (customer==null) ? "" : customer;
+        String sHtml;
+        if (daterendu==null) {
+            sHtml = "<tr><td width=\"50\">"+ "["+ ticketid +"]" +"</td>" +
+                    "<td align=\"center\" width=\"100\">"+ Formats.DATE.formatValue(date) +"</td>" +
+                    "<td align=\"center\" width=\"100\">"+ sCustomer +"</td>" +
+                    "<td align=\"right\" width=\"120\">"+ Formats.CURRENCY.formatValue(total) +"</td>"+
+                    "<td align=\"center\" width=\"150\">"+ Formats.STRING.formatValue(name) +"</td>"+
+                    "<td align=\"center\" width=\"100\">"+ Formats.DATE.formatValue(daterendu) +"</td>"
+                    +"</tr>";
+         } else {
+            sHtml  = "<tr BGCOLOR=\"#aaffaa\"><td width=\"50\">"+ "["+ ticketid +"]" +"</td>" +
+                    "<td align=\"center\" width=\"100\">"+ Formats.DATE.formatValue(date) +"</td>" +
+                    "<td align=\"center\" width=\"100\">"+ sCustomer +"</td>" +
+                    "<td align=\"right\" width=\"120\">"+ Formats.CURRENCY.formatValue(total) +"</td>"+
+                    "<td align=\"center\" width=\"150\">"+ Formats.STRING.formatValue(name) +"</td>"+
+                    "<td align=\"center\" width=\"100\">"+ Formats.DATE.formatValue(daterendu) +"</td>"
+                    +"</tr>";
+         }
 
-        String sHtml = "<tr><td width=\"50\">"+ "["+ ticketid +"]" +"</td>" +
-                "<td align=\"center\" width=\"100\">"+ Formats.DATE.formatValue(date) +"</td>" +
-                "<td align=\"center\" width=\"100\">"+ sCustomer +"</td>" +
-                "<td align=\"right\" width=\"120\">"+ Formats.CURRENCY.formatValue(total) +"</td>"+
-                "<td align=\"center\" width=\"150\">"+ Formats.STRING.formatValue(name) +"</td>"+
-                "<td align=\"center\" width=\"100\">"+ Formats.DATE.formatValue(daterendu) +"</td>"
-                +"</tr>";
-        
         return sHtml;
     }
     

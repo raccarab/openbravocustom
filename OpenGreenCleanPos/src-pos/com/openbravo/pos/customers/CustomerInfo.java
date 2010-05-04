@@ -90,14 +90,14 @@ public class CustomerInfo implements Serializable {
             if ( this.curdebt.substring(0, 1).equals("-") ) {
 
                  value = "<html><table>" +
-                   "<tr><td width=\"300\">"+ " "+ getName() +" " +"</td>" +
+                   "<tr BGCOLOR=\"#aaffaa\"><td width=\"300\">"+ " "+ getName() +" " +"</td>" +
                    "<td width=\"80\">"+ "[ CREDIT : " +"</td>"+
                    "<td width=\"120\">"+ this.curdebt.substring(1) +" ]" +"</td>"
                 +"</tr></table></html>";
 
             } else {
                 value = "<html><table>" +
-                   "<tr><td width=\"300\">"+ " "+ getName() +" " +"</td>" +
+                   "<tr BGCOLOR=\"#ff8899\"><td width=\"300\">"+ " "+ getName() +" " +"</td>" +
                    "<td width=\"80\">"+ "[ DEBT : " +"</td>"+
                    "<td width=\"120\">"+ this.curdebt +" ]" +"</td>"
                 +"</tr></table></html>";
