@@ -34,6 +34,7 @@ public class FindTicketsInfo implements SerializableRead {
     private int ticketid;
     private int tickettype;
     private Date date;
+    private Date daterendu;
     private String name;
     private String customer;
     private double total;
@@ -52,6 +53,7 @@ public class FindTicketsInfo implements SerializableRead {
         name = dr.getString(4);
         customer = dr.getString(5);
         total = (dr.getObject(6) == null) ? 0.0 : dr.getDouble(6).doubleValue();
+        daterendu = dr.getTimestamp(7);
     }
     
     @Override
@@ -59,11 +61,13 @@ public class FindTicketsInfo implements SerializableRead {
         
         String sCustomer = (customer==null) ? "" : customer;
 
-        String sHtml = "<tr><td width=\"30\">"+ "["+ ticketid +"]" +"</td>" +
-                "<td width=\"100\">"+ Formats.TIMESTAMP.formatValue(date) +"</td>" +
+        String sHtml = "<tr><td width=\"50\">"+ "["+ ticketid +"]" +"</td>" +
+                "<td align=\"center\" width=\"100\">"+ Formats.DATE.formatValue(date) +"</td>" +
                 "<td align=\"center\" width=\"100\">"+ sCustomer +"</td>" +
-                "<td align=\"right\" width=\"100\">"+ Formats.CURRENCY.formatValue(total) +"</td>"+
-                "<td width=\"100\">"+ Formats.STRING.formatValue(name) +"</td></tr>";
+                "<td align=\"right\" width=\"120\">"+ Formats.CURRENCY.formatValue(total) +"</td>"+
+                "<td align=\"center\" width=\"150\">"+ Formats.STRING.formatValue(name) +"</td>"+
+                "<td align=\"center\" width=\"100\">"+ Formats.DATE.formatValue(daterendu) +"</td>"
+                +"</tr>";
         
         return sHtml;
     }

@@ -81,11 +81,30 @@ public class CustomerInfo implements Serializable {
     
     @Override
     public String toString() {
-        if (this.curdebt != null) {
+ //       if (this.curdebt != null && (!this.curdebt.equals("0"))) {
+        String value = "";
+        if (this.curdebt == null || this.curdebt.equals("0")) {
+            value= getName();
             
-            return getName()+"    ! "+getcurDebt()+" !";
-        } else
-            return getName();
+        } else {
+            if ( this.curdebt.substring(0, 1).equals("-") ) {
+
+                 value = "<html><table>" +
+                   "<tr><td width=\"300\">"+ " "+ getName() +" " +"</td>" +
+                   "<td width=\"80\">"+ "[ CREDIT : " +"</td>"+
+                   "<td width=\"120\">"+ this.curdebt.substring(1) +" ]" +"</td>"
+                +"</tr></table></html>";
+
+            } else {
+                value = "<html><table>" +
+                   "<tr><td width=\"300\">"+ " "+ getName() +" " +"</td>" +
+                   "<td width=\"80\">"+ "[ DEBT : " +"</td>"+
+                   "<td width=\"120\">"+ this.curdebt +" ]" +"</td>"
+                +"</tr></table></html>";
+            }
+        }
+ //           return getName()+"    ! "+getcurDebt()+" !";
+          return value;
     }
 
     void setCurdebt(String curdebt) {

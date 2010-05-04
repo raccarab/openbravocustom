@@ -230,10 +230,8 @@
          #end
          #if ($paymentline.name == "magcard")
         <line>
-            <text bold="true">Carte</text>
-        </line>
-         <line>
-            <text align ="right" length="42">${paymentline.printTotal()}</text>
+            <text bold="true" length="22">Carte</text>
+            <text align ="right" length="20">${paymentline.printTotal()}</text>
         </line>
         <line>
             <text align ="left" length="22">Number:</text>
