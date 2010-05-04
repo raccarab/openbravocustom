@@ -90,16 +90,16 @@ public class CustomerInfo implements Serializable {
             if ( this.curdebt.substring(0, 1).equals("-") ) {
 
                  value = "<html><table>" +
-                   "<tr BGCOLOR=\"#aaffaa\"><td width=\"300\">"+ " "+ getName() +" " +"</td>" +
-                   "<td width=\"80\">"+ "[ CREDIT : " +"</td>"+
-                   "<td width=\"120\">"+ this.curdebt.substring(1) +" ]" +"</td>"
+                   "<tr><td width=\"300\">"+ " "+ getName() +" " +"</td>" +
+                   "<td width=\"80\" BGCOLOR=\"#aaffaa\">"+ "[ CREDIT : " +"</td>"+
+                   "<td align=\"right\" width=\"120\" BGCOLOR=\"#aaffaa\">"+ this.curdebt.substring(1) +" ]" +"</td>"
                 +"</tr></table></html>";
 
             } else {
                 value = "<html><table>" +
-                   "<tr BGCOLOR=\"#ff8899\"><td width=\"300\">"+ " "+ getName() +" " +"</td>" +
-                   "<td width=\"80\">"+ "[ DEBT : " +"</td>"+
-                   "<td width=\"120\">"+ this.curdebt +" ]" +"</td>"
+                   "<tr><td width=\"300\">"+ " "+ getName() +" " +"</td>" +
+                   "<td width=\"80\" BGCOLOR=\"#ff8899\">"+ "[ DEBT : " +"</td>"+
+                   "<td align=\"right\" width=\"120\" BGCOLOR=\"#ff8899\">"+ this.curdebt +" ]" +"</td>"
                 +"</tr></table></html>";
             }
         }
