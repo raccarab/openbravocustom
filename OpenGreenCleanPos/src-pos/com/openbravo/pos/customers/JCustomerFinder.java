@@ -30,7 +30,6 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Window;
 import java.util.ArrayList;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 
