@@ -866,6 +866,8 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                     Toolkit.getDefaultToolkit().beep();
                 }
             }
+
+          colorizeCustomer();
         }
     }
     
@@ -1887,6 +1889,8 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         }
 
         refreshTicket();
+
+          colorizeCustomer();
 
     }//GEN-LAST:event_jTakeAwayActionPerformed
 
