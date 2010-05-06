@@ -112,16 +112,23 @@ public class StartPOS {
                 }
 
                 // For printing the Hostname in the ticke
-                 TicketInfo.setHostname(config.getProperty("machine.hostname"));
+                 String hostname = config.getProperty("machine.hostname");
+                 TicketInfo.setHostname(hostname);
 
-                String screenmode = config.getProperty("machine.screenmode");
-                if ("fullscreen".equals(screenmode)) {
+                 String screenmode = config.getProperty("machine.screenmode");
+
+                 if ("fullscreen".equals(screenmode)) {
                     JRootKiosk rootkiosk = new JRootKiosk();
                     rootkiosk.initFrame(config);
+                    rootkiosk.setTitle(rootkiosk.getTitle()+" >>> "+hostname+" <<< ");
                 } else {
                     JRootFrame rootframe = new JRootFrame(); 
                     rootframe.initFrame(config);
+
+                    rootframe.setTitle(rootframe.getTitle()+" >>> "+hostname+" <<< ");
                 }
+
+
 
             }
         });
