@@ -27,7 +27,7 @@
  */
 
 //    Portions:
-//    GreenPressing POS is a point of sales application designed for touch screens.
+//    GreenPOS is a point of sales application designed for touch screens.
 //    Copyright (C) 2007-2009 Openbravo, S.L.
 //    http://code.google.com/p/openbravocustom/
 //    author adrian romero

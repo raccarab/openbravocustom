@@ -27,8 +27,8 @@ import com.openbravo.beans.LocaleResources;
  */
 public class AppLocal {
     
-    public static final String APP_NAME = "GreenPressing POS";
-    public static final String APP_ID = "greenpressingpos";
+    public static final String APP_NAME = "GreenPOS";
+    public static final String APP_ID = "greenpos";
     public static final String APP_VERSION = "1.0";
   
     // private static List<ResourceBundle> m_messages;

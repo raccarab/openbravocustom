@@ -1,12 +1,12 @@
 A) General Public License
-This license file applies to the GreenPressing POS software (the "GreenPressing POS Software"), except as described in B) and C) below.
+This license file applies to the GreenPOS software (the "GreenPOS Software"), except as described in B) and C) below.
 
 This product is Copyright 2007-2009 Openbravo S.L.
 Original Developer: Adrian Romero
 
-	This file is part of GreenPressing POS.
+	This file is part of GreenPOS.
 
-    GreenPressing POS is free software: you can redistribute it and/or modify
+    GreenPOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
@@ -17,9 +17,9 @@ Original Developer: Adrian Romero
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with GreenPressing POS.  If not, see <http://www.gnu.org/licenses/>.
+    along with GreenPOS.  If not, see <http://www.gnu.org/licenses/>.
 
-B) Some portions of the GreenPressing POS Software are provided by third parties. In this distribution, they are:
+B) Some portions of the GreenPOS Software are provided by third parties. In this distribution, they are:
 
 - Files in folder /images marked marked "(c) Everaldo". � http://www.everaldo.com. (LGPL)
 - Translation of the POS interface in Galician (files marked "(c) mancomun.org"). � 2007 mancomun.org  (GPL) 
@@ -92,4 +92,4 @@ All available from http://www.rxtx.org/. Copyright 1998-2006 Keane Jarvi. Distri
 
 The jetty web server version 6.1.12 is found in the folder /jetty/ and is available from http://www.mortbay.org/jetty/. Copyright (C) 1995-2008 Mort Bay Consulting
 
-If you have questions about the licensing terms for the GreenPressing POS Software, please contact us at: legal@openbravo.com
+If you have questions about the licensing terms for the GreenPOS Software, please contact us at: legal@openbravo.com

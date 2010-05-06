@@ -33,7 +33,7 @@ public class PropertyUtils {
 
     private Properties m_propsconfig;
     private File configFile;
-    private final String APP_ID = "greenpressingpos";
+    private final String APP_ID = "greenpos";
 
     public PropertyUtils() {
         init(getDefaultConfig());
