@@ -206,7 +206,7 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
 
         jPanel5.setLayout(new java.awt.BorderLayout());
 
-        jPanel4.setPreferredSize(new java.awt.Dimension(0, 100));
+        jPanel4.setPreferredSize(new java.awt.Dimension(0, 50));
         jPanel4.setLayout(null);
 
         jLabel8.setText(AppLocal.getIntString("Label.InputCash")); // NOI18N
@@ -231,7 +231,7 @@ public class JPaymentMagcardCredit extends javax.swing.JPanel implements JPaymen
         jlblMessage.setLineWrap(true);
         jlblMessage.setWrapStyleWord(true);
         jlblMessage.setFocusable(false);
-        jlblMessage.setPreferredSize(new java.awt.Dimension(300, 72));
+        jlblMessage.setPreferredSize(new java.awt.Dimension(300, 62));
         jlblMessage.setRequestFocusEnabled(false);
         jPanel7.add(jlblMessage);
 
