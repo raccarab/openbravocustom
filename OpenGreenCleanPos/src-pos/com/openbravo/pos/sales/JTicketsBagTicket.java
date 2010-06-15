@@ -591,11 +591,19 @@ private void jDebtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
 
             checkDebt();
             m_jRendu.setEnabled(
-                    m_ticket != null && (m_ticket.isPickable()));
-//            printTicket(paymentdialog.isPrintSelected()
-//                    ? "Printer.CustomerPaid"
-//                    : "Printer.CustomerPaid2",
-//                    ticket, c);
+            m_ticket != null && (ticket.isPickable()));
+            if (ticket != null) {
+                try {
+                    ScriptEngine script = ScriptFactory.getScriptEngine(ScriptFactory.VELOCITY);
+                    script.put("ticket", ticket);
+                    script.put("customer", currentCustomer);
+                    m_TTP2.printTicket(script.eval(m_dlSystem.getResourceAsXML("Printer.CustomerPaid")).toString());
+                } catch (ScriptException e) {
+                    JMessageDialog.showMessage(this, new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.cannotprint"), e));
+                } catch (TicketPrinterException e) {
+                    JMessageDialog.showMessage(this, new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.cannotprint"), e));
+                }
+            }
         }
 }//GEN-LAST:event_jDebtActionPerformed
     

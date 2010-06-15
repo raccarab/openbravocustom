@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/Users/Tii/Workspace/greenandclean.be/files/wsdl/VM_CategoriesWSDL.wsdl" uri="xml-resources/web-service-references/VM_CategoriesWSDL_1/wsdl/VM_CategoriesWSDL.wsdl"/>
+    <system systemId="file:/Users/Tii/Workspace/greenandclean.be/files/wsdl/VM_UsersWSDL.wsdl" uri="xml-resources/web-service-references/VM_UsersWSDL/wsdl/VM_UsersWSDL.wsdl"/>
+    <system systemId="http://127.0.0.1/greenandclean.be/www/administrator/components/com_vm_soa/services/VM_UsersWSDL.php" uri="xml-resources/web-service-references/VM_UsersWSDL/wsdl/127.0.0.1/greenandclean.be/www/administrator/components/com_vm_soa/services/VM_UsersWSDL.php.wsdl"/>
+    <system systemId="http://schemas.xmlsoap.org/soap/encoding/" uri="xml-resources/web-service-references/VM_UsersWSDL/wsdl/schemas.xmlsoap.org/soap/encoding"/>
+</catalog>
+
+
+
+
