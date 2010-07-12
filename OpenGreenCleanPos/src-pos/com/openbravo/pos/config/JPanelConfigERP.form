@@ -45,7 +45,7 @@
         </Property>
       </Properties>
       <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="SSH configuration"/>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="&quot;ERP configuration&quot;"/>
       </AccessibilityProperties>
 
       <Layout>

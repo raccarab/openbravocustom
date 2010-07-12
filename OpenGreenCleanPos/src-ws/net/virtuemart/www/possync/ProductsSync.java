@@ -68,6 +68,9 @@ public class ProductsSync implements ProcessAction {
     
     public MessageInf execute() throws BasicException {
         
+
+
+
         try {
         
             if (externalsales == null) {
@@ -77,9 +80,14 @@ public class ProductsSync implements ProcessAction {
             Product[] products = externalsales.getProductsCatalog();
             Customer[] customers = externalsales.getCustomers();
 
-            if (products == null || customers == null){
-                throw new BasicException(AppLocal.getIntString("message.returnnull"));
-            }     
+            if (customers == null){
+                throw new BasicException(AppLocal.getIntString("message.returnnull")+" > Customers null");
+            }
+
+            if (products == null) {
+                throw new BasicException(AppLocal.getIntString("message.returnnull")+" > Products null");
+            }
+  
             
             if (products.length > 0){
                 

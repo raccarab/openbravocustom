@@ -203,7 +203,7 @@ public class JPanelConfigERP extends javax.swing.JPanel implements PanelConfig {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("SSH configuration");
+        jPanel1.getAccessibleContext().setAccessibleName("\"ERP configuration\"");
     }// </editor-fold>//GEN-END:initComponents
     
     

@@ -41,82 +41,160 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 import com.openbravo.basic.BasicException;
+import com.openbravo.pos.forms.AppConfig;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.DataLogicSystem;
 import com.openbravo.pos.util.AltEncrypter;
 import com.openbravo.pos.util.Base64Encoder;
+import java.util.logging.Logger;
+import net.virtuemart.www.externalsales.Tax;
+import net.virtuemart.www.VM_Categories.VM_CategoriesProxy;
+import net.virtuemart.www.VM_Order.VM_OrderProxy;
+import net.virtuemart.www.VM_Product.GetAllProductsInput;
+import net.virtuemart.www.VM_Product.Produit;
+import net.virtuemart.www.VM_Product.VM_ProductProxy;
+import net.virtuemart.www.VM_Tools.LoginInfo;
+import net.virtuemart.www.VM_Users.User;
+import net.virtuemart.www.VM_Users.VM_UsersProxy;
+import net.virtuemart.www.customers.Contact;
+import net.virtuemart.www.customers.Location;
+import net.virtuemart.www.externalsales.Category;
 
 public class ExternalSalesHelper {
     
     private ExternalSalesImpl externalSales;
     private WebServiceImpl externalCustomers;
     
-    private String m_sERPUser;
-    private String m_sERPPassword;
-    private String m_iERPId;
-    private String m_iERPOrg;
-    private String m_iERPPos;
+    private String wsPosid;
+    private LoginInfo wsLogin;
+    private String wsURL;
+
+    private String vm_path = "/administrator/components/com_vm_soa/services/VM_";
+    private String vm_path_end = "Service.php";
+
+    private String CategoriesURL = vm_path+"Categories"+vm_path_end;
+    private String ProductURL = vm_path+"Product"+vm_path_end;
+    private String UsersURL = vm_path+"Users"+vm_path_end;
+    private String OrderURL = vm_path+"Orders"+vm_path_end;
+
+    private static Logger logger = Logger.getLogger("com.openbravo.data.loader.PreparedSentence");
     
     /** Creates a new instance of WebServiceHelper */
     public ExternalSalesHelper(DataLogicSystem dlsystem) throws BasicException, ServiceException, MalformedURLException {
         
-        
-        Properties prop = dlsystem.getResourceAsProperties("greenpos.properties");
-        if (prop == null) {
+        AppConfig config = new AppConfig();
+        config.load();
+
+        wsLogin= new LoginInfo();
+        // set WS.
+        wsURL = config.getProperty("ws.URL");
+        wsPosid = config.getProperty("ws.posid");
+
+        wsLogin.setLogin(config.getProperty("ws.user"));
+        wsLogin.setPassword(config.getProperty("ws.password"));
+
+        if (wsPosid==null || wsPosid.equals(""))
+        {
             throw new BasicException(AppLocal.getIntString("message.propsnotdefined"));            
         } else {
-            String url = prop.getProperty("url");
-            if (url == null || url.equals("")) {
+
+              if ( wsURL.equals("") || wsURL == null) {
                 throw new BasicException(AppLocal.getIntString("message.urlnotdefined"));
             } else {
-                
-                url = url.trim();
-                 
-                // transform the URL for backwards compatibility
-                if (url.endsWith("/ExternalSales")) {
-                    url = url.substring(0, url.length() - 14);
-                }               
-                
-                externalSales = new ExternalSalesImplServiceLocator().getExternalSales(new URL(url + "/ExternalSales"));
-                externalCustomers = new WebServiceImplServiceLocator().getWebService(new URL(url + "/WebService"));
-                        
-                m_sERPUser = prop.getProperty("user");
-                m_sERPPassword = prop.getProperty("password");        
-                if (m_sERPUser != null && m_sERPPassword != null && m_sERPPassword.startsWith("crypt:")) {
-                    // La clave esta encriptada.
-                    AltEncrypter cypher = new AltEncrypter("key" + m_sERPUser);
-                    m_sERPPassword = cypher.decrypt(m_sERPPassword.substring(6));
-                } 
-                m_sERPPassword = getPasswordHash(m_sERPPassword);
-                m_iERPId = prop.getProperty("id");
-                m_iERPOrg = prop.getProperty("org");
-                m_iERPPos = prop.getProperty("pos");
+
+
+
             }
         }
     }
+
+    private VM_CategoriesProxy getCategoriesProxy() throws RemoteException {
+        return new VM_CategoriesProxy(wsURL+CategoriesURL);
+    }
+    
+    private VM_UsersProxy getUsersProxy() throws RemoteException {
+        return new VM_UsersProxy(wsURL+UsersURL);
+    }
+
+    private VM_ProductProxy getProductProxy() throws RemoteException {
+        return new VM_ProductProxy(wsURL+ProductURL);
+    }
+
+    private VM_OrderProxy getOrderProxy() throws RemoteException {
+        return new VM_OrderProxy(wsURL+OrderURL);
+    }
     
     public Customer[] getCustomers() throws RemoteException {
+        Customer[] customers = null;
         try {
-            // 2.40 service
-            return externalCustomers.getCustomers(m_iERPId, m_sERPUser, m_sERPPassword);
-        } catch (RemoteException e) {
-            // 2.35 service not exists
-            return new Customer[0];
-        }             
+            VM_UsersProxy proxy = getUsersProxy();
+
+            User[] users = proxy.getUsers(wsLogin);
+            customers = new Customer[users.length];
+            int i=0;
+
+            Contact[] contact = null;
+            Location[] location= null;
+            for (User user : users) {
+                logger.info("*");
+                customers[i] = new Customer(user.getId(),
+                                            Boolean.TRUE,
+                                            contact ,
+                                            Boolean.TRUE,
+                                            user.getDescription(),
+                                            user.getId(),
+                                            location,
+                                            user.getFirstname()+" "+user.getLastname(),
+                                            user.getId(),
+                                            Boolean.TRUE);
+                i++;
+            }
+         } catch (RemoteException e) {
+            System.out.println("Error getCustomers");
+         }
+        return customers;
     }
     
     public Product[] getProductsCatalog() throws RemoteException {
+        Product[] products = null;
         try {
-            // 2.40 service
-            return externalSales.getProductsPlusCatalog(m_iERPId, m_iERPOrg, m_iERPPos, m_sERPUser, m_sERPPassword);
-        } catch (RemoteException e) {
-            // 2.35 service
-            return externalSales.getProductsCatalog(m_iERPId, m_iERPOrg, m_iERPPos, m_sERPUser, m_sERPPassword);
-        }        
+            VM_ProductProxy proxy = getProductProxy();
+
+            GetAllProductsInput gapi = new GetAllProductsInput();
+            gapi.setLoginInfo(wsLogin);
+            gapi.setProduct_publish("true");
+            gapi.setLimite_end("");
+            gapi.setLimite_start("");
+            gapi.setWith_childs("false");
+            
+            Produit[] produits = proxy.getAllProducts(gapi);
+            products = new Product[products.length];
+            
+            int i=0;
+
+            for (Produit produit : produits) {
+
+                products[i] = new Product(new Category("POS","3","POS"), 
+                                            produit.getDescription(),
+                                            produit.getId(),
+                                            produit.getId(),
+                                            produit.getImage(),
+                                            Double.parseDouble(produit.getPrice()),
+                                            produit.getName(),
+                                            produit.getQuantity(),
+                                            Double.parseDouble(produit.getPrice()),
+                                            new Tax());
+                i++;
+            }
+         } catch (RemoteException e) {
+            System.out.println("Error getProductsCatalog");
+         }
+        return products;
     }
     
     public boolean uploadOrders(Order[] orderstoupload) throws RemoteException {
-        return externalSales.uploadOrders(m_iERPId, m_iERPOrg, m_iERPPos, orderstoupload, m_sERPUser, m_sERPPassword);
+       // return externalSales.uploadOrders(m_iERPId, m_iERPOrg, m_iERPPos, orderstoupload, m_sERPUser, m_sERPPassword);
+    return true;
     }
        
     private static String getPasswordHash(String password) {

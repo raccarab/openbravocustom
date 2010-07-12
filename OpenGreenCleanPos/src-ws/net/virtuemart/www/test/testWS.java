@@ -47,23 +47,27 @@ public class testWS {
                 String UsersURL = wsurl+vm_path+"Users"+vm_path_end;
                 String OrderURL = wsurl+vm_path+"Orders"+vm_path_end;
 
-
+                //System.out.println(CategoriesURL);
 
                 /**
 		 * Setting endpoints
 		 */
 		VM_CategoriesProxy cp = new VM_CategoriesProxy();
-		//cp.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_CategoriesService.php");
                 cp.setEndpoint(CategoriesURL);
+		//cp.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_CategoriesService.php");
+                
 
 		VM_ProductProxy pp = new VM_ProductProxy();
-		pp.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_ProductService.php");
+                pp.setEndpoint(ProductURL);
+		//pp.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_ProductService.php");
 
 		VM_UsersProxy up = new VM_UsersProxy();
-		up.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_UsersService.php");
+                pp.setEndpoint(UsersURL);
+		//up.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_UsersService.php");
 	
 		VM_OrderProxy op = new VM_OrderProxy();
-		up.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_OrdersService.php");
+                pp.setEndpoint(OrderURL);
+		//up.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_OrdersService.php");
 	
 		
 	
