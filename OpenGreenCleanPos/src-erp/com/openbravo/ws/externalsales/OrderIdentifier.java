@@ -6,6 +6,8 @@
  */
 package com.openbravo.ws.externalsales;
 
+import com.openbravo.ws.externalsales.OrderIdentifier;
+
 public class OrderIdentifier implements java.io.Serializable {
 
     private static final long serialVersionUID = 9341677250499L;

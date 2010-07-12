@@ -1,52 +1,49 @@
 /**
- * Location.java
+ * BPartner.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
-package com.openbravo.ws.customers;
+package net.virtuemart.www.externalsales;
 
-import com.openbravo.ws.customers.Location;
+import net.virtuemart.www.externalsales.BPartner;
 
-public class Location implements java.io.Serializable {
+public class BPartner implements java.io.Serializable {
 
-    private static final long serialVersionUID = 9751926027090L;
+    private static final long serialVersionUID = 9457582354291L;
     private java.lang.String address1;
     private java.lang.String address2;
-    private java.lang.String businessPartnerId;
     private java.lang.String city;
-    private java.lang.String clientId;
     private java.lang.String country;
     private java.lang.String id;
+    private java.lang.String name;
     private java.lang.String postal;
     private java.lang.String region;
 
-    public Location() {
+    public BPartner() {
     }
 
-    public Location(
+    public BPartner(
             java.lang.String address1,
             java.lang.String address2,
-            java.lang.String businessPartnerId,
             java.lang.String city,
-            java.lang.String clientId,
             java.lang.String country,
             java.lang.String id,
+            java.lang.String name,
             java.lang.String postal,
             java.lang.String region) {
         this.address1 = address1;
         this.address2 = address2;
-        this.businessPartnerId = businessPartnerId;
         this.city = city;
-        this.clientId = clientId;
         this.country = country;
         this.id = id;
+        this.name = name;
         this.postal = postal;
         this.region = region;
     }
 
     /**
-     * Gets the address1 value for this Location.
+     * Gets the address1 value for this BPartner.
      * 
      * @return address1
      */
@@ -55,7 +52,7 @@ public class Location implements java.io.Serializable {
     }
 
     /**
-     * Sets the address1 value for this Location.
+     * Sets the address1 value for this BPartner.
      * 
      * @param address1
      */
@@ -64,7 +61,7 @@ public class Location implements java.io.Serializable {
     }
 
     /**
-     * Gets the address2 value for this Location.
+     * Gets the address2 value for this BPartner.
      * 
      * @return address2
      */
@@ -73,7 +70,7 @@ public class Location implements java.io.Serializable {
     }
 
     /**
-     * Sets the address2 value for this Location.
+     * Sets the address2 value for this BPartner.
      * 
      * @param address2
      */
@@ -82,25 +79,7 @@ public class Location implements java.io.Serializable {
     }
 
     /**
-     * Gets the businessPartnerId value for this Location.
-     * 
-     * @return businessPartnerId
-     */
-    public java.lang.String getBusinessPartnerId() {
-        return businessPartnerId;
-    }
-
-    /**
-     * Sets the businessPartnerId value for this Location.
-     * 
-     * @param businessPartnerId
-     */
-    public void setBusinessPartnerId(java.lang.String businessPartnerId) {
-        this.businessPartnerId = businessPartnerId;
-    }
-
-    /**
-     * Gets the city value for this Location.
+     * Gets the city value for this BPartner.
      * 
      * @return city
      */
@@ -109,7 +88,7 @@ public class Location implements java.io.Serializable {
     }
 
     /**
-     * Sets the city value for this Location.
+     * Sets the city value for this BPartner.
      * 
      * @param city
      */
@@ -118,25 +97,7 @@ public class Location implements java.io.Serializable {
     }
 
     /**
-     * Gets the clientId value for this Location.
-     * 
-     * @return clientId
-     */
-    public java.lang.String getClientId() {
-        return clientId;
-    }
-
-    /**
-     * Sets the clientId value for this Location.
-     * 
-     * @param clientId
-     */
-    public void setClientId(java.lang.String clientId) {
-        this.clientId = clientId;
-    }
-
-    /**
-     * Gets the country value for this Location.
+     * Gets the country value for this BPartner.
      * 
      * @return country
      */
@@ -145,7 +106,7 @@ public class Location implements java.io.Serializable {
     }
 
     /**
-     * Sets the country value for this Location.
+     * Sets the country value for this BPartner.
      * 
      * @param country
      */
@@ -154,7 +115,7 @@ public class Location implements java.io.Serializable {
     }
 
     /**
-     * Gets the id value for this Location.
+     * Gets the id value for this BPartner.
      * 
      * @return id
      */
@@ -163,7 +124,7 @@ public class Location implements java.io.Serializable {
     }
 
     /**
-     * Sets the id value for this Location.
+     * Sets the id value for this BPartner.
      * 
      * @param id
      */
@@ -172,7 +133,25 @@ public class Location implements java.io.Serializable {
     }
 
     /**
-     * Gets the postal value for this Location.
+     * Gets the name value for this BPartner.
+     * 
+     * @return name
+     */
+    public java.lang.String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the name value for this BPartner.
+     * 
+     * @param name
+     */
+    public void setName(java.lang.String name) {
+        this.name = name;
+    }
+
+    /**
+     * Gets the postal value for this BPartner.
      * 
      * @return postal
      */
@@ -181,7 +160,7 @@ public class Location implements java.io.Serializable {
     }
 
     /**
-     * Sets the postal value for this Location.
+     * Sets the postal value for this BPartner.
      * 
      * @param postal
      */
@@ -190,7 +169,7 @@ public class Location implements java.io.Serializable {
     }
 
     /**
-     * Gets the region value for this Location.
+     * Gets the region value for this BPartner.
      * 
      * @return region
      */
@@ -199,7 +178,7 @@ public class Location implements java.io.Serializable {
     }
 
     /**
-     * Sets the region value for this Location.
+     * Sets the region value for this BPartner.
      * 
      * @param region
      */
@@ -209,10 +188,10 @@ public class Location implements java.io.Serializable {
     private java.lang.Object __equalsCalc = null;
 
     public synchronized boolean equals(java.lang.Object obj) {
-        if (!(obj instanceof Location)) {
+        if (!(obj instanceof BPartner)) {
             return false;
         }
-        Location other = (Location) obj;
+        BPartner other = (BPartner) obj;
         if (obj == null) {
             return false;
         }
@@ -231,21 +210,18 @@ public class Location implements java.io.Serializable {
                 ((this.address2 == null && other.getAddress2() == null) ||
                 (this.address2 != null &&
                 this.address2.equals(other.getAddress2()))) &&
-                ((this.businessPartnerId == null && other.getBusinessPartnerId() == null) ||
-                (this.businessPartnerId != null &&
-                this.businessPartnerId.equals(other.getBusinessPartnerId()))) &&
                 ((this.city == null && other.getCity() == null) ||
                 (this.city != null &&
                 this.city.equals(other.getCity()))) &&
-                ((this.clientId == null && other.getClientId() == null) ||
-                (this.clientId != null &&
-                this.clientId.equals(other.getClientId()))) &&
                 ((this.country == null && other.getCountry() == null) ||
                 (this.country != null &&
                 this.country.equals(other.getCountry()))) &&
                 ((this.id == null && other.getId() == null) ||
                 (this.id != null &&
                 this.id.equals(other.getId()))) &&
+                ((this.name == null && other.getName() == null) ||
+                (this.name != null &&
+                this.name.equals(other.getName()))) &&
                 ((this.postal == null && other.getPostal() == null) ||
                 (this.postal != null &&
                 this.postal.equals(other.getPostal()))) &&
@@ -269,20 +245,17 @@ public class Location implements java.io.Serializable {
         if (getAddress2() != null) {
             _hashCode += getAddress2().hashCode();
         }
-        if (getBusinessPartnerId() != null) {
-            _hashCode += getBusinessPartnerId().hashCode();
-        }
         if (getCity() != null) {
             _hashCode += getCity().hashCode();
-        }
-        if (getClientId() != null) {
-            _hashCode += getClientId().hashCode();
         }
         if (getCountry() != null) {
             _hashCode += getCountry().hashCode();
         }
         if (getId() != null) {
             _hashCode += getId().hashCode();
+        }
+        if (getName() != null) {
+            _hashCode += getName().hashCode();
         }
         if (getPostal() != null) {
             _hashCode += getPostal().hashCode();
@@ -294,11 +267,11 @@ public class Location implements java.io.Serializable {
         return _hashCode;
     }    // Type metadata
     private static org.apache.axis.description.TypeDesc typeDesc =
-            new org.apache.axis.description.TypeDesc(Location.class, true);
+            new org.apache.axis.description.TypeDesc(BPartner.class, true);
     
 
     static {
-        typeDesc.setXmlType(new javax.xml.namespace.QName("/services/WebService", "Location"));
+        typeDesc.setXmlType(new javax.xml.namespace.QName("/services/ExternalSales", "BPartner"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("address1");
         elemField.setXmlName(new javax.xml.namespace.QName("", "address1"));
@@ -312,20 +285,8 @@ public class Location implements java.io.Serializable {
         elemField.setNillable(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("businessPartnerId");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "businessPartnerId"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setNillable(true);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("city");
         elemField.setXmlName(new javax.xml.namespace.QName("", "city"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setNillable(true);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("clientId");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "clientId"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(true);
         typeDesc.addFieldDesc(elemField);
@@ -338,6 +299,12 @@ public class Location implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("id");
         elemField.setXmlName(new javax.xml.namespace.QName("", "id"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(true);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("name");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "name"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(true);
         typeDesc.addFieldDesc(elemField);

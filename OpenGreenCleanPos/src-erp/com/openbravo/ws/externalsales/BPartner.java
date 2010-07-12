@@ -6,6 +6,8 @@
  */
 package com.openbravo.ws.externalsales;
 
+import com.openbravo.ws.externalsales.BPartner;
+
 public class BPartner implements java.io.Serializable {
 
     private static final long serialVersionUID = 9457582354291L;

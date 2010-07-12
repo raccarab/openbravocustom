@@ -1,71 +1,71 @@
 /**
- * Payment.java
+ * OrderIdentifier.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
-package com.openbravo.ws.externalsales;
+package net.virtuemart.www.externalsales;
 
-import com.openbravo.ws.externalsales.Payment;
+import net.virtuemart.www.externalsales.OrderIdentifier;
 
-public class Payment implements java.io.Serializable {
+public class OrderIdentifier implements java.io.Serializable {
 
-    private static final long serialVersionUID = 9273872175133L;
-    private double amount;
-    private String paymentType;
+    private static final long serialVersionUID = 9341677250499L;
+    private java.util.Calendar dateNew;
+    private java.lang.String documentNo;
 
-    public Payment() {
+    public OrderIdentifier() {
     }
 
-    public Payment(
-            double amount,
-            java.lang.String paymentType) {
-        this.amount = amount;
-        this.paymentType = paymentType;
-    }
-
-    /**
-     * Gets the amount value for this Payment.
-     * 
-     * @return amount
-     */
-    public double getAmount() {
-        return amount;
+    public OrderIdentifier(
+            java.util.Calendar dateNew,
+            java.lang.String documentNo) {
+        this.dateNew = dateNew;
+        this.documentNo = documentNo;
     }
 
     /**
-     * Sets the amount value for this Payment.
+     * Gets the dateNew value for this OrderIdentifier.
      * 
-     * @param amount
+     * @return dateNew
      */
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public java.util.Calendar getDateNew() {
+        return dateNew;
     }
 
     /**
-     * Gets the paymentType value for this Payment.
+     * Sets the dateNew value for this OrderIdentifier.
      * 
-     * @return paymentType
+     * @param dateNew
      */
-    public java.lang.String getPaymentType() {
-        return paymentType;
+    public void setDateNew(java.util.Calendar dateNew) {
+        this.dateNew = dateNew;
     }
 
     /**
-     * Sets the paymentType value for this Payment.
+     * Gets the documentNo value for this OrderIdentifier.
      * 
-     * @param paymentType
+     * @return documentNo
      */
-    public void setPaymentType(java.lang.String paymentType) {
-        this.paymentType = paymentType;
+    public java.lang.String getDocumentNo() {
+        return documentNo;
+    }
+
+    /**
+     * Sets the documentNo value for this OrderIdentifier.
+     * 
+     * @param documentNo
+     */
+    public void setDocumentNo(java.lang.String documentNo) {
+        this.documentNo = documentNo;
     }
     private java.lang.Object __equalsCalc = null;
 
     public synchronized boolean equals(java.lang.Object obj) {
-        if (!(obj instanceof Payment)) {
+        if (!(obj instanceof OrderIdentifier)) {
             return false;
         }
-        Payment other = (Payment) obj;
+        OrderIdentifier other = (OrderIdentifier) obj;
         if (obj == null) {
             return false;
         }
@@ -78,10 +78,12 @@ public class Payment implements java.io.Serializable {
         __equalsCalc = obj;
         boolean _equals;
         _equals = true &&
-                this.amount == other.getAmount() &&
-                ((this.paymentType == null && other.getPaymentType() == null) ||
-                (this.paymentType != null &&
-                this.paymentType.equals(other.getPaymentType())));
+                ((this.dateNew == null && other.getDateNew() == null) ||
+                (this.dateNew != null &&
+                this.dateNew.equals(other.getDateNew()))) &&
+                ((this.documentNo == null && other.getDocumentNo() == null) ||
+                (this.documentNo != null &&
+                this.documentNo.equals(other.getDocumentNo())));
         __equalsCalc = null;
         return _equals;
     }
@@ -93,28 +95,30 @@ public class Payment implements java.io.Serializable {
         }
         __hashCodeCalc = true;
         int _hashCode = 1;
-        _hashCode += new Double(getAmount()).hashCode();
-        if (getPaymentType() != null) {
-            _hashCode += getPaymentType().hashCode();
+        if (getDateNew() != null) {
+            _hashCode += getDateNew().hashCode();
+        }
+        if (getDocumentNo() != null) {
+            _hashCode += getDocumentNo().hashCode();
         }
         __hashCodeCalc = false;
         return _hashCode;
     }    // Type metadata
     private static org.apache.axis.description.TypeDesc typeDesc =
-            new org.apache.axis.description.TypeDesc(Payment.class, true);
+            new org.apache.axis.description.TypeDesc(OrderIdentifier.class, true);
     
 
     static {
-        typeDesc.setXmlType(new javax.xml.namespace.QName("/services/ExternalSales", "Payment"));
+        typeDesc.setXmlType(new javax.xml.namespace.QName("/services/ExternalSales", "OrderIdentifier"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("amount");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "amount"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "double"));
-        elemField.setNillable(false);
+        elemField.setFieldName("dateNew");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "dateNew"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "dateTime"));
+        elemField.setNillable(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("paymentType");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "paymentType"));
+        elemField.setFieldName("documentNo");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "documentNo"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(true);
         typeDesc.addFieldDesc(elemField);

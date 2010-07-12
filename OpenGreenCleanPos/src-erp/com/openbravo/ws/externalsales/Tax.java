@@ -6,6 +6,8 @@
  */
 package com.openbravo.ws.externalsales;
 
+import com.openbravo.ws.externalsales.Tax;
+
 public class Tax implements java.io.Serializable {
 
     private static final long serialVersionUID = 9131564148974L;

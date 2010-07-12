@@ -4,14 +4,14 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
-package com.openbravo.ws.externalsales;
+package net.virtuemart.www.externalsales;
 
-import com.openbravo.ws.externalsales.Product;
+import net.virtuemart.www.externalsales.Product;
 
 public class Product implements java.io.Serializable {
 
     private static final long serialVersionUID = 9239663177762L;
-    private com.openbravo.ws.externalsales.Category category;
+    private net.virtuemart.www.externalsales.Category category;
     private java.lang.String description;
     private java.lang.String ean;
     private java.lang.String id;
@@ -20,13 +20,13 @@ public class Product implements java.io.Serializable {
     private java.lang.String name;
     private java.lang.String number;
     private double purchasePrice;
-    private com.openbravo.ws.externalsales.Tax tax;
+    private net.virtuemart.www.externalsales.Tax tax;
 
     public Product() {
     }
 
     public Product(
-            com.openbravo.ws.externalsales.Category category,
+            net.virtuemart.www.externalsales.Category category,
             java.lang.String description,
             java.lang.String ean,
             java.lang.String id,
@@ -35,7 +35,7 @@ public class Product implements java.io.Serializable {
             java.lang.String name,
             java.lang.String number,
             double purchasePrice,
-            com.openbravo.ws.externalsales.Tax tax) {
+            net.virtuemart.www.externalsales.Tax tax) {
         this.category = category;
         this.description = description;
         this.ean = ean;
@@ -53,7 +53,7 @@ public class Product implements java.io.Serializable {
      * 
      * @return category
      */
-    public com.openbravo.ws.externalsales.Category getCategory() {
+    public net.virtuemart.www.externalsales.Category getCategory() {
         return category;
     }
 
@@ -62,7 +62,7 @@ public class Product implements java.io.Serializable {
      * 
      * @param category
      */
-    public void setCategory(com.openbravo.ws.externalsales.Category category) {
+    public void setCategory(net.virtuemart.www.externalsales.Category category) {
         this.category = category;
     }
 
@@ -215,7 +215,7 @@ public class Product implements java.io.Serializable {
      * 
      * @return tax
      */
-    public com.openbravo.ws.externalsales.Tax getTax() {
+    public net.virtuemart.www.externalsales.Tax getTax() {
         return tax;
     }
 
@@ -224,7 +224,7 @@ public class Product implements java.io.Serializable {
      * 
      * @param tax
      */
-    public void setTax(com.openbravo.ws.externalsales.Tax tax) {
+    public void setTax(net.virtuemart.www.externalsales.Tax tax) {
         this.tax = tax;
     }
     private java.lang.Object __equalsCalc = null;

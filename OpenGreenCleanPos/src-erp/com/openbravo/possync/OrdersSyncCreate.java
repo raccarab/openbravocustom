@@ -19,6 +19,9 @@
 
 package com.openbravo.possync;
 
+import com.openbravo.possync.DataLogicIntegration;
+import com.openbravo.possync.OrdersSync;
+
 import com.openbravo.pos.forms.AppView;
 import com.openbravo.pos.forms.BeanFactoryCache;
 import com.openbravo.pos.forms.BeanFactoryException;

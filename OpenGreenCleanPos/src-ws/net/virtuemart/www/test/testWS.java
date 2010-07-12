@@ -6,6 +6,7 @@ import net.virtuemart.www.VM_Categories.GetChildsCategoriesRequestInput;
 import net.virtuemart.www.VM_Categories.VM_CategoriesProxy;
 import net.virtuemart.www.VM_Categories.Categorie;
 
+import net.virtuemart.www.VM_Order.VM_OrderProxy;
 import net.virtuemart.www.VM_Product.ProductFromCatIdInput;
 import net.virtuemart.www.VM_Product.ProductFromIdInput;
 import net.virtuemart.www.VM_Product.Produit;
@@ -27,12 +28,22 @@ public class testWS {
 		login.setPassword("titoupass");
 		
 		
+		/**
+		 * Setting endpoints
+		 */
 		VM_CategoriesProxy cp = new VM_CategoriesProxy();
 		cp.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_CategoriesService.php");
 
 		VM_ProductProxy pp = new VM_ProductProxy();
 		pp.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_ProductService.php");
 
+		VM_UsersProxy up = new VM_UsersProxy();
+		up.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_UsersService.php");
+	
+		VM_OrderProxy op = new VM_OrderProxy();
+		up.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_UsersService.php");
+	
+		
 	
 //		GetChildsCategoriesRequestInput parent = new GetChildsCategoriesRequestInput(login,"3");
 	
@@ -102,9 +113,7 @@ System.out.println("TEST getAllCats");
 		System.out.println("TEST getUsers");
 
 		
-		VM_UsersProxy up = new VM_UsersProxy();
-		up.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_UsersService.php");
-		
+			
 		try {
 			System.out.println("TEST 1");
 			

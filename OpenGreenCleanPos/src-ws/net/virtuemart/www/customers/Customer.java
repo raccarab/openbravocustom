@@ -4,11 +4,11 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
-package com.openbravo.ws.customers;
+package net.virtuemart.www.customers;
 
-import com.openbravo.ws.customers.Customer;
+import net.virtuemart.www.customers.Customer;
 
-public class Customer extends com.openbravo.ws.customers.BusinessPartner implements java.io.Serializable {
+public class Customer extends net.virtuemart.www.customers.BusinessPartner implements java.io.Serializable {
 
     private static final long serialVersionUID = 9783582244150L;
 
@@ -18,11 +18,11 @@ public class Customer extends com.openbravo.ws.customers.BusinessPartner impleme
     public Customer(
             java.lang.String clientId,
             java.lang.Boolean complete,
-            com.openbravo.ws.customers.Contact[] contacts,
+            net.virtuemart.www.customers.Contact[] contacts,
             java.lang.Boolean customer,
             java.lang.String description,
             java.lang.String id,
-            com.openbravo.ws.customers.Location[] locations,
+            net.virtuemart.www.customers.Location[] locations,
             java.lang.String name,
             java.lang.String searchKey,
             java.lang.Boolean vendor) {

@@ -17,30 +17,27 @@
 //    You should have received a copy of the GNU General Public License
 //    along with GreenPOS.  If not, see <http://www.gnu.org/licenses/>.
 
-package com.openbravo.possync;
-
-import com.openbravo.possync.DataLogicIntegration;
-import com.openbravo.possync.ProductsSync;
+package net.virtuemart.www.possync;
 
 import com.openbravo.pos.forms.AppView;
 import com.openbravo.pos.forms.BeanFactoryCache;
 import com.openbravo.pos.forms.BeanFactoryException;
-import com.openbravo.pos.forms.DataLogicSales;
 import com.openbravo.pos.forms.DataLogicSystem;
+import net.virtuemart.www.possync.DataLogicIntegration;
+import net.virtuemart.www.possync.OrdersSync;
 
 /**
  *
  * @author adrian
  */
-public class ProductsSyncCreate extends BeanFactoryCache {
+public class OrdersSyncCreate extends BeanFactoryCache {
     
     public Object constructBean(AppView app) throws BeanFactoryException {
-        
-        DataLogicSystem dlSystem = (DataLogicSystem) app.getBean("com.openbravo.pos.forms.DataLogicSystem");
-        DataLogicIntegration dli = (DataLogicIntegration) app.getBean("com.openbravo.possync.DataLogicIntegration");
-        DataLogicSales dlsales = (DataLogicSales) app.getBean("com.openbravo.pos.forms.DataLogicSales");
 
-        ProductsSync bean = new ProductsSync(dlSystem, dli, dlsales, app.getInventoryLocation());
+        DataLogicSystem dlSystem = (DataLogicSystem) app.getBean("com.openbravo.pos.forms.DataLogicSystem");
+        DataLogicIntegration dli = (DataLogicIntegration) app.getBean("net.virtuemart.www.possync.DataLogicIntegration");
+
+        OrdersSync bean = new OrdersSync(dlSystem, dli);
         return bean;
     }
 }

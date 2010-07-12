@@ -4,27 +4,27 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
-package com.openbravo.ws.externalsales;
+package net.virtuemart.www.externalsales;
 
-import com.openbravo.ws.externalsales.Order;
+import net.virtuemart.www.externalsales.Order;
 
 public class Order implements java.io.Serializable {
 
     private static final long serialVersionUID = 9384737214755L;
-    private com.openbravo.ws.externalsales.BPartner businessPartner;
-    private com.openbravo.ws.externalsales.OrderLine[] lines;
-    private com.openbravo.ws.externalsales.OrderIdentifier orderId;
-    private com.openbravo.ws.externalsales.Payment[] payment;
+    private net.virtuemart.www.externalsales.BPartner businessPartner;
+    private net.virtuemart.www.externalsales.OrderLine[] lines;
+    private net.virtuemart.www.externalsales.OrderIdentifier orderId;
+    private net.virtuemart.www.externalsales.Payment[] payment;
     private int state;
 
     public Order() {
     }
 
     public Order(
-            com.openbravo.ws.externalsales.BPartner businessPartner,
-            com.openbravo.ws.externalsales.OrderLine[] lines,
-            com.openbravo.ws.externalsales.OrderIdentifier orderId,
-            com.openbravo.ws.externalsales.Payment[] payment,
+            net.virtuemart.www.externalsales.BPartner businessPartner,
+            net.virtuemart.www.externalsales.OrderLine[] lines,
+            net.virtuemart.www.externalsales.OrderIdentifier orderId,
+            net.virtuemart.www.externalsales.Payment[] payment,
             int state) {
         this.businessPartner = businessPartner;
         this.lines = lines;
@@ -38,7 +38,7 @@ public class Order implements java.io.Serializable {
      * 
      * @return businessPartner
      */
-    public com.openbravo.ws.externalsales.BPartner getBusinessPartner() {
+    public net.virtuemart.www.externalsales.BPartner getBusinessPartner() {
         return businessPartner;
     }
 
@@ -47,7 +47,7 @@ public class Order implements java.io.Serializable {
      * 
      * @param businessPartner
      */
-    public void setBusinessPartner(com.openbravo.ws.externalsales.BPartner businessPartner) {
+    public void setBusinessPartner(net.virtuemart.www.externalsales.BPartner businessPartner) {
         this.businessPartner = businessPartner;
     }
 
@@ -56,7 +56,7 @@ public class Order implements java.io.Serializable {
      * 
      * @return lines
      */
-    public com.openbravo.ws.externalsales.OrderLine[] getLines() {
+    public net.virtuemart.www.externalsales.OrderLine[] getLines() {
         return lines;
     }
 
@@ -65,7 +65,7 @@ public class Order implements java.io.Serializable {
      * 
      * @param lines
      */
-    public void setLines(com.openbravo.ws.externalsales.OrderLine[] lines) {
+    public void setLines(net.virtuemart.www.externalsales.OrderLine[] lines) {
         this.lines = lines;
     }
 
@@ -74,7 +74,7 @@ public class Order implements java.io.Serializable {
      * 
      * @return orderId
      */
-    public com.openbravo.ws.externalsales.OrderIdentifier getOrderId() {
+    public net.virtuemart.www.externalsales.OrderIdentifier getOrderId() {
         return orderId;
     }
 
@@ -83,7 +83,7 @@ public class Order implements java.io.Serializable {
      * 
      * @param orderId
      */
-    public void setOrderId(com.openbravo.ws.externalsales.OrderIdentifier orderId) {
+    public void setOrderId(net.virtuemart.www.externalsales.OrderIdentifier orderId) {
         this.orderId = orderId;
     }
 
@@ -92,7 +92,7 @@ public class Order implements java.io.Serializable {
      * 
      * @return payment
      */
-    public com.openbravo.ws.externalsales.Payment[] getPayment() {
+    public net.virtuemart.www.externalsales.Payment[] getPayment() {
         return payment;
     }
 
@@ -101,7 +101,7 @@ public class Order implements java.io.Serializable {
      * 
      * @param payment
      */
-    public void setPayment(com.openbravo.ws.externalsales.Payment[] payment) {
+    public void setPayment(net.virtuemart.www.externalsales.Payment[] payment) {
         this.payment = payment;
     }
 

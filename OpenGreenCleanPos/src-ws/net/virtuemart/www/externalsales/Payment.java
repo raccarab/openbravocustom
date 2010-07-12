@@ -4,9 +4,9 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
-package com.openbravo.ws.externalsales;
+package net.virtuemart.www.externalsales;
 
-import com.openbravo.ws.externalsales.Payment;
+import net.virtuemart.www.externalsales.Payment;
 
 public class Payment implements java.io.Serializable {
 

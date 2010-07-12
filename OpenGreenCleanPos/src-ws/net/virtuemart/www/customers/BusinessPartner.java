@@ -4,20 +4,20 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
-package com.openbravo.ws.customers;
+package net.virtuemart.www.customers;
 
-import com.openbravo.ws.customers.BusinessPartner;
+import net.virtuemart.www.customers.BusinessPartner;
 
 public class BusinessPartner implements java.io.Serializable {
 
     private static final long serialVersionUID = 7460326872588L;
     private java.lang.String clientId;
     private java.lang.Boolean complete;
-    private com.openbravo.ws.customers.Contact[] contacts;
+    private net.virtuemart.www.customers.Contact[] contacts;
     private java.lang.Boolean customer;
     private java.lang.String description;
     private java.lang.String id;
-    private com.openbravo.ws.customers.Location[] locations;
+    private net.virtuemart.www.customers.Location[] locations;
     private java.lang.String name;
     private java.lang.String searchKey;
     private java.lang.Boolean vendor;
@@ -28,11 +28,11 @@ public class BusinessPartner implements java.io.Serializable {
     public BusinessPartner(
             java.lang.String clientId,
             java.lang.Boolean complete,
-            com.openbravo.ws.customers.Contact[] contacts,
+            net.virtuemart.www.customers.Contact[] contacts,
             java.lang.Boolean customer,
             java.lang.String description,
             java.lang.String id,
-            com.openbravo.ws.customers.Location[] locations,
+            net.virtuemart.www.customers.Location[] locations,
             java.lang.String name,
             java.lang.String searchKey,
             java.lang.Boolean vendor) {
@@ -89,7 +89,7 @@ public class BusinessPartner implements java.io.Serializable {
      * 
      * @return contacts
      */
-    public com.openbravo.ws.customers.Contact[] getContacts() {
+    public net.virtuemart.www.customers.Contact[] getContacts() {
         return contacts;
     }
 
@@ -98,7 +98,7 @@ public class BusinessPartner implements java.io.Serializable {
      * 
      * @param contacts
      */
-    public void setContacts(com.openbravo.ws.customers.Contact[] contacts) {
+    public void setContacts(net.virtuemart.www.customers.Contact[] contacts) {
         this.contacts = contacts;
     }
 
@@ -161,7 +161,7 @@ public class BusinessPartner implements java.io.Serializable {
      * 
      * @return locations
      */
-    public com.openbravo.ws.customers.Location[] getLocations() {
+    public net.virtuemart.www.customers.Location[] getLocations() {
         return locations;
     }
 
@@ -170,7 +170,7 @@ public class BusinessPartner implements java.io.Serializable {
      * 
      * @param locations
      */
-    public void setLocations(com.openbravo.ws.customers.Location[] locations) {
+    public void setLocations(net.virtuemart.www.customers.Location[] locations) {
         this.locations = locations;
     }
 

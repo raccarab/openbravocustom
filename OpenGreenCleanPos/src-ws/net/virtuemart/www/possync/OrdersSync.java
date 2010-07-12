@@ -21,7 +21,7 @@
 //    You should have received a copy of the GNU General Public License
 //    along with GreenPOS.  If not, see <http://www.gnu.org/licenses/>.
 
-package com.openbravo.possync;
+package net.virtuemart.www.possync;
 
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
@@ -29,13 +29,11 @@ import java.util.Calendar;
 import java.util.List;
 import javax.xml.rpc.ServiceException;
 
-import com.openbravo.ws.externalsales.BPartner;
-import com.openbravo.ws.externalsales.Order;
-import com.openbravo.ws.externalsales.OrderIdentifier;
-import com.openbravo.ws.externalsales.OrderLine;
-import com.openbravo.ws.externalsales.Payment;
-import com.openbravo.possync.DataLogicIntegration;
-import com.openbravo.possync.ExternalSalesHelper;
+import net.virtuemart.www.externalsales.BPartner;
+import net.virtuemart.www.externalsales.Order;
+import net.virtuemart.www.externalsales.OrderIdentifier;
+import net.virtuemart.www.externalsales.OrderLine;
+import net.virtuemart.www.externalsales.Payment;
 
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.MessageInf;
@@ -45,6 +43,8 @@ import com.openbravo.pos.forms.ProcessAction;
 import com.openbravo.pos.payment.PaymentInfo;
 import com.openbravo.pos.ticket.TicketInfo;
 import com.openbravo.pos.ticket.TicketLineInfo;
+import net.virtuemart.www.possync.DataLogicIntegration;
+import net.virtuemart.www.possync.ExternalSalesHelper;
 
 
 public class OrdersSync implements ProcessAction {

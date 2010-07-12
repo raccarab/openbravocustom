@@ -4,11 +4,11 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
-package com.openbravo.ws.externalsales;
+package net.virtuemart.www.externalsales;
 
-import com.openbravo.ws.externalsales.ProductPlus;
+import net.virtuemart.www.externalsales.ProductPlus;
 
-public class ProductPlus extends com.openbravo.ws.externalsales.Product implements java.io.Serializable {
+public class ProductPlus extends net.virtuemart.www.externalsales.Product implements java.io.Serializable {
 
     private static final long serialVersionUID = 9203746223092L;
     private double qtyonhand;
@@ -17,7 +17,7 @@ public class ProductPlus extends com.openbravo.ws.externalsales.Product implemen
     }
 
     public ProductPlus(
-            com.openbravo.ws.externalsales.Category category,
+            net.virtuemart.www.externalsales.Category category,
             java.lang.String description,
             java.lang.String ean,
             java.lang.String id,
@@ -26,7 +26,7 @@ public class ProductPlus extends com.openbravo.ws.externalsales.Product implemen
             java.lang.String name,
             java.lang.String number,
             double purchasePrice,
-            com.openbravo.ws.externalsales.Tax tax,
+            net.virtuemart.www.externalsales.Tax tax,
             double qtyonhand) {
         super(
                 category,

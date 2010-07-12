@@ -21,17 +21,15 @@
 //    You should have received a copy of the GNU General Public License
 //    along with GreenPOS.  If not, see <http://www.gnu.org/licenses/>.
 
-package com.openbravo.possync;
+package net.virtuemart.www.possync;
 
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import javax.xml.rpc.ServiceException;
 
-import com.openbravo.ws.customers.Customer;
-import com.openbravo.ws.externalsales.Product;
-import com.openbravo.ws.externalsales.ProductPlus;
-import com.openbravo.possync.DataLogicIntegration;
-import com.openbravo.possync.ExternalSalesHelper;
+import net.virtuemart.www.customers.Customer;
+import net.virtuemart.www.externalsales.Product;
+import net.virtuemart.www.externalsales.ProductPlus;
 
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.MessageInf;
@@ -46,6 +44,8 @@ import com.openbravo.pos.inventory.TaxCategoryInfo;
 import com.openbravo.pos.ticket.CategoryInfo;
 import com.openbravo.pos.ticket.ProductInfoExt;
 import com.openbravo.pos.ticket.TaxInfo;
+import net.virtuemart.www.possync.DataLogicIntegration;
+import net.virtuemart.www.possync.ExternalSalesHelper;
 import java.util.Date;
 import java.util.UUID;
 
