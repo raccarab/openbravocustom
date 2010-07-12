@@ -76,8 +76,6 @@ import net.sf.jasperreports.engine.data.JRMapArrayDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
-import java.util.logging.Logger;
-
 /**
  *
  * @author adrianromero
@@ -140,7 +138,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         initComponents ();
     }
 
-    private static Logger logger = Logger.getLogger("com.openbravo.pos.forms.JPrincipalApp");
+//    private static Logger logger = Logger.getLogger("com.openbravo.pos.forms.JPrincipalApp");
 
    
     public void init(AppView app) throws BeanFactoryException {

@@ -30,7 +30,6 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Window;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -42,7 +41,7 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
     private CustomerInfo selectedCustomer;
     private ListProvider lpr;
 
-    private static Logger logger = Logger.getLogger("com.openbravo.pos.customers.JCustomerFinder");
+//    private static Logger logger = Logger.getLogger("com.openbravo.pos.customers.JCustomerFinder");
 
     /** Creates new form JCustomerFinder */
     private JCustomerFinder(java.awt.Frame parent, boolean modal) {
