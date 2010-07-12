@@ -27,6 +27,9 @@ public class testWS {
 		login.setLogin("tii");
 		login.setPassword("titoupass");
 		
+		/**
+		 * retrieve config file
+		 */
 		
 		/**
 		 * Setting endpoints
