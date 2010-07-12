@@ -9,6 +9,8 @@ import java.io.UnsupportedEncodingException;
 import com.openbravo.pos.forms.*;
 
 import com.openbravo.pos.util.AltEncrypter;
+import com.sun.net.ssl.internal.ssl.Provider;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.Security;
@@ -37,7 +39,7 @@ public class PaymentGatewayPayPoint implements PaymentGateway {
         // Propiedades del sistema
         System.setProperty("java.protocol.handler.pkgs", "com.sun.net.ssl.internal.www.protocol" );
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-            
+        
         // Configuracion del pago
         m_sCommerceID = props.getProperty("payment.commerceid");
         
