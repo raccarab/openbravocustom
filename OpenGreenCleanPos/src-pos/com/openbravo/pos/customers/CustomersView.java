@@ -56,7 +56,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         
         DataLogicSales dlSales = (DataLogicSales) app.getBean("com.openbravo.pos.forms.DataLogicSales");
 
-        posid = app.getProperties().getProperty("ssh.posid");
+        posid = app.getProperties().getProperty("ws.posid");
         if (posid==null || posid.length()<=0) {
              SimpleDateFormat sdf = new SimpleDateFormat("S");
              posid = sdf.format(new Date());

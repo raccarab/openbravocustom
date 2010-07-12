@@ -29,16 +29,14 @@ import com.openbravo.pos.util.AltEncrypter;
  *
  * @author adrianromero
  */
-public class JPanelConfigSSH extends javax.swing.JPanel implements PanelConfig {
+public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
 
     private DirtyManager dirty = new DirtyManager();
         
     /** Creates new form JPanelConfigERP */
-    public JPanelConfigSSH() {
+    public JPanelConfigWS() {
         initComponents();
         
-        jTextField1.getDocument().addDocumentListener(dirty);
-        jTextField2.getDocument().addDocumentListener(dirty);
         jtxtId.getDocument().addDocumentListener(dirty);
         jtxtName.getDocument().addDocumentListener(dirty);
         jtxtPassword.getDocument().addDocumentListener(dirty);
@@ -55,13 +53,11 @@ public class JPanelConfigSSH extends javax.swing.JPanel implements PanelConfig {
    
     public void loadProperties(AppConfig config) {
 
-        jtxtUrl.setText(config.getProperty("ssh.URL"));
-        jtxtId.setText(config.getProperty("ssh.posid"));
-        jTextField2.setText(config.getProperty("ssh.rport"));
-        jTextField1.setText(config.getProperty("ssh.lport"));
+        jtxtUrl.setText(config.getProperty("ws.URL"));
+        jtxtId.setText(config.getProperty("ws.posid"));
         
-        String sERPUser = config.getProperty("ssh.user");
-        String sERPPassword = config.getProperty("ssh.password");
+        String sERPUser = config.getProperty("ws.user");
+        String sERPPassword = config.getProperty("ws.password");
         if (sERPUser != null && sERPPassword != null && sERPPassword.startsWith("crypt:")) {
             // La clave esta encriptada.
             AltEncrypter cypher = new AltEncrypter("cypherkey" + sERPUser);
@@ -75,14 +71,12 @@ public class JPanelConfigSSH extends javax.swing.JPanel implements PanelConfig {
     
     public void saveProperties(AppConfig config) {
         
-        config.setProperty("ssh.URL", jtxtUrl.getText());
-        config.setProperty("ssh.posid", jtxtId.getText());
-        config.setProperty("ssh.rport", jTextField2.getText());
-        config.setProperty("ssh.lport", jTextField1.getText());
+        config.setProperty("ws.URL", jtxtUrl.getText());
+        config.setProperty("ws.posid", jtxtId.getText());
         
-        config.setProperty("ssh.user", jtxtName.getText());
+        config.setProperty("ws.user", jtxtName.getText());
         AltEncrypter cypher = new AltEncrypter("cypherkey" + jtxtName.getText());             
-        config.setProperty("ssh.password", "crypt:" + cypher.encrypt(new String(jtxtPassword.getPassword())));
+        config.setProperty("ws.password", "crypt:" + cypher.encrypt(new String(jtxtPassword.getPassword())));
 
         dirty.setDirty(false);
     }
@@ -100,28 +94,21 @@ public class JPanelConfigSSH extends javax.swing.JPanel implements PanelConfig {
         jtxtUrl = new javax.swing.JTextField();
         jLabelId = new javax.swing.JLabel();
         jtxtId = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabelName = new javax.swing.JLabel();
         jtxtName = new javax.swing.JTextField();
         jLabelProperties = new javax.swing.JLabel();
         jtxtPassword = new javax.swing.JPasswordField();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(AppLocal.getIntString("label.configssh")));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(AppLocal.getIntString("label.wsconfig")));
 
-        jlabelUrl.setText(AppLocal.getIntString("label.sshurl"));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("erp_messages"); // NOI18N
+        jlabelUrl.setText(bundle.getString("label.wsurl")); // NOI18N
 
-        jLabelId.setText(AppLocal.getIntString("label.sshid"));
+        jLabelId.setText(bundle.getString("label.wsid")); // NOI18N
 
-        jLabel1.setText(AppLocal.getIntString("label.sshrport"));
+        jLabelName.setText(bundle.getString("label.wsuser")); // NOI18N
 
-        jLabel2.setText(AppLocal.getIntString("label.sshlport"));
-
-        jLabelName.setText(AppLocal.getIntString("label.sshuser"));
-
-        jLabelProperties.setText(AppLocal.getIntString("label.sshpassword"));
+        jLabelProperties.setText(bundle.getString("label.wspassword")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,14 +125,6 @@ public class JPanelConfigSSH extends javax.swing.JPanel implements PanelConfig {
                         .addComponent(jLabelId, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -166,15 +145,7 @@ public class JPanelConfigSSH extends javax.swing.JPanel implements PanelConfig {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlabelUrl)
                     .addComponent(jtxtUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelName)
                     .addComponent(jtxtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -186,8 +157,6 @@ public class JPanelConfigSSH extends javax.swing.JPanel implements PanelConfig {
         );
 
         jLabelId.getAccessibleContext().setAccessibleName("");
-        jLabel1.getAccessibleContext().setAccessibleName("");
-        jLabel2.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -203,7 +172,7 @@ public class JPanelConfigSSH extends javax.swing.JPanel implements PanelConfig {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
@@ -211,14 +180,10 @@ public class JPanelConfigSSH extends javax.swing.JPanel implements PanelConfig {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelId;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelProperties;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel jlabelUrl;
     private javax.swing.JTextField jtxtId;
     private javax.swing.JTextField jtxtName;

@@ -70,13 +70,11 @@ public class StartPOS {
                 AppConfig config = new AppConfig(args);
                 config.load();
 
-                // set SSH.
-                String sshuser = config.getProperty("ssh.user");
-                String sshpassword = config.getProperty("ssh.password");
-                String sshlport = config.getProperty("ssh.lport");
-                String sshrport = config.getProperty("ssh.rport");
-                String sshurl = config.getProperty("ssh.URL");
-                if (sshuser != null && !sshuser.equals("") && sshlport != null && sshurl != null) {
+                // set WS.
+                String sshuser = config.getProperty("ws.user");
+                String sshpassword = config.getProperty("ws.password");
+                String sshurl = config.getProperty("ws.URL");
+                if (sshuser != null && !sshuser.equals("") && sshurl != null) {
                     //create SSH
                 }
 
