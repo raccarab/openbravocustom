@@ -27,6 +27,7 @@ import com.openbravo.pos.instance.InstanceQuery;
 import com.openbravo.pos.ticket.TicketInfo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.LookAndFeel;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.api.SubstanceSkin;
@@ -71,11 +72,16 @@ public class StartPOS {
                 config.load();
 
                 // set WS.
-                String sshuser = config.getProperty("ws.user");
-                String sshpassword = config.getProperty("ws.password");
-                String sshurl = config.getProperty("ws.URL");
-                if (sshuser != null && !sshuser.equals("") && sshurl != null) {
-                    //create SSH
+                String wsuser = config.getProperty("ws.user");
+                String wspassword = config.getProperty("ws.password");
+                String wsurl = config.getProperty("ws.URL");
+                String wsposid = config.getProperty("ws.posid");
+                if (wsposid!=null &&
+                           (wsuser == null || wsuser.equals("")
+                           || wsurl.equals("") || wsurl == null
+                           || wspassword.equals("") || wspassword == null)) {
+                    JOptionPane.showMessageDialog(null, "Config Error ! : Please configure Web Service correctly !");
+                   
                 }
 
                 // set Locale.
@@ -118,12 +124,12 @@ public class StartPOS {
                  if ("fullscreen".equals(screenmode)) {
                     JRootKiosk rootkiosk = new JRootKiosk();
                     rootkiosk.initFrame(config);
-                    rootkiosk.setTitle(rootkiosk.getTitle()+"   >>> "+hostname+" <<< ");
+                    rootkiosk.setTitle("   >>> "+hostname+" <<< "+rootkiosk.getTitle());
                 } else {
                     JRootFrame rootframe = new JRootFrame(); 
                     rootframe.initFrame(config);
 
-                    rootframe.setTitle(rootframe.getTitle()+"   >>> "+hostname+" <<< ");
+                    rootframe.setTitle("   >>> "+hostname+" <<< "+rootframe.getTitle());
                 }
 
 
