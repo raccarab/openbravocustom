@@ -33,6 +33,7 @@ report.setSentence("SELECT " +
                 "PRODUCTS.NAME, " +
                 "SUM(TICKETLINES.UNITS) AS UNITS, " +
                 "SUM(TICKETLINES.UNITS * TICKETLINES.PRICE) AS TOTAL, " +
+                "SUM( TICKETLINES.UNITS * TICKETLINES.PRICE ) * ( TAXES.RATE ) AS TOTALTAXE, " +
                 "TAXES.RATE "+
                 "FROM TAXES, CLOSEDCASH INNER JOIN RECEIPTS ON CLOSEDCASH.MONEY = RECEIPTS.MONEY, TICKETS LEFT OUTER JOIN CUSTOMERS ON CUSTOMERS.ID = TICKETS.CUSTOMER, TICKETLINES LEFT OUTER JOIN PRODUCTS ON TICKETLINES.PRODUCT = PRODUCTS.ID " +
                 "WHERE TAXES.ID=TICKETLINES.TAXID AND RECEIPTS.ID = TICKETS.ID AND TICKETS.ID = TICKETLINES.TICKET AND ?(QBF_FILTER) " +
@@ -52,6 +53,7 @@ report.addField("REFERENCE", com.openbravo.data.loader.Datas.STRING);
 report.addField("NAME", com.openbravo.data.loader.Datas.STRING);
 report.addField("UNITS", com.openbravo.data.loader.Datas.DOUBLE);
 report.addField("TOTAL", com.openbravo.data.loader.Datas.DOUBLE);
+report.addField("TOTALTAXE", com.openbravo.data.loader.Datas.DOUBLE);
 report.addField("RATE", com.openbravo.data.loader.Datas.DOUBLE);
 
 report;
