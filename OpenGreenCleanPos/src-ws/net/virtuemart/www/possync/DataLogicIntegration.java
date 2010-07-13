@@ -36,7 +36,10 @@ import com.openbravo.data.loader.SerializerWriteString;
 import com.openbravo.data.loader.Session;
 import com.openbravo.data.loader.StaticSentence;
 import com.openbravo.data.loader.Transaction;
+
+
 import com.openbravo.pos.customers.CustomerInfoExt;
+import com.openbravo.pos.customers.CustomerSync;
 import com.openbravo.pos.forms.BeanFactoryDataSingle;
 import com.openbravo.pos.inventory.TaxCategoryInfo;
 import com.openbravo.pos.payment.PaymentInfoTicket;
@@ -65,7 +68,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
     }
      
     public void syncCustomersBefore() throws BasicException {
-        new StaticSentence(s, "UPDATE CUSTOMERS SET VISIBLE = " + s.DB.FALSE()).exec();
+        new StaticSentence(s, "UPDATE CUSTOMERS SET VISIBLE = " + s.DB.TRUE()).exec();
     }
 
     public void syncCustomer(final CustomerInfoExt customer) throws BasicException {
@@ -270,15 +273,21 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
         };
         t.execute();     
     }
+
+    public List getCustomers() throws BasicException {
+        return new PreparedSentence(s
+                  , "SELECT ID,	SEARCHKEY,TAXID,NAME,ADDRESS,ADDRESS2,POSTAL,CITY,REGION,COUNTRY,FIRSTNAME,LASTNAME,EMAIL,PHONE,PHONE2,FAX,NOTES,CURDATE,CURDEBT FROM CUSTOMERS"               
+                  , null
+                  , new SerializerReadClass(CustomerSync.class)).list();
+    }
     
     public List getTickets() throws BasicException {
         return new PreparedSentence(s
-//                , "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, P.ID, P.NAME, C.ID, C.TAXID, C.SEARCHKEY, C.NAME, T.DATERETURN, T.DATERENDU FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID LEFT OUTER JOIN CUSTOMERS C ON T.CUSTOMER = C.ID WHERE (T.TICKETTYPE = 0 OR T.TICKETTYPE = 1) AND T.STATUS = 0"
-                  , "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE (T.TICKETTYPE = 0 OR T.TICKETTYPE = 1) AND T.STATUS = 0"
-               
-                , null
-                , new SerializerReadClass(TicketInfo.class)).list();
-    }
+                  	, "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE (T.TICKETTYPE = 0 OR T.TICKETTYPE = 1) AND T.STATUS = 0"               
+                  	, null
+                  	, new SerializerReadClass(TicketInfo.class)).list();
+    }    
+    
     public List getTicketLines(final String ticket) throws BasicException {
         return new PreparedSentence(s
 //                , "SELECT L.TICKET, L.LINE, L.PRODUCT, L.UNITS, L.PRICE, T.ID, T.NAME, T.CATEGORY, T.CUSTCATEGORY, T.PARENTID, T.RATE, T.RATECASCADE, T.RATEORDER, L.ATTRIBUTES " +

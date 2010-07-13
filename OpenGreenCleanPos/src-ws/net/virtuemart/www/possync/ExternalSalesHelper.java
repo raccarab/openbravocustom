@@ -26,6 +26,8 @@ package net.virtuemart.www.possync;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import javax.swing.JDialog;
 import javax.xml.rpc.ServiceException;
 
 import net.virtuemart.www.customers.Customer;
@@ -41,6 +43,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 import com.openbravo.basic.BasicException;
+import com.openbravo.data.gui.JMessageDialog;
+import com.openbravo.data.gui.MessageInf;
 import com.openbravo.pos.forms.AppConfig;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.DataLogicSystem;
@@ -54,6 +58,7 @@ import net.virtuemart.www.VM_Product.GetAllProductsInput;
 import net.virtuemart.www.VM_Product.Produit;
 import net.virtuemart.www.VM_Product.VM_ProductProxy;
 import net.virtuemart.www.VM_Tools.LoginInfo;
+import net.virtuemart.www.VM_Users.AddUserInput;
 import net.virtuemart.www.VM_Users.User;
 import net.virtuemart.www.VM_Users.VM_UsersProxy;
 import net.virtuemart.www.customers.Contact;
@@ -80,6 +85,12 @@ public class ExternalSalesHelper {
     private static Logger logger = Logger.getLogger("com.openbravo.data.loader.PreparedSentence");
     
     /** Creates a new instance of WebServiceHelper */
+    /**
+     * @param dlsystem
+     * @throws BasicException
+     * @throws ServiceException
+     * @throws MalformedURLException
+     */
     public ExternalSalesHelper(DataLogicSystem dlsystem) throws BasicException, ServiceException, MalformedURLException {
         
         AppConfig config = new AppConfig();
@@ -90,9 +101,12 @@ public class ExternalSalesHelper {
         wsURL = config.getProperty("ws.URL");
         wsPosid = config.getProperty("ws.posid");
 
-        wsLogin.setLogin(config.getProperty("ws.user"));
-        wsLogin.setPassword(config.getProperty("ws.password"));
-
+        String user = config.getProperty("ws.user");
+        wsLogin.setLogin(user);
+        AltEncrypter cypher = new AltEncrypter("cypherkey" + user);             
+        String password = cypher.decrypt(config.getProperty("ws.password").substring(6));
+        wsLogin.setPassword(password);
+        
         if (wsPosid==null || wsPosid.equals(""))
         {
             throw new BasicException(AppLocal.getIntString("message.propsnotdefined"));            
@@ -108,7 +122,35 @@ public class ExternalSalesHelper {
         }
     }
 
-    private VM_CategoriesProxy getCategoriesProxy() throws RemoteException {
+    public String getWsPosid() {
+		return wsPosid;
+	}
+
+	public LoginInfo getWsLogin() {
+		return wsLogin;
+	}
+
+	public String getWsURL() {
+		return wsURL;
+	}
+
+	public String getCategoriesURL() {
+		return CategoriesURL;
+	}
+
+	public String getProductURL() {
+		return ProductURL;
+	}
+
+	public String getUsersURL() {
+		return UsersURL;
+	}
+
+	public String getOrderURL() {
+		return OrderURL;
+	}
+
+	private VM_CategoriesProxy getCategoriesProxy() throws RemoteException {
         return new VM_CategoriesProxy(wsURL+CategoriesURL);
     }
     
@@ -130,13 +172,15 @@ public class ExternalSalesHelper {
             VM_UsersProxy proxy = getUsersProxy();
 
             User[] users = proxy.getUsers(wsLogin);
+            
             customers = new Customer[users.length];
+            
             int i=0;
 
             Contact[] contact = null;
             Location[] location= null;
+            
             for (User user : users) {
-                logger.info("*");
                 customers[i] = new Customer(user.getId(),
                                             Boolean.TRUE,
                                             contact ,
@@ -150,9 +194,22 @@ public class ExternalSalesHelper {
                 i++;
             }
          } catch (RemoteException e) {
-            System.out.println("Error getCustomers");
+        	 System.out.println("Error getCustomers : ");
+             e.printStackTrace();
          }
         return customers;
+    }
+    
+    public boolean addCustomer(User user) {
+    	AddUserInput parameters = new AddUserInput(wsLogin, user);
+    	try {
+			getUsersProxy().addUser(parameters);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
     }
     
     public Product[] getProductsCatalog() throws RemoteException {
@@ -168,7 +225,7 @@ public class ExternalSalesHelper {
             gapi.setWith_childs("false");
             
             Produit[] produits = proxy.getAllProducts(gapi);
-            products = new Product[products.length];
+            products = new Product[produits.length];
             
             int i=0;
 
@@ -187,7 +244,8 @@ public class ExternalSalesHelper {
                 i++;
             }
          } catch (RemoteException e) {
-            System.out.println("Error getProductsCatalog");
+            System.out.println("Error getProductsCatalog : ");
+            e.printStackTrace();
          }
         return products;
     }

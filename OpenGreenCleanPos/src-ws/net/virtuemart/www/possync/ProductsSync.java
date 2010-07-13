@@ -27,6 +27,11 @@ import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import javax.xml.rpc.ServiceException;
 
+import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
+import org.hsqldb.lib.MD5;
+
+import net.virtuemart.www.VM_Users.AddUserInput;
+import net.virtuemart.www.VM_Users.User;
 import net.virtuemart.www.customers.Customer;
 import net.virtuemart.www.externalsales.Product;
 import net.virtuemart.www.externalsales.ProductPlus;
@@ -34,7 +39,7 @@ import net.virtuemart.www.externalsales.ProductPlus;
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.MessageInf;
 import com.openbravo.data.loader.ImageUtils;
-import com.openbravo.pos.customers.CustomerInfoExt;
+import com.openbravo.pos.customers.CustomerSync;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.DataLogicSales;
 import com.openbravo.pos.forms.DataLogicSystem;
@@ -47,6 +52,7 @@ import com.openbravo.pos.ticket.TaxInfo;
 import net.virtuemart.www.possync.DataLogicIntegration;
 import net.virtuemart.www.possync.ExternalSalesHelper;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class ProductsSync implements ProcessAction {
@@ -58,7 +64,7 @@ public class ProductsSync implements ProcessAction {
     private ExternalSalesHelper externalsales;
     
     /** Creates a new instance of ProductsSync */
-    public ProductsSync(DataLogicSystem dlsystem, DataLogicIntegration dlintegration, DataLogicSales dlsales, String warehouse) {
+    public ProductsSync(DataLogicSystem dlsystem, DataLogicIntegration dlintegration, DataLogicSales dlsales,  String warehouse) {
         this.dlsystem = dlsystem;
         this.dlintegration = dlintegration;
         this.dlsales = dlsales;
@@ -67,10 +73,7 @@ public class ProductsSync implements ProcessAction {
     }
     
     public MessageInf execute() throws BasicException {
-        
-
-
-
+       
         try {
         
             if (externalsales == null) {
@@ -78,18 +81,13 @@ public class ProductsSync implements ProcessAction {
             }
             
             Product[] products = externalsales.getProductsCatalog();
-            Customer[] customers = externalsales.getCustomers();
-
-            if (customers == null){
-                throw new BasicException(AppLocal.getIntString("message.returnnull")+" > Customers null");
-            }
 
             if (products == null) {
                 throw new BasicException(AppLocal.getIntString("message.returnnull")+" > Products null");
             }
   
             
-            if (products.length > 0){
+            if (false && products.length > 0){
                 
                 dlintegration.syncProductsBefore();
                 
@@ -155,20 +153,62 @@ public class ProductsSync implements ProcessAction {
                 
                 // datalogic.syncProductsAfter();
             }
+ 
+            Customer[] customers = externalsales.getCustomers();
+
+            if (customers == null){
+                throw new BasicException(AppLocal.getIntString("message.returnnull")+" > Customers null");
+            }
             
             if (customers.length > 0 ) {
                 
-                dlintegration. syncCustomersBefore();
-                
-                for (Customer customer : customers) {                    
-                    CustomerInfoExt cinfo = new CustomerInfoExt(customer.getId());
-                    cinfo.setSearchkey(customer.getSearchKey());
-                    cinfo.setName(customer.getName());          
-                    cinfo.setNotes(customer.getDescription());
-                    // TODO: Finish the integration of all fields.
-                    dlintegration.syncCustomer(cinfo);
-                }
+//                dlintegration. syncCustomersBefore();
+//                for (Customer customer : customers) {                    
+//                    CustomerInfoExt cinfo = new CustomerInfoExt(customer.getId());
+//                    cinfo.setSearchkey(customer.getSearchKey());
+//                    cinfo.setName(customer.getName());          
+//                    cinfo.setNotes(customer.getDescription());
+//                    // TODO: Finish the integration of all fields.
+//                    dlintegration.syncCustomer(cinfo);
+//                }
             }
+            //List<TicketInfo> clist = dlintegration.getTicketsTest();
+            List<CustomerSync> clist = dlintegration.getCustomers();
+            System.out.println(" >> "+clist.size()+ "  " + clist.toString());
+			
+            for (CustomerSync cInfo : clist) {
+            	//System.out.println(" >> "+cInfo.getTaxid());
+            	
+                User userAdd = new User();
+    			userAdd.setLogin(cInfo.getTaxid());
+    			userAdd.setId(cInfo.getTaxid());
+    			userAdd.setFirstname(" ");
+    			userAdd.setLastname(cInfo.getName());
+    			userAdd.setPassword("407b3273beea2c061dbe7fc11b68de43");
+    			userAdd.setTitle("Mr");
+    			if (cInfo.getEmail()==null || cInfo.getEmail().indexOf('@')==-1)
+    				userAdd.setEmail(cInfo.getTaxid()+"@greenandclean.be");
+    			else
+    				userAdd.setEmail(" "+cInfo.getEmail());
+    			userAdd.setDescription(" "+cInfo.getNotes());
+    			userAdd.setAddress(" "+cInfo.getAddress());
+    			userAdd.setAddress2(" "+cInfo.getAddress2());
+
+    			userAdd.setState_region(" "+cInfo.getRegion());
+    			userAdd.setCity(" "+cInfo.getCity());
+    			userAdd.setCountry(" "+cInfo.getCountry());
+    			userAdd.setZipcode(" "+cInfo.getPostal());
+    			userAdd.setPhone(" "+cInfo.getPhone());
+    			userAdd.setMobile(" "+cInfo.getPhone2());
+    			userAdd.setFax(" ");
+    		
+    			System.out.println("* "+userAdd.toString());
+    			
+    			externalsales.addCustomer(userAdd);
+			}
+            
+            
+
             
             if (products.length == 0 && customers.length == 0) {
                 return new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.zeroproducts"));               

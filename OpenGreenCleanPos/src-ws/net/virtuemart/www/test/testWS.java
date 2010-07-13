@@ -110,12 +110,12 @@ public class testWS {
 //			System.out.println(p1.getName()+" "+p1.getPrice()+" "+p1.getDescription()+" "+p1.getBigdescription());
 //			
 System.out.println("TEST getProductsFromCategory");
-			Produit [] p = pp.getProductsFromCategory(pfci);
+//			Produit [] p = pp.getProductsFromCategory(pfci);
 			
-			for (Produit p1 : p) {
-				System.out.println(p1.getName()+" "+p1.getPrice()+" "+p1.getDescription()+" "+p1.getBigdescription());
+//			for (Produit p1 : p) {
+//				System.out.println(p1.getName()+" "+p1.getPrice()+" "+p1.getDescription()+" "+p1.getBigdescription());
 				
-			}
+//			}
 			
 System.out.println("TEST getAllCats");
 			
@@ -144,13 +144,13 @@ System.out.println("TEST getAllCats");
 			System.out.println("TEST 1");
 			
 			User userAdd = new User();
-			userAdd.setLogin("Testeur");
-			userAdd.setId("23");
+			userAdd.setLogin("Testeur1");
+			userAdd.setId("33");
 			userAdd.setFirstname("firstname");
 			userAdd.setLastname("lastname");
 			userAdd.setPassword("passssss");
 			userAdd.setTitle("Mr");
-			userAdd.setEmail("test@beyours.be");
+			userAdd.setEmail("test1@beyours.be");
 			userAdd.setDescription("");
 			userAdd.setAddress("address");
 			userAdd.setAddress2("address2");
@@ -166,8 +166,8 @@ System.out.println("TEST getAllCats");
 			AddUserInput parameters = new AddUserInput(login, userAdd);
 		
 			//OK
-			//String tmp = up.addUser(parameters);
-			//System.out.println(tmp);
+			String tmp = up.addUser(parameters);
+			System.out.println(tmp);
 				
 			
 			User[] users = up.getUsers(login);			

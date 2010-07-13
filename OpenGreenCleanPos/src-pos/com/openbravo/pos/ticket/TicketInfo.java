@@ -38,6 +38,7 @@ import com.openbravo.pos.util.tsUUID;
  *
  * @author adrianromero
  */
+
 public class TicketInfo implements SerializableRead, Externalizable {
 
     private static final long serialVersionUID = 2765650092387265178L;
@@ -129,6 +130,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
     }
 
     public void readValues(DataRead dr) throws BasicException {
+    	logger.info("*"+dr.getString(1));
         m_sId = dr.getString(1);
         tickettype = dr.getInt(2).intValue();
         m_iTicketId = dr.getInt(3).intValue();

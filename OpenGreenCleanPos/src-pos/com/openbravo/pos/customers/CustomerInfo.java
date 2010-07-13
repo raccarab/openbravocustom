@@ -19,14 +19,30 @@
 
 package com.openbravo.pos.customers;
 
+import com.openbravo.basic.BasicException;
+import com.openbravo.data.loader.DataRead;
+import com.openbravo.data.loader.DataWrite;
+import com.openbravo.data.loader.SerializableRead;
+import com.openbravo.data.loader.SerializableWrite;
+import com.openbravo.pos.payment.PaymentInfo;
+import com.openbravo.pos.ticket.TicketLineInfo;
 import com.openbravo.pos.util.StringUtils;
+
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Properties;
+import java.util.logging.Logger;
 
 /**
  *
  * @author adrianromero
  */
-public class CustomerInfo implements Serializable {
+public class CustomerInfo implements SerializableRead, Serializable {
     
     private static final long serialVersionUID = 9083257536541L;
     protected String id;
@@ -34,6 +50,8 @@ public class CustomerInfo implements Serializable {
     protected String taxid;
     protected String name;
     protected String curdebt;
+
+    private static Logger logger = Logger.getLogger("com.openbravo.pos.ticket.TicketInfo");
     
     /** Creates a new instance of UserInfoBasic */
     public CustomerInfo(String id) {
@@ -114,5 +132,33 @@ public class CustomerInfo implements Serializable {
     String getcurDebt() {
         return this.curdebt;
     }
+
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        // esto es solo para serializar tickets que no estan en la bolsa de tickets pendientes
+        id = (String) in.readObject();
+        searchkey = (String) in.readObject();
+        taxid = "1";
+        name = (String) in.readObject();
+        curdebt = (String) in.readObject();
+    }
+    
+	@Override
+	public void readValues(DataRead dr) throws BasicException {
+        id = dr.getString(1);
+        searchkey = dr.getString(2);
+        taxid = "1";
+        name = dr.getString(3);
+        curdebt = dr.getString(4);
+		
+	}
+	
+	 public void writeExternal(ObjectOutput out) throws IOException {
+	        // esto es solo para serializar tickets que no estan en la bolsa de tickets pendientes
+	        out.writeObject(id);
+	        out.writeObject(searchkey);
+	        out.writeObject(name);
+	        out.writeObject(curdebt);
+	    }
+
 }
 

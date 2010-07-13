@@ -19,6 +19,8 @@
 
 package com.openbravo.pos.customers;
 
+import java.util.List;
+
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.loader.DataParams;
 import com.openbravo.data.loader.DataRead;
@@ -30,6 +32,7 @@ import com.openbravo.data.loader.SentenceExecTransaction;
 import com.openbravo.data.loader.SentenceList;
 import com.openbravo.data.loader.SerializerRead;
 import com.openbravo.data.loader.SerializerReadBasic;
+import com.openbravo.data.loader.SerializerReadClass;
 import com.openbravo.data.loader.SerializerWriteBasic;
 import com.openbravo.data.loader.SerializerWriteBasicExt;
 import com.openbravo.data.loader.SerializerWriteParams;
@@ -39,6 +42,7 @@ import com.openbravo.data.loader.TableDefinition;
 import com.openbravo.format.Formats;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.BeanFactoryDataSingle;
+import com.openbravo.pos.ticket.TicketInfo;
 
 /**
  *
@@ -92,7 +96,7 @@ public class DataLogicCustomers extends BeanFactoryDataSingle {
                     }
                 });
     }
-
+    
     public int updateCustomerExt(final CustomerInfoExt customer) throws BasicException {
      
         return new PreparedSentence(s
