@@ -69,13 +69,22 @@ public class CustomerSync implements SerializableRead, Externalizable {
     protected String region;
     protected String country;
   
+    public CustomerSync() {
+    	this.id=null;
+    	this.name=null;
+    	this.searchkey=null;
+    	this.curdebt=null;
+    }
     public CustomerSync(String id) {
     	this.id = id;
 	}
 
 
 	public String getId() {
-			return id;
+    	/**
+    	 * TODO
+    	 */
+        return id;
     }    
     
     public String getTaxid() {

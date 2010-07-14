@@ -133,10 +133,11 @@ public class ProductsSync implements ProcessAction {
                 cinfo.setSearchkey(user.getLogin());
                 cinfo.setName(user.getLastname());          
                 cinfo.setNotes(user.getDescription());
-                if (cinfo.getEmail()==null || cinfo.getEmail().indexOf('@')==-1)
-                	cinfo.setEmail(user.getEmail());
-                else 
+                
+                if (cinfo.getEmail()==null || cinfo.getEmail().trim().equals("") || cinfo.getEmail().indexOf('@')==-1)
                 	cinfo.setEmail(user.getLogin()+"@greenandclean.be");
+                else 
+                	cinfo.setEmail(user.getEmail());
                 
                 cinfo.setAddress(user.getAddress());
                 cinfo.setAddress2(user.getAddress2());
@@ -158,9 +159,10 @@ public class ProductsSync implements ProcessAction {
         
         List<CustomerSync> clist = dlintegration.getCustomers();
         
- //       System.out.println(" >> "+clist.size()+ "  " + notToSync);
+        System.out.println(" >> "+clist.size()+ "  " + notToSync);
 		
         for (CustomerSync cInfo : clist) {
+        	System.out.println(cInfo.getTaxid());
         	if (notToSync.contains(cInfo.getTaxid())) {
         		continue;
         	}
@@ -171,7 +173,7 @@ public class ProductsSync implements ProcessAction {
 			userAdd.setLastname(cInfo.getName());
 			userAdd.setPassword("407b3273beea2c061dbe7fc11b68de43");
 			userAdd.setTitle("Mr");
-			if (cInfo.getEmail()==null || cInfo.getEmail().indexOf('@')==-1)
+			if (cInfo.getEmail()==null || cInfo.getEmail().trim().equals("") || cInfo.getEmail().indexOf('@')==-1)
 				userAdd.setEmail(cInfo.getTaxid()+"@greenandclean.be");
 			else
 				userAdd.setEmail(""+cInfo.getEmail());
@@ -188,6 +190,7 @@ public class ProductsSync implements ProcessAction {
 			userAdd.setFax(" ");
 		
 			externalsales.addUser(userAdd);
+			
 		}
         
         return users.length;

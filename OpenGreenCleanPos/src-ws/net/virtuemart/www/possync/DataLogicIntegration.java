@@ -298,7 +298,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 
     public List getCustomers() throws BasicException {
         return new PreparedSentence(s
-                  , "SELECT ID,	SEARCHKEY,TAXID,NAME,ADDRESS,ADDRESS2,POSTAL,CITY,REGION,COUNTRY,FIRSTNAME,LASTNAME,EMAIL,PHONE,PHONE2,FAX,NOTES,CURDATE,CURDEBT FROM CUSTOMERS"               
+                  , "SELECT ID, SEARCHKEY, TAXID, NAME, ADDRESS, ADDRESS2, POSTAL, CITY, REGION, COUNTRY, FIRSTNAME, LASTNAME, EMAIL, PHONE, PHONE2, FAX, NOTES, CURDATE, CURDEBT FROM CUSTOMERS "               
                   , null
                   , new SerializerReadClass(CustomerSync.class)).list();
     }

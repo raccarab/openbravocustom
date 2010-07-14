@@ -185,6 +185,7 @@ public class ExternalSalesHelper {
     	AddUserInput parameters = new AddUserInput(wsLogin, user);
     	try {
 			getUsersProxy().addUser(parameters);
+			
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
