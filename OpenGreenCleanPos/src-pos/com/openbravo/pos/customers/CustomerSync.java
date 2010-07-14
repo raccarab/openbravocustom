@@ -24,7 +24,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import com.openbravo.pos.payment.PaymentInfo;
 import com.openbravo.data.loader.DataRead;
+import com.openbravo.data.loader.DataWrite;
 import com.openbravo.data.loader.SerializableRead;
+import com.openbravo.data.loader.SerializableWrite;
 import com.openbravo.format.Formats;
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.loader.LocalRes;
@@ -66,18 +68,14 @@ public class CustomerSync implements SerializableRead, Externalizable {
     protected String city;
     protected String region;
     protected String country;
-    
-    /** Creates a new instance of UserInfoBasic */
-    public CustomerSync() {
-        this.id = null;
-        this.searchkey = null;
-        this.taxid = null;
-        this.name = null;
-    } 
   
-    
-    public String getId() {
-        return id;
+    public CustomerSync(String id) {
+    	this.id = id;
+	}
+
+
+	public String getId() {
+			return id;
     }    
     
     public String getTaxid() {
@@ -337,4 +335,11 @@ public class CustomerSync implements SerializableRead, Externalizable {
         out.writeObject(curdebt);
 		
 	}
+
+
+//	@Override
+//	public void writeValues(DataWrite dp) throws BasicException {
+//		dp.setString(1, id);
+//		
+//	}
 }

@@ -45,6 +45,7 @@ import java.util.Properties;
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.JMessageDialog;
 import com.openbravo.data.gui.MessageInf;
+import com.openbravo.pos.customers.CustomerSync;
 import com.openbravo.pos.forms.AppConfig;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.DataLogicSystem;
@@ -166,41 +167,21 @@ public class ExternalSalesHelper {
         return new VM_OrderProxy(wsURL+OrderURL);
     }
     
-    public Customer[] getCustomers() throws RemoteException {
-        Customer[] customers = null;
-        try {
+    public User[] getUsers() throws RemoteException {
+
+    	try {
             VM_UsersProxy proxy = getUsersProxy();
 
-            User[] users = proxy.getUsers(wsLogin);
-            
-            customers = new Customer[users.length];
-            
-            int i=0;
-
-            Contact[] contact = null;
-            Location[] location= null;
-            
-            for (User user : users) {
-                customers[i] = new Customer(user.getId(),
-                                            Boolean.TRUE,
-                                            contact ,
-                                            Boolean.TRUE,
-                                            user.getDescription(),
-                                            user.getId(),
-                                            location,
-                                            user.getFirstname()+" "+user.getLastname(),
-                                            user.getId(),
-                                            Boolean.TRUE);
-                i++;
-            }
+            return proxy.getUsers(wsLogin);
+       
          } catch (RemoteException e) {
         	 System.out.println("Error getCustomers : ");
              e.printStackTrace();
          }
-        return customers;
+        return null;
     }
     
-    public boolean addCustomer(User user) {
+    public boolean addUser(User user) {
     	AddUserInput parameters = new AddUserInput(wsLogin, user);
     	try {
 			getUsersProxy().addUser(parameters);

@@ -38,7 +38,6 @@ import com.openbravo.data.loader.StaticSentence;
 import com.openbravo.data.loader.Transaction;
 
 
-import com.openbravo.pos.customers.CustomerInfoExt;
 import com.openbravo.pos.customers.CustomerSync;
 import com.openbravo.pos.forms.BeanFactoryDataSingle;
 import com.openbravo.pos.inventory.TaxCategoryInfo;
@@ -68,10 +67,10 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
     }
      
     public void syncCustomersBefore() throws BasicException {
-        new StaticSentence(s, "UPDATE CUSTOMERS SET VISIBLE = " + s.DB.TRUE()).exec();
+        new StaticSentence(s, "UPDATE CUSTOMERS SET VISIBLE = " + s.DB.FALSE()).exec();
     }
 
-    public void syncCustomer(final CustomerInfoExt customer) throws BasicException {
+    public void syncCustomer(final CustomerSync customer) throws BasicException {
 
         Transaction t = new Transaction(s) {
             public Object transact() throws BasicException {
@@ -79,25 +78,48 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 
                 // Try to update
                 if (new PreparedSentence(s,
-                            "UPDATE CUSTOMERS SET SEARCHKEY = ?, NAME = ?, NOTES = ?, VISIBLE = " + s.DB.TRUE() + " WHERE ID = ?",
+                            "UPDATE CUSTOMERS SET ADDRESS = ?, ADDRESS2 = ?, POSTAL = ?, CITY = ?, REGION = ?, COUNTRY = ?, FIRSTNAME = ?, LASTNAME = ?, EMAIL = ?, PHONE = ?, PHONE2 = ?, NOTES = ?, VISIBLE = " + s.DB.TRUE() + " WHERE TAXID = ?",
                             SerializerWriteParams.INSTANCE
                             ).exec(new DataParams() { public void writeValues() throws BasicException {
-                                setString(1, customer.getSearchkey());
-                                setString(2, customer.getName());
-                                setString(3, customer.getAddress());
-                                setString(4, customer.getId());
+                                setString(1, customer.getAddress());
+                                setString(2, customer.getAddress2());
+                                setString(3, customer.getPostal());
+                                setString(4, customer.getCity());
+                                setString(5, customer.getRegion());
+                                setString(6, customer.getCountry());
+                                setString(7, customer.getFirstname());
+                                setString(8, customer.getLastname());
+                                setString(9, customer.getEmail());
+                                setString(10, customer.getPhone());
+                                setString(11, customer.getPhone2());
+                                setString(12, customer.getNotes());
+                                setString(13, customer.getTaxid());
                             }}) == 0) {
 
                     // If not updated, try to insert
-                    new PreparedSentence(s,
-                            "INSERT INTO CUSTOMERS(ID, SEARCHKEY, NAME, NOTES, VISIBLE) VALUES (?, ?, ?, ?, " + s.DB.TRUE() + ")",
-                            SerializerWriteParams.INSTANCE
-                            ).exec(new DataParams() { public void writeValues() throws BasicException {
-                                setString(1, customer.getId());
-                                setString(2, customer.getSearchkey());
-                                setString(3, customer.getName());
-                                setString(4, customer.getAddress());
-                            }});
+//                    new PreparedSentence(s,
+//                            "INSERT INTO CUSTOMERS(ID, SEARCHKEY, NAME, ADDRESS, ADDRESS2, POSTAL, CITY, REGION, COUNTRY, FIRSTNAME, LASTNAME, EMAIL, PHONE, PHONE2, NOTES, TAXID, VISIBLE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + s.DB.TRUE() + ")",
+//                            SerializerWriteParams.INSTANCE
+//                            ).exec(new DataParams() { public void writeValues() throws BasicException {
+//                                setString(1, customer.getId());
+//                                setString(2, customer.getSearchkey());
+//                                setString(3, customer.getName());
+//                                setString(4, customer.getAddress());
+//                                setString(5, customer.getAddress2());
+//                                setString(6, customer.getPostal());
+//                                setString(7, customer.getCity());
+//                                setString(8, customer.getRegion());
+//                                setString(9, customer.getCountry());
+//                                setString(10, customer.getFirstname());
+//                                setString(11, customer.getLastname());
+//                                setString(12, customer.getEmail());
+//                                setString(13, customer.getPhone());
+//                                setString(14, customer.getPhone2());
+//                                setString(15, customer.getNotes());
+//                                setString(16, customer.getTaxid());
+//                            }});
+                	
+                    System.out.println("NOT UPDATED "+customer.getTaxid());
                 }
 
                 return null;
@@ -294,7 +316,6 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 //                  "FROM TICKETLINES L, TAXES T WHERE L.TAXID = T.ID AND L.TICKET = ?"
                  , "SELECT L.TICKET, L.LINE, L.PRODUCT, L.ATTRIBUTESETINSTANCE_ID, L.UNITS, L.PRICE, T.ID, T.NAME, T.CATEGORY, T.CUSTCATEGORY, T.PARENTID, T.RATE, T.RATECASCADE, T.RATEORDER, L.ATTRIBUTES " +
                   "FROM TICKETLINES L, TAXES T WHERE L.TAXID = T.ID AND L.TICKET = ? ORDER BY L.LINE"
-
                 , SerializerWriteString.INSTANCE
                 , new SerializerReadClass(TicketLineInfo.class)).list(ticket);
     }
