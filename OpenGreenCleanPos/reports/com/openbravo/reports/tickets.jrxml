@@ -2,9 +2,9 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="usersales" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20">
 	<property name="ireport.scriptlethandling" value="0"/>
 	<property name="ireport.encoding" value="UTF-8"/>
-	<property name="ireport.zoom" value="3.1384283767210035"/>
-	<property name="ireport.x" value="626"/>
-	<property name="ireport.y" value="183"/>
+	<property name="ireport.zoom" value="1.6105100000000017"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<import value="net.sf.jasperreports.engine.*"/>
 	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
@@ -26,10 +26,11 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 	<field name="TOTAL" class="java.lang.Double"/>
 	<field name="TOTALTAXE" class="java.lang.Double"/>
 	<field name="RATE" class="java.lang.Double"/>
-	<variable name="BIGTOTAL" class="java.lang.Double" calculation="Sum">
+	<variable name="BIGTOTAL" class="java.lang.Double" resetType="Group" resetGroup="Ticket" calculation="Sum">
 		<variableExpression><![CDATA[$F{TOTAL}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Double(0.0)]]></initialValueExpression>
 	</variable>
+      
 	<variable name="PARTIALTOTAL" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{TOTAL}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Double(0.0)]]></initialValueExpression>
@@ -41,7 +42,7 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 	<group name="Ticket">
 		<groupExpression><![CDATA[$F{TICKETID}]]></groupExpression>
 		<groupHeader>
-			<band height="25">
+			<band height="52">
 				<line>
 					<reportElement key="line-2" mode="Opaque" x="3" y="21" width="530" height="1" forecolor="#000000" backcolor="#FFFFFF"/>
 					<graphicElement fill="Solid">
@@ -83,12 +84,12 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
 					</box>
 					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
-						<font fontName="Dialog" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<font fontName="Dialog" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{SEARCHKEY} == null ? "" : $F{NAMECUST}]]></textFieldExpression>
 				</textField>
 				<textField pattern="" isBlankWhenNull="false">
-					<reportElement key="textField-5" mode="Opaque" x="268" y="0" width="155" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<reportElement key="textField-5" mode="Opaque" x="268" y="0" width="117" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 					<box>
 						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -100,12 +101,70 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[com.openbravo.format.Formats.DATE.formatValue($F{DATENEW})]]></textFieldExpression>
 				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-15" mode="Opaque" x="268" y="24" width="43" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Dialog" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{label.QQT}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-15" mode="Opaque" x="322" y="22" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Dialog" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{label.prixhtva}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-15" mode="Opaque" x="467" y="24" width="68" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Dialog" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{label.prixttc}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement key="line-2" mode="Opaque" x="3" y="43" width="530" height="1" forecolor="#000000" backcolor="#FFFFFF"/>
+					<graphicElement fill="Solid">
+						<pen lineWidth="0.25" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-15" mode="Opaque" x="411" y="23" width="52" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Dialog" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{label.TVA}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="49">
+			<band height="94">
 				<textField pattern="" isBlankWhenNull="false">
-					<reportElement key="textField-15" mode="Opaque" x="184" y="0" width="238" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<reportElement key="textField-15" mode="Opaque" x="195" y="0" width="73" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 					<box>
 						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -118,7 +177,7 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 					<textFieldExpression class="java.lang.String"><![CDATA[$R{label.totalhtva}]]></textFieldExpression>
 				</textField>
 				<textField pattern="" isBlankWhenNull="false">
-					<reportElement key="textField-5" mode="Opaque" x="385" y="0" width="145" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<reportElement key="textField-5" mode="Opaque" x="195" y="21" width="84" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 					<box>
 						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -128,10 +187,10 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single">
 						<font fontName="Dialog" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[com.openbravo.format.Formats.CURRENCY.formatValue($V{BIGTOTAL})]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.openbravo.format.Formats.DOUBLE.formatValue($V{BIGTOTAL})]]></textFieldExpression>
 				</textField>
 				<textField pattern="" isBlankWhenNull="false">
-					<reportElement key="textField-15" mode="Opaque" x="185" y="20" width="238" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<reportElement key="textField-15" mode="Opaque" x="322" y="0" width="83" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 					<box>
 						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -144,7 +203,7 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 					<textFieldExpression class="java.lang.String"><![CDATA[$R{label.totaltva}]]></textFieldExpression>
 				</textField>
 				<textField pattern="" isBlankWhenNull="false">
-					<reportElement key="textField-5" mode="Opaque" x="390" y="20" width="135" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<reportElement key="textField-5" mode="Opaque" x="304" y="21" width="86" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 					<box>
 						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -154,7 +213,52 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single">
 						<font fontName="Dialog" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[com.openbravo.format.Formats.CURRENCY.formatValue($V{TOTALTVA})]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.openbravo.format.Formats.DOUBLE.formatValue($V{TOTALTVA})]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-15" mode="Opaque" x="448" y="0" width="82" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Dialog" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{label.totalttc}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement key="line-2" mode="Opaque" x="3" y="20" width="530" height="1" forecolor="#000000" backcolor="#FFFFFF"/>
+					<graphicElement fill="Solid">
+						<pen lineWidth="0.25" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-15" mode="Opaque" x="47" y="21" width="86" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Dialog" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{label.total}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-5" mode="Opaque" x="423" y="21" width="81" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Dialog" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.openbravo.format.Formats.DOUBLE.formatValue($V{TOTALTVA})]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -268,7 +372,7 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 		<band/>
 	</columnHeader>
 	<detail>
-		<band height="27">
+		<band height="22">
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement key="textField-1" mode="Opaque" x="0" y="0" width="133" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
@@ -296,7 +400,7 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{NAME}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement key="textField-19" mode="Opaque" x="279" y="0" width="34" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement key="textField-19" mode="Opaque" x="260" y="0" width="34" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -309,7 +413,7 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[com.openbravo.format.Formats.DOUBLE.formatValue($F{UNITS})]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement key="textField-19" mode="Opaque" x="320" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement key="textField-19" mode="Opaque" x="307" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -322,7 +426,7 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[com.openbravo.format.Formats.DOUBLE.formatValue($F{TOTAL})]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement key="textField-5" mode="Opaque" x="421" y="0" width="62" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement key="textField-5" mode="Opaque" x="385" y="0" width="63" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -330,9 +434,9 @@ ORDER BY TICKETS.TICKETID,CUSTOMERS.SEARCHKEY, PRODUCTS.NAME]]>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single">
-					<font fontName="Dialog" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<font fontName="Dialog" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[com.openbravo.format.Formats.CURRENCY.formatValue($F{TOTALTAXE})]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[com.openbravo.format.Formats.DOUBLE.formatValue($F{TOTALTAXE})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
