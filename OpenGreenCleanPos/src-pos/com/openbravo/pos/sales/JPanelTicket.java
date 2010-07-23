@@ -1738,7 +1738,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
           if (discountrate == null) return;
 
-          if (discountrate>0 && discountrate<100) {
+          if (discountrate>0 && discountrate<=100) {
 
           discountrate/=100;
 
@@ -1784,7 +1784,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         TicketTaxInfo[] taxes;
         TicketTaxInfo taxline;
 
-        if (discountrate > 0 && discountrate < 100) {
+        if (discountrate > 0 && discountrate <= 100) {
             discountrate/=100;
             double total = m_oTicket.getTotal();
             if (total > 0.0 && discountrate > 0.0) {
@@ -1905,7 +1905,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         TicketTaxInfo[] taxes;
         TicketTaxInfo taxline;
 
-        if (discountrate > 0 && discountrate < 100) {
+        if (discountrate > 0 && discountrate <= 100) {
             discountrate/=100;
             double total = m_oTicket.getTotal();
             if (total > 0.0 && discountrate > 0.0) {
