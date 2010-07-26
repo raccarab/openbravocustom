@@ -42,6 +42,26 @@ public class User  implements java.io.Serializable {
 
     private java.lang.String fax;
 
+    private java.lang.String cdate;
+
+    private java.lang.String mdate;
+
+    private java.lang.String perms;
+
+    private java.lang.String bank_account_nr;
+
+    private java.lang.String bank_name;
+
+    private java.lang.String bank_sort_code;
+
+    private java.lang.String bank_iban;
+
+    private java.lang.String bank_account_holder;
+
+    private java.lang.String bank_account_type;
+
+    private java.lang.String shopper_group_id;
+
     public User() {
     }
 
@@ -62,7 +82,17 @@ public class User  implements java.io.Serializable {
            java.lang.String zipcode,
            java.lang.String phone,
            java.lang.String mobile,
-           java.lang.String fax) {
+           java.lang.String fax,
+           java.lang.String cdate,
+           java.lang.String mdate,
+           java.lang.String perms,
+           java.lang.String bank_account_nr,
+           java.lang.String bank_name,
+           java.lang.String bank_sort_code,
+           java.lang.String bank_iban,
+           java.lang.String bank_account_holder,
+           java.lang.String bank_account_type,
+           java.lang.String shopper_group_id) {
            this.id = id;
            this.login = login;
            this.password = password;
@@ -80,6 +110,16 @@ public class User  implements java.io.Serializable {
            this.phone = phone;
            this.mobile = mobile;
            this.fax = fax;
+           this.cdate = cdate;
+           this.mdate = mdate;
+           this.perms = perms;
+           this.bank_account_nr = bank_account_nr;
+           this.bank_name = bank_name;
+           this.bank_sort_code = bank_sort_code;
+           this.bank_iban = bank_iban;
+           this.bank_account_holder = bank_account_holder;
+           this.bank_account_type = bank_account_type;
+           this.shopper_group_id = shopper_group_id;
     }
 
 
@@ -422,6 +462,206 @@ public class User  implements java.io.Serializable {
         this.fax = fax;
     }
 
+
+    /**
+     * Gets the cdate value for this User.
+     * 
+     * @return cdate
+     */
+    public java.lang.String getCdate() {
+        return cdate;
+    }
+
+
+    /**
+     * Sets the cdate value for this User.
+     * 
+     * @param cdate
+     */
+    public void setCdate(java.lang.String cdate) {
+        this.cdate = cdate;
+    }
+
+
+    /**
+     * Gets the mdate value for this User.
+     * 
+     * @return mdate
+     */
+    public java.lang.String getMdate() {
+        return mdate;
+    }
+
+
+    /**
+     * Sets the mdate value for this User.
+     * 
+     * @param mdate
+     */
+    public void setMdate(java.lang.String mdate) {
+        this.mdate = mdate;
+    }
+
+
+    /**
+     * Gets the perms value for this User.
+     * 
+     * @return perms
+     */
+    public java.lang.String getPerms() {
+        return perms;
+    }
+
+
+    /**
+     * Sets the perms value for this User.
+     * 
+     * @param perms
+     */
+    public void setPerms(java.lang.String perms) {
+        this.perms = perms;
+    }
+
+
+    /**
+     * Gets the bank_account_nr value for this User.
+     * 
+     * @return bank_account_nr
+     */
+    public java.lang.String getBank_account_nr() {
+        return bank_account_nr;
+    }
+
+
+    /**
+     * Sets the bank_account_nr value for this User.
+     * 
+     * @param bank_account_nr
+     */
+    public void setBank_account_nr(java.lang.String bank_account_nr) {
+        this.bank_account_nr = bank_account_nr;
+    }
+
+
+    /**
+     * Gets the bank_name value for this User.
+     * 
+     * @return bank_name
+     */
+    public java.lang.String getBank_name() {
+        return bank_name;
+    }
+
+
+    /**
+     * Sets the bank_name value for this User.
+     * 
+     * @param bank_name
+     */
+    public void setBank_name(java.lang.String bank_name) {
+        this.bank_name = bank_name;
+    }
+
+
+    /**
+     * Gets the bank_sort_code value for this User.
+     * 
+     * @return bank_sort_code
+     */
+    public java.lang.String getBank_sort_code() {
+        return bank_sort_code;
+    }
+
+
+    /**
+     * Sets the bank_sort_code value for this User.
+     * 
+     * @param bank_sort_code
+     */
+    public void setBank_sort_code(java.lang.String bank_sort_code) {
+        this.bank_sort_code = bank_sort_code;
+    }
+
+
+    /**
+     * Gets the bank_iban value for this User.
+     * 
+     * @return bank_iban
+     */
+    public java.lang.String getBank_iban() {
+        return bank_iban;
+    }
+
+
+    /**
+     * Sets the bank_iban value for this User.
+     * 
+     * @param bank_iban
+     */
+    public void setBank_iban(java.lang.String bank_iban) {
+        this.bank_iban = bank_iban;
+    }
+
+
+    /**
+     * Gets the bank_account_holder value for this User.
+     * 
+     * @return bank_account_holder
+     */
+    public java.lang.String getBank_account_holder() {
+        return bank_account_holder;
+    }
+
+
+    /**
+     * Sets the bank_account_holder value for this User.
+     * 
+     * @param bank_account_holder
+     */
+    public void setBank_account_holder(java.lang.String bank_account_holder) {
+        this.bank_account_holder = bank_account_holder;
+    }
+
+
+    /**
+     * Gets the bank_account_type value for this User.
+     * 
+     * @return bank_account_type
+     */
+    public java.lang.String getBank_account_type() {
+        return bank_account_type;
+    }
+
+
+    /**
+     * Sets the bank_account_type value for this User.
+     * 
+     * @param bank_account_type
+     */
+    public void setBank_account_type(java.lang.String bank_account_type) {
+        this.bank_account_type = bank_account_type;
+    }
+
+
+    /**
+     * Gets the shopper_group_id value for this User.
+     * 
+     * @return shopper_group_id
+     */
+    public java.lang.String getShopper_group_id() {
+        return shopper_group_id;
+    }
+
+
+    /**
+     * Sets the shopper_group_id value for this User.
+     * 
+     * @param shopper_group_id
+     */
+    public void setShopper_group_id(java.lang.String shopper_group_id) {
+        this.shopper_group_id = shopper_group_id;
+    }
+
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof User)) return false;
@@ -484,7 +724,37 @@ public class User  implements java.io.Serializable {
               this.mobile.equals(other.getMobile()))) &&
             ((this.fax==null && other.getFax()==null) || 
              (this.fax!=null &&
-              this.fax.equals(other.getFax())));
+              this.fax.equals(other.getFax()))) &&
+            ((this.cdate==null && other.getCdate()==null) || 
+             (this.cdate!=null &&
+              this.cdate.equals(other.getCdate()))) &&
+            ((this.mdate==null && other.getMdate()==null) || 
+             (this.mdate!=null &&
+              this.mdate.equals(other.getMdate()))) &&
+            ((this.perms==null && other.getPerms()==null) || 
+             (this.perms!=null &&
+              this.perms.equals(other.getPerms()))) &&
+            ((this.bank_account_nr==null && other.getBank_account_nr()==null) || 
+             (this.bank_account_nr!=null &&
+              this.bank_account_nr.equals(other.getBank_account_nr()))) &&
+            ((this.bank_name==null && other.getBank_name()==null) || 
+             (this.bank_name!=null &&
+              this.bank_name.equals(other.getBank_name()))) &&
+            ((this.bank_sort_code==null && other.getBank_sort_code()==null) || 
+             (this.bank_sort_code!=null &&
+              this.bank_sort_code.equals(other.getBank_sort_code()))) &&
+            ((this.bank_iban==null && other.getBank_iban()==null) || 
+             (this.bank_iban!=null &&
+              this.bank_iban.equals(other.getBank_iban()))) &&
+            ((this.bank_account_holder==null && other.getBank_account_holder()==null) || 
+             (this.bank_account_holder!=null &&
+              this.bank_account_holder.equals(other.getBank_account_holder()))) &&
+            ((this.bank_account_type==null && other.getBank_account_type()==null) || 
+             (this.bank_account_type!=null &&
+              this.bank_account_type.equals(other.getBank_account_type()))) &&
+            ((this.shopper_group_id==null && other.getShopper_group_id()==null) || 
+             (this.shopper_group_id!=null &&
+              this.shopper_group_id.equals(other.getShopper_group_id())));
         __equalsCalc = null;
         return _equals;
     }
@@ -546,6 +816,36 @@ public class User  implements java.io.Serializable {
         }
         if (getFax() != null) {
             _hashCode += getFax().hashCode();
+        }
+        if (getCdate() != null) {
+            _hashCode += getCdate().hashCode();
+        }
+        if (getMdate() != null) {
+            _hashCode += getMdate().hashCode();
+        }
+        if (getPerms() != null) {
+            _hashCode += getPerms().hashCode();
+        }
+        if (getBank_account_nr() != null) {
+            _hashCode += getBank_account_nr().hashCode();
+        }
+        if (getBank_name() != null) {
+            _hashCode += getBank_name().hashCode();
+        }
+        if (getBank_sort_code() != null) {
+            _hashCode += getBank_sort_code().hashCode();
+        }
+        if (getBank_iban() != null) {
+            _hashCode += getBank_iban().hashCode();
+        }
+        if (getBank_account_holder() != null) {
+            _hashCode += getBank_account_holder().hashCode();
+        }
+        if (getBank_account_type() != null) {
+            _hashCode += getBank_account_type().hashCode();
+        }
+        if (getShopper_group_id() != null) {
+            _hashCode += getShopper_group_id().hashCode();
         }
         __hashCodeCalc = false;
         return _hashCode;
@@ -656,6 +956,66 @@ public class User  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("fax");
         elemField.setXmlName(new javax.xml.namespace.QName("", "fax"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("cdate");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "cdate"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("mdate");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "mdate"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("perms");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "perms"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("bank_account_nr");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "bank_account_nr"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("bank_name");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "bank_name"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("bank_sort_code");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "bank_sort_code"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("bank_iban");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "bank_iban"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("bank_account_holder");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "bank_account_holder"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("bank_account_type");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "bank_account_type"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("shopper_group_id");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "shopper_group_id"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);

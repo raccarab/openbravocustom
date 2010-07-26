@@ -16,7 +16,7 @@ public class VM_UsersSOAPStub extends org.apache.axis.client.Stub implements net
     static org.apache.axis.description.OperationDesc [] _operations;
 
     static {
-        _operations = new org.apache.axis.description.OperationDesc[35];
+        _operations = new org.apache.axis.description.OperationDesc[36];
         _initOperationDesc1();
         _initOperationDesc2();
         _initOperationDesc3();
@@ -28,7 +28,7 @@ public class VM_UsersSOAPStub extends org.apache.axis.client.Stub implements net
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("GetUsers");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "GetUsersRequest"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "loginInfo"), net.virtuemart.www.VM_Tools.LoginInfo.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "GetUsersRequest"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "GetUsersInput"), net.virtuemart.www.VM_Users.GetUsersInput.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "UsersArray"));
         oper.setReturnClass(net.virtuemart.www.VM_Users.User[].class);
@@ -85,8 +85,8 @@ public class VM_UsersSOAPStub extends org.apache.axis.client.Stub implements net
         oper.setName("GetUserFromEmailOrUsername");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "getUserFromEmailOrUsernameRequest"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "getUserFromEmailOrUsernameInput"), net.virtuemart.www.VM_Users.GetUserFromEmailOrUsernameInput.class, false, false);
         oper.addParameter(param);
-        oper.setReturnType(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "User"));
-        oper.setReturnClass(net.virtuemart.www.VM_Users.User.class);
+        oper.setReturnType(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "UsersArray"));
+        oper.setReturnClass(net.virtuemart.www.VM_Users.User[].class);
         oper.setReturnQName(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "getUserFromEmailOrUsernameResponse"));
         oper.setStyle(org.apache.axis.constants.Style.DOCUMENT);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
@@ -426,6 +426,17 @@ public class VM_UsersSOAPStub extends org.apache.axis.client.Stub implements net
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[34] = oper;
 
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("GetVersions");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "GetVersionsRequest"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "loginInfo"), net.virtuemart.www.VM_Tools.LoginInfo.class, false, false);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "Version"));
+        oper.setReturnClass(net.virtuemart.www.VM_Users.Version.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "GetVersionsResponse"));
+        oper.setStyle(org.apache.axis.constants.Style.DOCUMENT);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[35] = oper;
+
     }
 
     public VM_UsersSOAPStub() throws org.apache.axis.AxisFault {
@@ -603,6 +614,13 @@ public class VM_UsersSOAPStub extends org.apache.axis.client.Stub implements net
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
+            qName = new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "GetUsersInput");
+            cachedSerQNames.add(qName);
+            cls = net.virtuemart.www.VM_Users.GetUsersInput.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
             qName = new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "ids");
             cachedSerQNames.add(qName);
             cls = java.lang.String[].class;
@@ -715,6 +733,15 @@ public class VM_UsersSOAPStub extends org.apache.axis.client.Stub implements net
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
+            qName = new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "user_ids");
+            cachedSerQNames.add(qName);
+            cls = java.lang.String[].class;
+            cachedSerClasses.add(cls);
+            qName = new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string");
+            qName2 = new javax.xml.namespace.QName("", "user_id");
+            cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
+            cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
+
             qName = new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "UsersArray");
             cachedSerQNames.add(qName);
             cls = net.virtuemart.www.VM_Users.User[].class;
@@ -755,6 +782,13 @@ public class VM_UsersSOAPStub extends org.apache.axis.client.Stub implements net
             qName2 = null;
             cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
             cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
+
+            qName = new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "Version");
+            cachedSerQNames.add(qName);
+            cls = net.virtuemart.www.VM_Users.Version.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
 
     }
 
@@ -822,7 +856,7 @@ public class VM_UsersSOAPStub extends org.apache.axis.client.Stub implements net
         }
     }
 
-    public net.virtuemart.www.VM_Users.User[] getUsers(net.virtuemart.www.VM_Tools.LoginInfo parameters) throws java.rmi.RemoteException {
+    public net.virtuemart.www.VM_Users.User[] getUsers(net.virtuemart.www.VM_Users.GetUsersInput parameters) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -992,7 +1026,7 @@ public class VM_UsersSOAPStub extends org.apache.axis.client.Stub implements net
 }
     }
 
-    public net.virtuemart.www.VM_Users.User getUserFromEmailOrUsername(net.virtuemart.www.VM_Users.GetUserFromEmailOrUsernameInput parameters) throws java.rmi.RemoteException {
+    public net.virtuemart.www.VM_Users.User[] getUserFromEmailOrUsername(net.virtuemart.www.VM_Users.GetUserFromEmailOrUsernameInput parameters) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -1016,9 +1050,9 @@ public class VM_UsersSOAPStub extends org.apache.axis.client.Stub implements net
         else {
             extractAttachments(_call);
             try {
-                return (net.virtuemart.www.VM_Users.User) _resp;
+                return (net.virtuemart.www.VM_Users.User[]) _resp;
             } catch (java.lang.Exception _exception) {
-                return (net.virtuemart.www.VM_Users.User) org.apache.axis.utils.JavaUtils.convert(_resp, net.virtuemart.www.VM_Users.User.class);
+                return (net.virtuemart.www.VM_Users.User[]) org.apache.axis.utils.JavaUtils.convert(_resp, net.virtuemart.www.VM_Users.User[].class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
@@ -2005,6 +2039,40 @@ public class VM_UsersSOAPStub extends org.apache.axis.client.Stub implements net
                 return (net.virtuemart.www.VM_Users.AvalaibleImage[]) _resp;
             } catch (java.lang.Exception _exception) {
                 return (net.virtuemart.www.VM_Users.AvalaibleImage[]) org.apache.axis.utils.JavaUtils.convert(_resp, net.virtuemart.www.VM_Users.AvalaibleImage[].class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public net.virtuemart.www.VM_Users.Version getVersions(net.virtuemart.www.VM_Tools.LoginInfo parameters) throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[35]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://www.virtuemart.net/VM_Users/GetVersions");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("", "GetVersions"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {parameters});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (net.virtuemart.www.VM_Users.Version) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (net.virtuemart.www.VM_Users.Version) org.apache.axis.utils.JavaUtils.convert(_resp, net.virtuemart.www.VM_Users.Version.class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {

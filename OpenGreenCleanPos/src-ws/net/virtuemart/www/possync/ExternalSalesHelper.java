@@ -25,51 +25,39 @@ package net.virtuemart.www.possync;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.swing.JDialog;
 import javax.xml.rpc.ServiceException;
 
-import net.virtuemart.www.customers.Customer;
-import net.virtuemart.www.customers.WebServiceImpl;
-import net.virtuemart.www.customers.WebServiceImplServiceLocator;
-import net.virtuemart.www.externalsales.ExternalSalesImpl;
-import net.virtuemart.www.externalsales.ExternalSalesImplServiceLocator;
 import net.virtuemart.www.externalsales.Order;
-import net.virtuemart.www.externalsales.Product;
-
 import java.rmi.RemoteException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Properties;
+import java.util.HashMap;
 import com.openbravo.basic.BasicException;
-import com.openbravo.data.gui.JMessageDialog;
-import com.openbravo.data.gui.MessageInf;
-import com.openbravo.pos.customers.CustomerSync;
 import com.openbravo.pos.forms.AppConfig;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.DataLogicSystem;
 import com.openbravo.pos.util.AltEncrypter;
 import com.openbravo.pos.util.Base64Encoder;
 import java.util.logging.Logger;
-import net.virtuemart.www.externalsales.Tax;
+import net.virtuemart.www.VM_Categories.AddCategoryInput;
+import net.virtuemart.www.VM_Categories.Categorie;
+import net.virtuemart.www.VM_Categories.GetAllCategoriesInput;
 import net.virtuemart.www.VM_Categories.VM_CategoriesProxy;
 import net.virtuemart.www.VM_Order.VM_OrderProxy;
 import net.virtuemart.www.VM_Product.GetAllProductsInput;
 import net.virtuemart.www.VM_Product.Produit;
+import net.virtuemart.www.VM_Product.Tax;
+import net.virtuemart.www.VM_Product.UpdateProductInput;
 import net.virtuemart.www.VM_Product.VM_ProductProxy;
 import net.virtuemart.www.VM_Tools.LoginInfo;
 import net.virtuemart.www.VM_Users.AddUserInput;
+import net.virtuemart.www.VM_Users.GetUsersInput;
 import net.virtuemart.www.VM_Users.User;
 import net.virtuemart.www.VM_Users.VM_UsersProxy;
-import net.virtuemart.www.customers.Contact;
-import net.virtuemart.www.customers.Location;
-import net.virtuemart.www.externalsales.Category;
 
 public class ExternalSalesHelper {
     
-    private ExternalSalesImpl externalSales;
-    private WebServiceImpl externalCustomers;
+    private static final String country = "BEL";
     
     private String wsPosid;
     private LoginInfo wsLogin;
@@ -82,7 +70,13 @@ public class ExternalSalesHelper {
     private String ProductURL = vm_path+"Product"+vm_path_end;
     private String UsersURL = vm_path+"Users"+vm_path_end;
     private String OrderURL = vm_path+"Orders"+vm_path_end;
+    private final String max = "1000000000000000";
 
+    private VM_CategoriesProxy categoriesProxy;
+    private VM_UsersProxy usersProxy;
+    private VM_ProductProxy productProxy;
+    private VM_OrderProxy orderProxy;
+    
     private static Logger logger = Logger.getLogger("com.openbravo.data.loader.PreparedSentence");
     
     /** Creates a new instance of WebServiceHelper */
@@ -121,64 +115,48 @@ public class ExternalSalesHelper {
 
             }
         }
+		categoriesProxy = new VM_CategoriesProxy(wsURL+CategoriesURL);
+		orderProxy = new VM_OrderProxy(wsURL+OrderURL);
+		usersProxy = new VM_UsersProxy(wsURL+UsersURL);
+		productProxy = new VM_ProductProxy(wsURL+ProductURL);
     }
 
     public String getWsPosid() {
 		return wsPosid;
 	}
 
-	public LoginInfo getWsLogin() {
-		return wsLogin;
-	}
-
-	public String getWsURL() {
-		return wsURL;
-	}
-
-	public String getCategoriesURL() {
-		return CategoriesURL;
-	}
-
-	public String getProductURL() {
-		return ProductURL;
-	}
-
-	public String getUsersURL() {
-		return UsersURL;
-	}
-
-	public String getOrderURL() {
-		return OrderURL;
-	}
-
 	private VM_CategoriesProxy getCategoriesProxy() throws RemoteException {
-        return new VM_CategoriesProxy(wsURL+CategoriesURL);
+        return categoriesProxy;
     }
     
     private VM_UsersProxy getUsersProxy() throws RemoteException {
-        return new VM_UsersProxy(wsURL+UsersURL);
+        return usersProxy; 
     }
 
     private VM_ProductProxy getProductProxy() throws RemoteException {
-        return new VM_ProductProxy(wsURL+ProductURL);
+        return productProxy;
     }
 
     private VM_OrderProxy getOrderProxy() throws RemoteException {
-        return new VM_OrderProxy(wsURL+OrderURL);
+        return orderProxy;
+    }
+   
+/**
+ * PUBLIC
+ * @param produit
+ * @throws RemoteException
+ */
+    public void addProduct(Produit produit) throws RemoteException {
+
+		UpdateProductInput parameter = new UpdateProductInput(wsLogin, produit);
+   		getProductProxy().addProduct(parameter);
+    	
     }
     
     public User[] getUsers() throws RemoteException {
-
-    	try {
             VM_UsersProxy proxy = getUsersProxy();
-
-            return proxy.getUsers(wsLogin);
-       
-         } catch (RemoteException e) {
-        	 System.out.println("Error getCustomers : ");
-             e.printStackTrace();
-         }
-        return null;
+            GetUsersInput userInput = new GetUsersInput(wsLogin,"0",max);
+            return proxy.getUsers(userInput);
     }
     
     public boolean addUser(User user) {
@@ -194,42 +172,49 @@ public class ExternalSalesHelper {
 		return true;
     }
     
-    public Product[] getProductsCatalog() throws RemoteException {
-        Product[] products = null;
+	public Categorie[] getCategories() throws RemoteException  {
+		VM_CategoriesProxy proxy = getCategoriesProxy();
+		GetAllCategoriesInput gaci = new GetAllCategoriesInput(wsLogin,"Y");
+		return proxy.getAllCategories(gaci);
+	}  
+
+	public void addCategory(Categorie category) throws RemoteException {
+	
+		AddCategoryInput parameters = new AddCategoryInput(wsLogin,category);
+		getCategoriesProxy().addCategory(parameters);
+		
+	} 
+    
+	public HashMap<Double, String> getTaxes() throws RemoteException{
+	    HashMap< Double, String> hash = new HashMap<Double, String>();
+		Tax[] taxes = getProductProxy().getAllTax(wsLogin);
+		for (Tax tax : taxes) {
+			if (tax.getTax_country().equals(country))
+				hash.put(Double.valueOf(tax.getTax_rate()),tax.getTax_rate_id());
+		}
+		return hash;
+	}
+	
+    public Produit[] getProductsCatalog() throws RemoteException {
+        Produit[] produits = null;
         try {
             VM_ProductProxy proxy = getProductProxy();
-
+            
             GetAllProductsInput gapi = new GetAllProductsInput();
             gapi.setLoginInfo(wsLogin);
-            gapi.setProduct_publish("true");
+            gapi.setProduct_publish("Y");
             gapi.setLimite_end("");
             gapi.setLimite_start("");
             gapi.setWith_childs("false");
             
-            Produit[] produits = proxy.getAllProducts(gapi);
-            products = new Product[produits.length];
-            
-            int i=0;
-
-            for (Produit produit : produits) {
-
-                products[i] = new Product(new Category("POS","3","POS"), 
-                                            produit.getDescription(),
-                                            produit.getId(),
-                                            produit.getId(),
-                                            produit.getImage(),
-                                            Double.parseDouble(produit.getPrice()),
-                                            produit.getName(),
-                                            produit.getQuantity(),
-                                            Double.parseDouble(produit.getPrice()),
-                                            new Tax());
-                i++;
-            }
+            produits = proxy.getAllProducts(gapi);
+//            System.out.println("**"+produits.length);
+           
          } catch (RemoteException e) {
             System.out.println("Error getProductsCatalog : ");
             e.printStackTrace();
          }
-        return products;
+        return produits;
     }
     
     public boolean uploadOrders(Order[] orderstoupload) throws RemoteException {
@@ -247,5 +232,6 @@ public class ExternalSalesHelper {
         } catch (UnsupportedEncodingException e) {
             return null; // never happens :-)
         }
-    }     
+    }
+  
 }

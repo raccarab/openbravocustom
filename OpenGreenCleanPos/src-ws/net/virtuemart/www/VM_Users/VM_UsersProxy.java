@@ -44,7 +44,7 @@ public class VM_UsersProxy implements net.virtuemart.www.VM_Users.VM_Users_PortT
     return vM_Users_PortType;
   }
   
-  public net.virtuemart.www.VM_Users.User[] getUsers(net.virtuemart.www.VM_Tools.LoginInfo parameters) throws java.rmi.RemoteException{
+  public net.virtuemart.www.VM_Users.User[] getUsers(net.virtuemart.www.VM_Users.GetUsersInput parameters) throws java.rmi.RemoteException{
     if (vM_Users_PortType == null)
       _initVM_UsersProxy();
     return vM_Users_PortType.getUsers(parameters);
@@ -74,7 +74,7 @@ public class VM_UsersProxy implements net.virtuemart.www.VM_Users.VM_Users_PortT
     return vM_Users_PortType.sendMail(parameters);
   }
   
-  public net.virtuemart.www.VM_Users.User getUserFromEmailOrUsername(net.virtuemart.www.VM_Users.GetUserFromEmailOrUsernameInput parameters) throws java.rmi.RemoteException{
+  public net.virtuemart.www.VM_Users.User[] getUserFromEmailOrUsername(net.virtuemart.www.VM_Users.GetUserFromEmailOrUsernameInput parameters) throws java.rmi.RemoteException{
     if (vM_Users_PortType == null)
       _initVM_UsersProxy();
     return vM_Users_PortType.getUserFromEmailOrUsername(parameters);
@@ -252,6 +252,12 @@ public class VM_UsersProxy implements net.virtuemart.www.VM_Users.VM_Users_PortT
     if (vM_Users_PortType == null)
       _initVM_UsersProxy();
     return vM_Users_PortType.getAvailableVendorImages(parameters);
+  }
+  
+  public net.virtuemart.www.VM_Users.Version getVersions(net.virtuemart.www.VM_Tools.LoginInfo parameters) throws java.rmi.RemoteException{
+    if (vM_Users_PortType == null)
+      _initVM_UsersProxy();
+    return vM_Users_PortType.getVersions(parameters);
   }
   
   

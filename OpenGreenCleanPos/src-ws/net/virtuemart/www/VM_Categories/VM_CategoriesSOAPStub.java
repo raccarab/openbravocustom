@@ -25,7 +25,7 @@ public class VM_CategoriesSOAPStub extends org.apache.axis.client.Stub implement
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("GetAllCategories");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Categories/", "GetAllCategoriesRequest"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Categories/", "loginInfo"), net.virtuemart.www.VM_Tools.LoginInfo.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Categories/", "GetAllCategoriesRequest"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Categories/", "GetAllCategoriesInput"), net.virtuemart.www.VM_Categories.GetAllCategoriesInput.class, false, false);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Categories/", "CategorieArray"));
         oper.setReturnClass(net.virtuemart.www.VM_Categories.Categorie[].class);
@@ -166,6 +166,13 @@ public class VM_CategoriesSOAPStub extends org.apache.axis.client.Stub implement
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
+            qName = new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Categories/", "GetAllCategoriesInput");
+            cachedSerQNames.add(qName);
+            cls = net.virtuemart.www.VM_Categories.GetAllCategoriesInput.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
             qName = new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Categories/", "GetChildsCategoriesRequestInput");
             cachedSerQNames.add(qName);
             cls = net.virtuemart.www.VM_Categories.GetChildsCategoriesRequestInput.class;
@@ -246,7 +253,7 @@ public class VM_CategoriesSOAPStub extends org.apache.axis.client.Stub implement
         }
     }
 
-    public net.virtuemart.www.VM_Categories.Categorie[] getAllCategories(net.virtuemart.www.VM_Tools.LoginInfo parameters) throws java.rmi.RemoteException {
+    public net.virtuemart.www.VM_Categories.Categorie[] getAllCategories(net.virtuemart.www.VM_Categories.GetAllCategoriesInput parameters) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }

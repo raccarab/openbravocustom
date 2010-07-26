@@ -8,12 +8,12 @@
 package net.virtuemart.www.VM_Users;
 
 public interface VM_Users_PortType extends java.rmi.Remote {
-    public net.virtuemart.www.VM_Users.User[] getUsers(net.virtuemart.www.VM_Tools.LoginInfo parameters) throws java.rmi.RemoteException;
+    public net.virtuemart.www.VM_Users.User[] getUsers(net.virtuemart.www.VM_Users.GetUsersInput parameters) throws java.rmi.RemoteException;
     public java.lang.String authentification(net.virtuemart.www.VM_Tools.LoginInfo parameters) throws java.rmi.RemoteException;
     public java.lang.String addUser(net.virtuemart.www.VM_Users.AddUserInput parameters) throws java.rmi.RemoteException;
     public java.lang.String deleteUser(net.virtuemart.www.VM_Users.DeleteUserInput parameters) throws java.rmi.RemoteException;
     public java.lang.String sendMail(net.virtuemart.www.VM_Users.SendMailInput parameters) throws java.rmi.RemoteException;
-    public net.virtuemart.www.VM_Users.User getUserFromEmailOrUsername(net.virtuemart.www.VM_Users.GetUserFromEmailOrUsernameInput parameters) throws java.rmi.RemoteException;
+    public net.virtuemart.www.VM_Users.User[] getUserFromEmailOrUsername(net.virtuemart.www.VM_Users.GetUserFromEmailOrUsernameInput parameters) throws java.rmi.RemoteException;
     public net.virtuemart.www.VM_Users.Country[] getAllCountryCode(net.virtuemart.www.VM_Tools.LoginInfo parameters) throws java.rmi.RemoteException;
     public net.virtuemart.www.VM_Users.AuthGroup[] getAuthGroup(net.virtuemart.www.VM_Tools.LoginInfo parameters) throws java.rmi.RemoteException;
     public java.lang.String addAuthGroup(net.virtuemart.www.VM_Users.AddAuthGroupInput parameters) throws java.rmi.RemoteException;
@@ -43,4 +43,5 @@ public interface VM_Users_PortType extends java.rmi.Remote {
     public java.lang.String updateManufacturerCat(net.virtuemart.www.VM_Users.AddManufacturerCatInput parameters) throws java.rmi.RemoteException;
     public java.lang.String deleteManufacturerCat(net.virtuemart.www.VM_Users.DelInput parameters) throws java.rmi.RemoteException;
     public net.virtuemart.www.VM_Users.AvalaibleImage[] getAvailableVendorImages(net.virtuemart.www.VM_Tools.LoginInfo parameters) throws java.rmi.RemoteException;
+    public net.virtuemart.www.VM_Users.Version getVersions(net.virtuemart.www.VM_Tools.LoginInfo parameters) throws java.rmi.RemoteException;
 }

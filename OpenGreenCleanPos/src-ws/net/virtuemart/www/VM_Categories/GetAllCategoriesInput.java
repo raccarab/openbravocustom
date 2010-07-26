@@ -1,5 +1,5 @@
 /**
- * GetChildsCategoriesRequestInput.java
+ * GetAllCategoriesInput.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
@@ -7,28 +7,24 @@
 
 package net.virtuemart.www.VM_Categories;
 
-public class GetChildsCategoriesRequestInput  implements java.io.Serializable {
+public class GetAllCategoriesInput  implements java.io.Serializable {
     private net.virtuemart.www.VM_Tools.LoginInfo loginInfo;
-
-    private java.lang.String categoryId;
 
     private java.lang.String category_publish;
 
-    public GetChildsCategoriesRequestInput() {
+    public GetAllCategoriesInput() {
     }
 
-    public GetChildsCategoriesRequestInput(
+    public GetAllCategoriesInput(
            net.virtuemart.www.VM_Tools.LoginInfo loginInfo,
-           java.lang.String categoryId,
            java.lang.String category_publish) {
            this.loginInfo = loginInfo;
-           this.categoryId = categoryId;
            this.category_publish = category_publish;
     }
 
 
     /**
-     * Gets the loginInfo value for this GetChildsCategoriesRequestInput.
+     * Gets the loginInfo value for this GetAllCategoriesInput.
      * 
      * @return loginInfo
      */
@@ -38,7 +34,7 @@ public class GetChildsCategoriesRequestInput  implements java.io.Serializable {
 
 
     /**
-     * Sets the loginInfo value for this GetChildsCategoriesRequestInput.
+     * Sets the loginInfo value for this GetAllCategoriesInput.
      * 
      * @param loginInfo
      */
@@ -48,27 +44,7 @@ public class GetChildsCategoriesRequestInput  implements java.io.Serializable {
 
 
     /**
-     * Gets the categoryId value for this GetChildsCategoriesRequestInput.
-     * 
-     * @return categoryId
-     */
-    public java.lang.String getCategoryId() {
-        return categoryId;
-    }
-
-
-    /**
-     * Sets the categoryId value for this GetChildsCategoriesRequestInput.
-     * 
-     * @param categoryId
-     */
-    public void setCategoryId(java.lang.String categoryId) {
-        this.categoryId = categoryId;
-    }
-
-
-    /**
-     * Gets the category_publish value for this GetChildsCategoriesRequestInput.
+     * Gets the category_publish value for this GetAllCategoriesInput.
      * 
      * @return category_publish
      */
@@ -78,7 +54,7 @@ public class GetChildsCategoriesRequestInput  implements java.io.Serializable {
 
 
     /**
-     * Sets the category_publish value for this GetChildsCategoriesRequestInput.
+     * Sets the category_publish value for this GetAllCategoriesInput.
      * 
      * @param category_publish
      */
@@ -88,8 +64,8 @@ public class GetChildsCategoriesRequestInput  implements java.io.Serializable {
 
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
-        if (!(obj instanceof GetChildsCategoriesRequestInput)) return false;
-        GetChildsCategoriesRequestInput other = (GetChildsCategoriesRequestInput) obj;
+        if (!(obj instanceof GetAllCategoriesInput)) return false;
+        GetAllCategoriesInput other = (GetAllCategoriesInput) obj;
         if (obj == null) return false;
         if (this == obj) return true;
         if (__equalsCalc != null) {
@@ -101,9 +77,6 @@ public class GetChildsCategoriesRequestInput  implements java.io.Serializable {
             ((this.loginInfo==null && other.getLoginInfo()==null) || 
              (this.loginInfo!=null &&
               this.loginInfo.equals(other.getLoginInfo()))) &&
-            ((this.categoryId==null && other.getCategoryId()==null) || 
-             (this.categoryId!=null &&
-              this.categoryId.equals(other.getCategoryId()))) &&
             ((this.category_publish==null && other.getCategory_publish()==null) || 
              (this.category_publish!=null &&
               this.category_publish.equals(other.getCategory_publish())));
@@ -121,9 +94,6 @@ public class GetChildsCategoriesRequestInput  implements java.io.Serializable {
         if (getLoginInfo() != null) {
             _hashCode += getLoginInfo().hashCode();
         }
-        if (getCategoryId() != null) {
-            _hashCode += getCategoryId().hashCode();
-        }
         if (getCategory_publish() != null) {
             _hashCode += getCategory_publish().hashCode();
         }
@@ -133,20 +103,14 @@ public class GetChildsCategoriesRequestInput  implements java.io.Serializable {
 
     // Type metadata
     private static org.apache.axis.description.TypeDesc typeDesc =
-        new org.apache.axis.description.TypeDesc(GetChildsCategoriesRequestInput.class, true);
+        new org.apache.axis.description.TypeDesc(GetAllCategoriesInput.class, true);
 
     static {
-        typeDesc.setXmlType(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Categories/", "GetChildsCategoriesRequestInput"));
+        typeDesc.setXmlType(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Categories/", "GetAllCategoriesInput"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("loginInfo");
         elemField.setXmlName(new javax.xml.namespace.QName("", "loginInfo"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Categories/", "loginInfo"));
-        elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("categoryId");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "categoryId"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();

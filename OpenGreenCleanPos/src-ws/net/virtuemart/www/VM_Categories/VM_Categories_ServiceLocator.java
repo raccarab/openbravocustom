@@ -22,7 +22,7 @@ public class VM_Categories_ServiceLocator extends org.apache.axis.client.Service
     }
 
     // Use to get a proxy class for VM_CategoriesSOAP
-    private java.lang.String VM_CategoriesSOAP_address = "http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_CategoriesService.php";
+    private java.lang.String VM_CategoriesSOAP_address = "http://___HOST___/___BASE___/administrator/components/com_vm_soa/services/___SERVICE___";
 
     public java.lang.String getVM_CategoriesSOAPAddress() {
         return VM_CategoriesSOAP_address;

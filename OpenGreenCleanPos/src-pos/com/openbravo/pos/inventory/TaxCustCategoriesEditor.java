@@ -29,6 +29,7 @@ import com.openbravo.basic.BasicException;
 import com.openbravo.data.user.EditorRecord;
 import com.openbravo.data.user.DirtyManager;
 import com.openbravo.pos.forms.AppLocal;
+import com.openbravo.pos.util.GreenUUID;
 
 public class TaxCustCategoriesEditor extends JPanel implements EditorRecord {
     
@@ -48,7 +49,7 @@ public class TaxCustCategoriesEditor extends JPanel implements EditorRecord {
         m_jName.setEnabled(false);
     }
     public void writeValueInsert() {
-        m_oId = UUID.randomUUID().toString();
+        m_oId = GreenUUID.randomUUID().toString();
         m_jName.setText(null);
         m_jName.setEnabled(true);
     }

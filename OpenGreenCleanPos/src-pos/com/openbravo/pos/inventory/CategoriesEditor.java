@@ -26,6 +26,7 @@ import com.openbravo.pos.forms.AppLocal;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.UUID;
+
 import com.openbravo.format.Formats;
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.ComboBoxValModel;
@@ -37,6 +38,7 @@ import com.openbravo.data.user.EditorRecord;
 import com.openbravo.data.user.DirtyManager;
 import com.openbravo.pos.forms.AppView;
 import com.openbravo.pos.forms.DataLogicSales;
+
 import java.util.ArrayList;
 
 /**

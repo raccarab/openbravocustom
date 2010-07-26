@@ -86,6 +86,10 @@ public class Produit  implements java.io.Serializable {
 
     private java.lang.String product_currency;
 
+    private java.lang.String manufacturer_id;
+
+    private java.lang.String vendor_id;
+
     public Produit() {
     }
 
@@ -128,7 +132,9 @@ public class Produit  implements java.io.Serializable {
            java.lang.String child_option_ids,
            java.lang.String product_order_levels,
            java.lang.String product_categories,
-           java.lang.String product_currency) {
+           java.lang.String product_currency,
+           java.lang.String manufacturer_id,
+           java.lang.String vendor_id) {
            this.id = id;
            this.name = name;
            this.product_sku = product_sku;
@@ -168,6 +174,8 @@ public class Produit  implements java.io.Serializable {
            this.product_order_levels = product_order_levels;
            this.product_categories = product_categories;
            this.product_currency = product_currency;
+           this.manufacturer_id = manufacturer_id;
+           this.vendor_id = vendor_id;
     }
 
 
@@ -950,6 +958,46 @@ public class Produit  implements java.io.Serializable {
         this.product_currency = product_currency;
     }
 
+
+    /**
+     * Gets the manufacturer_id value for this Produit.
+     * 
+     * @return manufacturer_id
+     */
+    public java.lang.String getManufacturer_id() {
+        return manufacturer_id;
+    }
+
+
+    /**
+     * Sets the manufacturer_id value for this Produit.
+     * 
+     * @param manufacturer_id
+     */
+    public void setManufacturer_id(java.lang.String manufacturer_id) {
+        this.manufacturer_id = manufacturer_id;
+    }
+
+
+    /**
+     * Gets the vendor_id value for this Produit.
+     * 
+     * @return vendor_id
+     */
+    public java.lang.String getVendor_id() {
+        return vendor_id;
+    }
+
+
+    /**
+     * Sets the vendor_id value for this Produit.
+     * 
+     * @param vendor_id
+     */
+    public void setVendor_id(java.lang.String vendor_id) {
+        this.vendor_id = vendor_id;
+    }
+
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof Produit)) return false;
@@ -1078,7 +1126,13 @@ public class Produit  implements java.io.Serializable {
               this.product_categories.equals(other.getProduct_categories()))) &&
             ((this.product_currency==null && other.getProduct_currency()==null) || 
              (this.product_currency!=null &&
-              this.product_currency.equals(other.getProduct_currency())));
+              this.product_currency.equals(other.getProduct_currency()))) &&
+            ((this.manufacturer_id==null && other.getManufacturer_id()==null) || 
+             (this.manufacturer_id!=null &&
+              this.manufacturer_id.equals(other.getManufacturer_id()))) &&
+            ((this.vendor_id==null && other.getVendor_id()==null) || 
+             (this.vendor_id!=null &&
+              this.vendor_id.equals(other.getVendor_id())));
         __equalsCalc = null;
         return _equals;
     }
@@ -1206,6 +1260,12 @@ public class Produit  implements java.io.Serializable {
         }
         if (getProduct_currency() != null) {
             _hashCode += getProduct_currency().hashCode();
+        }
+        if (getManufacturer_id() != null) {
+            _hashCode += getManufacturer_id().hashCode();
+        }
+        if (getVendor_id() != null) {
+            _hashCode += getVendor_id().hashCode();
         }
         __hashCodeCalc = false;
         return _hashCode;
@@ -1451,6 +1511,18 @@ public class Produit  implements java.io.Serializable {
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("manufacturer_id");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "manufacturer_id"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("vendor_id");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "vendor_id"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
     }
 
     /**
@@ -1484,4 +1556,7 @@ public class Produit  implements java.io.Serializable {
             _javaType, _xmlType, typeDesc);
     }
 
+    public String toString() {
+    	return this.getName()+" "+this.getProduct_categories()+" "+this.getProduct_sku();
+    }
 }

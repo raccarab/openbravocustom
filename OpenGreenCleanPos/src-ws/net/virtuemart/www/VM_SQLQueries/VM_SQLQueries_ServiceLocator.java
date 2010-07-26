@@ -1,59 +1,59 @@
 /**
- * VM_Product_ServiceLocator.java
+ * VM_SQLQueries_ServiceLocator.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package net.virtuemart.www.VM_Product;
+package net.virtuemart.www.VM_SQLQueries;
 
-public class VM_Product_ServiceLocator extends org.apache.axis.client.Service implements net.virtuemart.www.VM_Product.VM_Product_Service {
+public class VM_SQLQueries_ServiceLocator extends org.apache.axis.client.Service implements net.virtuemart.www.VM_SQLQueries.VM_SQLQueries_Service {
 
-    public VM_Product_ServiceLocator() {
+    public VM_SQLQueries_ServiceLocator() {
     }
 
 
-    public VM_Product_ServiceLocator(org.apache.axis.EngineConfiguration config) {
+    public VM_SQLQueries_ServiceLocator(org.apache.axis.EngineConfiguration config) {
         super(config);
     }
 
-    public VM_Product_ServiceLocator(java.lang.String wsdlLoc, javax.xml.namespace.QName sName) throws javax.xml.rpc.ServiceException {
+    public VM_SQLQueries_ServiceLocator(java.lang.String wsdlLoc, javax.xml.namespace.QName sName) throws javax.xml.rpc.ServiceException {
         super(wsdlLoc, sName);
     }
 
-    // Use to get a proxy class for VM_ProductSOAP
-    private java.lang.String VM_ProductSOAP_address = "http://___HOST___/___BASE___/administrator/components/com_vm_soa/services/___SERVICE___";
+    // Use to get a proxy class for VM_SQLQueriesSOAP
+    private java.lang.String VM_SQLQueriesSOAP_address = "http://___HOST___/___BASE___/administrator/components/com_vm_soa/services/___SERVICE___";
 
-    public java.lang.String getVM_ProductSOAPAddress() {
-        return VM_ProductSOAP_address;
+    public java.lang.String getVM_SQLQueriesSOAPAddress() {
+        return VM_SQLQueriesSOAP_address;
     }
 
     // The WSDD service name defaults to the port name.
-    private java.lang.String VM_ProductSOAPWSDDServiceName = "VM_ProductSOAP";
+    private java.lang.String VM_SQLQueriesSOAPWSDDServiceName = "VM_SQLQueriesSOAP";
 
-    public java.lang.String getVM_ProductSOAPWSDDServiceName() {
-        return VM_ProductSOAPWSDDServiceName;
+    public java.lang.String getVM_SQLQueriesSOAPWSDDServiceName() {
+        return VM_SQLQueriesSOAPWSDDServiceName;
     }
 
-    public void setVM_ProductSOAPWSDDServiceName(java.lang.String name) {
-        VM_ProductSOAPWSDDServiceName = name;
+    public void setVM_SQLQueriesSOAPWSDDServiceName(java.lang.String name) {
+        VM_SQLQueriesSOAPWSDDServiceName = name;
     }
 
-    public net.virtuemart.www.VM_Product.VM_Product_PortType getVM_ProductSOAP() throws javax.xml.rpc.ServiceException {
+    public net.virtuemart.www.VM_SQLQueries.VM_SQLQueries_PortType getVM_SQLQueriesSOAP() throws javax.xml.rpc.ServiceException {
        java.net.URL endpoint;
         try {
-            endpoint = new java.net.URL(VM_ProductSOAP_address);
+            endpoint = new java.net.URL(VM_SQLQueriesSOAP_address);
         }
         catch (java.net.MalformedURLException e) {
             throw new javax.xml.rpc.ServiceException(e);
         }
-        return getVM_ProductSOAP(endpoint);
+        return getVM_SQLQueriesSOAP(endpoint);
     }
 
-    public net.virtuemart.www.VM_Product.VM_Product_PortType getVM_ProductSOAP(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+    public net.virtuemart.www.VM_SQLQueries.VM_SQLQueries_PortType getVM_SQLQueriesSOAP(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
         try {
-            net.virtuemart.www.VM_Product.VM_ProductSOAPStub _stub = new net.virtuemart.www.VM_Product.VM_ProductSOAPStub(portAddress, this);
-            _stub.setPortName(getVM_ProductSOAPWSDDServiceName());
+            net.virtuemart.www.VM_SQLQueries.VM_SQLQueriesSOAPStub _stub = new net.virtuemart.www.VM_SQLQueries.VM_SQLQueriesSOAPStub(portAddress, this);
+            _stub.setPortName(getVM_SQLQueriesSOAPWSDDServiceName());
             return _stub;
         }
         catch (org.apache.axis.AxisFault e) {
@@ -61,8 +61,8 @@ public class VM_Product_ServiceLocator extends org.apache.axis.client.Service im
         }
     }
 
-    public void setVM_ProductSOAPEndpointAddress(java.lang.String address) {
-        VM_ProductSOAP_address = address;
+    public void setVM_SQLQueriesSOAPEndpointAddress(java.lang.String address) {
+        VM_SQLQueriesSOAP_address = address;
     }
 
     /**
@@ -72,9 +72,9 @@ public class VM_Product_ServiceLocator extends org.apache.axis.client.Service im
      */
     public java.rmi.Remote getPort(Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         try {
-            if (net.virtuemart.www.VM_Product.VM_Product_PortType.class.isAssignableFrom(serviceEndpointInterface)) {
-                net.virtuemart.www.VM_Product.VM_ProductSOAPStub _stub = new net.virtuemart.www.VM_Product.VM_ProductSOAPStub(new java.net.URL(VM_ProductSOAP_address), this);
-                _stub.setPortName(getVM_ProductSOAPWSDDServiceName());
+            if (net.virtuemart.www.VM_SQLQueries.VM_SQLQueries_PortType.class.isAssignableFrom(serviceEndpointInterface)) {
+                net.virtuemart.www.VM_SQLQueries.VM_SQLQueriesSOAPStub _stub = new net.virtuemart.www.VM_SQLQueries.VM_SQLQueriesSOAPStub(new java.net.URL(VM_SQLQueriesSOAP_address), this);
+                _stub.setPortName(getVM_SQLQueriesSOAPWSDDServiceName());
                 return _stub;
             }
         }
@@ -94,8 +94,8 @@ public class VM_Product_ServiceLocator extends org.apache.axis.client.Service im
             return getPort(serviceEndpointInterface);
         }
         java.lang.String inputPortName = portName.getLocalPart();
-        if ("VM_ProductSOAP".equals(inputPortName)) {
-            return getVM_ProductSOAP();
+        if ("VM_SQLQueriesSOAP".equals(inputPortName)) {
+            return getVM_SQLQueriesSOAP();
         }
         else  {
             java.rmi.Remote _stub = getPort(serviceEndpointInterface);
@@ -105,7 +105,7 @@ public class VM_Product_ServiceLocator extends org.apache.axis.client.Service im
     }
 
     public javax.xml.namespace.QName getServiceName() {
-        return new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Product/", "VM_Product");
+        return new javax.xml.namespace.QName("http://www.virtuemart.net/VM_SQLQueries/", "VM_SQLQueries");
     }
 
     private java.util.HashSet ports = null;
@@ -113,7 +113,7 @@ public class VM_Product_ServiceLocator extends org.apache.axis.client.Service im
     public java.util.Iterator getPorts() {
         if (ports == null) {
             ports = new java.util.HashSet();
-            ports.add(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Product/", "VM_ProductSOAP"));
+            ports.add(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_SQLQueries/", "VM_SQLQueriesSOAP"));
         }
         return ports.iterator();
     }
@@ -123,8 +123,8 @@ public class VM_Product_ServiceLocator extends org.apache.axis.client.Service im
     */
     public void setEndpointAddress(java.lang.String portName, java.lang.String address) throws javax.xml.rpc.ServiceException {
         
-if ("VM_ProductSOAP".equals(portName)) {
-            setVM_ProductSOAPEndpointAddress(address);
+if ("VM_SQLQueriesSOAP".equals(portName)) {
+            setVM_SQLQueriesSOAPEndpointAddress(address);
         }
         else 
 { // Unknown Port Name

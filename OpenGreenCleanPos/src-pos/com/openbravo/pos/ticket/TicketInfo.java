@@ -31,8 +31,8 @@ import com.openbravo.data.loader.LocalRes;
 import com.openbravo.pos.customers.CustomerInfoExt;
 import com.openbravo.pos.payment.PaymentInfoMagcard;
 import com.openbravo.pos.util.StringUtils;
+
 import java.util.logging.Logger;
-import com.openbravo.pos.util.tsUUID;
 
 /**
  *
@@ -78,9 +78,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
 
     /** Creates new TicketModel */
     public TicketInfo() {
-        m_sId = tsUUID.randomUUID().toString();
-
-        logger.info(tsUUID.fromString(m_sId).getDate().toString());
+        m_sId = UUID.randomUUID().toString();
 
         tickettype = RECEIPT_NORMAL;
         m_iTicketId = 0; // incrementamos

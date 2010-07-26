@@ -44,7 +44,7 @@ public class VM_CategoriesProxy implements net.virtuemart.www.VM_Categories.VM_C
     return vM_Categories_PortType;
   }
   
-  public net.virtuemart.www.VM_Categories.Categorie[] getAllCategories(net.virtuemart.www.VM_Tools.LoginInfo parameters) throws java.rmi.RemoteException{
+  public net.virtuemart.www.VM_Categories.Categorie[] getAllCategories(net.virtuemart.www.VM_Categories.GetAllCategoriesInput parameters) throws java.rmi.RemoteException{
     if (vM_Categories_PortType == null)
       _initVM_CategoriesProxy();
     return vM_Categories_PortType.getAllCategories(parameters);

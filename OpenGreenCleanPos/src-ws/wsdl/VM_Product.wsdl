@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.virtuemart.net/VM_Product/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="VM_Product"
+	targetNamespace="http://www.virtuemart.net/VM_Product/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.virtuemart.net/VM_Product/">
+			<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"
+				schemaLocation="http://schemas.xmlsoap.org/soap/encoding/" />
+
+			<xsd:element name="GetProductFromIdResponse" type="tns:Produit"></xsd:element>
+			<xsd:element name="GetProductFromIdRequest" type="tns:ProductFromIdInput"></xsd:element>
+
+			<xsd:element name="GetProductsFromCategoryResponse" type="tns:ProduitsArray"></xsd:element>
+			<xsd:element name="GetProductsFromCategoryRequest" type="tns:ProductFromCatIdInput"></xsd:element>
+
+			<xsd:element name="GetChildsProductResponse" type="tns:ProduitsArray"></xsd:element>
+			<xsd:element name="GetChildsProductRequest" type="tns:ProductFromIdInput"></xsd:element>
+
+			<xsd:element name="UpdateProductResponse" type="xsd:string"></xsd:element>
+			<xsd:element name="UpdateProductRequest" type="tns:UpdateProductInput"></xsd:element>
+			
+			<xsd:element name="AddProductResponse" type="xsd:string"></xsd:element>
+			<xsd:element name="AddProductRequest" type="tns:UpdateProductInput"></xsd:element>
+			
+			<xsd:element name="DeleteProductResponse" type="xsd:string"></xsd:element>
+			<xsd:element name="DeleteProductRequest" type="tns:ProductFromIdInput"></xsd:element>
+			
+			<xsd:element name="GetProductsFromOrderIdResponse" type="tns:OrderItemInfoArray"></xsd:element>
+			<xsd:element name="GetProductsFromOrderIdRequest" type="tns:ProductsFromOrderIdInput"></xsd:element>
+			
+			<xsd:element name="GetAllCurrencyResponse" type="tns:CurrencyArray"></xsd:element>
+			<xsd:element name="GetAllCurrencyRequest" type="tns:GetAllCurrencyInput"></xsd:element>
+			
+			<xsd:element name="GetAllTaxResponse" type="tns:TaxArray"></xsd:element>
+			<xsd:element name="GetAllTaxRequest" type="tns:loginInfo"></xsd:element>
+			
+			<xsd:element name="AddTaxResponse" type="xsd:string"></xsd:element>
+			<xsd:element name="AddTaxRequest" type="tns:TaxesInput"></xsd:element>
+			
+			<xsd:element name="UpdateTaxResponse" type="xsd:string"></xsd:element>
+			<xsd:element name="UpdateTaxRequest" type="tns:TaxesInput"></xsd:element>
+			
+			<xsd:element name="DeleteTaxResponse" type="xsd:string"></xsd:element>
+			<xsd:element name="DeleteTaxRequest" type="tns:DelInput"></xsd:element>
+			
+			<xsd:element name="GetAllProductsResponse" type="tns:ProduitsArray"></xsd:element>
+			<xsd:element name="GetAllProductsRequest" type="tns:GetAllProductsInput"></xsd:element>
+			
+			<xsd:element name="GetAvailableImagesResponse" type="tns:AvalaibleImageArray"></xsd:element>
+			<xsd:element name="GetAvailableImagesRequest" type="tns:loginInfo"></xsd:element>
+
+			<xsd:complexType name="loginInfo">
+				<xsd:all>
+					<xsd:element name="login" type="xsd:string" />
+					<xsd:element name="password" type="xsd:string" />
+				</xsd:all>
+			</xsd:complexType>
+			
+			<xsd:complexType name="ids">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="id" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="DelInput">
+				<xsd:all>
+					<xsd:element name="loginInfo" type="tns:loginInfo" />
+					<xsd:element name="ids" type="tns:ids" />
+				</xsd:all>
+			</xsd:complexType>
+			
+			<xsd:complexType name="ProductFromIdInput">
+				<xsd:all>
+					<xsd:element name="loginInfo" type="tns:loginInfo" />
+					<xsd:element name="product_id" type="xsd:string" />
+				</xsd:all>
+			</xsd:complexType>
+			
+			<xsd:complexType name="ProductFromCatIdInput">
+				<xsd:all>
+					<xsd:element name="loginInfo" type="tns:loginInfo" />
+					<xsd:element name="catgory_id" type="xsd:string" />
+				</xsd:all>
+			</xsd:complexType>
+			
+			<xsd:complexType name="UpdateProductInput">
+				<xsd:all>
+					<xsd:element name="loginInfo" type="tns:loginInfo" />
+					<xsd:element name="product" type="tns:Produit" />
+				</xsd:all>
+			</xsd:complexType>
+			
+			<xsd:complexType name="ProductsFromOrderIdInput">
+				<xsd:all>
+					<xsd:element name="loginInfo" type="tns:loginInfo" />
+					<xsd:element name="order_id" type="xsd:string" />
+				</xsd:all>
+			</xsd:complexType>
+			
+			<xsd:complexType name="Produit">
+				<xsd:all>
+					<xsd:element name="id" type="xsd:string" />
+					<xsd:element name="name" type="xsd:string" />
+					<xsd:element name="product_sku" type="xsd:string" />
+					<xsd:element name="product_sales" type="xsd:string" />
+					<xsd:element name="price" type="xsd:string" />
+					<xsd:element name="discount" type="xsd:string" />
+					<xsd:element name="discount_is_percent" type="xsd:string" />
+					<xsd:element name="description" type="xsd:string" />
+					<xsd:element name="bigdescription" type="xsd:string" />
+					<xsd:element name="image" type="xsd:string" />
+					<xsd:element name="fullimage" type="xsd:string" />
+					<xsd:element name="quantity" type="xsd:string" />
+					<xsd:element name="parent_produit_id" type="xsd:string" />
+					<xsd:element name="has_childs" type="xsd:string" />
+					<xsd:element name="childs_id" type="xsd:string" />
+					<xsd:element name="atribute" type="xsd:string" />
+					<xsd:element name="atribute_value" type="xsd:string" />
+					<xsd:element name="product_publish" type="xsd:string" />
+					<xsd:element name="product_weight" type="xsd:string" />
+					<xsd:element name="product_weight_uom" type="xsd:string" />
+					<xsd:element name="product_length" type="xsd:string" />
+					<xsd:element name="product_width" type="xsd:string" />
+					<xsd:element name="product_height" type="xsd:string" />
+					<xsd:element name="product_lwh_uom" type="xsd:string" />
+					<xsd:element name="product_unit" type="xsd:string" />
+					<xsd:element name="product_packaging" type="xsd:string" />
+					<xsd:element name="product_url" type="xsd:string" />
+					<xsd:element name="custom_attribute" type="xsd:string" />
+					<xsd:element name="product_available_date" type="xsd:string" />
+					<xsd:element name="product_availability" type="xsd:string" />
+					<xsd:element name="product_special" type="xsd:string" />
+					<xsd:element name="child_options" type="xsd:string" />
+					<xsd:element name="quantity_options" type="xsd:string" />
+					<xsd:element name="product_discount_id" type="xsd:string" />
+					<xsd:element name="product_tax_id" type="xsd:string" />
+					<xsd:element name="child_option_ids" type="xsd:string" />
+					<xsd:element name="product_order_levels" type="xsd:string" />
+					<xsd:element name="product_categories" type="xsd:string" />
+					<xsd:element name="product_currency" type="xsd:string" />	
+					<xsd:element name="manufacturer_id" type="xsd:string" />
+					<xsd:element name="vendor_id" type="xsd:string" />						
+				</xsd:all>
+			</xsd:complexType>
+
+			<xsd:complexType name="OrderItemInfo">
+				<xsd:all>
+					<xsd:element name="order_id" type="xsd:string" />
+					<xsd:element name="vendor_id" type="xsd:string" />
+					<xsd:element name="product_id" type="xsd:string" />
+					<xsd:element name="order_item_sku" type="xsd:string" />
+					<xsd:element name="order_item_name" type="xsd:string" />
+					<xsd:element name="product_quantity" type="xsd:string" />
+					<xsd:element name="product_item_price" type="xsd:string" />
+					<xsd:element name="product_final_price" type="xsd:string" />
+					<xsd:element name="order_item_currency" type="xsd:string" />
+					<xsd:element name="order_status" type="xsd:string" />
+					<xsd:element name="cdate" type="xsd:string" />
+					<xsd:element name="mdate" type="xsd:string" />
+					<xsd:element name="product_attribute" type="xsd:string" />
+				</xsd:all>
+			</xsd:complexType>
+
+			<xsd:complexType name="ProduitsArray">
+				<xsd:complexContent>
+					<xsd:restriction base="soapenc:Array">
+						<xsd:attribute ref="soapenc:arrayType"
+							wsdl:arrayType="tns:Produit[]" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+			
+			<xsd:complexType name="OrderItemInfoArray">
+				<xsd:complexContent>
+					<xsd:restriction base="soapenc:Array">
+						<xsd:attribute ref="soapenc:arrayType"
+							wsdl:arrayType="tns:OrderItemInfo[]" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+			
+			<xsd:complexType name="GetAllCurrencyInput">
+				<xsd:all>
+					<xsd:element name="loginInfo" type="tns:loginInfo" />
+				</xsd:all>
+			</xsd:complexType>
+			
+			<xsd:complexType name="Currency">
+				<xsd:all>
+					<xsd:element name="currency_id" type="xsd:string" />
+					<xsd:element name="currency_name" type="xsd:string" />
+					<xsd:element name="currency_code" type="xsd:string" />
+				</xsd:all>
+			</xsd:complexType>
+			
+			<xsd:complexType name="CurrencyArray">
+				<xsd:complexContent>
+					<xsd:restriction base="soapenc:Array">
+						<xsd:attribute ref="soapenc:arrayType"
+							wsdl:arrayType="tns:Currency[]" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+			
+			<xsd:complexType name="Tax">
+				<xsd:all>
+					<xsd:element name="tax_rate_id" type="xsd:string" />
+					<xsd:element name="vendor_id" type="xsd:string" />
+					<xsd:element name="tax_state" type="xsd:string" />
+					<xsd:element name="tax_country" type="xsd:string" />
+					<xsd:element name="mdate" type="xsd:string" />
+					<xsd:element name="tax_rate" type="xsd:string" />
+				</xsd:all>
+			</xsd:complexType>
+			
+			<xsd:complexType name="TaxArray">
+				<xsd:complexContent>
+					<xsd:restriction base="soapenc:Array">
+						<xsd:attribute ref="soapenc:arrayType"
+							wsdl:arrayType="tns:Tax[]" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+			
+			<xsd:complexType name="Taxes">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="tax" type="tns:Tax" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="TaxesInput">
+				<xsd:all>
+					<xsd:element name="loginInfo" type="tns:loginInfo" />
+					<xsd:element name="taxes" type="tns:Taxes" />
+				</xsd:all>
+			</xsd:complexType>
+			
+			<xsd:complexType name="GetAllProductsInput">
+				<xsd:all>
+					<xsd:element name="loginInfo" type="tns:loginInfo" />
+					<xsd:element name="product_publish" type="xsd:string" />
+					<xsd:element name="with_childs" type="xsd:string" />
+					<xsd:element name="limite_start" type="xsd:string" />
+					<xsd:element name="limite_end" type="xsd:string" />
+				</xsd:all>
+			</xsd:complexType>
+			
+			<xsd:complexType name="AvalaibleImage">
+				<xsd:all>
+					<xsd:element name="image_name" type="xsd:string" />
+					<xsd:element name="image_url" type="xsd:string" />
+				</xsd:all>
+			</xsd:complexType>
+			
+			<xsd:complexType name="AvalaibleImageArray">
+				<xsd:complexContent>
+					<xsd:restriction base="soapenc:Array">
+						<xsd:attribute ref="soapenc:arrayType"
+							wsdl:arrayType="tns:AvalaibleImage[]" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="GetProductsFromCategoryRequest">
+		<wsdl:part element="tns:GetProductsFromCategoryRequest"
+			name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="GetProductFromIdResponse">
+		<wsdl:part element="tns:GetProductFromIdResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="GetProductFromIdRequest">
+		<wsdl:part element="tns:GetProductFromIdRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="GetProductsFromCategoryResponse">
+		<wsdl:part element="tns:GetProductsFromCategoryResponse"
+			name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="GetChildsProductRequest">
+		<wsdl:part element="tns:GetChildsProductRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="GetChildsProductResponse">
+		<wsdl:part element="tns:GetChildsProductResponse" name="parameters" />
+	</wsdl:message>
+
+	<wsdl:message name="UpdateProductRequest">
+		<wsdl:part element="tns:UpdateProductRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="UpdateProductResponse">
+		<wsdl:part element="tns:UpdateProductResponse" name="parameters" />
+	</wsdl:message>
+	
+	<wsdl:message name="GetProductsFromOrderIdRequest">
+		<wsdl:part element="tns:GetProductsFromOrderIdRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="GetProductsFromOrderIdResponse">
+		<wsdl:part element="tns:GetProductsFromOrderIdResponse" name="parameters" />
+	</wsdl:message>
+
+	<wsdl:message name="AddProductRequest">
+		<wsdl:part element="tns:AddProductRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="AddProductResponse">
+		<wsdl:part element="tns:AddProductResponse" name="parameters" />
+	</wsdl:message>
+
+	<wsdl:message name="DeleteProductRequest">
+		<wsdl:part element="tns:DeleteProductRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="DeleteProductResponse">
+		<wsdl:part element="tns:DeleteProductResponse" name="parameters" />
+	</wsdl:message>	
+	
+	<wsdl:message name="GetAllCurrencyRequest">
+		<wsdl:part element="tns:GetAllCurrencyRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="GetAllCurrencyResponse">
+		<wsdl:part element="tns:GetAllCurrencyResponse" name="parameters" />
+	</wsdl:message>	
+		
+	<wsdl:message name="GetAllTaxRequest">
+		<wsdl:part element="tns:GetAllTaxRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="GetAllTaxResponse">
+		<wsdl:part element="tns:GetAllTaxResponse" name="parameters" />
+	</wsdl:message>	
+	
+	<wsdl:message name="AddTaxRequest">
+		<wsdl:part element="tns:AddTaxRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="AddTaxResponse">
+		<wsdl:part element="tns:AddTaxResponse" name="parameters" />
+	</wsdl:message>	
+	
+	<wsdl:message name="UpdateTaxRequest">
+		<wsdl:part element="tns:UpdateTaxRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="UpdateTaxResponse">
+		<wsdl:part element="tns:UpdateTaxResponse" name="parameters" />
+	</wsdl:message>	
+	
+	<wsdl:message name="DeleteTaxRequest">
+		<wsdl:part element="tns:DeleteTaxRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="DeleteTaxResponse">
+		<wsdl:part element="tns:DeleteTaxResponse" name="parameters" />
+	</wsdl:message>	
+	
+	<wsdl:message name="GetAllProductsRequest">
+		<wsdl:part element="tns:GetAllProductsRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="GetAllProductsResponse">
+		<wsdl:part element="tns:GetAllProductsResponse" name="parameters" />
+	</wsdl:message>	
+	
+	<wsdl:message name="GetAvailableImagesRequest">
+		<wsdl:part element="tns:GetAvailableImagesRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="GetAvailableImagesResponse">
+		<wsdl:part element="tns:GetAvailableImagesResponse" name="parameters" />
+	</wsdl:message>	
+	
+	<wsdl:portType name="VM_Product">
+		<wsdl:operation name="GetProductsFromCategory">
+			<wsdl:input message="tns:GetProductsFromCategoryRequest" />
+			<wsdl:output message="tns:GetProductsFromCategoryResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="GetChildsProduct">
+			<wsdl:input message="tns:GetChildsProductRequest" />
+			<wsdl:output message="tns:GetChildsProductResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="GetProductFromId">
+			<wsdl:input message="tns:GetProductFromIdRequest" />
+			<wsdl:output message="tns:GetProductFromIdResponse" />
+		</wsdl:operation>
+
+		<wsdl:operation name="UpdateProduct">
+			<wsdl:input message="tns:UpdateProductRequest" />
+			<wsdl:output message="tns:UpdateProductResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="GetProductsFromOrderId">
+			<wsdl:input message="tns:GetProductsFromOrderIdRequest" />
+			<wsdl:output message="tns:GetProductsFromOrderIdResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="AddProduct">
+			<wsdl:input message="tns:AddProductRequest" />
+			<wsdl:output message="tns:AddProductResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="DeleteProduct">
+			<wsdl:input message="tns:DeleteProductRequest" />
+			<wsdl:output message="tns:DeleteProductResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="GetAllCurrency">
+			<wsdl:input message="tns:GetAllCurrencyRequest" />
+			<wsdl:output message="tns:GetAllCurrencyResponse" />
+		</wsdl:operation>
+
+		<wsdl:operation name="GetAllTax">
+			<wsdl:input message="tns:GetAllTaxRequest" />
+			<wsdl:output message="tns:GetAllTaxResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="AddTax">
+			<wsdl:input message="tns:AddTaxRequest" />
+			<wsdl:output message="tns:AddTaxResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="UpdateTax">
+			<wsdl:input message="tns:UpdateTaxRequest" />
+			<wsdl:output message="tns:UpdateTaxResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="DeleteTax">
+			<wsdl:input message="tns:DeleteTaxRequest" />
+			<wsdl:output message="tns:DeleteTaxResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="GetAllProducts">
+			<wsdl:input message="tns:GetAllProductsRequest" />
+			<wsdl:output message="tns:GetAllProductsResponse" />
+		</wsdl:operation>
+		
+		<wsdl:operation name="GetAvailableImages">
+			<wsdl:input message="tns:GetAvailableImagesRequest" />
+			<wsdl:output message="tns:GetAvailableImagesResponse" />
+		</wsdl:operation>
+		
+	</wsdl:portType>
+	<wsdl:binding name="VM_ProductSOAP" type="tns:VM_Product">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="GetProductFromId">
+			<soap:operation
+				soapAction="http://www.virtuemart.net/VM_Product/GetProductFromId" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetProductsFromCategory">
+			<soap:operation
+				soapAction="http://www.virtuemart.net/VM_Product/GetProductsFromCategory" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetChildsProduct">
+			<soap:operation
+				soapAction="http://www.virtuemart.net/VM_Product/GetChildsProduct" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="UpdateProduct">
+			<soap:operation soapAction="http://www.virtuemart.net/VM_Product/UpdateProduct" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="GetProductsFromOrderId">
+			<soap:operation soapAction="http://www.virtuemart.net/VM_Product/GetProductsFromOrderId" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="AddProduct">
+			<soap:operation soapAction="http://www.virtuemart.net/VM_Product/AddProduct" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="DeleteProduct">
+			<soap:operation soapAction="http://www.virtuemart.net/VM_Product/DeleteProduct" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="GetAllCurrency">
+			<soap:operation soapAction="http://www.virtuemart.net/VM_Product/GetAllCurrency" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="GetAllTax">
+			<soap:operation soapAction="http://www.virtuemart.net/VM_Product/GetAllTax" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="AddTax">
+			<soap:operation soapAction="http://www.virtuemart.net/VM_Product/AddTax" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="UpdateTax">
+			<soap:operation soapAction="http://www.virtuemart.net/VM_Product/UpdateTax" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="DeleteTax">
+			<soap:operation soapAction="http://www.virtuemart.net/VM_Product/DeleteTax" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetAllProducts">
+			<soap:operation soapAction="http://www.virtuemart.net/VM_Product/GetAllProducts" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetAvailableImages">
+			<soap:operation soapAction="http://www.virtuemart.net/VM_Product/GetAvailableImages" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="VM_Product">
+		<wsdl:port binding="tns:VM_ProductSOAP" name="VM_ProductSOAP">
+			<soap:address
+				location="http://___HOST___/___BASE___/administrator/components/com_vm_soa/services/___SERVICE___" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

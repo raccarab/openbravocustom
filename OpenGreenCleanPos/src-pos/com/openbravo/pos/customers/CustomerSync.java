@@ -20,21 +20,12 @@ package com.openbravo.pos.customers;
 
 import java.util.*;
 import java.io.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import com.openbravo.pos.payment.PaymentInfo;
 import com.openbravo.data.loader.DataRead;
-import com.openbravo.data.loader.DataWrite;
 import com.openbravo.data.loader.SerializableRead;
-import com.openbravo.data.loader.SerializableWrite;
 import com.openbravo.format.Formats;
 import com.openbravo.basic.BasicException;
-import com.openbravo.data.loader.LocalRes;
-import com.openbravo.pos.payment.PaymentInfoMagcard;
 import com.openbravo.pos.util.RoundUtils;
 import com.openbravo.pos.util.StringUtils;
-import java.util.logging.Logger;
-import com.openbravo.pos.util.tsUUID;
 
 /**
  *

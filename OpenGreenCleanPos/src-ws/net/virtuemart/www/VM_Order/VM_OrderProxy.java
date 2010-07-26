@@ -80,7 +80,7 @@ public class VM_OrderProxy implements net.virtuemart.www.VM_Order.VM_Order_PortT
     return vM_Order_PortType.deleteOrder(parameters);
   }
   
-  public java.lang.String createOrder(net.virtuemart.www.VM_Order.CreateOrderInput parameters) throws java.rmi.RemoteException{
+  public net.virtuemart.www.VM_Order.ReturnOutput createOrder(net.virtuemart.www.VM_Order.CreateOrderInput parameters) throws java.rmi.RemoteException{
     if (vM_Order_PortType == null)
       _initVM_OrderProxy();
     return vM_Order_PortType.createOrder(parameters);
@@ -210,6 +210,18 @@ public class VM_OrderProxy implements net.virtuemart.www.VM_Order.VM_Order_PortT
     if (vM_Order_PortType == null)
       _initVM_OrderProxy();
     return vM_Order_PortType.deleteOrderStatusCode(parameters);
+  }
+  
+  public java.lang.String updateShippingCarrier(net.virtuemart.www.VM_Order.AddShippingCarriersInput parameters) throws java.rmi.RemoteException{
+    if (vM_Order_PortType == null)
+      _initVM_OrderProxy();
+    return vM_Order_PortType.updateShippingCarrier(parameters);
+  }
+  
+  public java.lang.String updateShippingRate(net.virtuemart.www.VM_Order.AddShippingRatesInput parameters) throws java.rmi.RemoteException{
+    if (vM_Order_PortType == null)
+      _initVM_OrderProxy();
+    return vM_Order_PortType.updateShippingRate(parameters);
   }
   
   

@@ -9,7 +9,6 @@ import java.io.UnsupportedEncodingException;
 import com.openbravo.pos.forms.*;
 
 import com.openbravo.pos.util.AltEncrypter;
-import com.sun.net.ssl.internal.ssl.Provider;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

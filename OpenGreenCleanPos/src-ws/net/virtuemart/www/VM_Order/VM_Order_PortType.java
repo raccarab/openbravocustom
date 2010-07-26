@@ -14,7 +14,7 @@ public interface VM_Order_PortType extends java.rmi.Remote {
     public net.virtuemart.www.VM_Order.OrderStatus[] getOrderStatus(net.virtuemart.www.VM_Tools.LoginInfo parameters) throws java.rmi.RemoteException;
     public java.lang.String updateOrderStatus(net.virtuemart.www.VM_Order.UpdateOrderStatusInput parameters) throws java.rmi.RemoteException;
     public java.lang.String deleteOrder(net.virtuemart.www.VM_Order.DeleteOrderInput parameters) throws java.rmi.RemoteException;
-    public java.lang.String createOrder(net.virtuemart.www.VM_Order.CreateOrderInput parameters) throws java.rmi.RemoteException;
+    public net.virtuemart.www.VM_Order.ReturnOutput createOrder(net.virtuemart.www.VM_Order.CreateOrderInput parameters) throws java.rmi.RemoteException;
     public net.virtuemart.www.VM_Order.Coupon[] getAllCouponCode(net.virtuemart.www.VM_Tools.LoginInfo parameters) throws java.rmi.RemoteException;
     public java.lang.String addCouponCode(net.virtuemart.www.VM_Order.AddCouponInput parameters) throws java.rmi.RemoteException;
     public java.lang.String deleteCouponCode(net.virtuemart.www.VM_Order.DelInput parameters) throws java.rmi.RemoteException;
@@ -36,4 +36,6 @@ public interface VM_Order_PortType extends java.rmi.Remote {
     public java.lang.String addOrderStatusCode(net.virtuemart.www.VM_Order.AddStatusInput parameters) throws java.rmi.RemoteException;
     public java.lang.String updateOrderStatusCode(net.virtuemart.www.VM_Order.AddStatusInput parameters) throws java.rmi.RemoteException;
     public java.lang.String deleteOrderStatusCode(net.virtuemart.www.VM_Order.DeleteStatusInput parameters) throws java.rmi.RemoteException;
+    public java.lang.String updateShippingCarrier(net.virtuemart.www.VM_Order.AddShippingCarriersInput parameters) throws java.rmi.RemoteException;
+    public java.lang.String updateShippingRate(net.virtuemart.www.VM_Order.AddShippingRatesInput parameters) throws java.rmi.RemoteException;
 }

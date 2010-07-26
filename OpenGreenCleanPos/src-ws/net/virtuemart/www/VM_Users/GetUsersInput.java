@@ -1,34 +1,34 @@
 /**
- * GetChildsCategoriesRequestInput.java
+ * GetUsersInput.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package net.virtuemart.www.VM_Categories;
+package net.virtuemart.www.VM_Users;
 
-public class GetChildsCategoriesRequestInput  implements java.io.Serializable {
+public class GetUsersInput  implements java.io.Serializable {
     private net.virtuemart.www.VM_Tools.LoginInfo loginInfo;
 
-    private java.lang.String categoryId;
+    private java.lang.String limite_start;
 
-    private java.lang.String category_publish;
+    private java.lang.String limite_end;
 
-    public GetChildsCategoriesRequestInput() {
+    public GetUsersInput() {
     }
 
-    public GetChildsCategoriesRequestInput(
+    public GetUsersInput(
            net.virtuemart.www.VM_Tools.LoginInfo loginInfo,
-           java.lang.String categoryId,
-           java.lang.String category_publish) {
+           java.lang.String limite_start,
+           java.lang.String limite_end) {
            this.loginInfo = loginInfo;
-           this.categoryId = categoryId;
-           this.category_publish = category_publish;
+           this.limite_start = limite_start;
+           this.limite_end = limite_end;
     }
 
 
     /**
-     * Gets the loginInfo value for this GetChildsCategoriesRequestInput.
+     * Gets the loginInfo value for this GetUsersInput.
      * 
      * @return loginInfo
      */
@@ -38,7 +38,7 @@ public class GetChildsCategoriesRequestInput  implements java.io.Serializable {
 
 
     /**
-     * Sets the loginInfo value for this GetChildsCategoriesRequestInput.
+     * Sets the loginInfo value for this GetUsersInput.
      * 
      * @param loginInfo
      */
@@ -48,48 +48,48 @@ public class GetChildsCategoriesRequestInput  implements java.io.Serializable {
 
 
     /**
-     * Gets the categoryId value for this GetChildsCategoriesRequestInput.
+     * Gets the limite_start value for this GetUsersInput.
      * 
-     * @return categoryId
+     * @return limite_start
      */
-    public java.lang.String getCategoryId() {
-        return categoryId;
+    public java.lang.String getLimite_start() {
+        return limite_start;
     }
 
 
     /**
-     * Sets the categoryId value for this GetChildsCategoriesRequestInput.
+     * Sets the limite_start value for this GetUsersInput.
      * 
-     * @param categoryId
+     * @param limite_start
      */
-    public void setCategoryId(java.lang.String categoryId) {
-        this.categoryId = categoryId;
+    public void setLimite_start(java.lang.String limite_start) {
+        this.limite_start = limite_start;
     }
 
 
     /**
-     * Gets the category_publish value for this GetChildsCategoriesRequestInput.
+     * Gets the limite_end value for this GetUsersInput.
      * 
-     * @return category_publish
+     * @return limite_end
      */
-    public java.lang.String getCategory_publish() {
-        return category_publish;
+    public java.lang.String getLimite_end() {
+        return limite_end;
     }
 
 
     /**
-     * Sets the category_publish value for this GetChildsCategoriesRequestInput.
+     * Sets the limite_end value for this GetUsersInput.
      * 
-     * @param category_publish
+     * @param limite_end
      */
-    public void setCategory_publish(java.lang.String category_publish) {
-        this.category_publish = category_publish;
+    public void setLimite_end(java.lang.String limite_end) {
+        this.limite_end = limite_end;
     }
 
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
-        if (!(obj instanceof GetChildsCategoriesRequestInput)) return false;
-        GetChildsCategoriesRequestInput other = (GetChildsCategoriesRequestInput) obj;
+        if (!(obj instanceof GetUsersInput)) return false;
+        GetUsersInput other = (GetUsersInput) obj;
         if (obj == null) return false;
         if (this == obj) return true;
         if (__equalsCalc != null) {
@@ -101,12 +101,12 @@ public class GetChildsCategoriesRequestInput  implements java.io.Serializable {
             ((this.loginInfo==null && other.getLoginInfo()==null) || 
              (this.loginInfo!=null &&
               this.loginInfo.equals(other.getLoginInfo()))) &&
-            ((this.categoryId==null && other.getCategoryId()==null) || 
-             (this.categoryId!=null &&
-              this.categoryId.equals(other.getCategoryId()))) &&
-            ((this.category_publish==null && other.getCategory_publish()==null) || 
-             (this.category_publish!=null &&
-              this.category_publish.equals(other.getCategory_publish())));
+            ((this.limite_start==null && other.getLimite_start()==null) || 
+             (this.limite_start!=null &&
+              this.limite_start.equals(other.getLimite_start()))) &&
+            ((this.limite_end==null && other.getLimite_end()==null) || 
+             (this.limite_end!=null &&
+              this.limite_end.equals(other.getLimite_end())));
         __equalsCalc = null;
         return _equals;
     }
@@ -121,11 +121,11 @@ public class GetChildsCategoriesRequestInput  implements java.io.Serializable {
         if (getLoginInfo() != null) {
             _hashCode += getLoginInfo().hashCode();
         }
-        if (getCategoryId() != null) {
-            _hashCode += getCategoryId().hashCode();
+        if (getLimite_start() != null) {
+            _hashCode += getLimite_start().hashCode();
         }
-        if (getCategory_publish() != null) {
-            _hashCode += getCategory_publish().hashCode();
+        if (getLimite_end() != null) {
+            _hashCode += getLimite_end().hashCode();
         }
         __hashCodeCalc = false;
         return _hashCode;
@@ -133,25 +133,25 @@ public class GetChildsCategoriesRequestInput  implements java.io.Serializable {
 
     // Type metadata
     private static org.apache.axis.description.TypeDesc typeDesc =
-        new org.apache.axis.description.TypeDesc(GetChildsCategoriesRequestInput.class, true);
+        new org.apache.axis.description.TypeDesc(GetUsersInput.class, true);
 
     static {
-        typeDesc.setXmlType(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Categories/", "GetChildsCategoriesRequestInput"));
+        typeDesc.setXmlType(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "GetUsersInput"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("loginInfo");
         elemField.setXmlName(new javax.xml.namespace.QName("", "loginInfo"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Categories/", "loginInfo"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Users/", "loginInfo"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("categoryId");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "categoryId"));
+        elemField.setFieldName("limite_start");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "limite_start"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("category_publish");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "category_publish"));
+        elemField.setFieldName("limite_end");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "limite_end"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);

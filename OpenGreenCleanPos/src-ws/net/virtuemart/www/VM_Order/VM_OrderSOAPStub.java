@@ -16,7 +16,7 @@ public class VM_OrderSOAPStub extends org.apache.axis.client.Stub implements net
     static org.apache.axis.description.OperationDesc [] _operations;
 
     static {
-        _operations = new org.apache.axis.description.OperationDesc[28];
+        _operations = new org.apache.axis.description.OperationDesc[30];
         _initOperationDesc1();
         _initOperationDesc2();
         _initOperationDesc3();
@@ -95,8 +95,8 @@ public class VM_OrderSOAPStub extends org.apache.axis.client.Stub implements net
         oper.setName("CreateOrder");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Order/", "CreateOrderRequest"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Order/", "CreateOrderInput"), net.virtuemart.www.VM_Order.CreateOrderInput.class, false, false);
         oper.addParameter(param);
-        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        oper.setReturnClass(java.lang.String.class);
+        oper.setReturnType(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Order/", "returnOutput"));
+        oper.setReturnClass(net.virtuemart.www.VM_Order.ReturnOutput.class);
         oper.setReturnQName(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Order/", "CreateOrderResponse"));
         oper.setStyle(org.apache.axis.constants.Style.DOCUMENT);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
@@ -342,6 +342,28 @@ public class VM_OrderSOAPStub extends org.apache.axis.client.Stub implements net
         oper.setStyle(org.apache.axis.constants.Style.DOCUMENT);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[27] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("UpdateShippingCarrier");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Order/", "UpdateShippingCarrierRequest"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Order/", "AddShippingCarriersInput"), net.virtuemart.www.VM_Order.AddShippingCarriersInput.class, false, false);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        oper.setReturnClass(java.lang.String.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Order/", "UpdateShippingCarrierResponse"));
+        oper.setStyle(org.apache.axis.constants.Style.DOCUMENT);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[28] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("UpdateShippingRate");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Order/", "UpdateShippingRateRequest"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Order/", "AddShippingRatesInput"), net.virtuemart.www.VM_Order.AddShippingRatesInput.class, false, false);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        oper.setReturnClass(java.lang.String.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Order/", "UpdateShippingRateResponse"));
+        oper.setStyle(org.apache.axis.constants.Style.DOCUMENT);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[29] = oper;
 
     }
 
@@ -597,6 +619,13 @@ public class VM_OrderSOAPStub extends org.apache.axis.client.Stub implements net
             qName2 = new javax.xml.namespace.QName("", "product");
             cachedSerFactories.add(new org.apache.axis.encoding.ser.ArraySerializerFactory(qName, qName2));
             cachedDeserFactories.add(new org.apache.axis.encoding.ser.ArrayDeserializerFactory());
+
+            qName = new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Order/", "returnOutput");
+            cachedSerQNames.add(qName);
+            cls = net.virtuemart.www.VM_Order.ReturnOutput.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Order/", "shipping_carriers");
             cachedSerQNames.add(qName);
@@ -950,7 +979,7 @@ public class VM_OrderSOAPStub extends org.apache.axis.client.Stub implements net
 }
     }
 
-    public java.lang.String createOrder(net.virtuemart.www.VM_Order.CreateOrderInput parameters) throws java.rmi.RemoteException {
+    public net.virtuemart.www.VM_Order.ReturnOutput createOrder(net.virtuemart.www.VM_Order.CreateOrderInput parameters) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -974,9 +1003,9 @@ public class VM_OrderSOAPStub extends org.apache.axis.client.Stub implements net
         else {
             extractAttachments(_call);
             try {
-                return (java.lang.String) _resp;
+                return (net.virtuemart.www.VM_Order.ReturnOutput) _resp;
             } catch (java.lang.Exception _exception) {
-                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+                return (net.virtuemart.www.VM_Order.ReturnOutput) org.apache.axis.utils.JavaUtils.convert(_resp, net.virtuemart.www.VM_Order.ReturnOutput.class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
@@ -1677,6 +1706,74 @@ public class VM_OrderSOAPStub extends org.apache.axis.client.Stub implements net
         _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
         _call.setOperationName(new javax.xml.namespace.QName("", "DeleteOrderStatusCode"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {parameters});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (java.lang.String) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public java.lang.String updateShippingCarrier(net.virtuemart.www.VM_Order.AddShippingCarriersInput parameters) throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[28]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://www.virtuemart.net/VM_Order/UpdateShippingCarrier");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("", "UpdateShippingCarrier"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {parameters});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (java.lang.String) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public java.lang.String updateShippingRate(net.virtuemart.www.VM_Order.AddShippingRatesInput parameters) throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[29]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://www.virtuemart.net/VM_Order/UpdateShippingRate");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("", "UpdateShippingRate"));
 
         setRequestHeaders(_call);
         setAttachments(_call);

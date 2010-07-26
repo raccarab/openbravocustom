@@ -21,10 +21,16 @@
 package com.openbravo.pos.forms;
 
 import java.util.Locale;
+import java.util.UUID;
+
 import javax.swing.UIManager;
+
+import com.openbravo.data.gui.JMessageDialog;
+import com.openbravo.data.gui.MessageInf;
 import com.openbravo.format.Formats;
 import com.openbravo.pos.instance.InstanceQuery;
 import com.openbravo.pos.ticket.TicketInfo;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -118,6 +124,16 @@ public class StartPOS {
                 // For printing the Hostname in the ticke
                  String hostname = config.getProperty("machine.hostname");
                  TicketInfo.setHostname(hostname);
+                 if (config.getProperty("ws.posid")!=null){
+                	 try {
+                	 int posid = Integer.parseInt(config.getProperty("ws.posid"));
+//                	 	if ( posid > 0 && posid <= 9000000) {
+//                	 		UUID.setId(posid);
+//                	 	} 
+                	 } catch (NumberFormatException e) {
+						e.printStackTrace();
+					}
+                 }
 
                  String screenmode = config.getProperty("machine.screenmode");
 

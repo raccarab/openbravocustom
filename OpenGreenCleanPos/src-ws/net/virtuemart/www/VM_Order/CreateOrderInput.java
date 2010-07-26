@@ -12,15 +12,15 @@ public class CreateOrderInput  implements java.io.Serializable {
 
     private java.lang.String user_id;
 
-    private java.lang.String shipping;
+    private java.lang.String shipping_method;
 
-    private java.lang.String shipping_rate;
+    private java.lang.String shipping_carrier_name;
 
-    private java.lang.String shipping_opt;
+    private java.lang.String shipping_rate_name;
 
     private java.lang.String shipping_price;
 
-    private java.lang.String shipping_id;
+    private java.lang.String shipping_rate_id;
 
     private java.lang.String price_including_tax;
 
@@ -34,36 +34,40 @@ public class CreateOrderInput  implements java.io.Serializable {
 
     private net.virtuemart.www.VM_Order.Product[] products;
 
+    private java.lang.String vendor_id;
+
     public CreateOrderInput() {
     }
 
     public CreateOrderInput(
            net.virtuemart.www.VM_Tools.LoginInfo loginInfo,
            java.lang.String user_id,
-           java.lang.String shipping,
-           java.lang.String shipping_rate,
-           java.lang.String shipping_opt,
+           java.lang.String shipping_method,
+           java.lang.String shipping_carrier_name,
+           java.lang.String shipping_rate_name,
            java.lang.String shipping_price,
-           java.lang.String shipping_id,
+           java.lang.String shipping_rate_id,
            java.lang.String price_including_tax,
            java.lang.String product_currency,
            java.lang.String customer_note,
            java.lang.String payment_method_id,
            java.lang.String coupon_code,
-           net.virtuemart.www.VM_Order.Product[] products) {
+           net.virtuemart.www.VM_Order.Product[] products,
+           java.lang.String vendor_id) {
            this.loginInfo = loginInfo;
            this.user_id = user_id;
-           this.shipping = shipping;
-           this.shipping_rate = shipping_rate;
-           this.shipping_opt = shipping_opt;
+           this.shipping_method = shipping_method;
+           this.shipping_carrier_name = shipping_carrier_name;
+           this.shipping_rate_name = shipping_rate_name;
            this.shipping_price = shipping_price;
-           this.shipping_id = shipping_id;
+           this.shipping_rate_id = shipping_rate_id;
            this.price_including_tax = price_including_tax;
            this.product_currency = product_currency;
            this.customer_note = customer_note;
            this.payment_method_id = payment_method_id;
            this.coupon_code = coupon_code;
            this.products = products;
+           this.vendor_id = vendor_id;
     }
 
 
@@ -108,62 +112,62 @@ public class CreateOrderInput  implements java.io.Serializable {
 
 
     /**
-     * Gets the shipping value for this CreateOrderInput.
+     * Gets the shipping_method value for this CreateOrderInput.
      * 
-     * @return shipping
+     * @return shipping_method
      */
-    public java.lang.String getShipping() {
-        return shipping;
+    public java.lang.String getShipping_method() {
+        return shipping_method;
     }
 
 
     /**
-     * Sets the shipping value for this CreateOrderInput.
+     * Sets the shipping_method value for this CreateOrderInput.
      * 
-     * @param shipping
+     * @param shipping_method
      */
-    public void setShipping(java.lang.String shipping) {
-        this.shipping = shipping;
+    public void setShipping_method(java.lang.String shipping_method) {
+        this.shipping_method = shipping_method;
     }
 
 
     /**
-     * Gets the shipping_rate value for this CreateOrderInput.
+     * Gets the shipping_carrier_name value for this CreateOrderInput.
      * 
-     * @return shipping_rate
+     * @return shipping_carrier_name
      */
-    public java.lang.String getShipping_rate() {
-        return shipping_rate;
+    public java.lang.String getShipping_carrier_name() {
+        return shipping_carrier_name;
     }
 
 
     /**
-     * Sets the shipping_rate value for this CreateOrderInput.
+     * Sets the shipping_carrier_name value for this CreateOrderInput.
      * 
-     * @param shipping_rate
+     * @param shipping_carrier_name
      */
-    public void setShipping_rate(java.lang.String shipping_rate) {
-        this.shipping_rate = shipping_rate;
+    public void setShipping_carrier_name(java.lang.String shipping_carrier_name) {
+        this.shipping_carrier_name = shipping_carrier_name;
     }
 
 
     /**
-     * Gets the shipping_opt value for this CreateOrderInput.
+     * Gets the shipping_rate_name value for this CreateOrderInput.
      * 
-     * @return shipping_opt
+     * @return shipping_rate_name
      */
-    public java.lang.String getShipping_opt() {
-        return shipping_opt;
+    public java.lang.String getShipping_rate_name() {
+        return shipping_rate_name;
     }
 
 
     /**
-     * Sets the shipping_opt value for this CreateOrderInput.
+     * Sets the shipping_rate_name value for this CreateOrderInput.
      * 
-     * @param shipping_opt
+     * @param shipping_rate_name
      */
-    public void setShipping_opt(java.lang.String shipping_opt) {
-        this.shipping_opt = shipping_opt;
+    public void setShipping_rate_name(java.lang.String shipping_rate_name) {
+        this.shipping_rate_name = shipping_rate_name;
     }
 
 
@@ -188,22 +192,22 @@ public class CreateOrderInput  implements java.io.Serializable {
 
 
     /**
-     * Gets the shipping_id value for this CreateOrderInput.
+     * Gets the shipping_rate_id value for this CreateOrderInput.
      * 
-     * @return shipping_id
+     * @return shipping_rate_id
      */
-    public java.lang.String getShipping_id() {
-        return shipping_id;
+    public java.lang.String getShipping_rate_id() {
+        return shipping_rate_id;
     }
 
 
     /**
-     * Sets the shipping_id value for this CreateOrderInput.
+     * Sets the shipping_rate_id value for this CreateOrderInput.
      * 
-     * @param shipping_id
+     * @param shipping_rate_id
      */
-    public void setShipping_id(java.lang.String shipping_id) {
-        this.shipping_id = shipping_id;
+    public void setShipping_rate_id(java.lang.String shipping_rate_id) {
+        this.shipping_rate_id = shipping_rate_id;
     }
 
 
@@ -326,6 +330,26 @@ public class CreateOrderInput  implements java.io.Serializable {
         this.products = products;
     }
 
+
+    /**
+     * Gets the vendor_id value for this CreateOrderInput.
+     * 
+     * @return vendor_id
+     */
+    public java.lang.String getVendor_id() {
+        return vendor_id;
+    }
+
+
+    /**
+     * Sets the vendor_id value for this CreateOrderInput.
+     * 
+     * @param vendor_id
+     */
+    public void setVendor_id(java.lang.String vendor_id) {
+        this.vendor_id = vendor_id;
+    }
+
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof CreateOrderInput)) return false;
@@ -344,21 +368,21 @@ public class CreateOrderInput  implements java.io.Serializable {
             ((this.user_id==null && other.getUser_id()==null) || 
              (this.user_id!=null &&
               this.user_id.equals(other.getUser_id()))) &&
-            ((this.shipping==null && other.getShipping()==null) || 
-             (this.shipping!=null &&
-              this.shipping.equals(other.getShipping()))) &&
-            ((this.shipping_rate==null && other.getShipping_rate()==null) || 
-             (this.shipping_rate!=null &&
-              this.shipping_rate.equals(other.getShipping_rate()))) &&
-            ((this.shipping_opt==null && other.getShipping_opt()==null) || 
-             (this.shipping_opt!=null &&
-              this.shipping_opt.equals(other.getShipping_opt()))) &&
+            ((this.shipping_method==null && other.getShipping_method()==null) || 
+             (this.shipping_method!=null &&
+              this.shipping_method.equals(other.getShipping_method()))) &&
+            ((this.shipping_carrier_name==null && other.getShipping_carrier_name()==null) || 
+             (this.shipping_carrier_name!=null &&
+              this.shipping_carrier_name.equals(other.getShipping_carrier_name()))) &&
+            ((this.shipping_rate_name==null && other.getShipping_rate_name()==null) || 
+             (this.shipping_rate_name!=null &&
+              this.shipping_rate_name.equals(other.getShipping_rate_name()))) &&
             ((this.shipping_price==null && other.getShipping_price()==null) || 
              (this.shipping_price!=null &&
               this.shipping_price.equals(other.getShipping_price()))) &&
-            ((this.shipping_id==null && other.getShipping_id()==null) || 
-             (this.shipping_id!=null &&
-              this.shipping_id.equals(other.getShipping_id()))) &&
+            ((this.shipping_rate_id==null && other.getShipping_rate_id()==null) || 
+             (this.shipping_rate_id!=null &&
+              this.shipping_rate_id.equals(other.getShipping_rate_id()))) &&
             ((this.price_including_tax==null && other.getPrice_including_tax()==null) || 
              (this.price_including_tax!=null &&
               this.price_including_tax.equals(other.getPrice_including_tax()))) &&
@@ -376,7 +400,10 @@ public class CreateOrderInput  implements java.io.Serializable {
               this.coupon_code.equals(other.getCoupon_code()))) &&
             ((this.products==null && other.getProducts()==null) || 
              (this.products!=null &&
-              java.util.Arrays.equals(this.products, other.getProducts())));
+              java.util.Arrays.equals(this.products, other.getProducts()))) &&
+            ((this.vendor_id==null && other.getVendor_id()==null) || 
+             (this.vendor_id!=null &&
+              this.vendor_id.equals(other.getVendor_id())));
         __equalsCalc = null;
         return _equals;
     }
@@ -394,20 +421,20 @@ public class CreateOrderInput  implements java.io.Serializable {
         if (getUser_id() != null) {
             _hashCode += getUser_id().hashCode();
         }
-        if (getShipping() != null) {
-            _hashCode += getShipping().hashCode();
+        if (getShipping_method() != null) {
+            _hashCode += getShipping_method().hashCode();
         }
-        if (getShipping_rate() != null) {
-            _hashCode += getShipping_rate().hashCode();
+        if (getShipping_carrier_name() != null) {
+            _hashCode += getShipping_carrier_name().hashCode();
         }
-        if (getShipping_opt() != null) {
-            _hashCode += getShipping_opt().hashCode();
+        if (getShipping_rate_name() != null) {
+            _hashCode += getShipping_rate_name().hashCode();
         }
         if (getShipping_price() != null) {
             _hashCode += getShipping_price().hashCode();
         }
-        if (getShipping_id() != null) {
-            _hashCode += getShipping_id().hashCode();
+        if (getShipping_rate_id() != null) {
+            _hashCode += getShipping_rate_id().hashCode();
         }
         if (getPrice_including_tax() != null) {
             _hashCode += getPrice_including_tax().hashCode();
@@ -435,6 +462,9 @@ public class CreateOrderInput  implements java.io.Serializable {
                 }
             }
         }
+        if (getVendor_id() != null) {
+            _hashCode += getVendor_id().hashCode();
+        }
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -458,20 +488,20 @@ public class CreateOrderInput  implements java.io.Serializable {
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("shipping");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "shipping"));
+        elemField.setFieldName("shipping_method");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "shipping_method"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("shipping_rate");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "shipping_rate"));
+        elemField.setFieldName("shipping_carrier_name");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "shipping_carrier_name"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("shipping_opt");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "shipping_opt"));
+        elemField.setFieldName("shipping_rate_name");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "shipping_rate_name"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
@@ -482,8 +512,8 @@ public class CreateOrderInput  implements java.io.Serializable {
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("shipping_id");
-        elemField.setXmlName(new javax.xml.namespace.QName("", "shipping_id"));
+        elemField.setFieldName("shipping_rate_id");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "shipping_rate_id"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
@@ -523,6 +553,12 @@ public class CreateOrderInput  implements java.io.Serializable {
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.virtuemart.net/VM_Order/", "product"));
         elemField.setNillable(false);
         elemField.setItemQName(new javax.xml.namespace.QName("", "product"));
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("vendor_id");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "vendor_id"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }
 

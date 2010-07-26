@@ -97,27 +97,27 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                             }}) == 0) {
 
                     // If not updated, try to insert
-//                    new PreparedSentence(s,
-//                            "INSERT INTO CUSTOMERS(ID, SEARCHKEY, NAME, ADDRESS, ADDRESS2, POSTAL, CITY, REGION, COUNTRY, FIRSTNAME, LASTNAME, EMAIL, PHONE, PHONE2, NOTES, TAXID, VISIBLE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + s.DB.TRUE() + ")",
-//                            SerializerWriteParams.INSTANCE
-//                            ).exec(new DataParams() { public void writeValues() throws BasicException {
-//                                setString(1, customer.getId());
-//                                setString(2, customer.getSearchkey());
-//                                setString(3, customer.getName());
-//                                setString(4, customer.getAddress());
-//                                setString(5, customer.getAddress2());
-//                                setString(6, customer.getPostal());
-//                                setString(7, customer.getCity());
-//                                setString(8, customer.getRegion());
-//                                setString(9, customer.getCountry());
-//                                setString(10, customer.getFirstname());
-//                                setString(11, customer.getLastname());
-//                                setString(12, customer.getEmail());
-//                                setString(13, customer.getPhone());
-//                                setString(14, customer.getPhone2());
-//                                setString(15, customer.getNotes());
-//                                setString(16, customer.getTaxid());
-//                            }});
+                    new PreparedSentence(s,
+                            "INSERT INTO CUSTOMERS(ID, SEARCHKEY, NAME, ADDRESS, ADDRESS2, POSTAL, CITY, REGION, COUNTRY, FIRSTNAME, LASTNAME, EMAIL, PHONE, PHONE2, NOTES, TAXID, VISIBLE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + s.DB.TRUE() + ")",
+                            SerializerWriteParams.INSTANCE
+                            ).exec(new DataParams() { public void writeValues() throws BasicException {
+                                setString(1, customer.getId());
+                                setString(2, customer.getSearchkey());
+                                setString(3, customer.getName());
+                                setString(4, customer.getAddress());
+                                setString(5, customer.getAddress2());
+                                setString(6, customer.getPostal());
+                                setString(7, customer.getCity());
+                                setString(8, customer.getRegion());
+                                setString(9, customer.getCountry());
+                                setString(10, customer.getFirstname());
+                                setString(11, customer.getLastname());
+                                setString(12, customer.getEmail());
+                                setString(13, customer.getPhone());
+                                setString(14, customer.getPhone2());
+                                setString(15, customer.getNotes());
+                                setString(16, customer.getTaxid());
+                            }});
                 	
                     System.out.println("NOT UPDATED "+customer.getTaxid());
                 }
@@ -213,12 +213,10 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                 
                 // Try to update
                 if (new PreparedSentence(s, 
-                            "UPDATE CATEGORIES SET NAME = ?, IMAGE = ? WHERE ID = ?", 
+                            "SELECT * FROM CATEGORIES WHERE NAME = ?", 
                             SerializerWriteParams.INSTANCE
                             ).exec(new DataParams() { public void writeValues() throws BasicException {
-                                 setString(1, cat.getName());
-                                 setBytes(2, ImageUtils.writeImage(cat.getImage()));
-                                 setString(3, cat.getID());                                   
+                                 setString(1, cat.getName());                              
                             }}) == 0) {
                        
                     // If not updated, try to insert
@@ -242,17 +240,15 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
         Transaction t = new Transaction(s) {
             public Object transact() throws BasicException {
                 // Sync the Product in a transaction
-                
                 // Try to update
                 if (new PreparedSentence(s, 
-                            "UPDATE PRODUCTS SET REFERENCE = ?, CODE = ?, NAME = ?, PRICEBUY = ?, PRICESELL = ?, CATEGORY = ?, TAXCAT = ?, IMAGE = ? WHERE ID = ?", 
+                            "UPDATE PRODUCTS SET REFERENCE = ?, NAME = ?, ISSCALE = ?, PRICEBUY = ?, PRICESELL = ?, CATEGORY = ?, TAXCAT = ?, IMAGE = ? WHERE CODE = ?", 
                             SerializerWriteParams.INSTANCE
                             ).exec(new DataParams() { public void writeValues() throws BasicException {
                                 setString(1, prod.getReference());
-                                setString(2, prod.getCode());
-                                setString(3, prod.getName());
+                                setString(2, prod.getName());
                                 // setBoolean(x, p.isCom());
-                                // setBoolean(x, p.isScale());
+                                setBoolean(3, prod.isScale());
                                 setDouble(4, prod.getPriceBuy());
                                 setDouble(5, prod.getPriceSell());
                                 setString(6, prod.getCategoryID());
@@ -260,7 +256,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                                 setBytes(8, ImageUtils.writeImage(prod.getImage()));
                                 // setDouble(x, 0.0);
                                 // setDouble(x, 0.0);
-                                setString(9, prod.getID());  
+                                setString(9, prod.getCode());  
                             }}) == 0) {
                             
                     // If not updated, try to insert
@@ -286,9 +282,9 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                         
                 // Insert in catalog
                 new StaticSentence(s, 
-                        "INSERT INTO PRODUCTS_CAT(PRODUCT, CATORDER) VALUES (?, NULL)",
+                        "INSERT INTO PRODUCTS_CAT(PRODUCT, CATORDER) VALUES ((SELECT ID FROM PRODUCTS WHERE CODE=?), NULL)",
                         SerializerWriteString.INSTANCE
-                        ).exec(prod.getID());   
+                        ).exec(prod.getCode());   
                 
                 return null;        
             }
