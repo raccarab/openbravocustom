@@ -27,7 +27,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import javax.xml.rpc.ServiceException;
 
-import net.virtuemart.www.externalsales.Order;
 import java.rmi.RemoteException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -38,11 +37,13 @@ import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.DataLogicSystem;
 import com.openbravo.pos.util.AltEncrypter;
 import com.openbravo.pos.util.Base64Encoder;
+
 import java.util.logging.Logger;
 import net.virtuemart.www.VM_Categories.AddCategoryInput;
 import net.virtuemart.www.VM_Categories.Categorie;
 import net.virtuemart.www.VM_Categories.GetAllCategoriesInput;
 import net.virtuemart.www.VM_Categories.VM_CategoriesProxy;
+import net.virtuemart.www.VM_Order.CreateOrderInput;
 import net.virtuemart.www.VM_Order.VM_OrderProxy;
 import net.virtuemart.www.VM_Product.GetAllProductsInput;
 import net.virtuemart.www.VM_Product.Produit;
@@ -119,6 +120,7 @@ public class ExternalSalesHelper {
 		orderProxy = new VM_OrderProxy(wsURL+OrderURL);
 		usersProxy = new VM_UsersProxy(wsURL+UsersURL);
 		productProxy = new VM_ProductProxy(wsURL+ProductURL);
+		
     }
 
     public String getWsPosid() {
@@ -217,9 +219,15 @@ public class ExternalSalesHelper {
         return produits;
     }
     
-    public boolean uploadOrders(Order[] orderstoupload) throws RemoteException {
-       // return externalSales.uploadOrders(m_iERPId, m_iERPOrg, m_iERPPos, orderstoupload, m_sERPUser, m_sERPPassword);
-    return true;
+    public boolean uploadOrders(CreateOrderInput[] orderstoupload) throws RemoteException {
+    	
+    	for (CreateOrderInput createOrderInput : orderstoupload) {
+    		createOrderInput.setLoginInfo(wsLogin);
+ //   		createOrderInput.setVendor_id(wsPosid);
+    		getOrderProxy().createOrder(createOrderInput);
+		}
+    	
+    	return true;
     }
        
     private static String getPasswordHash(String password) {

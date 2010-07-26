@@ -18,13 +18,19 @@
 //    along with GreenPOS.  If not, see <http://www.gnu.org/licenses/>.
 package com.openbravo.pos.ticket;
 
+import java.io.IOException;
+import java.io.ObjectOutput;
 import java.io.Serializable;
+
+import com.openbravo.basic.BasicException;
+import com.openbravo.data.loader.DataRead;
+import com.openbravo.data.loader.SerializableRead;
 
 /**
  *
  * @author adrianromero
  */
-public class UserInfo implements Serializable {
+public class UserInfo implements SerializableRead,Serializable {
 
     private static final long serialVersionUID = 7537578737839L;
     private String m_sId;
@@ -35,6 +41,11 @@ public class UserInfo implements Serializable {
         m_sId = id;
         m_sName = name;
     }
+    
+    public UserInfo() {
+    	m_sId = null;
+    	m_sName = null;
+    }
 
     public String getId() {
         return m_sId;
@@ -43,4 +54,17 @@ public class UserInfo implements Serializable {
     public String getName() {
         return m_sName;
     }
+
+	@Override
+	public void readValues(DataRead dr) throws BasicException {
+		m_sId = dr.getString(1);
+        m_sName = dr.getString(2);
+		
+	}
+	
+	public void writeExternal(ObjectOutput out) throws IOException {
+        // esto es solo para serializar tickets que no estan en la bolsa de tickets pendientes
+        out.writeObject(m_sId);
+        out.writeObject(m_sName);
+	}
 }

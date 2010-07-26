@@ -25,24 +25,26 @@ package net.virtuemart.www.possync;
 
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
-import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import javax.xml.rpc.ServiceException;
 
-import net.virtuemart.www.externalsales.BPartner;
-import net.virtuemart.www.externalsales.Order;
-import net.virtuemart.www.externalsales.OrderIdentifier;
-import net.virtuemart.www.externalsales.OrderLine;
-import net.virtuemart.www.externalsales.Payment;
+import net.virtuemart.www.VM_Order.CreateOrderInput;
+import net.virtuemart.www.VM_Order.Product;
+import net.virtuemart.www.VM_Product.Produit;
+import net.virtuemart.www.VM_Users.User;
 
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.MessageInf;
 import com.openbravo.pos.forms.AppLocal;
+import com.openbravo.pos.forms.DataLogicSales;
 import com.openbravo.pos.forms.DataLogicSystem;
 import com.openbravo.pos.forms.ProcessAction;
-import com.openbravo.pos.payment.PaymentInfo;
+import com.openbravo.pos.ticket.ProductInfoExt;
 import com.openbravo.pos.ticket.TicketInfo;
 import com.openbravo.pos.ticket.TicketLineInfo;
+import com.openbravo.pos.ticket.UserInfo;
+
 import net.virtuemart.www.possync.DataLogicIntegration;
 import net.virtuemart.www.possync.ExternalSalesHelper;
 
@@ -52,11 +54,13 @@ public class OrdersSync implements ProcessAction {
     private DataLogicSystem dlsystem;
     private DataLogicIntegration dlintegration;
     private ExternalSalesHelper externalsales;
+    private DataLogicSales dlsales;
     
     /** Creates a new instance of OrdersSync */
-    public OrdersSync(DataLogicSystem dlsystem, DataLogicIntegration dlintegration) {
+    public OrdersSync(DataLogicSystem dlsystem, DataLogicIntegration dlintegration, DataLogicSales dlsales) {
         this.dlsystem = dlsystem;
         this.dlintegration = dlintegration;
+        this.dlsales = dlsales;
         externalsales = null;
     }
     
@@ -81,14 +85,14 @@ public class OrdersSync implements ProcessAction {
             } else {
 
                 // transformo tickets en ordenes
-                Order[] orders = transformTickets(ticketlist);
+            	CreateOrderInput[] orders = transformTickets(ticketlist);
 
                 //uploads orders and return boolean as a result
                 if(!externalsales.uploadOrders(orders))
                     throw new BasicException(AppLocal.getIntString("message.returnnull"));
 
                 // actualizo los tickets como subidos
-                dlintegration.execTicketUpdate();
+               dlintegration.execTicketUpdate();
 
                 return new MessageInf(MessageInf.SGN_SUCCESS, AppLocal.getIntString("message.syncordersok"), AppLocal.getIntString("message.syncordersinfo", orders.length));
             }
@@ -102,71 +106,106 @@ public class OrdersSync implements ProcessAction {
         }
     }  
     
-    private Order[] transformTickets(List<TicketInfo> ticketlist) {
+    private CreateOrderInput[] transformTickets(List<TicketInfo> ticketlist) throws RemoteException, BasicException {
 
-        // Transformamos de tickets a ordenes
-        Order[] orders = new Order[ticketlist.size()];
+    	HashMap<String, String> usersMap = new HashMap<String, String>();
+    	
+		List<UserInfo> localUsers;
+		User[] remoteUsers = externalsales.getUsers();
+			
+			localUsers = dlintegration.getUsers();
+			
+			for (UserInfo localUser : localUsers) {
+				for (User user : remoteUsers) {
+					if (user.getLogin().equals(localUser.getName())) {
+						usersMap.put(localUser.getId(), user.getId());
+						break;
+					}
+				}
+			}
+
+		HashMap<String, String> productsMap = new HashMap<String, String>();
+    	
+		Produit[] remoteProducts = externalsales.getProductsCatalog();
+		
+		List<ProductInfoExt> localProducts = dlsales.getProductList().list();
+		
+		for (ProductInfoExt localProduct : localProducts) {
+			for (Produit produit : remoteProducts) {
+				if (produit.getProduct_sku().equals(localProduct.getCode())) {
+					productsMap.put(localProduct.getID(), produit.getId());
+					break;
+				}
+			}
+		}
+
+		System.out.println(usersMap);
+		System.out.println(productsMap);
+
+		CreateOrderInput[] orders = new CreateOrderInput[ticketlist.size()];
         for (int i = 0; i < ticketlist.size(); i++) {
-            TicketInfo ticket = ticketlist.get(i);
-
-            orders[i] = new Order();
-
-            OrderIdentifier orderid = new OrderIdentifier();
-            Calendar datenew = Calendar.getInstance();
-            datenew.setTime(ticket.getDate());
-            orderid.setDateNew(datenew);
-            orderid.setDocumentNo(Integer.toString(ticket.getTicketId()));
-
-            orders[i].setOrderId(orderid);
-            orders[i].setState(800175);
+        	TicketInfo ticket = ticketlist.get(i);
+        	
+        	String userID = usersMap.get(ticket.getCustomerId());
+  
+        	System.out.print(" > "+ticket.getCustomerId()+" ");
+        	System.out.println(usersMap.get(ticket.getCustomerId()));
+        	
+        	orders[i] = new CreateOrderInput();
+        	//orders[i].set
+            orders[i].setCoupon_code("0");
+            orders[i].setCustomer_note(String.valueOf(ticket.getTicketId()));
+            orders[i].setPayment_method_id("1");
+            orders[i].setPrice_including_tax(String.valueOf(ticket.getTotal()));
+            orders[i].setProduct_currency("EUR");
+            orders[i].setShipping_carrier_name("0");
+            orders[i].setShipping_method("0");
+            orders[i].setShipping_price("0");
+            orders[i].setShipping_rate_id("0");
+            orders[i].setShipping_rate_name("0");
+            if (userID==null)
+                orders[i].setUser_id("0");
+            else	
+            	orders[i].setUser_id(userID);
+            orders[i].setVendor_id("1");
             
-            // set the business partner
-            BPartner bp;
-            if (ticket.getCustomerId() == null) {
-                bp = null;
-            } else {
-                bp = new BPartner();
-                bp.setId(ticket.getCustomer().getSearchkey());
-                bp.setName(ticket.getCustomer().getName());
-            }
-            orders[i].setBusinessPartner(bp);
-
-            //Saco las lineas del pedido
-            OrderLine[] orderLine = new OrderLine[ticket.getLines().size()];
+            Product[] products = new Product[ticket.getLines().size()] ;
+            
             for (int j = 0; j < ticket.getLines().size(); j++){
                 TicketLineInfo line = ticket.getLines().get(j);
+                
+                products[j] = new Product();
 
-                orderLine[j] = new OrderLine();
-                orderLine[j].setOrderLineId(String.valueOf(line.getTicketLine()));// o simplemente "j"
                 if (line.getProductID() == null) {
-                    orderLine[j].setProductId("0");
+                	products[j].setProduct_id("0");
                 } else {
-                    orderLine[j].setProductId(line.getProductID()); // capturar error
+                	products[j].setProduct_id(productsMap.get(line.getProductID())); // capturar error
                 }
-                orderLine[j].setUnits(line.getMultiply());
-                orderLine[j].setPrice(line.getPrice());
-                orderLine[j].setTaxId(line.getTaxInfo().getId());     
+                products[j].setQuantity(String.valueOf(line.getMultiply()));
+                products[j].setDescription(line.getProductAttSetInstDesc());
             }
-            orders[i].setLines(orderLine);
 
+            orders[i].setProducts(products);
+            
+            
             //Saco las lineas de pago
-            Payment[] paymentLine = new Payment[ticket.getPayments().size()];
-            for (int j = 0; j < ticket.getPayments().size(); j++){       
-                PaymentInfo payment = ticket.getPayments().get(j);
-
-                paymentLine[j] = new Payment();
-                paymentLine[j].setAmount(payment.getTotal());
-                if ("magcard".equals(payment.getName())) {
-                    paymentLine[j].setPaymentType("K");
-                } else if ("cheque".equals(payment.getName())) {
-                    paymentLine[j].setPaymentType("2");
-                } else if ("cash".equals(payment.getName())) {
-                    paymentLine[j].setPaymentType("B");
-                } else {
-                    paymentLine[j].setPaymentType(null); // unknown
-                }        
-            }     
-            orders[i].setPayment(paymentLine);                    
+//            Payment[] paymentLine = new Payment[ticket.getPayments().size()];
+//            for (int j = 0; j < ticket.getPayments().size(); j++){       
+//                PaymentInfo payment = ticket.getPayments().get(j);
+//
+//                paymentLine[j] = new Payment();
+//                paymentLine[j].setAmount(payment.getTotal());
+//                if ("magcard".equals(payment.getName())) {
+//                    paymentLine[j].setPaymentType("K");
+//                } else if ("cheque".equals(payment.getName())) {
+//                    paymentLine[j].setPaymentType("2");
+//                } else if ("cash".equals(payment.getName())) {
+//                    paymentLine[j].setPaymentType("B");
+//                } else {
+//                    paymentLine[j].setPaymentType(null); // unknown
+//                }        
+//            }     
+//            orders[i].setPayment(paymentLine);                    
         }
         
         return orders;

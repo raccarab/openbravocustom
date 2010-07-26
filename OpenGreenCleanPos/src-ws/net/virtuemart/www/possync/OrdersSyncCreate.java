@@ -22,6 +22,7 @@ package net.virtuemart.www.possync;
 import com.openbravo.pos.forms.AppView;
 import com.openbravo.pos.forms.BeanFactoryCache;
 import com.openbravo.pos.forms.BeanFactoryException;
+import com.openbravo.pos.forms.DataLogicSales;
 import com.openbravo.pos.forms.DataLogicSystem;
 import net.virtuemart.www.possync.DataLogicIntegration;
 import net.virtuemart.www.possync.OrdersSync;
@@ -36,8 +37,9 @@ public class OrdersSyncCreate extends BeanFactoryCache {
 
         DataLogicSystem dlSystem = (DataLogicSystem) app.getBean("com.openbravo.pos.forms.DataLogicSystem");
         DataLogicIntegration dli = (DataLogicIntegration) app.getBean("net.virtuemart.www.possync.DataLogicIntegration");
-
-        OrdersSync bean = new OrdersSync(dlSystem, dli);
+        DataLogicSales dlsales = (DataLogicSales) app.getBean("com.openbravo.pos.forms.DataLogicSales");
+        
+        OrdersSync bean = new OrdersSync(dlSystem, dli, dlsales);
         return bean;
     }
 }

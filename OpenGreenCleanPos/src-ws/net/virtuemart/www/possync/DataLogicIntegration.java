@@ -47,6 +47,7 @@ import com.openbravo.pos.ticket.ProductInfoExt;
 import com.openbravo.pos.ticket.TaxInfo;
 import com.openbravo.pos.ticket.TicketInfo;
 import com.openbravo.pos.ticket.TicketLineInfo;
+import com.openbravo.pos.ticket.UserInfo;
 
 /**
  *
@@ -304,6 +305,13 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                   	, "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE (T.TICKETTYPE = 0 OR T.TICKETTYPE = 1) AND T.STATUS = 0"               
                   	, null
                   	, new SerializerReadClass(TicketInfo.class)).list();
+    }       
+    
+    public List getUsers() throws BasicException {
+        return new PreparedSentence(s
+                  	, "SELECT ID, TAXID FROM CUSTOMERS "               
+                  	, null
+                  	, new SerializerReadClass(UserInfo.class)).list();
     }    
     
     public List getTicketLines(final String ticket) throws BasicException {
