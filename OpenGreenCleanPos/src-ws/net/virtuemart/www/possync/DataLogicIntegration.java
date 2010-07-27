@@ -339,4 +339,19 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
     public void execTicketUpdate() throws BasicException {
         new StaticSentence(s, "UPDATE TICKETS SET STATUS = 1 WHERE STATUS = 0").exec();
     }
+
+	public void syncOrdersBefore()  throws BasicException {
+        new StaticSentence(s, "UPDATE TICKETS SET CUSTOMER = (SELECT ID FROM CUSTOMERS WHERE TAXID='999') WHERE CUSTOMER IS NULL").exec();
+		
+	}
+
+	public void execUpdateTicket(final String customerNote) throws BasicException {
+		new PreparedSentence(s, "UPDATE  TICKETS SET STATUS = 1 WHERE STATUS = 0 AND TICKETID = ?", 
+                SerializerWriteParams.INSTANCE
+                ).exec(new DataParams() { 
+                	public void writeValues() throws BasicException {
+                		setString(1, customerNote);
+               
+                	}});
+	}
 }

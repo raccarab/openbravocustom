@@ -54,6 +54,8 @@ import com.openbravo.pos.ticket.TaxInfo;
 import net.virtuemart.www.possync.DataLogicIntegration;
 import net.virtuemart.www.possync.ExternalSalesHelper;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -170,9 +172,12 @@ public class ProductsSync implements ProcessAction {
         
         List<CustomerSync> localList = dlintegration.getCustomers();
         
-        System.out.println(" >> "+localList.size()+ "  " + notToSync);
+//        System.out.println(" >> "+localList.size()+ "  " + notToSync);
 		
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
         for (CustomerSync localCustomer : localList) {
+        	Date now = new Date();
 //        	System.out.println(localCustomer.getTaxid());
         	if (notToSync.contains(localCustomer.getTaxid())) {
         		continue;
@@ -199,7 +204,20 @@ public class ProductsSync implements ProcessAction {
 			userAdd.setPhone(" "+localCustomer.getPhone());
 			userAdd.setMobile(" "+localCustomer.getPhone2());
 			userAdd.setFax(" ");
-			userAdd.setCdate("");
+			try {
+				userAdd.setCdate(df.format(localCustomer.getCurdate()));
+			} catch (NullPointerException nu) {
+				userAdd.setCdate(df.format(now));
+			}
+			userAdd.setPerms("");
+			userAdd.setBank_account_nr("");
+			userAdd.setBank_account_holder("");
+			userAdd.setBank_account_type("");
+			userAdd.setBank_iban("");
+			userAdd.setBank_name("");
+			userAdd.setBank_sort_code("");
+			userAdd.setMdate(df.format(now));
+			userAdd.setShopper_group_id("");
 		
 			externalsales.addUser(userAdd);
 			
@@ -221,7 +239,7 @@ public class ProductsSync implements ProcessAction {
 				try {
 					dlintegration.syncCategory(addCategory);
 				} catch (BasicException be) {
-					System.out.println("Not synced : "+categorie.getName());
+//					System.out.println("Not synced : "+categorie.getName());
 				}
 				notToSync.put(categorie.getName(),categorie.getId());
 			}
@@ -276,18 +294,6 @@ public class ProductsSync implements ProcessAction {
 				
 			}
 			
-//			catList.put("fa938625-e34c-47a9-9343-55f652dab62e", "1");
-//			catList.put("997278bb-44ae-4229-b4b5-5116e2d24c7c", "2");
-//			catList.put("000", "3");
-//			catList.put("682b8858-da35-4804-8827-5d061e34f48b", "4");
-//			catList.put("d34dff82-2c8a-476a-8f17-22da5cc88c98", "5");
-//			catList.put("6d24b412-05e9-447d-a7ed-5361e605ccf0", "6");
-//			catList.put("6c98cbc9-739e-44c6-890b-47e365838663", "7");
-//			catList.put("9b2f487b-8630-4ad3-b0c3-8fbb50b24fc3", "8");
-//			catList.put("0746a37d-712e-4fa0-b3e7-4062b3623390", "9");
-//			catList.put("f827989a-c457-4664-88d5-d0c4ce27bb86", "10");
-//			catList.put("1c48ea28-b7c0-4051-b731-b3e2cbf85292", "11");
-
 			HashMap<String, String> attList = new HashMap<String, String>();
 			
 			List<AttributeSetInfo> attributes = dlsales.getAttributeSetList().list();
@@ -329,10 +335,6 @@ public class ProductsSync implements ProcessAction {
 	             
 	             dlintegration.syncProductsBefore();
 	             
-	             Date now = new Date();
-	             
-	             System.out.println(catListRev.toString());
-	             
 	             for (Produit product : products) {
 	            	
 	                 String[] remCats = product.getProduct_categories().split("|");
@@ -344,8 +346,6 @@ public class ProductsSync implements ProcessAction {
 						}
 							
 					 }
-	                 
-	            	 System.out.println("> "+product.toString());
 
 	            	 String[] pAtt = product.getCustom_attribute().split(";");
 	            	 boolean isScale=false;

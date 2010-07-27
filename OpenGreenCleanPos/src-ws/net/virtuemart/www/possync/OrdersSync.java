@@ -80,19 +80,20 @@ public class OrdersSync implements ProcessAction {
             }
             
             if (ticketlist.size() == 0) {
-                
                 return new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.zeroorders"));
             } else {
 
                 // transformo tickets en ordenes
             	CreateOrderInput[] orders = transformTickets(ticketlist);
-
-                //uploads orders and return boolean as a result
-                if(!externalsales.uploadOrders(orders))
-                    throw new BasicException(AppLocal.getIntString("message.returnnull"));
-
+            	for (CreateOrderInput createOrderInput : orders) {
+                  
+            		//uploads orders and return boolean as a result
+            		if(externalsales.uploadOrders(createOrderInput))
+            			dlintegration.execUpdateTicket(createOrderInput.getCustomer_note());
+            			//throw new BasicException(AppLocal.getIntString("message.returnnull"));
+            	}
                 // actualizo los tickets como subidos
-               dlintegration.execTicketUpdate();
+               //dlintegration.execTicketUpdate();
 
                 return new MessageInf(MessageInf.SGN_SUCCESS, AppLocal.getIntString("message.syncordersok"), AppLocal.getIntString("message.syncordersinfo", orders.length));
             }
@@ -108,6 +109,8 @@ public class OrdersSync implements ProcessAction {
     
     private CreateOrderInput[] transformTickets(List<TicketInfo> ticketlist) throws RemoteException, BasicException {
 
+    	dlintegration.syncOrdersBefore();
+    	
     	HashMap<String, String> usersMap = new HashMap<String, String>();
     	
 		List<UserInfo> localUsers;
@@ -140,7 +143,6 @@ public class OrdersSync implements ProcessAction {
 		}
 
 		System.out.println(usersMap);
-		System.out.println(productsMap);
 
 		CreateOrderInput[] orders = new CreateOrderInput[ticketlist.size()];
         for (int i = 0; i < ticketlist.size(); i++) {
@@ -148,8 +150,8 @@ public class OrdersSync implements ProcessAction {
         	
         	String userID = usersMap.get(ticket.getCustomerId());
   
-        	System.out.print(" > "+ticket.getCustomerId()+" ");
-        	System.out.println(usersMap.get(ticket.getCustomerId()));
+//        	System.out.print(" > "+ticket.getCustomerId()+" ");
+//        	System.out.println(usersMap.get(ticket.getCustomerId()));
         	
         	orders[i] = new CreateOrderInput();
         	//orders[i].set
@@ -163,10 +165,7 @@ public class OrdersSync implements ProcessAction {
             orders[i].setShipping_price("0");
             orders[i].setShipping_rate_id("0");
             orders[i].setShipping_rate_name("0");
-            if (userID==null)
-                orders[i].setUser_id("0");
-            else	
-            	orders[i].setUser_id(userID);
+           	orders[i].setUser_id(userID);
             orders[i].setVendor_id("1");
             
             Product[] products = new Product[ticket.getLines().size()] ;

@@ -25,6 +25,7 @@ import net.virtuemart.www.VM_SQLQueries.SQLInsertRequest;
 import net.virtuemart.www.VM_SQLQueries.VM_SQLQueriesProxy;
 import net.virtuemart.www.VM_Tools.LoginInfo;
 import net.virtuemart.www.VM_Users.AddUserInput;
+import net.virtuemart.www.VM_Users.GetUsersInput;
 import net.virtuemart.www.VM_Users.User;
 import net.virtuemart.www.VM_Users.VM_UsersProxy;
 
@@ -85,11 +86,28 @@ public class testWS {
 		//pp.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_ProductService.php");
 
 		VM_UsersProxy up = new VM_UsersProxy();
-                pp.setEndpoint(UsersURL);
+                up.setEndpoint(UsersURL);
 		//up.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_UsersService.php");
-	
+                
+          GetUsersInput parameters = new GetUsersInput();
+          parameters.setLoginInfo(login);
+          parameters.setLimite_end("100000000000");
+          parameters.setLimite_start("0");
+		try {
+			User[] users = up.getUsers(parameters );
+			
+			for (User user : users) {
+				System.out.println(user.getLogin());
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+                
+                
 		VM_OrderProxy op = new VM_OrderProxy();
-                pp.setEndpoint(OrderURL);
+                op.setEndpoint(OrderURL);
 
 		//up.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_OrdersService.php");
 	
@@ -110,59 +128,59 @@ public class testWS {
 //		qp.executeSQLInsertQuery(parameters);                
 //		
             	
-				Produit produit = new Produit();
-				
-				
-				
-				produit.setId("1");
-				produit.setName("TEST");
-				produit.setProduct_sku("123");
-				produit.setAtribute("");	
-				produit.setAtribute_value("");
-				produit.setBigdescription("");
-				produit.setChild_option_ids("");
-				produit.setChild_options("");
-					produit.setCustom_attribute("CUSTOM");
-				produit.setDescription("TEST");
-				produit.setDiscount("");
-				produit.setDiscount_is_percent("");
-				produit.setFullimage("");
-				produit.setHas_childs("");
-				produit.setChilds_id("");
-				produit.setImage("");
-				produit.setParent_produit_id("");
-				produit.setPrice("1.0");
-				produit.setProduct_availability("");
-				produit.setProduct_available_date("");
-				produit.setProduct_categories("1");
-				produit.setProduct_currency("Û");
-				produit.setProduct_discount_id("");
-				produit.setProduct_height("");
-				produit.setProduct_length("");
-				produit.setProduct_lwh_uom("");
-				produit.setProduct_order_levels("");
-				produit.setProduct_packaging("");
-				produit.setProduct_publish("true");
-				produit.setProduct_sales("");
-				produit.setProduct_special("");
-				produit.setProduct_tax_id("2");
-				produit.setProduct_unit("");
-				produit.setProduct_url("");
-				produit.setProduct_weight("");
-				produit.setProduct_weight_uom("");
-				produit.setProduct_width("");
-				produit.setQuantity("");
-				produit.setQuantity_options("");
-				produit.setManufacturer_id("");
-				produit.setVendor_id("1");
-				
-				UpdateProductInput parameters = new UpdateProductInput(login,produit);
-				try {
-					pp.addProduct(parameters );
-				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}    			 
+//				Produit produit = new Produit();
+//				
+//				
+//				
+//				produit.setId("1");
+//				produit.setName("TEST");
+//				produit.setProduct_sku("123");
+//				produit.setAtribute("");	
+//				produit.setAtribute_value("");
+//				produit.setBigdescription("");
+//				produit.setChild_option_ids("");
+//				produit.setChild_options("");
+//					produit.setCustom_attribute("CUSTOM");
+//				produit.setDescription("TEST");
+//				produit.setDiscount("");
+//				produit.setDiscount_is_percent("");
+//				produit.setFullimage("");
+//				produit.setHas_childs("");
+//				produit.setChilds_id("");
+//				produit.setImage("");
+//				produit.setParent_produit_id("");
+//				produit.setPrice("1.0");
+//				produit.setProduct_availability("");
+//				produit.setProduct_available_date("");
+//				produit.setProduct_categories("1");
+//				produit.setProduct_currency("Û");
+//				produit.setProduct_discount_id("");
+//				produit.setProduct_height("");
+//				produit.setProduct_length("");
+//				produit.setProduct_lwh_uom("");
+//				produit.setProduct_order_levels("");
+//				produit.setProduct_packaging("");
+//				produit.setProduct_publish("true");
+//				produit.setProduct_sales("");
+//				produit.setProduct_special("");
+//				produit.setProduct_tax_id("2");
+//				produit.setProduct_unit("");
+//				produit.setProduct_url("");
+//				produit.setProduct_weight("");
+//				produit.setProduct_weight_uom("");
+//				produit.setProduct_width("");
+//				produit.setQuantity("");
+//				produit.setQuantity_options("");
+//				produit.setManufacturer_id("");
+//				produit.setVendor_id("1");
+//				
+//				UpdateProductInput parameters = new UpdateProductInput(login,produit);
+//				try {
+//					pp.addProduct(parameters );
+//				} catch (RemoteException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}    			 
         
 //        Categorie category = new Categorie();
 //		category.setId("33");

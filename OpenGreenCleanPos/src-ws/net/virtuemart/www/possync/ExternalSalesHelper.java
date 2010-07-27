@@ -23,6 +23,7 @@
 
 package net.virtuemart.www.possync;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import javax.xml.rpc.ServiceException;
@@ -156,9 +157,9 @@ public class ExternalSalesHelper {
     }
     
     public User[] getUsers() throws RemoteException {
-            VM_UsersProxy proxy = getUsersProxy();
             GetUsersInput userInput = new GetUsersInput(wsLogin,"0",max);
-            return proxy.getUsers(userInput);
+           
+            return usersProxy.getUsers(userInput);
     }
     
     public boolean addUser(User user) {
@@ -219,13 +220,17 @@ public class ExternalSalesHelper {
         return produits;
     }
     
-    public boolean uploadOrders(CreateOrderInput[] orderstoupload) throws RemoteException {
+    public boolean uploadOrders(CreateOrderInput orderstoupload) throws RemoteException {
     	
-    	for (CreateOrderInput createOrderInput : orderstoupload) {
-    		createOrderInput.setLoginInfo(wsLogin);
- //   		createOrderInput.setVendor_id(wsPosid);
-    		getOrderProxy().createOrder(createOrderInput);
-		}
+    	try {
+    			orderstoupload.setLoginInfo(wsLogin);
+    			//orderstoupload.setVendor_id(wsPosid);
+    			getOrderProxy().createOrder(orderstoupload);
+    		} catch (IOException ioe) {
+    			System.out.println(" Error : "+orderstoupload.getUser_id()+" - "+orderstoupload.getCustomer_note());
+    			return false;
+    		}
+
     	
     	return true;
     }
