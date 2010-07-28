@@ -44,7 +44,10 @@ import net.virtuemart.www.VM_Categories.AddCategoryInput;
 import net.virtuemart.www.VM_Categories.Categorie;
 import net.virtuemart.www.VM_Categories.GetAllCategoriesInput;
 import net.virtuemart.www.VM_Categories.VM_CategoriesProxy;
+import net.virtuemart.www.VM_Order.AddCouponInput;
+import net.virtuemart.www.VM_Order.Coupon;
 import net.virtuemart.www.VM_Order.CreateOrderInput;
+import net.virtuemart.www.VM_Order.DelInput;
 import net.virtuemart.www.VM_Order.VM_OrderProxy;
 import net.virtuemart.www.VM_Product.GetAllProductsInput;
 import net.virtuemart.www.VM_Product.Produit;
@@ -224,8 +227,10 @@ public class ExternalSalesHelper {
     	
     	try {
     			orderstoupload.setLoginInfo(wsLogin);
+    			orderstoupload.setCustomer_note(orderstoupload.getCustomer_note()+"> POS : "+wsPosid);
     			//orderstoupload.setVendor_id(wsPosid);
-    			getOrderProxy().createOrder(orderstoupload);
+    			orderProxy.createOrder(orderstoupload);
+
     		} catch (IOException ioe) {
     			System.out.println(" Error : "+orderstoupload.getUser_id()+" - "+orderstoupload.getCustomer_note());
     			return false;
@@ -246,5 +251,27 @@ public class ExternalSalesHelper {
             return null; // never happens :-)
         }
     }
+
+//	public String createCoupon(Double value, String order) {
+//		String uniqueID = order+"-"+wsPosid;
+//		Coupon coupon = new Coupon("1", uniqueID, "total", "permanent", String.valueOf(value));
+//		
+//		Coupon[] coupons = new Coupon[1];
+//		coupons[0]=coupon;
+//		AddCouponInput aci = new AddCouponInput(wsLogin, coupons);
+//
+//        try {
+//			orderProxy.addCouponCode(aci);
+//			Coupon[] cpList = orderProxy.getAllCouponCode(wsLogin);
+//			for (Coupon cp : cpList) {
+//				if (cp.getCoupon_code().equals(uniqueID))
+//					return cp.getCoupon_id();
+//			}
+//			
+//		} catch (RemoteException e1) {
+//			
+//		}
+//		return null;
+//	}
   
 }

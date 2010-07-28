@@ -29,6 +29,8 @@ import java.util.HashMap;
 import java.util.List;
 import javax.xml.rpc.ServiceException;
 
+import net.virtuemart.www.VM_Order.AddCouponInput;
+import net.virtuemart.www.VM_Order.Coupon;
 import net.virtuemart.www.VM_Order.CreateOrderInput;
 import net.virtuemart.www.VM_Order.Product;
 import net.virtuemart.www.VM_Product.Produit;
@@ -65,7 +67,9 @@ public class OrdersSync implements ProcessAction {
     }
     
     public MessageInf execute() throws BasicException {        
-        
+    	   System.gc(); 
+    	   System.runFinalization();
+
         try {
         
             if (externalsales == null) {
@@ -90,9 +94,12 @@ public class OrdersSync implements ProcessAction {
             	for (CreateOrderInput createOrderInput : orders) {
                   
             		//uploads orders and return boolean as a result
-            		if(externalsales.uploadOrders(createOrderInput))
-            			dlintegration.execUpdateTicket(createOrderInput.getCustomer_note());
+            		if(externalsales.uploadOrders(createOrderInput)){
+            			int endIndex = createOrderInput.getCustomer_note().indexOf(">");
+            			String ticketUpdate = createOrderInput.getCustomer_note().substring(0, endIndex);
+            			dlintegration.execUpdateTicket(ticketUpdate);
             			//throw new BasicException(AppLocal.getIntString("message.returnnull"));
+            		}
             	}
                 // actualizo los tickets como subidos
                //dlintegration.execTicketUpdate();
@@ -154,8 +161,7 @@ public class OrdersSync implements ProcessAction {
 //        	System.out.println(usersMap.get(ticket.getCustomerId()));
         	
         	orders[i] = new CreateOrderInput();
-        	//orders[i].set
-            orders[i].setCoupon_code("0");
+        	
             orders[i].setCustomer_note(String.valueOf(ticket.getTicketId()));
             orders[i].setPayment_method_id("1");
             orders[i].setPrice_including_tax(String.valueOf(ticket.getTotal()));
@@ -169,21 +175,25 @@ public class OrdersSync implements ProcessAction {
             orders[i].setVendor_id("1");
             
             Product[] products = new Product[ticket.getLines().size()] ;
-            
+                  
             for (int j = 0; j < ticket.getLines().size(); j++){
                 TicketLineInfo line = ticket.getLines().get(j);
                 
                 products[j] = new Product();
-
-//                if (line.getProductID() == null) {
-//                	products[j].setProduct_id("0");
-//                } else {
-                	products[j].setProduct_id(productsMap.get(line.getProductID())); // capturar error
-               // }
-                products[j].setQuantity(String.valueOf(line.getMultiply()));
-                products[j].setDescription(line.getProductAttSetInstDesc());
+                
+                if (line.getProductID().equals("99999999-9999-9999-9999-999999999999")) {
+        			products[j].setProduct_id(productsMap.get(line.getProductID())); 
+                    products[j].setQuantity(String.valueOf(line.getMultiply()*line.getPriceTax()*100));
+                    products[j].setDescription(line.getProductName()+" "+String.valueOf(line.getMultiply())+" > "+line.getPriceTax());
+                } else {
+                	products[j].setProduct_id(productsMap.get(line.getProductID())); 
+                    products[j].setQuantity(String.valueOf(line.getMultiply()));
+                    products[j].setDescription(line.getProductName());
+                }
+                
             }
-
+    		
+            orders[i].setCoupon_code("0");
             orders[i].setProducts(products);
             
             

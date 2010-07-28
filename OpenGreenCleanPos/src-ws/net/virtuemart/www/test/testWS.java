@@ -14,7 +14,9 @@ import net.virtuemart.www.VM_Categories.GetChildsCategoriesRequestInput;
 import net.virtuemart.www.VM_Categories.VM_CategoriesProxy;
 import net.virtuemart.www.VM_Categories.Categorie;
 
+import net.virtuemart.www.VM_Order.AddCouponInput;
 import net.virtuemart.www.VM_Order.AddShippingCarriersInput;
+import net.virtuemart.www.VM_Order.Coupon;
 import net.virtuemart.www.VM_Order.VM_OrderProxy;
 import net.virtuemart.www.VM_Product.ProductFromCatIdInput;
 import net.virtuemart.www.VM_Product.ProductFromIdInput;
@@ -40,6 +42,23 @@ public class testWS {
 		long exp =(long) java.lang.Math.exp(8 * java.lang.Math.log(10));
     	int posID = 1234;
 		long tmpint = Long.parseLong(tmpstring) + (posID * exp) ;
+
+        AppConfig config = new AppConfig(args);
+        config.load();
+
+        // set WS.
+        String wsuser = config.getProperty("ws.user");
+        String wspassword = config.getProperty("ws.password");
+        String wsurl = config.getProperty("ws.URL");
+        String wsposid = config.getProperty("ws.posid");
+
+        String vm_path = "/administrator/components/com_vm_soa/services/VM_";
+        String vm_path_end = "Service.php";
+        String CategoriesURL = wsurl+vm_path+"Categories"+vm_path_end;
+        String ProductURL = wsurl+vm_path+"Product"+vm_path_end;
+        String UsersURL = wsurl+vm_path+"Users"+vm_path_end;
+        String OrderURL = wsurl+vm_path+"Orders"+vm_path_end;
+        String QueryURL = wsurl+vm_path+"SQLQueries"+vm_path_end;
 		
 		System.out.println(String.valueOf(tmpint));
 
@@ -51,25 +70,27 @@ public class testWS {
 		login.setLogin("tii");
 		login.setPassword("titoupass");
 		
+		VM_OrderProxy op = new VM_OrderProxy();
+        op.setEndpoint(OrderURL);
+        
+        
+		Coupon coupon = new Coupon("3", "3", "total", "permanent", "30.0");
+		Coupon[] coupons = new Coupon[1];
+		coupons[0]=coupon;
+		AddCouponInput aci = new AddCouponInput(login, coupons);
+
+		
+        try {
+			op.addCouponCode(aci);
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		/**
 		 * retrieve configurations
 		 */
-                AppConfig config = new AppConfig(args);
-                config.load();
 
-                // set WS.
-                String wsuser = config.getProperty("ws.user");
-                String wspassword = config.getProperty("ws.password");
-                String wsurl = config.getProperty("ws.URL");
-                String wsposid = config.getProperty("ws.posid");
-
-                String vm_path = "/administrator/components/com_vm_soa/services/VM_";
-                String vm_path_end = "Service.php";
-                String CategoriesURL = wsurl+vm_path+"Categories"+vm_path_end;
-                String ProductURL = wsurl+vm_path+"Product"+vm_path_end;
-                String UsersURL = wsurl+vm_path+"Users"+vm_path_end;
-                String OrderURL = wsurl+vm_path+"Orders"+vm_path_end;
-                String QueryURL = wsurl+vm_path+"SQLQueries"+vm_path_end;
 
                 //System.out.println(CategoriesURL);
 
@@ -106,8 +127,7 @@ public class testWS {
 		
                 
                 
-		VM_OrderProxy op = new VM_OrderProxy();
-                op.setEndpoint(OrderURL);
+		
 
 		//up.setEndpoint("http://beyours.be/greenpos/administrator/components/com_vm_soa/services/VM_OrdersService.php");
 	
@@ -153,7 +173,7 @@ public class testWS {
 //				produit.setProduct_availability("");
 //				produit.setProduct_available_date("");
 //				produit.setProduct_categories("1");
-//				produit.setProduct_currency("Û");
+//				produit.setProduct_currency("ï¿½");
 //				produit.setProduct_discount_id("");
 //				produit.setProduct_height("");
 //				produit.setProduct_length("");

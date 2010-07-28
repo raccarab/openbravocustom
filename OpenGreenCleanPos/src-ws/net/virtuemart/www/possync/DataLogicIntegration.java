@@ -334,11 +334,12 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 
 	public void syncOrdersBefore()  throws BasicException {
 		new StaticSentence(s, "UPDATE TICKETS SET CUSTOMER = (SELECT ID FROM CUSTOMERS WHERE TAXID='999') WHERE CUSTOMER IS NULL").exec();
-		new StaticSentence(s, "UPDATE TICKETLINES SET PRODUCT = (SELECT ID FROM PRODUCTS WHERE CODE='REDUC21'), UNITS = PRICE, PRICE = 1 WHERE PRODUCT IS NULL AND TAXID NOT LIKE '000'").exec();
+		new StaticSentence(s, "UPDATE TICKETLINES SET PRODUCT = (SELECT ID FROM PRODUCTS WHERE CODE='999') WHERE PRODUCT IS NULL AND TAXID NOT LIKE '000'").exec();
 		
 	}
 
 	public void execUpdateTicket(final String customerNote) throws BasicException {
+		System.out.println(customerNote);
 		new PreparedSentence(s, "UPDATE  TICKETS SET STATUS = 1 WHERE STATUS = 0 AND TICKETID = ?", 
                 SerializerWriteParams.INSTANCE
                 ).exec(new DataParams() { 
