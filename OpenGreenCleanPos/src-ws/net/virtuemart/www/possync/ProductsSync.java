@@ -96,17 +96,10 @@ public class ProductsSync implements ProcessAction {
                message += AppLocal.getIntString("message.zeroproducts");               
            }
            
-           //Sync customers
-           int npCustomers = syncCustomers();
-                 
-           if ( npCustomers == 0 ) {
-        	   message += AppLocal.getIntString("message.zerocustomers");        
-           }
-           
            if (!message.equals("")) {
                return new MessageInf(MessageInf.SGN_NOTICE, message);               
            } else {
-        	   return new MessageInf(MessageInf.SGN_SUCCESS, AppLocal.getIntString("message.syncproductsok"), AppLocal.getIntString("message.syncproductsinfo", npProducts, npCustomers));
+        	   return new MessageInf(MessageInf.SGN_SUCCESS, AppLocal.getIntString("message.syncproductsok"), AppLocal.getIntString("message.syncproductsinfo", npProducts));
            }
            
         } catch (ServiceException e) {            
@@ -117,115 +110,6 @@ public class ProductsSync implements ProcessAction {
             throw new BasicException(AppLocal.getIntString("message.malformedurlexception"), e);
         }
     }
-
-	@SuppressWarnings("unchecked")
-	private int syncCustomers() throws RemoteException, BasicException {
-		
-		ArrayList<String> notToSync = new ArrayList<String>();
-        
-		// retrieve users from VM
-		User[] remoteUsers = externalsales.getUsers();
-
-        if (remoteUsers == null){
-            throw new BasicException(AppLocal.getIntString("message.returnnull")+" > Customers null");
-        }
-        
-        // if it found users
-        if (remoteUsers.length > 0 ) {
-            
-        	// hide all users in local DB
-            dlintegration. syncCustomersBefore();
-            
-            //loop on all users 
-            for (User remoteUser : remoteUsers) {                    
-                CustomerSync copyCustomer = new CustomerSync(remoteUser.getId());
-                
-                copyCustomer.setTaxid(remoteUser.getLogin());
-                
-                copyCustomer.setSearchkey(remoteUser.getLogin());
-                copyCustomer.setName(remoteUser.getLastname());          
-                copyCustomer.setNotes(remoteUser.getDescription());
-                
-                if (copyCustomer.getEmail()==null || copyCustomer.getEmail().trim().equals("") || copyCustomer.getEmail().indexOf('@')==-1)
-                	copyCustomer.setEmail(remoteUser.getLogin()+"@beyours.be");
-                else 
-                	copyCustomer.setEmail(remoteUser.getEmail());
-                
-                copyCustomer.setAddress(remoteUser.getAddress());
-                copyCustomer.setAddress2(remoteUser.getAddress2());
-                copyCustomer.setCity(remoteUser.getCity());
-                copyCustomer.setCountry(remoteUser.getCountry());
-                copyCustomer.setFirstname(remoteUser.getFirstname());
-                copyCustomer.setLastname(remoteUser.getLastname());
-                copyCustomer.setMaxdebt(1000.0);
-                copyCustomer.setName(remoteUser.getFirstname()+" "+remoteUser.getLastname());
-                copyCustomer.setPhone(remoteUser.getPhone());
-                copyCustomer.setPhone2(remoteUser.getMobile());
-                copyCustomer.setPostal(remoteUser.getZipcode());
-                
-                //Updates local user
-                dlintegration.syncCustomer(copyCustomer);
-
-                notToSync.add(copyCustomer.getTaxid());
-            }
-        }
-        
-        List<CustomerSync> localList = dlintegration.getCustomers();
-        
-//        System.out.println(" >> "+localList.size()+ "  " + notToSync);
-		
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        
-        for (CustomerSync localCustomer : localList) {
-        	Date now = new Date();
-//        	System.out.println(localCustomer.getTaxid());
-        	if (notToSync.contains(localCustomer.getTaxid())) {
-        		continue;
-        	}
-            User userAdd = new User();
-			userAdd.setLogin(localCustomer.getTaxid());
-			userAdd.setId(localCustomer.getTaxid());
-			userAdd.setFirstname(" ");
-			userAdd.setLastname(localCustomer.getName());
-			userAdd.setPassword("407b3273beea2c061dbe7fc11b68de43");
-			userAdd.setTitle("Mr");
-			if (localCustomer.getEmail()==null || localCustomer.getEmail().trim().equals("") || localCustomer.getEmail().indexOf('@')==-1)
-				userAdd.setEmail(localCustomer.getTaxid()+"@beyours.be");
-			else
-				userAdd.setEmail(""+localCustomer.getEmail());
-			userAdd.setDescription(" "+localCustomer.getNotes());
-			userAdd.setAddress(" "+localCustomer.getAddress());
-			userAdd.setAddress2(" "+localCustomer.getAddress2());
-
-			userAdd.setState_region(" "+localCustomer.getRegion());
-			userAdd.setCity(" "+localCustomer.getCity());
-			userAdd.setCountry(" "+localCustomer.getCountry());
-			userAdd.setZipcode(" "+localCustomer.getPostal());
-			userAdd.setPhone(" "+localCustomer.getPhone());
-			userAdd.setMobile(" "+localCustomer.getPhone2());
-			userAdd.setFax(" ");
-			try {
-				userAdd.setCdate(df.format(localCustomer.getCurdate()));
-			} catch (NullPointerException nu) {
-				userAdd.setCdate(df.format(now));
-			}
-			userAdd.setPerms("");
-			userAdd.setBank_account_nr("");
-			userAdd.setBank_account_holder("");
-			userAdd.setBank_account_type("");
-			userAdd.setBank_iban("");
-			userAdd.setBank_name("");
-			userAdd.setBank_sort_code("");
-			userAdd.setMdate(df.format(now));
-			userAdd.setShopper_group_id("");
-		
-			externalsales.addUser(userAdd);
-			
-		}
-        
-        return remoteUsers.length;
-        
-	}
 
 	private int syncProducts() throws RemoteException, BasicException {
 		 
@@ -238,8 +122,10 @@ public class ProductsSync implements ProcessAction {
 				CategoryInfo addCategory = new CategoryInfo(categorie.getId(), categorie.getName(), null);
 				try {
 					dlintegration.syncCategory(addCategory);
+					
 				} catch (BasicException be) {
-//					System.out.println("Not synced : "+categorie.getName());
+					be.printStackTrace();
+					System.out.println("Skipped : "+categorie.getName());
 				}
 				notToSync.put(categorie.getName(),categorie.getId());
 			}
@@ -250,7 +136,7 @@ public class ProductsSync implements ProcessAction {
 			List<CategoryInfo> localCats = localCatsList.list();
 			
 			for (CategoryInfo localCat : localCats) {
-//				System.out.println(" > "+localCat.getID()+" "+localCat.getName());
+				System.out.println(" > "+localCat.getID()+" "+localCat.getName());
 
 				if (notToSync.containsKey(localCat.getName())) {
 					continue;
@@ -303,7 +189,7 @@ public class ProductsSync implements ProcessAction {
 				attList.put(attribute.getId(), attribute.getName());
 				attMap.put(attribute.getName(), attribute.getId());
 			}
-
+			
 			HashMap<String, String> taxCats = new HashMap<String, String>();
 			HashMap<String, String> taxCatsRev = new HashMap<String, String>();
 			
@@ -349,7 +235,7 @@ public class ProductsSync implements ProcessAction {
 
 	            	 String[] pAtt = product.getCustom_attribute().split(";");
 	            	 boolean isScale=false;
-	            	 String attID="";
+	            	 String attID=null;
 	            	 String taxCatID="";
 	            	 for (String att : pAtt) {
 						AttributeSetInfo asi;
@@ -406,6 +292,10 @@ public class ProductsSync implements ProcessAction {
 //	             datalogic.syncProductsAfter();
 	         }
 			
+
+				System.out.println(attMap.toString());
+
+	         
 			List<ProductInfoExt> list = dlsales.getProductList().list();
 			
 			for (ProductInfoExt localProduct : list) {

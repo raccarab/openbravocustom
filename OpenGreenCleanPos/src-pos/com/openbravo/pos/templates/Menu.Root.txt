@@ -80,8 +80,9 @@
         submenu.addPanel("/com/openbravo/images/appointment.png", "Menu.UsersReport", "/com/openbravo/reports/people.bs");
 // Deprecated options.
         submenu.addTitle("Menu.Maintenance.ERP");
-        submenu.addExecution("/com/openbravo/images/openbravo.png", "Menu.ERPProducts", "net.virtuemart.www.ProductsSyncCreate");
-        submenu.addExecution("/com/openbravo/images/openbravo.png", "Menu.ERPOrders", "net.virtuemart.www.OrdersSyncCreate");
+        submenu.addExecution("/com/openbravo/images/openbravo.png", "Menu.WSProducts", "net.virtuemart.www.possync.ProductsSyncCreate");
+        submenu.addExecution("/com/openbravo/images/openbravo.png", "Menu.WSUsers", "net.virtuemart.www.possync.UsersSyncCreate");
+        submenu.addExecution("/com/openbravo/images/openbravo.png", "Menu.WSOrders", "net.virtuemart.www.possync.OrdersSyncCreate");
 //      submenu.addExecution("/com/openbravo/images/openbravo.png", "Menu.ERPProducts", "com.openbravo.possync.ProductsSyncCreate");
 //      submenu.addExecution("/com/openbravo/images/openbravo.png", "Menu.ERPOrders", "com.openbravo.possync.OrdersSyncCreate");
     group = menu.addGroup("Menu.System");

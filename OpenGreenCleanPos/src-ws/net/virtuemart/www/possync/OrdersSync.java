@@ -82,7 +82,9 @@ public class OrdersSync implements ProcessAction {
             if (ticketlist.size() == 0) {
                 return new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.zeroorders"));
             } else {
-
+            	dlintegration.syncOrdersBefore();
+            	
+            	
                 // transformo tickets en ordenes
             	CreateOrderInput[] orders = transformTickets(ticketlist);
             	for (CreateOrderInput createOrderInput : orders) {
@@ -109,8 +111,6 @@ public class OrdersSync implements ProcessAction {
     
     private CreateOrderInput[] transformTickets(List<TicketInfo> ticketlist) throws RemoteException, BasicException {
 
-    	dlintegration.syncOrdersBefore();
-    	
     	HashMap<String, String> usersMap = new HashMap<String, String>();
     	
 		List<UserInfo> localUsers;
@@ -175,11 +175,11 @@ public class OrdersSync implements ProcessAction {
                 
                 products[j] = new Product();
 
-                if (line.getProductID() == null) {
-                	products[j].setProduct_id("0");
-                } else {
+//                if (line.getProductID() == null) {
+//                	products[j].setProduct_id("0");
+//                } else {
                 	products[j].setProduct_id(productsMap.get(line.getProductID())); // capturar error
-                }
+               // }
                 products[j].setQuantity(String.valueOf(line.getMultiply()));
                 products[j].setDescription(line.getProductAttSetInstDesc());
             }

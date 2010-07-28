@@ -89,6 +89,7 @@
     <class name="/com/openbravo/reports/people.bs"/>
     <class name="net.virtuemart.www.possync.ProductsSyncCreate"/>
     <class name="net.virtuemart.www.possync.OrdersSyncCreate"/>
+    <class name="net.virtuemart.www.possync.UsersSyncCreate"/>
     <class name="Menu.ChangePassword"/>
     <class name="com.openbravo.pos.panels.JPanelPrinter"/>
     <class name="com.openbravo.pos.config.JPanelConfiguration"/>

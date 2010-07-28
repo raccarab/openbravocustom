@@ -79,7 +79,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 
                 // Try to update
                 if (new PreparedSentence(s,
-                            "UPDATE CUSTOMERS SET ADDRESS = ?, ADDRESS2 = ?, POSTAL = ?, CITY = ?, REGION = ?, COUNTRY = ?, FIRSTNAME = ?, LASTNAME = ?, EMAIL = ?, PHONE = ?, PHONE2 = ?, NOTES = ?, VISIBLE = " + s.DB.TRUE() + " WHERE TAXID = ?",
+                            "UPDATE CUSTOMERS SET ADDRESS = ?, ADDRESS2 = ?, POSTAL = ?, CITY = ?, REGION = ?, COUNTRY = ?, FIRSTNAME = ?, LASTNAME = ?, EMAIL = ?, PHONE = ?, PHONE2 = ?, NOTES = ?, MAXDEBT = ?, NAME = ?, VISIBLE = " + s.DB.TRUE() + " WHERE TAXID = ?",
                             SerializerWriteParams.INSTANCE
                             ).exec(new DataParams() { public void writeValues() throws BasicException {
                                 setString(1, customer.getAddress());
@@ -94,12 +94,14 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                                 setString(10, customer.getPhone());
                                 setString(11, customer.getPhone2());
                                 setString(12, customer.getNotes());
-                                setString(13, customer.getTaxid());
+                                setDouble(13, customer.getMaxdebt());
+                                setString(14, customer.getName());
+                                setString(15, customer.getTaxid());
                             }}) == 0) {
-
+                		
                     // If not updated, try to insert
                     new PreparedSentence(s,
-                            "INSERT INTO CUSTOMERS(ID, SEARCHKEY, NAME, ADDRESS, ADDRESS2, POSTAL, CITY, REGION, COUNTRY, FIRSTNAME, LASTNAME, EMAIL, PHONE, PHONE2, NOTES, TAXID, VISIBLE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + s.DB.TRUE() + ")",
+                            "INSERT INTO CUSTOMERS(ID, SEARCHKEY, NAME, ADDRESS, ADDRESS2, POSTAL, CITY, REGION, COUNTRY, FIRSTNAME, LASTNAME, EMAIL, PHONE, PHONE2, NOTES, TAXID, MAXDEBT, VISIBLE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + s.DB.TRUE() + ")",
                             SerializerWriteParams.INSTANCE
                             ).exec(new DataParams() { public void writeValues() throws BasicException {
                                 setString(1, customer.getId());
@@ -118,9 +120,8 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                                 setString(14, customer.getPhone2());
                                 setString(15, customer.getNotes());
                                 setString(16, customer.getTaxid());
+                                setDouble(17, customer.getMaxdebt());
                             }});
-                	
-                    System.out.println("NOT UPDATED "+customer.getTaxid());
                 }
 
                 return null;
@@ -211,16 +212,6 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
         Transaction t = new Transaction(s) {
             public Object transact() throws BasicException {
                 // Sync the Category in a transaction
-                
-                // Try to update
-                if (new PreparedSentence(s, 
-                            "SELECT * FROM CATEGORIES WHERE NAME = ?", 
-                            SerializerWriteParams.INSTANCE
-                            ).exec(new DataParams() { public void writeValues() throws BasicException {
-                                 setString(1, cat.getName());                              
-                            }}) == 0) {
-                       
-                    // If not updated, try to insert
                     new PreparedSentence(s, 
                         "INSERT INTO CATEGORIES(ID, NAME, IMAGE) VALUES (?, ?, ?)",
                         SerializerWriteParams.INSTANCE
@@ -229,8 +220,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                             setString(2, cat.getName());
                             setBytes(3, ImageUtils.writeImage(cat.getImage()));
                         }});
-                }
-                return null;        
+                return null;
             }
         };
         t.execute();        
@@ -243,7 +233,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                 // Sync the Product in a transaction
                 // Try to update
                 if (new PreparedSentence(s, 
-                            "UPDATE PRODUCTS SET REFERENCE = ?, NAME = ?, ISSCALE = ?, PRICEBUY = ?, PRICESELL = ?, CATEGORY = ?, TAXCAT = ?, IMAGE = ? WHERE CODE = ?", 
+                            "UPDATE PRODUCTS SET REFERENCE = ?, NAME = ?, ISSCALE = ?, PRICEBUY = ?, PRICESELL = ?, CATEGORY = ?, TAXCAT = ?, IMAGE = ?, ATTRIBUTESET_ID = ? WHERE CODE = ?", 
                             SerializerWriteParams.INSTANCE
                             ).exec(new DataParams() { public void writeValues() throws BasicException {
                                 setString(1, prod.getReference());
@@ -257,12 +247,13 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                                 setBytes(8, ImageUtils.writeImage(prod.getImage()));
                                 // setDouble(x, 0.0);
                                 // setDouble(x, 0.0);
-                                setString(9, prod.getCode());  
+                                setString(9, prod.getAttributeSetID()); 
+                                setString(10, prod.getCode());   
                             }}) == 0) {
                             
                     // If not updated, try to insert
                     new PreparedSentence(s, 
-                            "INSERT INTO PRODUCTS (ID, REFERENCE, CODE, NAME, ISCOM, ISSCALE, PRICEBUY, PRICESELL, CATEGORY, TAXCAT, IMAGE, STOCKCOST, STOCKVOLUME) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                            "INSERT INTO PRODUCTS (ID, REFERENCE, CODE, NAME, ISCOM, ISSCALE, PRICEBUY, PRICESELL, CATEGORY, TAXCAT, IMAGE, STOCKCOST, STOCKVOLUME, ATTRIBUTESET_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                             SerializerWriteParams.INSTANCE
                             ).exec(new DataParams() { public void writeValues() throws BasicException {
                                 setString(1, prod.getID());
@@ -277,7 +268,8 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                                 setString(10, prod.getTaxCategoryID());
                                 setBytes(11, ImageUtils.writeImage(prod.getImage()));
                                 setDouble(12, 0.0);
-                                setDouble(13, 0.0);                               
+                                setDouble(13, 0.0); 
+                                setString(14, prod.getAttributeSetID());                               
                             }});
                 }
                         
@@ -341,7 +333,8 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
     }
 
 	public void syncOrdersBefore()  throws BasicException {
-        new StaticSentence(s, "UPDATE TICKETS SET CUSTOMER = (SELECT ID FROM CUSTOMERS WHERE TAXID='999') WHERE CUSTOMER IS NULL").exec();
+		new StaticSentence(s, "UPDATE TICKETS SET CUSTOMER = (SELECT ID FROM CUSTOMERS WHERE TAXID='999') WHERE CUSTOMER IS NULL").exec();
+		new StaticSentence(s, "UPDATE TICKETLINES SET PRODUCT = (SELECT ID FROM PRODUCTS WHERE CODE='REDUC21'), UNITS = PRICE, PRICE = 1 WHERE PRODUCT IS NULL AND TAXID NOT LIKE '000'").exec();
 		
 	}
 
