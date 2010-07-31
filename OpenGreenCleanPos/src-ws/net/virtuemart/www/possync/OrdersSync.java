@@ -67,9 +67,19 @@ public class OrdersSync implements ProcessAction {
     }
     
     public MessageInf execute() throws BasicException {        
+
     	   System.gc(); 
     	   System.runFinalization();
-
+    	   ProductsSync bean = new ProductsSync(dlsystem, dlintegration, dlsales, "0");
+    	   bean.execute();
+    	   
+    
+    	   System.gc(); 
+    	   System.runFinalization();
+    	   UsersSync usc = new UsersSync(dlsystem, dlintegration, dlsales, "0");
+    	   
+    	   System.gc(); 
+    	   System.runFinalization();
         try {
         
             if (externalsales == null) {

@@ -25,6 +25,8 @@ package net.virtuemart.www.possync;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.nio.CharBuffer;
+import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
@@ -132,37 +134,54 @@ public class UsersSync implements ProcessAction {
             
         	// hide all users in local DB
             dlintegration. syncCustomersBefore();
-//            Charset charset = Charset.forName("ISO-8859-1"); 
-//            CharsetDecoder decoder = charset.newDecoder(); 
-//            CharsetEncoder encoder = charset.newEncoder(); 
+            Charset charset = Charset.forName("UTF-8"); 
+            CharsetDecoder decoder = charset.newDecoder(); 
+            CharsetEncoder encoder = charset.newEncoder(); 
             
             //loop on all users 
             for (User remoteUser : remoteUsers) {    
             	String name = (remoteUser.getFirstname()+" "+remoteUser.getLastname()).trim();
-            	
+            	String firstname = remoteUser.getFirstname();
+            	String lastname = remoteUser.getLastname();
+            	String description = remoteUser.getDescription();
+            	String address = remoteUser.getAddress();
+            	String address2 = remoteUser.getAddress2();
+            	String city = remoteUser.getCity();
+            	String country = remoteUser.getCountry();
+            	try {
+					name = new String (encoder.encode(CharBuffer.wrap(name.toCharArray())).array());
+					firstname = new String (encoder.encode(CharBuffer.wrap(firstname.toCharArray())).array());
+					lastname = new String (encoder.encode(CharBuffer.wrap(lastname.toCharArray())).array());
+					description = new String (encoder.encode(CharBuffer.wrap(description.toCharArray())).array());
+					address = new String (encoder.encode(CharBuffer.wrap(address.toCharArray())).array());
+					address2 = new String (encoder.encode(CharBuffer.wrap(address2.toCharArray())).array());
+					city = new String (encoder.encode(CharBuffer.wrap(city.toCharArray())).array());
+					country = new String (encoder.encode(CharBuffer.wrap(country.toCharArray())).array());
+				} catch (CharacterCodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             	
             	CustomerSync copyCustomer = new CustomerSync(remoteUser.getId());
-                
-            	copyCustomer.setFirstname(remoteUser.getFirstname());
-            	copyCustomer.setLastname(remoteUser.getLastname());
+               
+            	copyCustomer.setFirstname(firstname);
+            	copyCustomer.setLastname(lastname);
                 copyCustomer.setTaxid(remoteUser.getLogin());
                 
                 copyCustomer.setSearchkey(remoteUser.getLogin()+" "+name);
                 copyCustomer.setName(name);   
         
-                copyCustomer.setNotes(remoteUser.getDescription());
+                copyCustomer.setNotes(description);
                 
                 if (copyCustomer.getEmail()==null || copyCustomer.getEmail().trim().equals("") || copyCustomer.getEmail().indexOf('@')==-1)
                 	copyCustomer.setEmail(remoteUser.getLogin()+"@beyours.be");
                 else 
                 	copyCustomer.setEmail(remoteUser.getEmail());
                 
-                copyCustomer.setAddress(remoteUser.getAddress());
-                copyCustomer.setAddress2(remoteUser.getAddress2());
-                copyCustomer.setCity(remoteUser.getCity());
-                copyCustomer.setCountry(remoteUser.getCountry());
-                copyCustomer.setFirstname(remoteUser.getFirstname());
-                copyCustomer.setLastname(remoteUser.getLastname());
+                copyCustomer.setAddress(address);
+                copyCustomer.setAddress2(address2);
+                copyCustomer.setCity(city);
+                copyCustomer.setCountry(country);
                 copyCustomer.setMaxdebt(1000.0);
                 copyCustomer.setPhone(remoteUser.getPhone());
                 copyCustomer.setPhone2(remoteUser.getMobile());
