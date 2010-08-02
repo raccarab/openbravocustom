@@ -59,9 +59,11 @@ import net.virtuemart.www.VM_Product.UpdateProductInput;
 import net.virtuemart.www.VM_Product.VM_ProductProxy;
 import net.virtuemart.www.VM_Tools.LoginInfo;
 import net.virtuemart.www.VM_Users.AddUserInput;
+import net.virtuemart.www.VM_Users.AddVendorInput;
 import net.virtuemart.www.VM_Users.GetUsersInput;
 import net.virtuemart.www.VM_Users.User;
 import net.virtuemart.www.VM_Users.VM_UsersProxy;
+import net.virtuemart.www.VM_Users.Vendor;
 
 public class ExternalSalesHelper {
     
@@ -70,6 +72,7 @@ public class ExternalSalesHelper {
     private String wsPosid;
     private LoginInfo wsLogin;
     private String wsURL;
+    private String hostname;
 
     private String vm_path = "/administrator/components/com_vm_soa/services/VM_";
     private String vm_path_end = "Service.php";
@@ -85,6 +88,8 @@ public class ExternalSalesHelper {
     private VM_ProductProxy productProxy;
     private VM_OrderProxy orderProxy;
     
+    private  AppConfig config;
+    
     private static Logger logger = Logger.getLogger("com.openbravo.data.loader.PreparedSentence");
     
     /** Creates a new instance of WebServiceHelper */
@@ -96,13 +101,14 @@ public class ExternalSalesHelper {
      */
     public ExternalSalesHelper(DataLogicSystem dlsystem) throws BasicException, ServiceException, MalformedURLException {
         
-        AppConfig config = new AppConfig();
+        config = new AppConfig();
         config.load();
 
         wsLogin= new LoginInfo();
         // set WS.
         wsURL = config.getProperty("ws.URL");
         wsPosid = config.getProperty("ws.posid");
+        hostname = config.getProperty("machine.hostname");
 
         String user = config.getProperty("ws.user");
         wsLogin.setLogin(user);
@@ -163,8 +169,18 @@ public class ExternalSalesHelper {
     }
     
     public User[] getUsers() throws RemoteException {
-            GetUsersInput userInput = new GetUsersInput(wsLogin,"0",max);
-           
+            GetUsersInput userInput = new GetUsersInput(wsLogin,"0",max);           
+            return usersProxy.getUsers(userInput);
+    }
+    
+    // TO AVOID JAVA HEAP
+    public User[] getUsersBySteps(int step) throws RemoteException {
+    		int bystep = 100;
+    		
+            String start = String.valueOf( step * bystep );
+			String end = String.valueOf( start+ (bystep-1) );
+			
+			GetUsersInput userInput = new GetUsersInput(wsLogin,start,end);           
             return usersProxy.getUsers(userInput);
     }
     
@@ -224,6 +240,70 @@ public class ExternalSalesHelper {
             e.printStackTrace();
          }
         return produits;
+    }
+    
+    public void checkPosID() throws RemoteException {
+    	
+    	
+    	Vendor[] vendors = usersProxy.getAllVendor(wsLogin);
+    	for (Vendor vendor : vendors) {
+			if (vendor.getVendor_id()==wsPosid) {
+				if (!vendor.getVendor_name().equals(hostname)) {
+					throw new RemoteException("Wrong vendor name !!");
+				} else return;
+			} else if (vendor.getVendor_name().equals(hostname)) {
+				if (!vendor.getVendor_id().equals(wsPosid)) { 
+					throw new RemoteException("Wrong vendor ID, change your POS ID to "+vendor.getVendor_id());
+				} else return;
+			}
+		}				
+    	
+    	String contact_title="M";
+		String contact_first_name="null";
+		String vendor_store_name=hostname;
+		String vendor_min_pov="";
+		String vendor_city="";
+		String vendor_address_1="";
+		String vendor_freeshipping="";
+		String vendor_state="";
+		String vendor_full_image="";
+		String cdate="";
+		String vendor_country="";
+		String contact_phone_2="";
+		String contact_fax="";
+		String contact_email="POS"+wsPosid+"@beyours.be";
+		String vendor_zip="";
+		String vendor_url="";
+		String contact_middle_name="";
+		String vendor_store_desc ="";
+		String vendor_thumb_image="";
+		String vendor_accepted_currencies="";
+		String vendor_currency="";
+		String vendor_category_id="";
+		String contact_phone_1="";
+		String vendor_phone="";
+		String contact_last_name="";
+		String vendor_date_format="";
+		String vendor_address_format="";
+		String mdate="";
+		String vendor_terms_of_service="";
+		String vendor_image_path="";
+		String vendor_address_2="";
+		String vendor_currency_display_style="";
+		Vendor vendor = new Vendor(wsPosid, hostname, contact_last_name, contact_first_name, contact_middle_name, contact_title, contact_phone_1, contact_phone_2, contact_fax, contact_email, vendor_phone, vendor_address_1, vendor_address_2, vendor_city, vendor_state, vendor_country, vendor_zip, vendor_store_name, vendor_store_desc, vendor_category_id, vendor_thumb_image, vendor_full_image, vendor_currency, cdate, mdate, vendor_image_path, vendor_terms_of_service, vendor_url, vendor_min_pov, vendor_freeshipping, vendor_currency_display_style, vendor_accepted_currencies, vendor_address_format, vendor_date_format);
+		AddVendorInput parameters = new AddVendorInput(wsLogin, vendor);
+		usersProxy.addVendor(parameters);
+		
+		vendors = usersProxy.getAllVendor(wsLogin);
+		
+    	for (Vendor v : vendors) {
+    		if (v.getVendor_name().equals(hostname)) {
+
+    	        this.wsPosid = v.getVendor_id();
+    	        config.setProperty("ws.posid", wsPosid);
+    	        
+    		}
+    	}
     }
     
     public boolean uploadOrders(CreateOrderInput orderstoupload) throws RemoteException {

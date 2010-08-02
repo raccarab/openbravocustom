@@ -120,81 +120,84 @@ public class UsersSync implements ProcessAction {
 	private int syncCustomers() throws RemoteException, BasicException {
 		
 		ArrayList<String> notToSync = new ArrayList<String>();
-        
-		// retrieve users from VM
-		User[] remoteUsers = externalsales.getUsers();
-		System.out.println(" > "+remoteUsers.length);
-
-        if (remoteUsers == null){
-            throw new BasicException(AppLocal.getIntString("message.returnnull")+" > Customers null");
-        }
-        
-        // if it found users
-        if (remoteUsers.length > 0 ) {
-            
-        	// hide all users in local DB
-            dlintegration. syncCustomersBefore();
-            Charset charset = Charset.forName("UTF-8"); 
-            CharsetDecoder decoder = charset.newDecoder(); 
-            CharsetEncoder encoder = charset.newEncoder(); 
-            
-            //loop on all users 
-            for (User remoteUser : remoteUsers) {    
-            	String name = (remoteUser.getFirstname()+" "+remoteUser.getLastname()).trim();
-            	String firstname = remoteUser.getFirstname();
-            	String lastname = remoteUser.getLastname();
-            	String description = remoteUser.getDescription();
-            	String address = remoteUser.getAddress();
-            	String address2 = remoteUser.getAddress2();
-            	String city = remoteUser.getCity();
-            	String country = remoteUser.getCountry();
-            	try {
-					name = new String (encoder.encode(CharBuffer.wrap(name.toCharArray())).array());
-					firstname = new String (encoder.encode(CharBuffer.wrap(firstname.toCharArray())).array());
-					lastname = new String (encoder.encode(CharBuffer.wrap(lastname.toCharArray())).array());
-					description = new String (encoder.encode(CharBuffer.wrap(description.toCharArray())).array());
-					address = new String (encoder.encode(CharBuffer.wrap(address.toCharArray())).array());
-					address2 = new String (encoder.encode(CharBuffer.wrap(address2.toCharArray())).array());
-					city = new String (encoder.encode(CharBuffer.wrap(city.toCharArray())).array());
-					country = new String (encoder.encode(CharBuffer.wrap(country.toCharArray())).array());
-				} catch (CharacterCodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-            	
-            	CustomerSync copyCustomer = new CustomerSync(remoteUser.getId());
-               
-            	copyCustomer.setFirstname(firstname);
-            	copyCustomer.setLastname(lastname);
-                copyCustomer.setTaxid(remoteUser.getLogin());
-                
-                copyCustomer.setSearchkey(remoteUser.getLogin()+" "+name);
-                copyCustomer.setName(name);   
-        
-                copyCustomer.setNotes(description);
-                
-                if (copyCustomer.getEmail()==null || copyCustomer.getEmail().trim().equals("") || copyCustomer.getEmail().indexOf('@')==-1)
-                	copyCustomer.setEmail(remoteUser.getLogin()+"@beyours.be");
-                else 
-                	copyCustomer.setEmail(remoteUser.getEmail());
-                
-                copyCustomer.setAddress(address);
-                copyCustomer.setAddress2(address2);
-                copyCustomer.setCity(city);
-                copyCustomer.setCountry(country);
-                copyCustomer.setMaxdebt(1000.0);
-                copyCustomer.setPhone(remoteUser.getPhone());
-                copyCustomer.setPhone2(remoteUser.getMobile());
-                copyCustomer.setPostal(remoteUser.getZipcode());
-                
-                //Updates local user
-                dlintegration.syncCustomer(copyCustomer);
-
-                System.out.println("UPDATED : '"+name+"'");
-                notToSync.add(copyCustomer.getTaxid());
-            }
-        }
-        
+		int step=0;
+		User[] remoteUsers;
+		do {
+			// retrieve users from VM
+			remoteUsers = externalsales.getUsersBySteps(step);
+			step++;
+			
+	        if (remoteUsers == null){
+	            throw new BasicException(AppLocal.getIntString("message.returnnull")+" > Customers null");
+	        }
+	        
+	        // if it found users
+	        if (remoteUsers.length > 0 ) {
+	            
+	        	// hide all users in local DB
+	            dlintegration. syncCustomersBefore();
+	            Charset charset = Charset.forName("UTF-8"); 
+	            CharsetDecoder decoder = charset.newDecoder(); 
+	            CharsetEncoder encoder = charset.newEncoder(); 
+	            
+	            //loop on all users 
+	            for (User remoteUser : remoteUsers) {    
+	            	String name = (remoteUser.getFirstname()+" "+remoteUser.getLastname()).trim();
+	            	String firstname = remoteUser.getFirstname();
+	            	String lastname = remoteUser.getLastname();
+	            	String description = remoteUser.getDescription();
+	            	String address = remoteUser.getAddress();
+	            	String address2 = remoteUser.getAddress2();
+	            	String city = remoteUser.getCity();
+	            	String country = remoteUser.getCountry();
+	            	try {
+						name = new String (encoder.encode(CharBuffer.wrap(name.toCharArray())).array());
+						firstname = new String (encoder.encode(CharBuffer.wrap(firstname.toCharArray())).array());
+						lastname = new String (encoder.encode(CharBuffer.wrap(lastname.toCharArray())).array());
+						description = new String (encoder.encode(CharBuffer.wrap(description.toCharArray())).array());
+						address = new String (encoder.encode(CharBuffer.wrap(address.toCharArray())).array());
+						address2 = new String (encoder.encode(CharBuffer.wrap(address2.toCharArray())).array());
+						city = new String (encoder.encode(CharBuffer.wrap(city.toCharArray())).array());
+						country = new String (encoder.encode(CharBuffer.wrap(country.toCharArray())).array());
+					} catch (CharacterCodingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	            	
+	            	CustomerSync copyCustomer = new CustomerSync(remoteUser.getId());
+	               
+	            	copyCustomer.setFirstname(firstname);
+	            	copyCustomer.setLastname(lastname);
+	                copyCustomer.setTaxid(remoteUser.getLogin());
+	                
+	                copyCustomer.setSearchkey(remoteUser.getLogin()+" "+name);
+	                copyCustomer.setName(name);   
+	        
+	                copyCustomer.setNotes(description);
+	                
+	                if (copyCustomer.getEmail()==null || copyCustomer.getEmail().trim().equals("") || copyCustomer.getEmail().indexOf('@')==-1)
+	                	copyCustomer.setEmail(remoteUser.getLogin()+"@beyours.be");
+	                else 
+	                	copyCustomer.setEmail(remoteUser.getEmail());
+	                
+	                copyCustomer.setAddress(address);
+	                copyCustomer.setAddress2(address2);
+	                copyCustomer.setCity(city);
+	                copyCustomer.setCountry(country);
+	                copyCustomer.setMaxdebt(1000.0);
+	                copyCustomer.setPhone(remoteUser.getPhone());
+	                copyCustomer.setPhone2(remoteUser.getMobile());
+	                copyCustomer.setPostal(remoteUser.getZipcode());
+	                
+	                //Updates local user
+	                dlintegration.syncCustomer(copyCustomer);
+	
+	                System.out.println("UPDATED : '"+name+"'");
+	                notToSync.add(copyCustomer.getTaxid());
+	            }
+	        }
+        } while (remoteUsers.length > 0 );
+		
         List<CustomerSync> localList = dlintegration.getCustomers();
         
 //        System.out.println(" >> "+localList.size()+ "  " + notToSync);

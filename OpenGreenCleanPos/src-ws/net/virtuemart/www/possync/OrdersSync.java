@@ -67,24 +67,19 @@ public class OrdersSync implements ProcessAction {
     }
     
     public MessageInf execute() throws BasicException {        
-
-    	   System.gc(); 
-    	   System.runFinalization();
-    	   ProductsSync bean = new ProductsSync(dlsystem, dlintegration, dlsales, "0");
-    	   bean.execute();
-    	   
-    
-    	   System.gc(); 
-    	   System.runFinalization();
-    	   UsersSync usc = new UsersSync(dlsystem, dlintegration, dlsales, "0");
-    	   
-    	   System.gc(); 
-    	   System.runFinalization();
         try {
         
             if (externalsales == null) {
                 externalsales = new ExternalSalesHelper(dlsystem);
             }
+                
+            
+       	   try {
+       		   // CHECK POS ID
+           	   externalsales.checkPosID();
+       	   } catch (RemoteException re) {
+        		 return new MessageInf(MessageInf.SGN_WARNING,"Error POS ID ! ",re.toString());
+       	   }
             
             // Obtenemos los tickets
             List<TicketInfo> ticketlist = dlintegration.getTickets();
@@ -97,8 +92,23 @@ public class OrdersSync implements ProcessAction {
                 return new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.zeroorders"));
             } else {
             	dlintegration.syncOrdersBefore();
-            	
-            	
+  
+
+            	// SYNC PRODUCTS
+          	   System.gc(); 
+          	   System.runFinalization();
+          	   ProductsSync bean = new ProductsSync(dlsystem, dlintegration, dlsales, "0");
+          	   bean.execute();
+          	   System.gc(); 
+          	   System.runFinalization();
+          	   
+
+          	   // SYNC USERS
+          	   UsersSync usc = new UsersSync(dlsystem, dlintegration, dlsales, "0");
+          	   usc.execute();
+          	   System.gc(); 
+          	   System.runFinalization();
+          	   
                 // transformo tickets en ordenes
             	CreateOrderInput[] orders = transformTickets(ticketlist);
             	for (CreateOrderInput createOrderInput : orders) {
