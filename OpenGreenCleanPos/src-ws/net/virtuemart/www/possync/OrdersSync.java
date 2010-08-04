@@ -201,7 +201,7 @@ public class OrdersSync implements ProcessAction {
                 
                 products[j] = new Product();
                 
-                if (line.getProductID().equals("99999999-9999-9999-9999-999999999999")) {
+                if (line.getProductID().equals("0")) {
         			products[j].setProduct_id(productsMap.get(line.getProductID())); 
                     products[j].setQuantity(String.valueOf(line.getMultiply()*line.getPriceTax()*100));
                     products[j].setDescription(line.getProductName()+" "+String.valueOf(line.getMultiply())+" > "+line.getPriceTax());

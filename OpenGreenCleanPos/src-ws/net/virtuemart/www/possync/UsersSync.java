@@ -136,12 +136,13 @@ public class UsersSync implements ProcessAction {
 	            
 	        	// hide all users in local DB
 	            dlintegration. syncCustomersBefore();
-	            Charset charset = Charset.forName("UTF-8"); 
+//	            Charset charset = Charset.forName("UTF-8"); 
+	            Charset charset = Charset.forName("ISO-8859-1");
 	            CharsetDecoder decoder = charset.newDecoder(); 
 	            CharsetEncoder encoder = charset.newEncoder(); 
 	            
 	            //loop on all users 
-	            for (User remoteUser : remoteUsers) {    
+	            for (User remoteUser : remoteUsers) {
 	            	String name = (remoteUser.getFirstname()+" "+remoteUser.getLastname()).trim();
 	            	String firstname = remoteUser.getFirstname();
 	            	String lastname = remoteUser.getLastname();
@@ -150,6 +151,7 @@ public class UsersSync implements ProcessAction {
 	            	String address2 = remoteUser.getAddress2();
 	            	String city = remoteUser.getCity();
 	            	String country = remoteUser.getCountry();
+	            	
 	            	try {
 						name = new String (encoder.encode(CharBuffer.wrap(name.toCharArray())).array());
 						firstname = new String (encoder.encode(CharBuffer.wrap(firstname.toCharArray())).array());

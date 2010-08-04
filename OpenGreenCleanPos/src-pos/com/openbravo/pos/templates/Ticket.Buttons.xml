@@ -34,6 +34,6 @@
     <cat-height value="300" />
     <taxesincluded value="false"/>   
     <!-- <printselected value="true"/> -->    
-    <!-- <taxcategoryid value="001"/> -->
+    <!-- <taxcategoryid value="1"/> -->
     <!-- <pricevisible value="true" /> -->
 </configuration>

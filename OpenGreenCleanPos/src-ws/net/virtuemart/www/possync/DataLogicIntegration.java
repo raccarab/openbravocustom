@@ -68,7 +68,8 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
     }
      
     public void syncCustomersBefore() throws BasicException {
-        new StaticSentence(s, "UPDATE CUSTOMERS SET VISIBLE = " + s.DB.FALSE()).exec();
+ // sync problems
+ //       new StaticSentence(s, "UPDATE CUSTOMERS SET VISIBLE = " + s.DB.TRUE()).exec();
     }
 
     public void syncCustomer(final CustomerSync customer) throws BasicException {
@@ -79,7 +80,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 
                 // Try to update
                 if (new PreparedSentence(s,
-                            "UPDATE CUSTOMERS SET ADDRESS = ?, ADDRESS2 = ?, POSTAL = ?, CITY = ?, REGION = ?, COUNTRY = ?, FIRSTNAME = ?, LASTNAME = ?, EMAIL = ?, PHONE = ?, PHONE2 = ?, NOTES = ?, MAXDEBT = ?, NAME = ?, VISIBLE = " + s.DB.TRUE() + " WHERE TAXID = ?",
+                            "UPDATE CUSTOMERS SET ADDRESS = ?, ADDRESS2 = ?, POSTAL = ?, CITY = ?, REGION = ?, COUNTRY = ?, FIRSTNAME = ?, LASTNAME = ?, EMAIL = ?, PHONE = ?, PHONE2 = ?, NOTES = ?, MAXDEBT = ?, NAME = ? WHERE TAXID = ?",
                             SerializerWriteParams.INSTANCE
                             ).exec(new DataParams() { public void writeValues() throws BasicException {
                                 setString(1, customer.getAddress());
@@ -212,6 +213,17 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
         Transaction t = new Transaction(s) {
             public Object transact() throws BasicException {
                 // Sync the Category in a transaction
+                
+                // Try to update
+                if (new PreparedSentence(s, 
+                            "UPDATE CATEGORIES SET NAME = ? WHERE NAME = ?", 
+                            SerializerWriteParams.INSTANCE
+                            ).exec(new DataParams() { public void writeValues() throws BasicException {
+                                setString(1, cat.getName()); 
+                                setString(2, cat.getName());                                 
+                            }}) == 0) {
+                       
+                    // If not updated, try to insert
                     new PreparedSentence(s, 
                         "INSERT INTO CATEGORIES(ID, NAME, IMAGE) VALUES (?, ?, ?)",
                         SerializerWriteParams.INSTANCE
@@ -220,11 +232,12 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                             setString(2, cat.getName());
                             setBytes(3, ImageUtils.writeImage(cat.getImage()));
                         }});
-                return null;
+                }
+                return null;        
             }
         };
         t.execute();        
-    }    
+    }      
     
     public void syncProduct(final ProductInfoExt prod) throws BasicException {
         
@@ -333,8 +346,8 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
     }
 
 	public void syncOrdersBefore()  throws BasicException {
-		new StaticSentence(s, "UPDATE TICKETS SET CUSTOMER = (SELECT ID FROM CUSTOMERS WHERE TAXID='999') WHERE CUSTOMER IS NULL").exec();
-		new StaticSentence(s, "UPDATE TICKETLINES SET PRODUCT = (SELECT ID FROM PRODUCTS WHERE CODE='999') WHERE PRODUCT IS NULL AND TAXID NOT LIKE '000'").exec();
+		new StaticSentence(s, "UPDATE TICKETS SET CUSTOMER = '0' WHERE CUSTOMER IS NULL").exec();
+		new StaticSentence(s, "UPDATE TICKETLINES SET PRODUCT = '0' WHERE PRODUCT IS NULL AND TAXID NOT LIKE '000'").exec();
 		
 	}
 

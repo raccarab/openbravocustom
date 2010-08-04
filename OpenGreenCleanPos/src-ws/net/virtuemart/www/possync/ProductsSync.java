@@ -172,7 +172,7 @@ public class ProductsSync implements ProcessAction {
 					if (ci.getName().equalsIgnoreCase(cat.getName())) {
 						catList.put(ci.getID() , cat.getId());
 						catListRev.put(cat.getId(), ci.getID());
-						localCats.remove(ci);
+//						localCats.remove(ci);
 						break;
 					}
 					
@@ -216,23 +216,27 @@ public class ProductsSync implements ProcessAction {
 	             throw new BasicException(AppLocal.getIntString("message.returnnull")+" > Products null");
 	         }
 
-	         
+
+             ArrayList<String> prodNotToSync = new ArrayList<String>();
 	         if (products.length > 0){
 	             
 	             dlintegration.syncProductsBefore();
 	             
 	             for (Produit product : products) {
 	            	
-	                 String[] remCats = product.getProduct_categories().split("|");
-	                 String remCat = null;
-	                 for (String rCat : remCats) {
-						if (catListRev.get(rCat)!=null) {
-							remCat=catListRev.get(rCat);
-							break;
-						}
-							
-					 }
+	                 //String[] remCats = product.getProduct_categories().split("|");
+	            	 String tmpCats = product.getProduct_categories();
+	                 String remCat = tmpCats.substring(0, tmpCats.indexOf('|'));
+//	                 for (String rCat : remCats) {
+//						if (catListRev.get(rCat)!=null) {
+//							remCat=catListRev.get(rCat);
+//							break;
+//						}
+//							
+//					 }
 
+	                 System.out.println(product.getName()+" "+product.getProduct_categories()+" "+catListRev.get(remCat));
+	                 
 	            	 String[] pAtt = product.getCustom_attribute().split(";");
 	            	 boolean isScale=false;
 	            	 String attID=null;
@@ -263,10 +267,11 @@ public class ProductsSync implements ProcessAction {
 	                 p.setPriceBuy(1.0);
 	                 p.setAttributeSetID(attID);
 	                 p.setPriceSell(Double.valueOf(product.getPrice()));
-					 p.setCategoryID(remCat);
+					 p.setCategoryID(catListRev.get(remCat));
 	                 p.setTaxCategoryID(taxCatID);
 	                 p.setImage(ImageUtils.readImage(product.getImage()));
 	                 dlintegration.syncProduct(p);  
+	                 prodNotToSync.add(p.getCode());
 	                 
 	                 // Synchronization of stock          
 //	                 if (product instanceof ProductPlus) {
@@ -299,6 +304,9 @@ public class ProductsSync implements ProcessAction {
 			List<ProductInfoExt> list = dlsales.getProductList().list();
 			
 			for (ProductInfoExt localProduct : list) {
+				
+				if (prodNotToSync.contains(localProduct.getCode()))
+						continue;
 				
 				String attribute = ""+taxCats.get(localProduct.getTaxCategoryID());
 				if (attList.get(localProduct.getAttributeSetID()) != null)  
