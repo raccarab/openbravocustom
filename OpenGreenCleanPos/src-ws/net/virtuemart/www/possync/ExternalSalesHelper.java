@@ -175,10 +175,13 @@ public class ExternalSalesHelper {
     
     // TO AVOID JAVA HEAP
     public User[] getUsersBySteps(int step) throws RemoteException {
-    		int bystep = 100;
+    		int bystep = 500;
     		
             String start = String.valueOf( step * bystep );
-			String end = String.valueOf( start+ (bystep-1) );
+            int fin = (step * bystep) + (bystep-1);
+			String end = String.valueOf( fin );
+			
+			System.out.println(" "+start+" "+end);
 			
 			GetUsersInput userInput = new GetUsersInput(wsLogin,start,end);           
             return usersProxy.getUsers(userInput);
@@ -190,6 +193,10 @@ public class ExternalSalesHelper {
 			getUsersProxy().addUser(parameters);
 			
 		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;

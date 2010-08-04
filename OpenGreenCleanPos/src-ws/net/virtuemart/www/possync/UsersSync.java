@@ -192,7 +192,7 @@ public class UsersSync implements ProcessAction {
 	                //Updates local user
 	                dlintegration.syncCustomer(copyCustomer);
 	
-	                System.out.println("UPDATED : '"+name+"'");
+	               // System.out.println("UPDATED : '"+name+"'");
 	                notToSync.add(copyCustomer.getTaxid());
 	            }
 	        }
