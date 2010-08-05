@@ -136,6 +136,10 @@ public class ExternalSalesHelper {
 		
     }
 
+    public String getWsURL() {
+    	return wsURL;
+    }
+    
     public String getWsPosid() {
 		return wsPosid;
 	}

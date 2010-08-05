@@ -256,7 +256,11 @@ public class ProductsSync implements ProcessAction {
 	    	                  
 	            	 //System.out.println("* " + catListRev.get(product.getProduct_categories()));
 	            	 // Synchonization of products
-	             ProductInfoExt p = new ProductInfoExt();
+	            	 String image = "";
+	            	 if (product.getImage()!=null && !product.getImage().equalsIgnoreCase(""))
+	            		 image = externalsales.getWsURL()+"/components/com_virtuemart/shop_image/product/"+product.getImage();
+	            		 
+	            	 ProductInfoExt p = new ProductInfoExt();
 	            	  
 	                 p.setID(product.getId());
 	                 p.setReference(product.getDescription());
@@ -269,9 +273,12 @@ public class ProductsSync implements ProcessAction {
 	                 p.setPriceSell(Double.valueOf(product.getPrice()));
 					 p.setCategoryID(catListRev.get(remCat));
 	                 p.setTaxCategoryID(taxCatID);
-	                 p.setImage(ImageUtils.readImage(product.getImage()));
+	                 p.setImage(ImageUtils.readImage(image));
+	                 
 	                 dlintegration.syncProduct(p);  
+	                 
 	                 prodNotToSync.add(p.getCode());
+	                 
 	                 
 	                 // Synchronization of stock          
 //	                 if (product instanceof ProductPlus) {
