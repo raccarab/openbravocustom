@@ -253,7 +253,7 @@ public class UsersSync implements ProcessAction {
 			
 		}
         
-        return remoteUsers.length;
+        return localList.size();
         
 	}
 }
