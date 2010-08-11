@@ -86,12 +86,24 @@ public class UsersSync implements ProcessAction {
     }
     
     public MessageInf execute() throws BasicException {
-       
+
         try {
         
             if (externalsales == null) {
                 externalsales = new ExternalSalesHelper(dlsystem);
             }
+
+            try {
+                // CHECK POS ID
+                externalsales.checkPosID();
+            } catch (RemoteException re) {
+                try {
+                    externalsales.checkPosID();
+                } catch (RemoteException re1) {
+                    return new MessageInf(MessageInf.SGN_WARNING, "Error while checking pos id ", re.toString());
+                }
+            }
+
             String message = "";
                
            //Sync customers
@@ -119,13 +131,15 @@ public class UsersSync implements ProcessAction {
 	@SuppressWarnings("unchecked")
 	private int syncCustomers() throws RemoteException, BasicException {
 		
-		ArrayList<String> notToSync = new ArrayList<String>();
-		int step=0;
-		User[] remoteUsers;
-		do {
-			// retrieve users from VM
-			remoteUsers = externalsales.getUsersBySteps(step);
-			step++;
+            ArrayList<String> notToSync = new ArrayList<String>();
+            int step=0;
+            User[] remoteUsers;
+            int cpt=0;
+
+            do {
+                // retrieve users from VM
+                remoteUsers = externalsales.getUsersBySteps(step);
+                step++;
 			
 	        if (remoteUsers == null){
 	            throw new BasicException(AppLocal.getIntString("message.returnnull")+" > Customers null");
@@ -136,45 +150,58 @@ public class UsersSync implements ProcessAction {
 	            
 	        	// hide all users in local DB
 	            dlintegration. syncCustomersBefore();
-//	            Charset charset = Charset.forName("UTF-8"); 
-	            Charset charset = Charset.forName("ISO-8859-1");
-	            CharsetDecoder decoder = charset.newDecoder(); 
-	            CharsetEncoder encoder = charset.newEncoder(); 
 	            
 	            //loop on all users 
 	            for (User remoteUser : remoteUsers) {
-	            	String name = (remoteUser.getFirstname()+" "+remoteUser.getLastname()).trim();
-	            	String firstname = remoteUser.getFirstname();
-	            	String lastname = remoteUser.getLastname();
-	            	String description = remoteUser.getDescription();
-	            	String address = remoteUser.getAddress();
-	            	String address2 = remoteUser.getAddress2();
-	            	String city = remoteUser.getCity();
-	            	String country = remoteUser.getCountry();
-	            	
-	            	try {
-						name = new String (encoder.encode(CharBuffer.wrap(name.toCharArray())).array());
-						firstname = new String (encoder.encode(CharBuffer.wrap(firstname.toCharArray())).array());
-						lastname = new String (encoder.encode(CharBuffer.wrap(lastname.toCharArray())).array());
-						description = new String (encoder.encode(CharBuffer.wrap(description.toCharArray())).array());
-						address = new String (encoder.encode(CharBuffer.wrap(address.toCharArray())).array());
-						address2 = new String (encoder.encode(CharBuffer.wrap(address2.toCharArray())).array());
-						city = new String (encoder.encode(CharBuffer.wrap(city.toCharArray())).array());
-						country = new String (encoder.encode(CharBuffer.wrap(country.toCharArray())).array());
-					} catch (CharacterCodingException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+                        if (notToSync.contains(remoteUser.getLogin()))
+                            continue;
+                        cpt++;
+                        
+	            	String name = externalsales.encodeStringISO((remoteUser.getFirstname()+remoteUser.getLastname()).trim());
+	            	String firstname = externalsales.encodeStringISO(remoteUser.getFirstname());
+	            	String lastname = externalsales.encodeStringISO(remoteUser.getLastname());
+	            	String description = externalsales.encodeStringISO(remoteUser.getDescription());
+	            	String address = externalsales.encodeStringISO(remoteUser.getAddress());
+	            	String address2 = externalsales.encodeStringISO(remoteUser.getAddress2());
+	            	String city = externalsales.encodeStringISO(remoteUser.getCity());
+	            	String country = externalsales.encodeStringISO(remoteUser.getCountry());
+                        String phone = externalsales.encodeStringISO(remoteUser.getPhone());
+                        String mobile = externalsales.encodeStringISO(remoteUser.getMobile());
+	            	String zipcode = externalsales.encodeStringISO(remoteUser.getZipcode());
+                        CharsetEncoder encoder = externalsales.getEncoder();
+//	            	try {
+//                                name = new String (encoder.encode(CharBuffer.wrap(name.toCharArray())).array());
+//                                firstname = new String (encoder.encode(CharBuffer.wrap(firstname.toCharArray())).array());
+//                                lastname = new String (encoder.encode(CharBuffer.wrap(lastname.toCharArray())).array());
+//                                description = new String (encoder.encode(CharBuffer.wrap(description.toCharArray())).array());
+//                                address = new String (encoder.encode(CharBuffer.wrap(address.toCharArray())).array());
+//                                address2 = new String (encoder.encode(CharBuffer.wrap(address2.toCharArray())).array());
+//                                city = new String (encoder.encode(CharBuffer.wrap(city.toCharArray())).array());
+//                                country = new String (encoder.encode(CharBuffer.wrap(country.toCharArray())).array());
+//                        } catch (CharacterCodingException e) {
+//                                // TODO Auto-generated catch block
+//                                e.printStackTrace();
+//                        }
 	            	
 	            	CustomerSync copyCustomer = new CustomerSync(remoteUser.getId());
+
+                        if (firstname==null || firstname.equals(""))
+                            firstname =" ";
+                        copyCustomer.setFirstname(firstname);
+
+	            	if (lastname==null || lastname.equals(""))
+                            lastname =" ";
+                        copyCustomer.setLastname(lastname);
+
+                        copyCustomer.setTaxid(remoteUser.getLogin());
+	                copyCustomer.setSearchkey(remoteUser.getLogin()+name);
 	               
-	            	copyCustomer.setFirstname(firstname);
-	            	copyCustomer.setLastname(lastname);
-	                copyCustomer.setTaxid(remoteUser.getLogin());
-	                
-	                copyCustomer.setSearchkey(remoteUser.getLogin()+" "+name);
-	                copyCustomer.setName(name);   
-	        
+	            	if (name==null || name.equals(""))
+                            name =" ";
+                        copyCustomer.setName(name);
+
+                        if (description==null || description.equals(""))
+                            description =" ";
 	                copyCustomer.setNotes(description);
 	                
 	                if (copyCustomer.getEmail()==null || copyCustomer.getEmail().trim().equals("") || copyCustomer.getEmail().indexOf('@')==-1)
@@ -182,22 +209,43 @@ public class UsersSync implements ProcessAction {
 	                else 
 	                	copyCustomer.setEmail(remoteUser.getEmail());
 	                
+                        if (address==null || address.equals(""))
+                            address =" ";
 	                copyCustomer.setAddress(address);
-	                copyCustomer.setAddress2(address2);
+	                
+                        if (address2==null || address2.equals(""))
+                            address2 =" ";
+                        copyCustomer.setAddress2(address2);
+
+                        if (city==null || city.equals(""))
+                            city ="Brussels";
 	                copyCustomer.setCity(city);
+
+                        if (country==null || country.equals(""))
+                            country ="Belgium";
 	                copyCustomer.setCountry(country);
+
 	                copyCustomer.setMaxdebt(1000.0);
-	                copyCustomer.setPhone(remoteUser.getPhone());
-	                copyCustomer.setPhone2(remoteUser.getMobile());
-	                copyCustomer.setPostal(remoteUser.getZipcode());
+
+                        if (phone==null || phone.equals(""))
+                            phone=" ";
+	                copyCustomer.setPhone(phone);
+
+                        if (mobile==null || mobile.equals(""))
+                            mobile =" ";
+	                copyCustomer.setPhone2(mobile);
+
+                        if (zipcode==null || zipcode.equals(""))
+                            zipcode =" ";
+	                copyCustomer.setPostal(zipcode);
 	                
 	                //Updates local user
 	                dlintegration.syncCustomer(copyCustomer);
-	
-	               // System.out.println("UPDATED : '"+name+"'");
+	                //System.out.println("UPDATED : '"+name+"'");
 	                notToSync.add(copyCustomer.getTaxid());
 	            }
 	        }
+
         } while (remoteUsers.length > 0 );
 		
         List<CustomerSync> localList = dlintegration.getCustomers();
@@ -212,48 +260,45 @@ public class UsersSync implements ProcessAction {
         	if (notToSync.contains(localCustomer.getTaxid())) {
         		continue;
         	}
-            User userAdd = new User();
-			userAdd.setLogin(localCustomer.getTaxid());
-			userAdd.setId(localCustomer.getTaxid());
-			userAdd.setFirstname(" ");
-			userAdd.setLastname(localCustomer.getName());
-			userAdd.setPassword("407b3273beea2c061dbe7fc11b68de43");
-			userAdd.setTitle("Mr");
-			if (localCustomer.getEmail()==null || localCustomer.getEmail().trim().equals("") || localCustomer.getEmail().indexOf('@')==-1)
-				userAdd.setEmail(localCustomer.getTaxid()+"@beyours.be");
-			else
-				userAdd.setEmail(""+localCustomer.getEmail());
-			userAdd.setDescription(" "+localCustomer.getNotes());
-			userAdd.setAddress(" "+localCustomer.getAddress());
-			userAdd.setAddress2(" "+localCustomer.getAddress2());
+                cpt++;
+                    User userAdd = new User();
+                    userAdd.setLogin(localCustomer.getTaxid());
+                    userAdd.setId(localCustomer.getTaxid());
+                    userAdd.setFirstname(" ");
+                    userAdd.setLastname(localCustomer.getName());
+                    userAdd.setPassword("407b3273beea2c061dbe7fc11b68de43");
+                    userAdd.setTitle("Mr");
+                    if (localCustomer.getEmail()==null || localCustomer.getEmail().trim().equals("") || localCustomer.getEmail().indexOf('@')==-1)
+                            userAdd.setEmail(localCustomer.getTaxid()+"@beyours.be");
+                    else
+                            userAdd.setEmail(localCustomer.getEmail()+"");
+                    userAdd.setDescription(localCustomer.getNotes()+"");
+                    userAdd.setAddress(localCustomer.getAddress()+"");
+                    userAdd.setAddress2(localCustomer.getAddress2()+"");
+                    userAdd.setState_region(localCustomer.getRegion()+"");
+                    userAdd.setCity(localCustomer.getCity()+"");
+                    userAdd.setCountry(localCustomer.getCountry()+"");
+                    userAdd.setZipcode(localCustomer.getPostal()+"");
+                    userAdd.setPhone(localCustomer.getPhone2()+"");
+                    userAdd.setMobile(localCustomer.getPhone()+"");
+                    userAdd.setFax(" ");
+                    try {
+                            userAdd.setCdate(df.format(localCustomer.getCurdate()));
+                    } catch (NullPointerException nu) {
+                            userAdd.setCdate(df.format(now));
+                    }
+                    userAdd.setPerms("");
+                    userAdd.setBank_account_nr("");
+                    userAdd.setBank_account_holder("");
+                    userAdd.setBank_account_type("");
+                    userAdd.setBank_iban("");
+                    userAdd.setBank_name("");
+                    userAdd.setBank_sort_code("");
+                    userAdd.setMdate(df.format(now));
+                    userAdd.setShopper_group_id("");
 
-			userAdd.setState_region(" "+localCustomer.getRegion());
-			userAdd.setCity(" "+localCustomer.getCity());
-			userAdd.setCountry(" "+localCustomer.getCountry());
-			userAdd.setZipcode(" "+localCustomer.getPostal());
-			userAdd.setPhone(" "+localCustomer.getPhone());
-			userAdd.setMobile(" "+localCustomer.getPhone2());
-			userAdd.setFax(" ");
-			try {
-				userAdd.setCdate(df.format(localCustomer.getCurdate()));
-			} catch (NullPointerException nu) {
-				userAdd.setCdate(df.format(now));
-			}
-			userAdd.setPerms("");
-			userAdd.setBank_account_nr("");
-			userAdd.setBank_account_holder("");
-			userAdd.setBank_account_type("");
-			userAdd.setBank_iban("");
-			userAdd.setBank_name("");
-			userAdd.setBank_sort_code("");
-			userAdd.setMdate(df.format(now));
-			userAdd.setShopper_group_id("");
-		
-			externalsales.addUser(userAdd);
-			
+                    externalsales.addUser(userAdd);
 		}
-        
-        return localList.size();
-        
+            return cpt;
 	}
 }

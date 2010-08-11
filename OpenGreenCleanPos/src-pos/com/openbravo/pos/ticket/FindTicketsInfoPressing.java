@@ -29,8 +29,8 @@ import java.util.Date;
  *
  * @author  Mikel irurita
  */
-public class FindTicketsInfo implements SerializableRead {
-
+public class FindTicketsInfoPressing implements SerializableRead {
+    
     private int ticketid;
     private int tickettype;
     private Date date;
@@ -38,16 +38,15 @@ public class FindTicketsInfo implements SerializableRead {
     private String name;
     private String customer;
     private double total;
-    private int status;
-
+    
     /** Creates new ProductInfo */
-    public FindTicketsInfo() {
-
+    public FindTicketsInfoPressing() {
+        
     }
-
+    
     @Override
     public void readValues(DataRead dr) throws BasicException {
-
+        
         ticketid = dr.getInt(1);
         tickettype = dr.getInt(2);
         date = dr.getTimestamp(3);
@@ -56,13 +55,12 @@ public class FindTicketsInfo implements SerializableRead {
         total = (dr.getObject(6) == null) ? 0.0 : dr.getDouble(6).doubleValue();
         daterendu = dr.getTimestamp(7);
     }
-
+    
     @Override
     public String toString(){
-
+        
         String sCustomer = (customer==null) ? "" : customer;
         String sHtml;
-
         if (daterendu==null) {
             sHtml = "<tr><td width=\"50\">"+ "["+ ticketid +"]" +"</td>" +
                     "<td align=\"center\" width=\"100\">"+ Formats.DATE.formatValue(date) +"</td>" +
@@ -83,14 +81,14 @@ public class FindTicketsInfo implements SerializableRead {
 
         return sHtml;
     }
-
+    
     public int getTicketId(){
         return this.ticketid;
     }
-
+    
     public int getTicketType(){
         return this.tickettype;
     }
-
-
+    
+    
 }

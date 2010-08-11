@@ -23,45 +23,30 @@
 
 package net.virtuemart.www.possync;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import javax.xml.rpc.ServiceException;
 
 import net.virtuemart.www.VM_Categories.Categorie;
 import net.virtuemart.www.VM_Product.Produit;
-import net.virtuemart.www.VM_Product.UpdateProductInput;
-import net.virtuemart.www.VM_Product.VM_ProductProxy;
-import net.virtuemart.www.VM_Users.User;
-import net.virtuemart.www.externalsales.Product;
-import net.virtuemart.www.externalsales.ProductPlus;
 
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.MessageInf;
 import com.openbravo.data.loader.ImageUtils;
 import com.openbravo.data.loader.SentenceList;
-import com.openbravo.pos.customers.CustomerSync;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.DataLogicSales;
 import com.openbravo.pos.forms.DataLogicSystem;
 import com.openbravo.pos.forms.ProcessAction;
 import com.openbravo.pos.inventory.AttributeSetInfo;
-import com.openbravo.pos.inventory.MovementReason;
 import com.openbravo.pos.inventory.TaxCategoryInfo;
 import com.openbravo.pos.ticket.CategoryInfo;
 import com.openbravo.pos.ticket.ProductInfoExt;
 import com.openbravo.pos.ticket.TaxInfo;
-import net.virtuemart.www.possync.DataLogicIntegration;
-import net.virtuemart.www.possync.ExternalSalesHelper;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
 
 public class ProductsSync implements ProcessAction {
         
@@ -81,12 +66,23 @@ public class ProductsSync implements ProcessAction {
     }
     
     public MessageInf execute() throws BasicException {
-       
         try {
         
             if (externalsales == null) {
                 externalsales = new ExternalSalesHelper(dlsystem);
             }
+
+             try {
+                // CHECK POS ID
+                externalsales.checkPosID();
+            } catch (RemoteException re) {
+                try {
+                    externalsales.checkPosID();
+                } catch (RemoteException re1) {
+                    return new MessageInf(MessageInf.SGN_WARNING, "Error while checking pos id ", re.toString());
+                }
+            }
+
             String message = "";
                
            //Sync products
@@ -118,8 +114,11 @@ public class ProductsSync implements ProcessAction {
 		// Sync categories.
 			Categorie[] cats = externalsales.getCategories();
 			
-			for (Categorie categorie : cats) {	
-				CategoryInfo addCategory = new CategoryInfo(categorie.getId(), categorie.getName(), null);
+			for (Categorie categorie : cats) {
+
+                                System.out.println(" > "+categorie.getId()+" "+externalsales.encodeStringISO(categorie.getName()));
+
+				CategoryInfo addCategory = new CategoryInfo(categorie.getId(), externalsales.encodeStringISO(categorie.getName()), null);
 				try {
 					dlintegration.syncCategory(addCategory);
 					
@@ -136,8 +135,7 @@ public class ProductsSync implements ProcessAction {
 			List<CategoryInfo> localCats = localCatsList.list();
 			
 			for (CategoryInfo localCat : localCats) {
-				System.out.println(" > "+localCat.getID()+" "+localCat.getName());
-
+				
 				if (notToSync.containsKey(localCat.getName())) {
 					continue;
 				}
@@ -235,7 +233,7 @@ public class ProductsSync implements ProcessAction {
 //							
 //					 }
 
-	                 System.out.println(product.getName()+" "+product.getProduct_categories()+" "+catListRev.get(remCat));
+//	                 System.out.println(product.getName()+" "+product.getProduct_categories()+" "+catListRev.get(remCat));
 	                 
 	            	 String[] pAtt = product.getCustom_attribute().split(";");
 	            	 boolean isScale=false;

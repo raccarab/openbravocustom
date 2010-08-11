@@ -102,7 +102,9 @@ public class JTicketsFinder extends javax.swing.JDialog implements EditorCreator
         jtxtMoney.addEditorKeys(m_jKeys);
         
         //jtxtTicketID.activate();
-        lpr = new ListProviderCreator(dlSales.getTicketsListPressing(), this);
+        lpr = new ListProviderCreator(dlSales.getTicketsList(), this);
+
+        System.out.println("**");
 
         jListTickets.setCellRenderer(new FindTicketsRenderer());
 
@@ -207,7 +209,7 @@ public class JTicketsFinder extends javax.swing.JDialog implements EditorCreator
         
         // Date range
         Object startdate = Formats.TIMESTAMP.parseValue(jTxtStartDate.getText());
-        Object enddate = Formats.TIMESTAMP.parseValue(jTxtEndDate.getText());
+        Object enddate = Formats.TIMESTAMP. parseValue(jTxtEndDate.getText());
         
         afilter[6] = (startdate == null) ? QBFCompareEnum.COMP_NONE : QBFCompareEnum.COMP_GREATEROREQUALS;
         afilter[7] = startdate;

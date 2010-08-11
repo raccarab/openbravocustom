@@ -7,6 +7,8 @@
 
 package net.virtuemart.www.VM_SQLQueries;
 
+import net.virtuemart.www.VM_Tools.LoginInfo;
+
 public class SQLUpdateRequest  implements java.io.Serializable {
     private net.virtuemart.www.VM_Tools.LoginInfo loginInfo;
 
@@ -22,7 +24,7 @@ public class SQLUpdateRequest  implements java.io.Serializable {
     }
 
     public SQLUpdateRequest(
-           net.virtuemart.www.VM_Tools.LoginInfo loginInfo,
+           LoginInfo loginInfo,
            java.lang.String table,
            java.lang.String whereClause,
            java.lang.String[] columns,
