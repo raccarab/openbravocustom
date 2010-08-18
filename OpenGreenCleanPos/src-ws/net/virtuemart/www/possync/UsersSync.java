@@ -116,7 +116,7 @@ public class UsersSync implements ProcessAction {
            if (!message.equals("")) {
                return new MessageInf(MessageInf.SGN_NOTICE, message);               
            } else {
-        	   return new MessageInf(MessageInf.SGN_SUCCESS, AppLocal.getIntString("message.syncproductsok"), AppLocal.getIntString("message.syncusersinfo", npCustomers));
+        	   return new MessageInf(MessageInf.SGN_SUCCESS, AppLocal.getIntString("message.syncusersok"), AppLocal.getIntString("message.syncusersinfo", npCustomers));
            }
            
         } catch (ServiceException e) {            

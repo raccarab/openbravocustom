@@ -189,7 +189,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
             , new QBFBuilder(
             "SELECT T.TICKETID, T.TICKETTYPE, R.DATENEW, P.NAME, C.NAME, SUM(PM.TOTAL), T.DATERENDU "+
             "FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PAYMENTS PM ON R.ID = PM.RECEIPT LEFT OUTER JOIN CUSTOMERS C ON C.ID = T.CUSTOMER LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID " +
-            "WHERE ?(QBF_FILTER) GROUP BY T.ID, T.TICKETID, T.TICKETTYPE, R.DATENEW, P.NAME, C.NAME ORDER BY R.DATENEW DESC, T.TICKETID", new String[] {"T.TICKETID", "T.TICKETTYPE", "PM.TOTAL", "R.DATENEW", "R.DATENEW", "P.NAME", "C.NAME", "T.DATERENDU"})
+            "WHERE ?(QBF_FILTER) GROUP BY T.TICKETID, T.TICKETTYPE, R.DATENEW, P.NAME, C.NAME, T.DATERENDU ORDER BY R.DATENEW DESC, T.TICKETID", new String[] {"T.TICKETID", "T.TICKETTYPE", "PM.TOTAL", "R.DATENEW", "R.DATENEW", "P.NAME", "C.NAME", "T.DATERENDU"})
             , new SerializerWriteBasic(new Datas[] {Datas.OBJECT, Datas.INT, Datas.OBJECT, Datas.INT, Datas.OBJECT, Datas.DOUBLE, Datas.OBJECT, Datas.TIMESTAMP, Datas.OBJECT, Datas.TIMESTAMP, Datas.OBJECT, Datas.STRING, Datas.OBJECT, Datas.STRING, Datas.OBJECT, Datas.TIMESTAMP})
             , new SerializerReadClass(FindTicketsInfo.class));
     }
@@ -329,7 +329,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
 
     public final TicketInfo loadTicket(final int tickettype, final int ticketid) throws BasicException {
         TicketInfo ticket = (TicketInfo) new PreparedSentence(s
-                , "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE T.TICKETTYPE = ? AND T.TICKETID = ?"
+                , "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE T.TICKETTYPE = ? AND T.TICKETID = ?"
                 , SerializerWriteParams.INSTANCE
                 , new SerializerReadClass(TicketInfo.class))
                 .find(new DataParams() { public void writeValues() throws BasicException {
@@ -397,7 +397,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
 
                 // new ticket
                 new PreparedSentence(s
-                    , "INSERT INTO TICKETS (ID, TICKETTYPE, TICKETID, PERSON, CUSTOMER, DATERETURN, DATERENDU) VALUES (?, ?, ?, ?, ?, ?, ?)"
+                    , "INSERT INTO TICKETS (ID, TICKETTYPE, TICKETID, PERSON, CUSTOMER, DATERETURN, DATERENDU, STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
                     , SerializerWriteParams.INSTANCE
                     ).exec(new DataParams() { public void writeValues() throws BasicException {
                         setString(1, ticket.getId());
@@ -407,6 +407,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                         setString(5, ticket.getCustomerId());
                         setTimestamp(6, ticket.getDateReturn());
                         setTimestamp(7, ticket.getDateRendu());
+                        setInt(8, ticket.getStatus());
                     }});
 
                 SentenceExec ticketlineinsert = new PreparedSentence(s

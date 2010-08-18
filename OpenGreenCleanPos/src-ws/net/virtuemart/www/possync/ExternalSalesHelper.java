@@ -39,30 +39,31 @@ import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.DataLogicSystem;
 import com.openbravo.pos.util.AltEncrypter;
 import com.openbravo.pos.util.Base64Encoder;
+import java.net.SocketTimeoutException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import java.util.logging.Logger;
 import net.virtuemart.www.VM_Categories.AddCategoryInput;
 import net.virtuemart.www.VM_Categories.Categorie;
 import net.virtuemart.www.VM_Categories.GetAllCategoriesInput;
 import net.virtuemart.www.VM_Categories.VM_CategoriesProxy;
-import net.virtuemart.www.VM_Order.AddCouponInput;
-import net.virtuemart.www.VM_Order.AddStatusInput;
-import net.virtuemart.www.VM_Order.AllOrderRequest;
-import net.virtuemart.www.VM_Order.Coupon;
 import net.virtuemart.www.VM_Order.CreateOrderInput;
-import net.virtuemart.www.VM_Order.DelInput;
-import net.virtuemart.www.VM_Order.OrderStatus;
+import net.virtuemart.www.VM_Order.ReturnOutput;
 import net.virtuemart.www.VM_Order.VM_OrderProxy;
 import net.virtuemart.www.VM_Product.GetAllProductsInput;
 import net.virtuemart.www.VM_Product.Produit;
 import net.virtuemart.www.VM_Product.Tax;
 import net.virtuemart.www.VM_Product.UpdateProductInput;
 import net.virtuemart.www.VM_Product.VM_ProductProxy;
+import net.virtuemart.www.VM_SQLQueries.ColumnAndValue;
 import net.virtuemart.www.VM_SQLQueries.SQLRequest;
-import net.virtuemart.www.VM_SQLQueries.SQLUpdateRequest;
+import net.virtuemart.www.VM_SQLQueries.SQLResult;
 import net.virtuemart.www.VM_SQLQueries.VM_SQLQueriesProxy;
 import net.virtuemart.www.VM_Tools.LoginInfo;
 import net.virtuemart.www.VM_Users.AddUserInput;
@@ -150,6 +151,26 @@ public class ExternalSalesHelper {
 
     public String getWsURL() {
         return wsURL;
+    }
+
+    public boolean checkConnection() {
+        int tries = 3;
+        for (int i = 0; i < tries; i++) {
+            try {
+                System.out.print("*");
+                final URL url = new URL(wsURL);
+                final URLConnection conn = url.openConnection();
+                conn.setReadTimeout(1000);
+                conn.getContent();
+                return true;
+            } catch (IOException ex) {
+                Logger.getLogger(ExternalSalesHelper.class.getName()).log(Level.SEVERE, null, ex);
+                
+            } 
+        }
+        
+
+        return false;
     }
 
     public String getWsPosid() {
@@ -353,27 +374,65 @@ public class ExternalSalesHelper {
         }
     }
 
-    public boolean uploadOrders(CreateOrderInput orderstoupload) throws RemoteException {
+    public String uploadOrders(CreateOrderInput orderstoupload) throws RemoteException {
 
         try {
             orderstoupload.setLoginInfo(wsLogin);
           
-            orderProxy.createOrder(orderstoupload);
+            ReturnOutput ro = orderProxy.createOrder(orderstoupload);
+            return ro.getOutputParam();
 
         } catch (IOException ioe) {
-            System.out.println(" Error : " + orderstoupload.getUser_id() + " - " + orderstoupload.getCustomer_note());
-            return false;
+            return "";
+        }
+
+    }
+
+    public int getOrderID (String note) throws RemoteException {
+        String query = "SELECT order_id FROM #__{vm}_orders ";
+        SQLRequest sqlr = new SQLRequest(wsLogin, query);
+
+        try {
+//            queriesProxy.executeSQLUpdateQuery(sqlr);
+            SQLResult[] results = queriesProxy.executeSQLQuery(sqlr);
+            if (results.length == 1) {
+               ColumnAndValue[] cav = results[0].getColumnsAndValues();
+               return Integer.valueOf(cav[0].getValue());
+            } else {
+                return 0;
+                //throw new RemoteException("getOrderID != 1 : "+results.length);
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            throw new RemoteException("getOrderID ");
+        }
+
+        
+    }
+
+    public boolean updateStatus(String orderID, Date dateCreation, Date dateReturn) throws RemoteException {
+        
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateR = df.format(new Date());
+        String dateC = df.format(new Date());
+        if (dateReturn!=null) {
+            dateR = df.format(dateReturn);
+        }
+        if (dateCreation!=null) {
+            dateC = df.format(dateCreation);
         }
 
 
-        return true;
-    }
+        String query =  " INSERT INTO #__{vm}_order_history ( order_id , order_status_code , date_added , customer_notified , comments ) "
+                        +" VALUES ( '"+orderID+"', 'C', '"+dateR+"', '0', ''); ";
+        String query2 = " UPDATE #__{vm}_order_history SET date_added = '"+dateC+"' WHERE order_status_code = 'P' AND order_status_history_id ="+orderID+"; ";
+        String query3 = " UPDATE #__{vm}_orders SET order_status = 'C' WHERE order_id = "+orderID+";";
 
-    public boolean updateStatus(String note) throws RemoteException {
 
-        String query = "UPDATE #__{vm}_orders SET order_status = 'C' WHERE customer_note LIKE '"+note+"' ;";
         SQLRequest sqlr = new SQLRequest(wsLogin,query);
-        System.out.println(query);
+        SQLRequest sqlr2 = new SQLRequest(wsLogin,query2);
+        SQLRequest sqlr3 = new SQLRequest(wsLogin,query3);
+//        System.out.println(query);
 //        wsLogin, "vm_orders", "customer_note LIKE '"+note+"'", "order_status", "C"
 //        SQLUpdateRequest sqlr = new SQLUpdateRequest();
 //        sqlr.setLoginInfo(wsLogin);
@@ -388,7 +447,10 @@ public class ExternalSalesHelper {
 
         try {
 //            queriesProxy.executeSQLUpdateQuery(sqlr);
-            queriesProxy.executeSQLQuery(sqlr);
+           SQLResult[] results = queriesProxy.executeSQLQuery(sqlr);
+           results = queriesProxy.executeSQLQuery(sqlr2);
+           results = queriesProxy.executeSQLQuery(sqlr3);
+
         } catch (IOException ioe) {
             ioe.printStackTrace();
             return false;

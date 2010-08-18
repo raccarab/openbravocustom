@@ -63,6 +63,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
     private String m_sResponse;
     private java.util.Date m_DateReturn;
     private java.util.Date m_DateRendu;
+    private int m_status;
     
     private static Logger logger = Logger.getLogger("com.openbravo.pos.ticket.TicketInfo");
 
@@ -94,6 +95,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
         m_sResponse = null;
         m_DateReturn = null;
         m_DateRendu = null;
+        m_status = 0;
     }
 
     public void writeExternal(ObjectOutput out) throws IOException {
@@ -107,6 +109,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
         out.writeObject(m_aLines);
         out.writeObject(m_DateReturn);
         out.writeObject(m_DateRendu);
+        out.writeInt(m_status);
     }
 
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
@@ -120,6 +123,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
         m_aLines = (List<TicketLineInfo>) in.readObject();
         m_DateReturn = (Date) in.readObject();
         m_DateRendu = (Date) in.readObject();
+        m_status = in.readInt();
         m_User = null;
         m_sActiveCash = null;
 
@@ -128,7 +132,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
     }
 
     public void readValues(DataRead dr) throws BasicException {
-    	logger.info("*"+dr.getString(1));
+
         m_sId = dr.getString(1);
         tickettype = dr.getInt(2).intValue();
         m_iTicketId = dr.getInt(3).intValue();
@@ -149,6 +153,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
         taxes = null;
         m_DateReturn = dr.getTimestamp(10);
         m_DateRendu = dr.getTimestamp(11);
+        m_status = dr.getInt(12).intValue();
     }
 
     public TicketInfo copyTicket() {
@@ -163,6 +168,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
         t.attributes = (Properties) attributes.clone();
         t.m_User = m_User;
         t.m_Customer = m_Customer;
+        t.m_status = m_status;
 
         t.m_aLines = new ArrayList<TicketLineInfo>();
         for (TicketLineInfo l : m_aLines) {
@@ -174,11 +180,19 @@ public class TicketInfo implements SerializableRead, Externalizable {
         for (PaymentInfo p : payments) {
             t.payments.add(p.copyPayment());
         }
-
         // taxes are not copied, must be calculated again.
 
         return t;
     }
+
+    public int getStatus() {
+        return m_status;
+    }
+
+    public void setStatus(int m_status) {
+        this.m_status = m_status;
+    }
+    
 
     public String getId() {
         return m_sId;
@@ -515,6 +529,9 @@ public class TicketInfo implements SerializableRead, Externalizable {
      }
 
 
+    public double getDebt() {
+        return 0.0;
+    }
 
     public List<PaymentInfo> getPayments() {
         return payments;
@@ -624,4 +641,5 @@ public class TicketInfo implements SerializableRead, Externalizable {
     public String printTotalPaid() {
         return Formats.CURRENCY.formatValue(new Double(getTotalPaid()));
     }
+
 }

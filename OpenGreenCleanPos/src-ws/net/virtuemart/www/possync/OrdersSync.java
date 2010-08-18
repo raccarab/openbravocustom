@@ -29,8 +29,6 @@ import java.util.HashMap;
 import java.util.List;
 import javax.xml.rpc.ServiceException;
 
-import net.virtuemart.www.VM_Order.AddCouponInput;
-import net.virtuemart.www.VM_Order.Coupon;
 import net.virtuemart.www.VM_Order.CreateOrderInput;
 import net.virtuemart.www.VM_Order.Product;
 import net.virtuemart.www.VM_Product.Produit;
@@ -46,10 +44,6 @@ import com.openbravo.pos.ticket.ProductInfoExt;
 import com.openbravo.pos.ticket.TicketInfo;
 import com.openbravo.pos.ticket.TicketLineInfo;
 import com.openbravo.pos.ticket.UserInfo;
-import net.virtuemart.www.externalsales.Payment;
-
-import net.virtuemart.www.possync.DataLogicIntegration;
-import net.virtuemart.www.possync.ExternalSalesHelper;
 
 public class OrdersSync implements ProcessAction {
 
@@ -75,6 +69,8 @@ public class OrdersSync implements ProcessAction {
                 externalsales = new ExternalSalesHelper(dlsystem);
             }
 
+            if (!externalsales.checkConnection())
+                return new MessageInf(MessageInf.SGN_WARNING, "System offline ? ", "Error connecting to website ");
 
             try {
                 // CHECK POS ID
@@ -100,8 +96,7 @@ public class OrdersSync implements ProcessAction {
             if (ticketlist.size() == 0) {
                 return new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.zeroorders"));
             } else {
-
-
+                
                 // SYNC PRODUCTS
                 System.gc();
                 System.runFinalization();
@@ -204,23 +199,28 @@ public class OrdersSync implements ProcessAction {
                     }
 
                     totalpaid = ((Math.round(totalpaid * 100.0)) / 100.0);
-                    String note = ("TicketID."+String.valueOf(ticket.getTicketId()) + ".POS." + externalsales.getWsPosid() + ".TotalPaid." + totalpaid + ".Vendeur." + ticket.printUser()
-                            + ".Date." + ticket.printDate() + ".DateRetour." + ticket.printDateReturn() + ".DateRendu." + ticket.printDateRendu());
+                    String note = ("TicketID."+String.valueOf(ticket.getTicketId()) + ".POS." + externalsales.getWsPosid() + ".TotalPaid." + totalpaid + ".Vendeur." + ticket.printUser());
+ //                           + ".Date." + ticket.printDate() + ".DateRetour." + ticket.printDateReturn() + ".DateRendu." + ticket.printDateRendu());
 
                     orders.setCustomer_note(note);
 
-                    if (externalsales.uploadOrders(orders)) {
+                    String orderID = externalsales.uploadOrders(orders);
+                    if (!orderID.equals("")) {
                         cpt++;
-                        dlintegration.execUpdateTicket(String.valueOf(ticket.getTicketId()));
 
-                        if (totalpaid >= Math.round((ticket.getTotal() * 100) / 100)) {
-                            externalsales.updateStatus(note);
+                        dlintegration.execUpdateTicket(String.valueOf(ticket.getTicketId()),orderID);
+
+                         externalsales.updateStatus(orderID,ticket.getDate(), ticket.getDateReturn());
+
+                         if (totalpaid >= Math.round((ticket.getTotal() * 100) / 100)) {
+//PAYMENT
                         }
 
                     }
                 }
             }
 
+       
         } catch (ServiceException e) {
             throw new BasicException(AppLocal.getIntString("message.serviceexception"), e);
         } catch (RemoteException e) {
@@ -229,7 +229,6 @@ public class OrdersSync implements ProcessAction {
             throw new BasicException(AppLocal.getIntString("message.malformedurlexception"), e);
         }
         return new MessageInf(MessageInf.SGN_SUCCESS, AppLocal.getIntString("message.syncordersok"), AppLocal.getIntString("message.syncordersinfo", cpt));
-
     }
 
     private static int parseInt(String sValue) {

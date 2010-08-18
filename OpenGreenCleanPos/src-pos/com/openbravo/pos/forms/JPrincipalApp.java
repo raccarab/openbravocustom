@@ -65,9 +65,10 @@ public class JPrincipalApp extends javax.swing.JPanel implements AppUserView {
     
     private Icon menu_open;
     private Icon menu_close;
+
         
     /** Creates new form JPrincipalApp */
-    public JPrincipalApp(JRootApp appview, AppUser appuser) {
+    public JPrincipalApp(JRootApp appview, AppUser appuser) {     
         
         m_appview = appview; 
         m_appuser = appuser;
@@ -391,22 +392,39 @@ public class JPrincipalApp extends javax.swing.JPanel implements AppUserView {
     
     public void executeTask(String sTaskClass) {
         
-        m_appview.waitCursorBegin();       
+        System.gc();
+        System.runFinalization();
+
+        m_appview.waitCursorBegin();
 
         if (m_appuser.hasPermission(sTaskClass)) {
             try {
+this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+ 
+
+             //   WaitDialog wd = new WaitDialog();
+             //   wd.setVisible(true);
+                
                 ProcessAction myProcess = (ProcessAction) m_appview.getBean(sTaskClass);
 
-                // execute the proces
                 try {
-                    MessageInf m = myProcess.execute();    
+                    MessageInf m = myProcess.execute();
                     if (m != null) {
                         // si devuelve un mensaje, lo muestro
+              //          wd.setVisible(false);
+
                         JMessageDialog.showMessage(JPrincipalApp.this, m);
                     }
+
+
+
                 } catch (BasicException eb) {
                     // Si se produce un error lo muestro.
                     JMessageDialog.showMessage(JPrincipalApp.this, new MessageInf(eb));            
+                } finally {
+  this.setCursor(Cursor.getDefaultCursor());
+
                 }
             } catch (BeanFactoryException e) {
                 JMessageDialog.showMessage(JPrincipalApp.this, new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("Label.LoadError"), e));            

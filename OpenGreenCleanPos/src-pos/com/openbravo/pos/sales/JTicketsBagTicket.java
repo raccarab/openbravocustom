@@ -557,13 +557,13 @@ private void jDebtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
             }
 
             payments.add(new PaymentInfoTicket(-total, "debtpaid"));
-
             ticket.setPayments(payments);
             ticket.setUser(m_App.getAppUserView().getUser().getUserInfo());
             ticket.setActiveCash(m_App.getActiveCashIndex());
             ticket.setDate(new Date());
             ticket.setCustomer(currentCustomer);
             ticket.setDateReturn(paymentdialog.getrDate());
+
 
             try {
                 dlsales.saveTicket(ticket, m_App.getInventoryLocation());
@@ -637,7 +637,8 @@ private void jDebtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
         try {
            currentCustomer = m_ticket.getCustomer();
 
-           if (currentCustomer.getCurdebt()>0.0) {
+          // if (currentCustomer.getCurdebt()>0.0 && m_ticket.getDebt()>0.0) {
+            if (currentCustomer.getCurdebt()>0.0) {
                 jDebt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/indebt.png")));
                 m_jRendu.setEnabled(false);
                 jDebt.setEnabled(true);

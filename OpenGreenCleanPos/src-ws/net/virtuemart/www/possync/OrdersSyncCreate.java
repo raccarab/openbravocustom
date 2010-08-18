@@ -32,7 +32,7 @@ import net.virtuemart.www.possync.OrdersSync;
  * @author adrian
  */
 public class OrdersSyncCreate extends BeanFactoryCache {
-    
+
     public Object constructBean(AppView app) throws BeanFactoryException {
 
         DataLogicSystem dlSystem = (DataLogicSystem) app.getBean("com.openbravo.pos.forms.DataLogicSystem");

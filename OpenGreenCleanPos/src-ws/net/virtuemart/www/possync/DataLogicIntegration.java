@@ -307,7 +307,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
     
     public List getTickets() throws BasicException {
         return new PreparedSentence(s
-                  	, "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE (T.TICKETTYPE = 0 OR T.TICKETTYPE = 1) AND T.STATUS = 0"               
+                  	, "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE (T.TICKETTYPE = 0 OR T.TICKETTYPE = 1) AND T.STATUS = 0"
                   	, null
                   	, new SerializerReadClass(TicketInfo.class)).list();
     }       
@@ -351,13 +351,14 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 		
 	}
 
-	public void execUpdateTicket(final String customerNote) throws BasicException {
+	public void execUpdateTicket(final String customerNote, final String orderID ) throws BasicException {
 		System.out.println(customerNote);
-		new PreparedSentence(s, "UPDATE  TICKETS SET STATUS = 1 WHERE STATUS = 0 AND TICKETID = ?", 
+		new PreparedSentence(s, "UPDATE  TICKETS SET STATUS = ? WHERE STATUS = 0 AND TICKETID = ?",
                 SerializerWriteParams.INSTANCE
                 ).exec(new DataParams() { 
                 	public void writeValues() throws BasicException {
-                		setString(1, customerNote);
+                		setString(1, orderID);
+                		setString(2, customerNote);
                
                 	}});
 	}

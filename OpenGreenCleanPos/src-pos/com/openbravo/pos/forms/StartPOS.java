@@ -137,6 +137,8 @@ public class StartPOS {
 
                  String screenmode = config.getProperty("machine.screenmode");
 
+
+
                  if ("fullscreen".equals(screenmode)) {
                     JRootKiosk rootkiosk = new JRootKiosk();
                     rootkiosk.initFrame(config);
@@ -146,9 +148,8 @@ public class StartPOS {
                     rootframe.initFrame(config);
 
                     rootframe.setTitle("   >>> "+hostname+" <<< "+rootframe.getTitle());
+
                 }
-
-
 
             }
         });
