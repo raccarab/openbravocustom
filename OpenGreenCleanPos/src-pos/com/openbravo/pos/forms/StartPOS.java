@@ -16,8 +16,6 @@
 //
 //    You should have received a copy of the GNU General Public License
 //    along with GreenPOS.  If not, see <http://www.gnu.org/licenses/>.
-
-
 package com.openbravo.pos.forms;
 
 import java.util.Locale;
@@ -44,16 +42,14 @@ import org.jvnet.substance.api.SubstanceSkin;
  */
 public class StartPOS {
 
-
     private static Logger logger = Logger.getLogger("com.openbravo.pos.forms.StartPOS");
-    
+
     /** Creates a new instance of StartPOS */
     private StartPOS() {
     }
-    
-    
+
     public static boolean registerApp() {
-                       
+
         // vemos si existe alguna instancia        
         InstanceQuery i = null;
         try {
@@ -62,18 +58,19 @@ public class StartPOS {
             return false;
         } catch (Exception e) {
             return true;
-        }  
+        }
     }
-    
-    public static void main (final String args[]) {
-        
+
+    public static void main(final String args[]) {
+
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
-                
+
                 if (!registerApp()) {
                     System.exit(1);
                 }
-                
+
                 AppConfig config = new AppConfig(args);
                 config.load();
 
@@ -82,22 +79,22 @@ public class StartPOS {
                 String wspassword = config.getProperty("ws.password");
                 String wsurl = config.getProperty("ws.URL");
                 String wsposid = config.getProperty("ws.posid");
-                if (wsposid!=null &&
-                           (wsuser == null || wsuser.equals("")
-                           || wsurl.equals("") || wsurl == null
-                           || wspassword.equals("") || wspassword == null)) {
+                if (wsposid != null
+                        && (wsuser == null || wsuser.equals("")
+                        || wsurl.equals("") || wsurl == null
+                        || wspassword.equals("") || wspassword == null)) {
                     JOptionPane.showMessageDialog(null, "Config Error ! : Please configure Web Service correctly !");
-                   
+
                 }
 
                 // set Locale.
                 String slang = config.getProperty("user.language");
                 String scountry = config.getProperty("user.country");
                 String svariant = config.getProperty("user.variant");
-                if (slang != null && !slang.equals("") && scountry != null && svariant != null) {                                        
+                if (slang != null && !slang.equals("") && scountry != null && svariant != null) {
                     Locale.setDefault(new Locale(slang, scountry, svariant));
                 }
-                
+
                 // Set the format patterns
                 Formats.setIntegerPattern(config.getProperty("format.integer"));
                 Formats.setDoublePattern(config.getProperty("format.double"));
@@ -105,53 +102,58 @@ public class StartPOS {
                 Formats.setPercentPattern(config.getProperty("format.percent"));
                 Formats.setDatePattern(config.getProperty("format.date"));
                 Formats.setTimePattern(config.getProperty("format.time"));
-                Formats.setDateTimePattern(config.getProperty("format.datetime"));               
-                
+                Formats.setDateTimePattern(config.getProperty("format.datetime"));
+
                 // Set the look and feel.
-                try {             
-                    
+                try {
+
                     Object laf = Class.forName(config.getProperty("swing.defaultlaf")).newInstance();
-                    
-                    if (laf instanceof LookAndFeel){
+
+                    if (laf instanceof LookAndFeel) {
                         UIManager.setLookAndFeel((LookAndFeel) laf);
-                    } else if (laf instanceof SubstanceSkin) {                      
-                        SubstanceLookAndFeel.setSkin((SubstanceSkin) laf);                   
+                    } else if (laf instanceof SubstanceSkin) {
+                        SubstanceLookAndFeel.setSkin((SubstanceSkin) laf);
                     }
                 } catch (Exception e) {
                     logger.log(Level.WARNING, "Cannot set look and feel", e);
                 }
 
                 // For printing the Hostname in the ticke
-                 String hostname = config.getProperty("machine.hostname");
-                 TicketInfo.setHostname(hostname);
-                 if (config.getProperty("ws.posid")!=null){
-                	 try {
-                	 int posid = Integer.parseInt(config.getProperty("ws.posid"));
-//                	 	if ( posid > 0 && posid <= 9000000) {
-//                	 		UUID.setId(posid);
-//                	 	} 
-                	 } catch (NumberFormatException e) {
-						e.printStackTrace();
-					}
-                 }
-
-                 String screenmode = config.getProperty("machine.screenmode");
+                String hostname = config.getProperty("machine.hostname");
+                TicketInfo.setHostname(hostname);
 
 
+                if (config.getProperty("ws.posid") != null) {
+                    try {
+                        int posid = Integer.parseInt(config.getProperty("ws.posid"));
 
-                 if ("fullscreen".equals(screenmode)) {
+                        if (posid > 0) {
+                            TicketInfo.setPosID(posid);
+//                          UUID.setId(posid);
+                        }
+                        
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                String screenmode = config.getProperty("machine.screenmode");
+
+
+
+                if ("fullscreen".equals(screenmode)) {
                     JRootKiosk rootkiosk = new JRootKiosk();
                     rootkiosk.initFrame(config);
-                    rootkiosk.setTitle("   >>> "+hostname+" <<< "+rootkiosk.getTitle());
+                    rootkiosk.setTitle("   >>> " + hostname + " <<< " + rootkiosk.getTitle());
                 } else {
-                    JRootFrame rootframe = new JRootFrame(); 
+                    JRootFrame rootframe = new JRootFrame();
                     rootframe.initFrame(config);
 
-                    rootframe.setTitle("   >>> "+hostname+" <<< "+rootframe.getTitle());
+                    rootframe.setTitle("   >>> " + hostname + " <<< " + rootframe.getTitle());
 
                 }
 
             }
         });
-    }    
+    }
 }

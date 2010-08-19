@@ -28,6 +28,7 @@ import com.openbravo.format.Formats;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.AppView;
 import com.openbravo.pos.forms.DataLogicSales;
+import com.openbravo.pos.ticket.TicketInfo;
 import com.openbravo.pos.util.StringUtils;
 import java.awt.Component;
 import java.text.SimpleDateFormat;
@@ -56,10 +57,11 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         
         DataLogicSales dlSales = (DataLogicSales) app.getBean("com.openbravo.pos.forms.DataLogicSales");
 
-        posid = app.getProperties().getProperty("ws.posid");
-        if (posid==null || posid.length()<=0) {
+        if (!TicketInfo.isWS()) {
              SimpleDateFormat sdf = new SimpleDateFormat("S");
              posid = sdf.format(new Date());
+        } else {
+            posid=String.valueOf(TicketInfo.getPosID());
         }
 
         initComponents();

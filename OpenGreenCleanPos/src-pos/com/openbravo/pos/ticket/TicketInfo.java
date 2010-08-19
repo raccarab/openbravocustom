@@ -67,13 +67,29 @@ public class TicketInfo implements SerializableRead, Externalizable {
     
     private static Logger logger = Logger.getLogger("com.openbravo.pos.ticket.TicketInfo");
 
+   //posID for printing tickets
+    private static int posID = 0;
+
+    public static void setPosID(int posid) {
+        posID = posid;
+    }
+
+    public static int getPosID() {
+        return posID;
+    }
+
+    public static Boolean isWS() {
+        return posID>0;
+    }
+
+  // Hostname for printing tickets
     private static String Hostname;
 
     public static void setHostname(String name) {
         Hostname=name;
     }
 
-    public String getHostname() {
+    public static String getHostname() {
         return Hostname;
     }
 
@@ -249,7 +265,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
      *
      */
     public boolean isPickable(){
-
+//        return false;
         return ((m_DateReturn!=null) && (m_DateRendu == null) && (m_DateReturn.before(new Date())));
     }
 
@@ -597,6 +613,15 @@ public class TicketInfo implements SerializableRead, Externalizable {
         if (m_iTicketId > 0) {
             // valid ticket id
             return Formats.INT.formatValue(new Integer(m_iTicketId));
+        } else {
+            return "";
+        }
+    }
+
+    public String printPosID() {
+        if (posID > 0) {
+            // valid ticket id
+            return Formats.INT.formatValue(new Integer(posID));
         } else {
             return "";
         }

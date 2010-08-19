@@ -140,10 +140,14 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
         txtNotes.setEnabled(true);
 
         dirty.setDirty(false);
+        //deactivate if webservices used !
+        if (TicketInfo.isWS())
+            btnPay.setEnabled(false);
+        else
+            btnPay.setEnabled(customer.getCurdebt() != null && customer.getCurdebt().doubleValue() > 0.0);
 
         btnSave.setEnabled(true);
-        btnPay.setEnabled(customer.getCurdebt() != null && customer.getCurdebt().doubleValue() > 0.0);
-        btnCredit.setEnabled(customer != null && (customer.getCurdebt() == null || customer.getCurdebt().doubleValue() <= 0.0));
+         btnCredit.setEnabled(customer != null && (customer.getCurdebt() == null || customer.getCurdebt().doubleValue() <= 0.0));
     }
 
     private void resetCustomer() {

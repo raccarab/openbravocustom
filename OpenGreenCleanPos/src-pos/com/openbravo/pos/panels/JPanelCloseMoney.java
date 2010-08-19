@@ -46,6 +46,7 @@ import com.openbravo.pos.forms.JPrincipalApp;
 import com.openbravo.pos.forms.ProcessAction;
 import com.openbravo.pos.printer.TicketParser;
 import com.openbravo.pos.printer.TicketPrinterException;
+import com.openbravo.pos.ticket.TicketInfo;
 import net.virtuemart.www.possync.OrdersSync;
 import net.virtuemart.www.possync.OrdersSyncCreate;
 
@@ -474,20 +475,14 @@ public class JPanelCloseMoney extends JPanel implements JPanelView, BeanFactoryA
             try {
 
                 // WS SYNC START
-                AppConfig config = new AppConfig();
-                config.load();
-                String posid = config.getProperty("ws.posid");
-                String url = config.getProperty("ws.URL");
-                if (url != null && posid != null && !posid.equals("") && !url.equals("")) {
+                if (TicketInfo.isWS()) {
                     try {
-                        
-                          //      .showMessage(this, new MessageInf(MessageInf.SGN_NOTICE, "TEST"));
+
+                        this.getParent().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+                        //      .showMessage(this, new MessageInf(MessageInf.SGN_NOTICE, "TEST"));
                         ProcessAction myProcess = (ProcessAction) m_App.getBean("net.virtuemart.www.possync.OrdersSyncCreate");
                         // execute the proces
-
-
-this.getParent().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
                         try {
                             MessageInf m = myProcess.execute();
                             if (m != null) {
@@ -501,7 +496,7 @@ this.getParent().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                             eb.printStackTrace();
                         } finally {
 
-this.getParent().setCursor(Cursor.getDefaultCursor());
+                            this.getParent().setCursor(Cursor.getDefaultCursor());
                         }
                     } catch (BeanFactoryException e) {
                         JOptionPane.showMessageDialog(this, "Order Sync bean error");

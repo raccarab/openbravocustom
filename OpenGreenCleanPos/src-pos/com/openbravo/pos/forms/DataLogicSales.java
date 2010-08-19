@@ -327,6 +327,16 @@ public class DataLogicSales extends BeanFactoryDataSingle {
             t.execute();
     }
 
+    // Only used for WebServices SYNC
+    public final int getTicketID(final int tickettype, final int ticketstatus) throws BasicException {
+         PreparedSentence p = new PreparedSentence(s, "SELECT T.TICKETID FROM TICKETS T WHERE T.TICKETTYPE = ? AND T.TICKESTATUS = ? "
+                    , new SerializerWriteBasic(Datas.STRING, Datas.STRING)
+                    , SerializerReadInteger.INSTANCE);
+
+        Integer d = (Integer) p.find(tickettype, ticketstatus );
+        return d == null ? 0 : d.intValue();
+    }
+
     public final TicketInfo loadTicket(final int tickettype, final int ticketid) throws BasicException {
         TicketInfo ticket = (TicketInfo) new PreparedSentence(s
                 , "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE T.TICKETTYPE = ? AND T.TICKETID = ?"
