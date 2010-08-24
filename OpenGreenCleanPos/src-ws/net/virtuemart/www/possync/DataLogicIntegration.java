@@ -48,6 +48,8 @@ import com.openbravo.pos.ticket.TaxInfo;
 import com.openbravo.pos.ticket.TicketInfo;
 import com.openbravo.pos.ticket.TicketLineInfo;
 import com.openbravo.pos.ticket.UserInfo;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -304,13 +306,20 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                   , null
                   , new SerializerReadClass(CustomerSync.class)).list();
     }
-    
+
     public List getTickets() throws BasicException {
         return new PreparedSentence(s
-                  	, "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE (T.TICKETTYPE = 0 OR T.TICKETTYPE = 1) AND T.STATUS = 0"
+                  	, "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE ( T.TICKETTYPE = 0 AND T.STATUS = 0 ) OR ( T.TICKETTYPE = 1 AND T.DATERETURN IS NULL )"
                   	, null
                   	, new SerializerReadClass(TicketInfo.class)).list();
-    }       
+    }
+
+    public List getTicketsPayments() throws BasicException {
+        return new PreparedSentence(s
+                  	, "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE T.TICKETTYPE = 2 AND T.DATERETURN IS NULL ORDER BY STATUS "
+                  	, null
+                  	, new SerializerReadClass(TicketInfo.class)).list();
+    }
     
     public List getUsers() throws BasicException {
         return new PreparedSentence(s
@@ -328,6 +337,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                 , SerializerWriteString.INSTANCE
                 , new SerializerReadClass(TicketLineInfo.class)).list(ticket);
     }
+    
     public List getTicketPayments(final String ticket) throws BasicException {
         return new PreparedSentence(s
                 , "SELECT TOTAL, PAYMENT FROM PAYMENTS WHERE RECEIPT = ?"             
@@ -351,15 +361,32 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 		
 	}
 
-	public void execUpdateTicket(final String customerNote, final String orderID ) throws BasicException {
-		System.out.println(customerNote);
+	public void execUpdateTicket(final String ticketid, final String orderID ) throws BasicException {
+		
 		new PreparedSentence(s, "UPDATE  TICKETS SET STATUS = ? WHERE STATUS = 0 AND TICKETID = ?",
                 SerializerWriteParams.INSTANCE
-                ).exec(new DataParams() { 
+                ).exec(new DataParams() {
                 	public void writeValues() throws BasicException {
                 		setString(1, orderID);
-                		setString(2, customerNote);
-               
+                		setString(2, ticketid);
+
+                	}});
+	}
+
+	public void execUpdateTicketsRefundPayment(final String tickettype, final String orderID ) throws BasicException {
+		
+                final Date date = new Date();
+                final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                final String dateReturn = sdf.format(date);
+
+		new PreparedSentence(s, "UPDATE  TICKETS SET DATERETURN = ? WHERE STATUS = ? AND TICKETTYPE = ? ",
+                SerializerWriteParams.INSTANCE
+                ).exec(new DataParams() {
+                	public void writeValues() throws BasicException {
+                		setString(1, dateReturn);
+                		setString(2, orderID);
+                		setString(3, tickettype);
+
                 	}});
 	}
 }

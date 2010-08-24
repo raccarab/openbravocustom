@@ -25,7 +25,6 @@ import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.Window;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import com.openbravo.pos.forms.AppView;
 import com.openbravo.pos.forms.AppLocal;

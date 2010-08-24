@@ -47,6 +47,7 @@ import com.openbravo.pos.ticket.HostInfo;
 import com.openbravo.pos.ticket.TicketTaxInfo;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -313,13 +314,20 @@ public class DataLogicSales extends BeanFactoryDataSingle {
     }
 
     public final void setRendu(final String id) throws BasicException {
+        final Date date = new Date();
+                final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                final String dateReturn = sdf.format(date);
+
+
+
         Transaction t = new Transaction(s) {
             public Object transact() throws BasicException {
                new PreparedSentence(s
-                    , "UPDATE TICKETS SET DATERENDU=NOW() WHERE ID = ?"
+                    , "UPDATE TICKETS SET DATERENDU = ? WHERE ID = ?"
                     , SerializerWriteParams.INSTANCE
                     ).exec(new DataParams() { public void writeValues() throws BasicException {
-                        setString(1, id);
+                        setString(1, dateReturn);
+                        setString(2, id);
                     }});
                return null;
                }

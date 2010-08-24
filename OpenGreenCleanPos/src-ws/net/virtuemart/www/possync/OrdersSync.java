@@ -83,35 +83,36 @@ public class OrdersSync implements ProcessAction {
                 }
             }
 
+            // SYNC PRODUCTS
+            System.gc();
+            System.runFinalization();
+            ProductsSync bean = new ProductsSync(dlsystem, dlintegration, dlsales, "0");
+            bean.execute();
+            System.gc();
+            System.runFinalization();
+
+
+            // SYNC USERS
+            UsersSync usc = new UsersSync(dlsystem, dlintegration, dlsales, "0");
+            usc.execute();
+            System.gc();
+            System.runFinalization();
+
 
             dlintegration.syncOrdersBefore();
-                
+
+
             // Obtenemos los tickets
             List<TicketInfo> ticketlist = dlintegration.getTickets();
-            for (TicketInfo ticket : ticketlist) {
-                ticket.setLines(dlintegration.getTicketLines(ticket.getId()));
-                ticket.setPayments(dlintegration.getTicketPayments(ticket.getId()));
-            }
-
+            
             if (ticketlist.size() == 0) {
                 return new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.zeroorders"));
             } else {
+                for (TicketInfo ticket : ticketlist) {
+                    ticket.setLines(dlintegration.getTicketLines(ticket.getId()));
+                    ticket.setPayments(dlintegration.getTicketPayments(ticket.getId()));
+                }
                 
-                // SYNC PRODUCTS
-                System.gc();
-                System.runFinalization();
-                ProductsSync bean = new ProductsSync(dlsystem, dlintegration, dlsales, "0");
-                bean.execute();
-                System.gc();
-                System.runFinalization();
-
-
-                // SYNC USERS
-                UsersSync usc = new UsersSync(dlsystem, dlintegration, dlsales, "0");
-                usc.execute();
-                System.gc();
-                System.runFinalization();
-
                 HashMap<String, String> usersMap = new HashMap<String, String>();
 
                 List<UserInfo> localUsers;
@@ -148,9 +149,6 @@ public class OrdersSync implements ProcessAction {
                     TicketInfo ticket = ticketlist.get(i);
 
                     String userID = usersMap.get(ticket.getCustomerId());
-
-//        	System.out.print(" > "+ticket.getCustomerId()+" ");
-//        	System.out.println(usersMap.get(ticket.getCustomerId()));
 
                     orders = new CreateOrderInput();
                     orders.setPayment_method_id("1");
@@ -215,11 +213,26 @@ public class OrdersSync implements ProcessAction {
                              externalsales.setPaid(orderID,ticket.getDate() );
 
                         }
-                        dlintegration.execUpdateTicket(String.valueOf(ticket.getTicketId()),orderID);
+                        if (ticket.getTicketType() == TicketInfo.RECEIPT_REFUND)
+                            dlintegration.execUpdateTicketsRefundPayment(String.valueOf(ticket.getTicketType()), orderID);
+                        else if (ticket.getTicketType() == TicketInfo.RECEIPT_NORMAL)
+                            dlintegration.execUpdateTicket(String.valueOf(ticket.getTicketId()),orderID);
 
                     }
                 }
             }
+
+            //PAYMENTS
+
+            List<TicketInfo> ticketlistpayments = dlintegration.getTicketsPayments();
+
+            if (ticketlistpayments.size() > 0) {
+                
+                for (TicketInfo ticket : ticketlist) {
+                    ticket.setLines(dlintegration.getTicketLines(ticket.getId()));
+                    ticket.setPayments(dlintegration.getTicketPayments(ticket.getId()));
+                }
+           }
 
        
         } catch (ServiceException e) {
