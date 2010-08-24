@@ -94,7 +94,6 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
         this.app = app;
         dlSystem = (DataLogicSystem) app.getBean("com.openbravo.pos.forms.DataLogicSystem");
         printselected = true;
-       
         try {
             if(app.getProperties().getProperty("machine.printerenabled").compareTo("false")==0 ){
                 printselected = false;
@@ -204,6 +203,22 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
                     new javax.swing.ImageIcon(getClass().getResource(jpay.getIconKey())),
                     jpayinterface.getComponent());
         }
+    }
+
+    private Date getDefaultReturnDate() {
+
+        Calendar cal = Calendar.getInstance();
+                Date tomorrow = new Date();
+
+
+                cal.setTime(new Date(tomorrow.getYear(),tomorrow.getMonth(),tomorrow.getDate()));
+                cal.add(Calendar.DATE, 2);
+                if (cal.DAY_OF_WEEK == cal.SUNDAY)
+                   cal.add(Calendar.DATE, 1);
+
+                cal.setTimeInMillis(cal.getTimeInMillis()+57600000);
+
+                return (Date) cal.getTime();
     }
     
     public interface JPaymentCreator {
@@ -603,18 +618,7 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
 
         if (date == null) {
 
-                Calendar cal = Calendar.getInstance();
-                Date tomorrow = new Date();
-
-
-                cal.setTime(new Date(tomorrow.getYear(),tomorrow.getMonth(),tomorrow.getDate()));
-                cal.add(Calendar.DATE, 2);
-                if (cal.DAY_OF_WEEK == cal.SUNDAY)
-                   cal.add(Calendar.DATE, 1);
-
-                cal.setTimeInMillis(cal.getTimeInMillis()+57600000);
-                
-                date = (Date) cal.getTime();
+                date = getDefaultReturnDate();
 
 
         } 

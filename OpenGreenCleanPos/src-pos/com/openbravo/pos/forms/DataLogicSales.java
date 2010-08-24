@@ -329,12 +329,19 @@ public class DataLogicSales extends BeanFactoryDataSingle {
 
     // Only used for WebServices SYNC
     public final int getTicketID(final int tickettype, final int ticketstatus) throws BasicException {
-         PreparedSentence p = new PreparedSentence(s, "SELECT T.TICKETID FROM TICKETS T WHERE T.TICKETTYPE = ? AND T.TICKESTATUS = ? "
-                    , new SerializerWriteBasic(Datas.STRING, Datas.STRING)
+         PreparedSentence p = new PreparedSentence(s, "SELECT T.TICKETID FROM TICKETS T WHERE T.TICKETTYPE = ? AND T.STATUS = ? "
+                    , new SerializerWriteBasic(Datas.INT, Datas.INT)
                     , SerializerReadInteger.INSTANCE);
 
         Integer d = (Integer) p.find(tickettype, ticketstatus );
         return d == null ? 0 : d.intValue();
+    }
+
+    public final List<TicketInfo> getPayments (final int tickettype, final int ticketid) throws BasicException {
+        return new PreparedSentence(s
+                , "SELECT P.PAYMENT, P.TOTAL, P.TRANSID FROM PAYMENTS P LEFT JOIN TICKETS T ON P.RECEIPT=T.ID WHERE  T.TICKETTYPE = ? AND T.TICKETID = ?"
+                , SerializerWriteString.INSTANCE
+                , new SerializerReadClass(PaymentInfoTicket.class)).list(tickettype, ticketid);
     }
 
     public final TicketInfo loadTicket(final int tickettype, final int ticketid) throws BasicException {
@@ -362,6 +369,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 , "SELECT PAYMENT, TOTAL, TRANSID FROM PAYMENTS WHERE RECEIPT = ?"
                 , SerializerWriteString.INSTANCE
                 , new SerializerReadClass(PaymentInfoTicket.class)).list(ticket.getId()));
+            
         }
         return ticket;
     }

@@ -266,7 +266,8 @@ public class TicketInfo implements SerializableRead, Externalizable {
      */
     public boolean isPickable(){
 //        return false;
-        return ((m_DateReturn!=null) && (m_DateRendu == null) && (m_DateReturn.before(new Date())));
+//        && (m_DateReturn.before(new Date()))
+        return ((m_DateReturn!=null) && (m_DateRendu == null) );
     }
 
     public String getName() {
@@ -384,7 +385,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
         for (Iterator<TicketLineInfo> i = m_aLines.iterator(); i.hasNext();) {
 
              oLine = i.next();
-             if (oLine.isPressing()) {
+             if (oLine.isPressing() && oLine.getValue()>=0) {
                 return true;
             }
        }
@@ -458,21 +459,46 @@ public class TicketInfo implements SerializableRead, Externalizable {
 
     public double getTotal() {
         
-        return getSubTotal() + getTax();
+        double sum =getSubTotal() + getTax();
+        return Math.round(sum * 100.0) / 100.0;
     }
 
     public double getTotalPaid() {
-
-//logger.info("***************");
         double sum = 0.0;
         for (PaymentInfo p : payments) {
-
-//logger.info(p.getName()+" "+p.getTotal());
-            if (!"debtpaid".equals(p.getName()) && !"creditpaid".equals(p.getName())) {
+            if (!"debtpaid".equals(p.getName()) && !"creditpaid".equals(p.getName()) && !"debt".equals(p.getName()) && !"cashrefund".equals(p.getName())) {
                 sum += p.getTotal();
             }
         }
-        return sum;
+        return Math.round(sum * 100.0) / 100.0;
+    }
+
+    public boolean isRefundable() {
+        return (this.getTotal() + this.getRefund())>0;
+    }
+
+    public double getRefund() {
+        double sum = 0.0;
+        for (PaymentInfo p : payments) {
+            if ("cashrefund".equals(p.getName())) {
+                sum += p.getTotal();
+            }
+        }
+        return Math.round(sum * 100.0) / 100.0;
+    }
+
+    public double hasToBePaid() {
+        return getTotal()-getTotalPaid()-getRefund();
+    }
+
+    public double getDebt() {
+        double sum = 0.0;
+        for (PaymentInfo p : payments) {
+            if ("debtpaid".equals(p.getName()) || "creditpaid".equals(p.getName()) || "debt".equals(p.getName())) {
+                sum += p.getTotal();
+            }
+        }
+        return Math.round(sum * 100.0) / 100.0;
     }
 
     public List<TicketLineInfo> getLines() {
@@ -543,11 +569,6 @@ public class TicketInfo implements SerializableRead, Externalizable {
          }
         return newList;
      }
-
-
-    public double getDebt() {
-        return 0.0;
-    }
 
     public List<PaymentInfo> getPayments() {
         return payments;
