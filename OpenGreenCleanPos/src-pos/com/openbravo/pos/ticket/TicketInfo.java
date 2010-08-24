@@ -488,7 +488,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
     }
 
     public double hasToBePaid() {
-        return getTotal()-getTotalPaid()-getRefund();
+        return getTotal()-getTotalPaid()+getRefund();
     }
 
     public double getDebt() {

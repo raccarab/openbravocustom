@@ -328,20 +328,20 @@ public class DataLogicSales extends BeanFactoryDataSingle {
     }
 
     // Only used for WebServices SYNC
-    public final int getTicketID(final int tickettype, final int ticketstatus) throws BasicException {
-         PreparedSentence p = new PreparedSentence(s, "SELECT T.TICKETID FROM TICKETS T WHERE T.TICKETTYPE = ? AND T.STATUS = ? "
-                    , new SerializerWriteBasic(Datas.INT, Datas.INT)
-                    , SerializerReadInteger.INSTANCE);
+//    public final int getTicketID(final int tickettype, final int ticketstatus) throws BasicException {
+//         PreparedSentence p = new PreparedSentence(s, "SELECT T.TICKETID FROM TICKETS T WHERE T.TICKETTYPE = ? AND T.STATUS = ? "
+//                    , new SerializerWriteBasic(Datas.INT, Datas.INT)
+//                    , SerializerReadInteger.INSTANCE);
+//
+//        Integer d = (Integer) p.find(tickettype, ticketstatus );
+//        return d == null ? 0 : d.intValue();
+//    }
 
-        Integer d = (Integer) p.find(tickettype, ticketstatus );
-        return d == null ? 0 : d.intValue();
-    }
-
-    public final List<TicketInfo> getPayments (final int tickettype, final int ticketid) throws BasicException {
+    public final List<PaymentInfoTicket> getExtraPayments (final int ticketstatus) throws BasicException {
         return new PreparedSentence(s
-                , "SELECT P.PAYMENT, P.TOTAL, P.TRANSID FROM PAYMENTS P LEFT JOIN TICKETS T ON P.RECEIPT=T.ID WHERE  T.TICKETTYPE = ? AND T.TICKETID = ?"
-                , SerializerWriteString.INSTANCE
-                , new SerializerReadClass(PaymentInfoTicket.class)).list(tickettype, ticketid);
+                , "SELECT P.PAYMENT, P.TOTAL, P.TRANSID FROM PAYMENTS P LEFT JOIN TICKETS T ON P.RECEIPT=T.ID WHERE  T.TICKETTYPE > 0 AND T.STATUS = ?"
+                , SerializerWriteInteger.INSTANCE
+                , new SerializerReadClass(PaymentInfoTicket.class)).list(ticketstatus);
     }
 
     public final TicketInfo loadTicket(final int tickettype, final int ticketid) throws BasicException {

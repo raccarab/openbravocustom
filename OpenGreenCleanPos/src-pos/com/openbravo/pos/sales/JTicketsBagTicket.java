@@ -200,46 +200,21 @@ public class JTicketsBagTicket extends JTicketsBag {
                 m_ticket = ticket;
                 m_ticketCopy = null; // se asigna al pulsar el boton de editar o devolver
                 totalPaid = m_ticket.getTotalPaid();
-                
+
                 // CASE of WS, we check for paiments !!
                 if (TicketInfo.isWS() && m_ticket.getStatus() > 0) {
 
-                     try {
-                        // get additionnal payment
-                        int paymentOID = m_dlSales.getTicketID(TicketInfo.RECEIPT_PAYMENT, m_ticket.getStatus());
-
-                        TicketInfo paymentT = m_dlSales.loadTicket(TicketInfo.RECEIPT_PAYMENT, paymentOID);
-
-                        if (paymentT != null) {
-                            for (PaymentInfo p : paymentT.getPayments()) {
-                                m_ticket.getPayments().add(p);
-                            }
+                    List<PaymentInfoTicket> pi = m_dlSales.getExtraPayments(m_ticket.getStatus());
+                    if (pi != null) {
+                        for (PaymentInfo p : pi) {
+                            m_ticket.getPayments().add(p);
                         }
-
-                    } catch (BasicException ex) {
-                        Logger.getLogger(JTicketsBagTicket.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                    try {
-                        // get additionnal refund
-                        int paymentOID = m_dlSales.getTicketID(TicketInfo.RECEIPT_REFUND, m_ticket.getStatus());
-
-                        TicketInfo paymentR = m_dlSales.loadTicket(TicketInfo.RECEIPT_REFUND, paymentOID);
-
-                        if (paymentR != null) {
-                            for (PaymentInfo p : paymentR.getPayments()) {
-                                m_ticket.getPayments().add(p);
-                            }
-                        }
-
-                    } catch (BasicException ex) {
-                        Logger.getLogger(JTicketsBagTicket.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                     currentDebt = m_ticket.getDebt();
- 
+
                 }
-                checkDebt();
+                hasDebt();
                 printTicket();
             }
 
@@ -267,7 +242,9 @@ public class JTicketsBagTicket extends JTicketsBag {
                     m_ticket != null
                     && (m_ticket.getTicketType() == TicketInfo.RECEIPT_NORMAL || m_ticket.getTicketType() == TicketInfo.RECEIPT_REFUND)
                     && m_dlSales.isCashActive(m_ticket.getActiveCash()));
+
             haschanged = (m_ticket == null || (!m_ticket.isPickable()));
+
             m_jRendu.setEnabled(!haschanged);
 
         } catch (BasicException e) {
@@ -544,6 +521,7 @@ public class JTicketsBagTicket extends JTicketsBag {
         refundticket.setCustomer(m_ticket.getCustomer());
         refundticket.setPayments(m_ticket.getPayments());
         refundticket.setStatus(status);
+        refundticket.setDateReturn(null);
         m_panelticketedit.setActiveTicket(refundticket, null);
 
     }//GEN-LAST:event_m_jRefundActionPerformed
@@ -583,7 +561,11 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void m_jRenduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jRenduActionPerformed
 
     currentCustomer = m_ticket.getCustomer();
-    double toPay= currentCustomer.getCurdebt();
+    double toPay = 0.0;
+    try {
+        toPay = currentCustomer.getCurdebt();
+    } catch (NullPointerException npe) {
+    }
 
     if (TicketInfo.isWS()) {
         //WebService Sync needs remote order ID.
@@ -597,7 +579,8 @@ private void m_jRenduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         toPay = currentCustomer.getCurdebt();
     }
 
-    JPaymentSelect paymentdialog;
+    if (toPay > 0.0) {
+        JPaymentSelect paymentdialog;
         paymentdialog = JPaymentSelectCustomer.getDialog(this);
         paymentdialog.init(m_App);
         paymentdialog.setPrintSelected(true);
@@ -612,9 +595,12 @@ private void m_jRenduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             double total = 0.0;
             for (PaymentInfo p : payments) {
                 total += p.getTotal();
+                m_ticket.getPayments().add(p);
             }
 
             payments.add(new PaymentInfoTicket(-total, "debtpaid"));
+            currentDebt -= total;
+
             ticket.setPayments(payments);
             ticket.setUser(m_App.getAppUserView().getUser().getUserInfo());
             ticket.setActiveCash(m_App.getActiveCashIndex());
@@ -647,9 +633,6 @@ private void m_jRenduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 msg.show(this);
             }
 
-
-            checkDebt();
-
             m_jRendu.setEnabled(m_ticket != null && (ticket.isPickable()));
             if (ticket != null) {
                 try {
@@ -663,28 +646,44 @@ private void m_jRenduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     JMessageDialog.showMessage(this, new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.cannotprint"), e));
                 }
             }
+
+            hasDebt();
+
+            if (currentDebt <= 0.0) {
+                m_ticket.setRendu();
+                try {
+                    m_dlSales.setRendu(m_ticket.getId());
+                    m_jRendu.setEnabled(false);
+
+
+                } catch (BasicException ex) {
+                    Logger.getLogger(JTicketsBagTicket.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                m_jRendu.setEnabled(true);
+            }
+            haschanged = true;
+            printTicket();
         }
+
+    } else {
+        m_ticket.setRendu();
+        try {
+            m_dlSales.setRendu(m_ticket.getId());
+            m_jRendu.setEnabled(false);
+
+
+        } catch (BasicException ex) {
+            Logger.getLogger(JTicketsBagTicket.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        haschanged = true;
+        printTicket();
+    }
 
     /**
      * TODO
      */
-    m_ticket.setRendu();
-    try {
-        m_dlSales.setRendu(m_ticket.getId());
-        printTicket();
-        m_jRendu.setEnabled(false);
-        haschanged = true;
-
-    } catch (BasicException ex) {
-        Logger.getLogger(JTicketsBagTicket.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
 }//GEN-LAST:event_m_jRenduActionPerformed
-
-    public Boolean payDebt() {
-        
-        return false;
-    }
 
 private void jDebtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDebtActionPerformed
 
@@ -739,7 +738,7 @@ private void jDebtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
             msg.show(this);
         }
 
-        checkDebt();
+        hasDebt();
 
         m_jRendu.setEnabled(m_ticket != null && (ticket.isPickable()));
         if (ticket != null) {
@@ -780,21 +779,19 @@ private void jDebtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
     private javax.swing.JLabel m_jTicketId;
     // End of variables declaration//GEN-END:variables
 
-    private void checkDebt() {
+    private boolean hasDebt() {
 
-        if (m_ticket.getDateRendu() == null) {
-            m_jRendu.setEnabled(true);
-        } else {
-            m_jRendu.setEnabled(false);
-        }
 
         if (currentDebt > 0.0) {
             m_jRendu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/indebt.png")));
+            return true;
+        } else {
+            m_jRendu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/apply.png")));
+            return false;
         }
 
     }
-
-//        private void checkDebt() {
+//        private void hasDebt() {
 //        jDebt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/apply.png")));
 //        jDebt.setEnabled(false);
 //        try {
