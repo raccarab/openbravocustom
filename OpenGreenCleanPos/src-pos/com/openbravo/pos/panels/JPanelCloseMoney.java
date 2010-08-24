@@ -478,7 +478,7 @@ public class JPanelCloseMoney extends JPanel implements JPanelView, BeanFactoryA
                 if (TicketInfo.isWS()) {
                     try {
 
-                        this.getParent().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
                         //      .showMessage(this, new MessageInf(MessageInf.SGN_NOTICE, "TEST"));
                         ProcessAction myProcess = (ProcessAction) m_App.getBean("net.virtuemart.www.possync.OrdersSyncCreate");
@@ -496,7 +496,7 @@ public class JPanelCloseMoney extends JPanel implements JPanelView, BeanFactoryA
                             eb.printStackTrace();
                         } finally {
 
-                            this.getParent().setCursor(Cursor.getDefaultCursor());
+                            this.setCursor(Cursor.getDefaultCursor());
                         }
                     } catch (BeanFactoryException e) {
                         JOptionPane.showMessageDialog(this, "Order Sync bean error");

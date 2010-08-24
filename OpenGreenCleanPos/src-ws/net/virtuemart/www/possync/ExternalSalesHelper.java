@@ -410,45 +410,25 @@ public class ExternalSalesHelper {
         
     }
 
-    public boolean updateStatus(String orderID, Date dateCreation, Date dateReturn) throws RemoteException {
-        
+    public boolean setPaid(String orderID, Date date) throws RemoteException {
+
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateR = df.format(new Date());
-        String dateC = df.format(new Date());
-        if (dateReturn!=null) {
-            dateR = df.format(dateReturn);
+        if (date!=null) {
+            dateR = df.format(date);
         }
-        if (dateCreation!=null) {
-            dateC = df.format(dateCreation);
-        }
-
+       
 
         String query =  " INSERT INTO #__{vm}_order_history ( order_id , order_status_code , date_added , customer_notified , comments ) "
                         +" VALUES ( '"+orderID+"', 'C', '"+dateR+"', '0', ''); ";
-        String query2 = " UPDATE #__{vm}_order_history SET date_added = '"+dateC+"' WHERE order_status_code = 'P' AND order_status_history_id ="+orderID+"; ";
         String query3 = " UPDATE #__{vm}_orders SET order_status = 'C' WHERE order_id = "+orderID+";";
 
 
         SQLRequest sqlr = new SQLRequest(wsLogin,query);
-        SQLRequest sqlr2 = new SQLRequest(wsLogin,query2);
         SQLRequest sqlr3 = new SQLRequest(wsLogin,query3);
-//        System.out.println(query);
-//        wsLogin, "vm_orders", "customer_note LIKE '"+note+"'", "order_status", "C"
-//        SQLUpdateRequest sqlr = new SQLUpdateRequest();
-//        sqlr.setLoginInfo(wsLogin);
-//        sqlr.setTable("#__{vm}_orders");
-//        sqlr.setWhereClause("WHERE customer_note LIKE '"+note+"'");
-//
-//        String[] cols = { "order_status" };
-//        sqlr.setColumns(cols);
-//
-//        String[] vals = { "C" };
-//        sqlr.setValues(vals);
 
         try {
-//            queriesProxy.executeSQLUpdateQuery(sqlr);
            SQLResult[] results = queriesProxy.executeSQLQuery(sqlr);
-           results = queriesProxy.executeSQLQuery(sqlr2);
            results = queriesProxy.executeSQLQuery(sqlr3);
 
         } catch (IOException ioe) {
@@ -456,6 +436,45 @@ public class ExternalSalesHelper {
             return false;
         }
         return true;
+    }
+
+    public boolean updateStatus(String orderID, Date dateCreation, Date dateReturn) throws RemoteException {
+        
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateR = null;
+        String dateC = df.format(new Date());
+        boolean returnvalue = true;
+       SQLResult[] results;
+        if (dateReturn!=null) {
+            dateR = df.format(dateReturn);
+            String query =  " INSERT INTO #__{vm}_order_history ( order_id , order_status_code , date_added , customer_notified , comments ) "
+                        +" VALUES ( '"+orderID+"', 'S', '"+dateR+"', '0', ''); ";
+            SQLRequest sqlr = new SQLRequest(wsLogin,query);
+            try {
+               results = queriesProxy.executeSQLQuery(sqlr);
+
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+                returnvalue = false;
+            }
+
+        }
+        if (dateCreation!=null) {
+            dateC = df.format(dateCreation);
+        }
+
+
+        String query2 = " UPDATE #__{vm}_order_history SET date_added = '"+dateC+"' WHERE order_status_code = 'P' AND order_status_history_id ="+orderID+"; ";
+  
+        SQLRequest sqlr2 = new SQLRequest(wsLogin,query2);
+
+        try {
+           results = queriesProxy.executeSQLQuery(sqlr2);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            returnvalue = false;
+        }
+        return returnvalue;
     }
 
     private static String getPasswordHash(String password) {

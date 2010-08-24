@@ -208,13 +208,14 @@ public class OrdersSync implements ProcessAction {
                     if (!orderID.equals("")) {
                         cpt++;
 
-                        dlintegration.execUpdateTicket(String.valueOf(ticket.getTicketId()),orderID);
+                        externalsales.updateStatus(orderID,ticket.getDate(), ticket.getDateReturn());
 
-                         externalsales.updateStatus(orderID,ticket.getDate(), ticket.getDateReturn());
-
-                         if (totalpaid >= Math.round((ticket.getTotal() * 100) / 100)) {
+                        if (totalpaid >= Math.round((ticket.getTotal() * 100) / 100)) {
 //PAYMENT
+                             externalsales.setPaid(orderID,ticket.getDate() );
+
                         }
+                        dlintegration.execUpdateTicket(String.valueOf(ticket.getTicketId()),orderID);
 
                     }
                 }
