@@ -494,7 +494,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
     public double getDebt() {
         double sum = 0.0;
         for (PaymentInfo p : payments) {
-            if ("debtpaid".equals(p.getName()) || "creditpaid".equals(p.getName()) || "debt".equals(p.getName())) {
+            if ("debtpaid".equals(p.getName()) || "creditpaid".equals(p.getName()) || "debt".equals(p.getName()) || "cashrefund".equals(p.getName())) {
                 sum += p.getTotal();
             }
         }
@@ -670,6 +670,10 @@ public class TicketInfo implements SerializableRead, Externalizable {
 
     public String printArticlesCount() {
         return Formats.DOUBLE.formatValue(new Double(getArticlesCount()));
+    }
+
+    public String printStatus() {
+        return Formats.INT.formatValue(new Integer(getStatus()));
     }
 
     public String printSubTotal() {

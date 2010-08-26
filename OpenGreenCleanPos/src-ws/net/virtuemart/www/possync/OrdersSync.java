@@ -168,6 +168,7 @@ public class OrdersSync implements ProcessAction {
                         TicketLineInfo line = ticket.getLines().get(j);
                         String pDesc = line.getProductName();
                         products[j] = new Product();
+
                         if (line.getProductID().equals("0")) {
                             products[j].setProduct_id(productsMap.get(line.getProductID()));
                             products[j].setQuantity(String.valueOf(line.getMultiply() * line.getPriceTax() * 100));
@@ -203,6 +204,7 @@ public class OrdersSync implements ProcessAction {
                     orders.setCustomer_note(note);
 
                     String orderID = externalsales.uploadOrders(orders);
+
                     if (!orderID.equals("")) {
                         cpt++;
 
@@ -222,17 +224,28 @@ public class OrdersSync implements ProcessAction {
                 }
             }
 
-            //PAYMENTS
+              //PAYMENTS
 
-            List<TicketInfo> ticketlistpayments = dlintegration.getTicketsPayments();
+            List<Integer> orderids = dlintegration.getTicketsPayments();
 
-            if (ticketlistpayments.size() > 0) {
-                
-                for (TicketInfo ticket : ticketlist) {
-                    ticket.setLines(dlintegration.getTicketLines(ticket.getId()));
-                    ticket.setPayments(dlintegration.getTicketPayments(ticket.getId()));
+            if (orderids.size() > 0) {
+
+                for (Integer oid : orderids) {
+                   // List<Double> dd = dlintegration.getDebt(oid);
+
+                    double dd =  Math.round(dlintegration.getDebt(String.valueOf(oid))*100)/100;
+                   double dp = Math.round(dlintegration.getPaid(String.valueOf(oid))*100)/100;
+
+                    if ((dd + dp) <= 0.0 ) {
+                        externalsales.setPaid( String.valueOf(oid), null);
+                        dlintegration.execUpdateTicketsRefundPayment(String.valueOf(TicketInfo.RECEIPT_PAYMENT), String.valueOf(oid));
+                    }
+
                 }
-           }
+                return null;
+            }
+
+
 
        
         } catch (ServiceException e) {

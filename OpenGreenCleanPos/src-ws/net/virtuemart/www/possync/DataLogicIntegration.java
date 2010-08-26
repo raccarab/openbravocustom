@@ -27,10 +27,14 @@ import java.util.List;
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.loader.DataParams;
 import com.openbravo.data.loader.DataRead;
+import com.openbravo.data.loader.Datas;
 import com.openbravo.data.loader.ImageUtils;
 import com.openbravo.data.loader.PreparedSentence;
 import com.openbravo.data.loader.SerializerRead;
 import com.openbravo.data.loader.SerializerReadClass;
+import com.openbravo.data.loader.SerializerReadDouble;
+import com.openbravo.data.loader.SerializerReadInteger;
+import com.openbravo.data.loader.SerializerWriteBasic;
 import com.openbravo.data.loader.SerializerWriteParams;
 import com.openbravo.data.loader.SerializerWriteString;
 import com.openbravo.data.loader.Session;
@@ -316,9 +320,57 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 
     public List getTicketsPayments() throws BasicException {
         return new PreparedSentence(s
-                  	, "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE T.TICKETTYPE = 2 AND T.DATERETURN IS NULL ORDER BY STATUS "
+                  	, "SELECT STATUS FROM TICKETS WHERE TICKETTYPE = 2 AND DATERETURN IS NULL GROUP BY STATUS "
                   	, null
-                  	, new SerializerReadClass(TicketInfo.class)).list();
+                  	, SerializerReadInteger.INSTANCE).list();
+    }
+
+/**
+ *  TODO
+ * @param status
+ * @return
+ * @throws BasicException
+ */
+//
+//    public List getDebt(String oid) throws BasicException {
+//
+//        return new PreparedSentence(s
+//                , "SELECT P.TOTAL FROM TICKETS T LEFT JOIN PAYMENTS P ON P.RECEIPT = T.ID WHERE T.STATUS = ? AND T.TICKETTYPE = ? AND P.PAYMENT LIKE 'debt' GROUP BY T.STATUS"
+//                , SerializerWriteString.INSTANCE
+//                , new SerializerRead() {
+//                    public Object readValues(DataRead dr) throws BasicException {
+//                        return new PaymentInfoTicket(
+//                                dr.getDouble(1),
+//                                dr.getString(2));
+//                    }
+//                }).list(ticket);
+//    }
+
+
+//    public List getDebt(String status) throws BasicException {
+//        return new PreparedSentence(s
+//                  	, "SELECT P.TOTAL FROM TICKETS T LEFT JOIN PAYMENTS P ON P.RECEIPT = T.ID WHERE T.STATUS = ? AND T.TICKETTYPE = 0 AND P.PAYMENT LIKE 'debt' "
+//                  	, SerializerWriteString.INSTANCE
+//                  	, SerializerReadInteger.INSTANCE).list();
+//    }
+    public double getDebt(String status) throws BasicException {
+        System.out.println(status);
+        PreparedSentence p = new PreparedSentence(s
+                  	, "SELECT SUM(P.TOTAL) FROM TICKETS T LEFT JOIN PAYMENTS P ON P.RECEIPT = T.ID WHERE T.STATUS = ? AND T.TICKETTYPE = 0 AND P.PAYMENT LIKE 'debt' GROUP BY STATUS"
+                  	, SerializerWriteString.INSTANCE
+                  	, SerializerReadDouble.INSTANCE);
+        Double d = (Double) p.find(status);
+        return d == null ? 0.0 : d.doubleValue();
+    }
+
+    public double getPaid(String status) throws BasicException {
+        System.out.println(status);
+        PreparedSentence p = new PreparedSentence(s
+                  	, "SELECT SUM(P.TOTAL) FROM TICKETS T LEFT JOIN PAYMENTS P ON P.RECEIPT = T.ID WHERE T.STATUS = ? AND ( T.TICKETTYPE = 2 OR T.TICKETTYPE = 1 ) AND P.TOTAL < 0.0 "
+                        , SerializerWriteString.INSTANCE
+                  	, SerializerReadDouble.INSTANCE);
+        Double d = (Double) p.find(status);
+        return d == null ? 0.0 : d.doubleValue();
     }
     
     public List getUsers() throws BasicException {
@@ -373,8 +425,9 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                 	}});
 	}
 
+
 	public void execUpdateTicketsRefundPayment(final String tickettype, final String orderID ) throws BasicException {
-		
+
                 final Date date = new Date();
                 final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 final String dateReturn = sdf.format(date);

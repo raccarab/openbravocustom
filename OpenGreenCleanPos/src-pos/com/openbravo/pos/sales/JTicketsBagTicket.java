@@ -249,6 +249,7 @@ public class JTicketsBagTicket extends JTicketsBag {
 
         } catch (BasicException e) {
             m_jEdit.setEnabled(false);
+
             m_jRendu.setEnabled(false);
             haschanged = true;
         }
@@ -499,7 +500,12 @@ public class JTicketsBagTicket extends JTicketsBag {
         if (TicketInfo.isWS()) {
             //WebService Sync needs remote order ID.
             if (m_ticket.getStatus() == 0) {
-                JMessageDialog.showMessage(this, new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("message.hastobesynced")));
+
+                JMessageDialog.showMessage(this, new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("message.errorrefund"), AppLocal.getIntString("message.refundnotsynced")));
+                return;
+            }else if (hasDebt()) {
+            
+                JMessageDialog.showMessage(this, new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("message.errorrefund"), AppLocal.getIntString("message.refunddebtremain")+" > "+m_ticket.getDebt()));
                 return;
             } else {
                 status = m_ticket.getStatus();
