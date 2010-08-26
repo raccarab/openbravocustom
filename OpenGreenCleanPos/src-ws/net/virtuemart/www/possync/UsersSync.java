@@ -67,6 +67,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import sun.util.logging.resources.logging;
 
 public class UsersSync implements ProcessAction {
         
@@ -150,11 +151,23 @@ public class UsersSync implements ProcessAction {
 	            
 	        	// hide all users in local DB
 	            dlintegration. syncCustomersBefore();
-	            
+	            String perms;
 	            //loop on all users 
 	            for (User remoteUser : remoteUsers) {
                         if (notToSync.contains(remoteUser.getLogin()))
                             continue;
+
+// TODO : SYNC PEOPLE WITH DATABASE
+//System.out.println (remoteUser.getLogin()+" : "+remoteUser.getShopper_group_id());
+//                        perms = remoteUser.getPerms();
+//                        if (!perms.equals("shopper")){
+//                            System.out.println (remoteUser.getLogin()+" : "+remoteUser.getPerms());
+//
+//
+//                            continue;
+//                        }
+
+
                         cpt++;
                         
 	            	String name = externalsales.encodeStringISO((remoteUser.getFirstname()+remoteUser.getLastname()).trim());
@@ -169,19 +182,6 @@ public class UsersSync implements ProcessAction {
                         String mobile = externalsales.encodeStringISO(remoteUser.getMobile());
 	            	String zipcode = externalsales.encodeStringISO(remoteUser.getZipcode());
                         CharsetEncoder encoder = externalsales.getEncoder();
-//	            	try {
-//                                name = new String (encoder.encode(CharBuffer.wrap(name.toCharArray())).array());
-//                                firstname = new String (encoder.encode(CharBuffer.wrap(firstname.toCharArray())).array());
-//                                lastname = new String (encoder.encode(CharBuffer.wrap(lastname.toCharArray())).array());
-//                                description = new String (encoder.encode(CharBuffer.wrap(description.toCharArray())).array());
-//                                address = new String (encoder.encode(CharBuffer.wrap(address.toCharArray())).array());
-//                                address2 = new String (encoder.encode(CharBuffer.wrap(address2.toCharArray())).array());
-//                                city = new String (encoder.encode(CharBuffer.wrap(city.toCharArray())).array());
-//                                country = new String (encoder.encode(CharBuffer.wrap(country.toCharArray())).array());
-//                        } catch (CharacterCodingException e) {
-//                                // TODO Auto-generated catch block
-//                                e.printStackTrace();
-//                        }
 	            	
 	            	CustomerSync copyCustomer = new CustomerSync(remoteUser.getId());
 
@@ -238,10 +238,10 @@ public class UsersSync implements ProcessAction {
                         if (zipcode==null || zipcode.equals(""))
                             zipcode =" ";
 	                copyCustomer.setPostal(zipcode);
+
 	                
 	                //Updates local user
 	                dlintegration.syncCustomer(copyCustomer);
-	                //System.out.println("UPDATED : '"+name+"'");
 	                notToSync.add(copyCustomer.getTaxid());
 	            }
 	        }
@@ -249,14 +249,11 @@ public class UsersSync implements ProcessAction {
         } while (remoteUsers.length > 0 );
 		
         List<CustomerSync> localList = dlintegration.getCustomers();
-        
-//        System.out.println(" >> "+localList.size()+ "  " + notToSync);
 		
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         
         for (CustomerSync localCustomer : localList) {
         	Date now = new Date();
-//        	System.out.println(localCustomer.getTaxid());
         	if (notToSync.contains(localCustomer.getTaxid())) {
         		continue;
         	}
@@ -287,7 +284,7 @@ public class UsersSync implements ProcessAction {
                     } catch (NullPointerException nu) {
                             userAdd.setCdate(df.format(now));
                     }
-                    userAdd.setPerms("");
+                    userAdd.setPerms("shopper");
                     userAdd.setBank_account_nr("");
                     userAdd.setBank_account_holder("");
                     userAdd.setBank_account_type("");
@@ -295,7 +292,7 @@ public class UsersSync implements ProcessAction {
                     userAdd.setBank_name("");
                     userAdd.setBank_sort_code("");
                     userAdd.setMdate(df.format(now));
-                    userAdd.setShopper_group_id("");
+                    userAdd.setShopper_group_id("1");
 
                     externalsales.addUser(userAdd);
 		}

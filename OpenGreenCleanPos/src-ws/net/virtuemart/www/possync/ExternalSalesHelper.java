@@ -157,7 +157,6 @@ public class ExternalSalesHelper {
         int tries = 3;
         for (int i = 0; i < tries; i++) {
             try {
-                System.out.print("*");
                 final URL url = new URL(wsURL);
                 final URLConnection conn = url.openConnection();
                 conn.setReadTimeout(1000);
@@ -239,7 +238,6 @@ public class ExternalSalesHelper {
 
         GetUsersInput userInput = new GetUsersInput(wsLogin, start, end);
 
-        System.out.println(" " + start + " " + end+ " > "+usersProxy.getUsers(userInput).length);
         return usersProxy.getUsers(userInput);
     }
 
@@ -300,7 +298,6 @@ public class ExternalSalesHelper {
 //            System.out.println("**"+produits.length);
 
         } catch (RemoteException e) {
-            System.out.println("Error getProductsCatalog : ");
             e.printStackTrace();
         }
         return produits;

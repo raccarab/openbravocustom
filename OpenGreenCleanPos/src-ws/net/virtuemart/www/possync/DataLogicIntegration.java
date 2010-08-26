@@ -354,8 +354,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 //                  	, SerializerReadInteger.INSTANCE).list();
 //    }
     public double getDebt(String status) throws BasicException {
-        System.out.println(status);
-        PreparedSentence p = new PreparedSentence(s
+       PreparedSentence p = new PreparedSentence(s
                   	, "SELECT SUM(P.TOTAL) FROM TICKETS T LEFT JOIN PAYMENTS P ON P.RECEIPT = T.ID WHERE T.STATUS = ? AND T.TICKETTYPE = 0 AND P.PAYMENT LIKE 'debt' GROUP BY STATUS"
                   	, SerializerWriteString.INSTANCE
                   	, SerializerReadDouble.INSTANCE);

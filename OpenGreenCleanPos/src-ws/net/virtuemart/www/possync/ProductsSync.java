@@ -116,15 +116,12 @@ public class ProductsSync implements ProcessAction {
 			
 			for (Categorie categorie : cats) {
 
-                                System.out.println(" > "+categorie.getId()+" "+externalsales.encodeStringISO(categorie.getName()));
-
 				CategoryInfo addCategory = new CategoryInfo(categorie.getId(), externalsales.encodeStringISO(categorie.getName()), null);
 				try {
 					dlintegration.syncCategory(addCategory);
 					
 				} catch (BasicException be) {
-					be.printStackTrace();
-					System.out.println("Skipped : "+categorie.getName());
+				//	be.printStackTrace();
 				}
 				notToSync.put(categorie.getName(),categorie.getId());
 			}
@@ -302,10 +299,6 @@ public class ProductsSync implements ProcessAction {
 //	             datalogic.syncProductsAfter();
 	         }
 			
-
-				System.out.println(attMap.toString());
-
-	         
 			List<ProductInfoExt> list = dlsales.getProductList().list();
 			
 			for (ProductInfoExt localProduct : list) {

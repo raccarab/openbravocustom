@@ -104,8 +104,6 @@ public class JTicketsFinder extends javax.swing.JDialog implements EditorCreator
         //jtxtTicketID.activate();
         lpr = new ListProviderCreator(dlSales.getTicketsList(), this);
 
-        System.out.println("**");
-
         jListTickets.setCellRenderer(new FindTicketsRenderer());
 
         getRootPane().setDefaultButton(jcmdOK);
