@@ -40,7 +40,12 @@ import com.openbravo.pos.scripting.ScriptEngine;
 import com.openbravo.pos.scripting.ScriptException;
 import com.openbravo.pos.scripting.ScriptFactory;
 import com.openbravo.pos.forms.AppLocal;
+import com.openbravo.pos.ticket.TicketInfo;
 import com.openbravo.pos.ticket.TicketLineInfo;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.xml.sax.Attributes;
@@ -365,7 +370,18 @@ public class JTicketLines extends javax.swing.JPanel {
         add(m_jScrollTableTicket, java.awt.BorderLayout.CENTER);
 
     }// </editor-fold>//GEN-END:initComponents
-    
+
+    protected void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+         Font f = new Font("Sans Serif",Font.BOLD,66);
+         g.setColor(Color.lightGray);
+         g.setFont(f);
+         int x = 5;
+         int y = this.getHeight()-5;
+        g.drawString(TicketInfo.getHostname(), x, y);
+
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane m_jScrollTableTicket;

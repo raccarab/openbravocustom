@@ -203,7 +203,8 @@ public class ProductsSync implements ProcessAction {
 				localTaxes.put(ti.getTaxCategoryID(),ti.getRate());
 			}
 			HashMap<Double, String> remoteTaxes = externalsales.getTaxes();
-			
+
+
 			
 			 Produit[] products = externalsales.getProductsCatalog();
 
@@ -236,17 +237,21 @@ public class ProductsSync implements ProcessAction {
 	            	 boolean isScale=false;
 	            	 String attID=null;
 	            	 String taxCatID="";
+                         boolean ok = false;
 	            	 for (String att : pAtt) {
-						AttributeSetInfo asi;
-						if (att.equals("isScale")) {
-							isScale = true;
-						} else if (att.startsWith("Tax")) {
-							taxCatID = taxCatsRev.get(att);
-						} else if (attMap.get(att)!=null) {
+                                AttributeSetInfo asi;
+                                if (att.equals("isScale")) {
+                                        isScale = true;
+                                } else if (att.startsWith("Tax")) {
+                                        taxCatID = taxCatsRev.get(att);
+                                        ok=true;
+                                } else if (attMap.get(att)!=null) {
 
-							 attID = attMap.get(att);
-						}
-					}
+                                         attID = attMap.get(att);
+                                }
+                         }
+                         if (ok==false)
+                             continue;
 	            	 //String taxCat = 
 	    	                  
 	            	 //System.out.println("* " + catListRev.get(product.getProduct_categories()));
@@ -269,7 +274,9 @@ public class ProductsSync implements ProcessAction {
 					 p.setCategoryID(catListRev.get(remCat));
 	                 p.setTaxCategoryID(taxCatID);
 	                 p.setImage(ImageUtils.readImage(image));
-	                 
+
+                         //System.out.println(p.getName()+p.getTaxCategoryID());
+
 	                 dlintegration.syncProduct(p);  
 	                 
 	                 prodNotToSync.add(p.getCode());
@@ -361,9 +368,10 @@ public class ProductsSync implements ProcessAction {
 				produit.setQuantity_options("");
 				produit.setManufacturer_id("");
 				produit.setVendor_id("1");
+                                //produit.set
 //				
 				try {
-				externalsales.addProduct(produit);
+                                    externalsales.addProduct(produit);
 				} catch (RemoteException e) {
 //					externalsales.updateProduct(produit);
 				}

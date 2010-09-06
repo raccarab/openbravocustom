@@ -565,7 +565,12 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_jButton2ActionPerformed
 
 private void m_jRenduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jRenduActionPerformed
+    if (TicketInfo.isWS() && (m_ticket.getStatus() == 0)) {
 
+        JMessageDialog.showMessage(this, new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("message.errorrefund"), AppLocal.getIntString("message.refundnotsynced")));
+        return;
+
+    }
     currentCustomer = m_ticket.getCustomer();
     double toPay = 0.0;
     try {
@@ -656,10 +661,21 @@ private void m_jRenduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             hasDebt();
 
             if (currentDebt <= 0.0) {
-                m_ticket.setRendu();
+                
                 try {
-                    m_dlSales.setRendu(m_ticket.getId());
-                    m_jRendu.setEnabled(false);
+
+                   /**
+                    * SET AS RENDU ?
+                    * 
+                    */
+                    //int res = JOptionPane.showConfirmDialog(this, AppLocal.getIntString("message.wannasave"), AppLocal.getIntString("title.editor"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    //if (res == JOptionPane.YES_OPTION) {
+
+                        m_ticket.setRendu();
+                        m_dlSales.setRendu(m_ticket.getId());
+                        m_jRendu.setEnabled(false);
+
+                    //}
 
 
                 } catch (BasicException ex) {

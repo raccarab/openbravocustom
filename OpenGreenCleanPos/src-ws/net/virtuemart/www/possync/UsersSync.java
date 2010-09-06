@@ -156,7 +156,9 @@ public class UsersSync implements ProcessAction {
 	            for (User remoteUser : remoteUsers) {
                         if (notToSync.contains(remoteUser.getLogin()))
                             continue;
-
+                        
+                        if (!remoteUser.getShopper_group_id().equals("1"))
+                            continue;
 // TODO : SYNC PEOPLE WITH DATABASE
 //System.out.println (remoteUser.getLogin()+" : "+remoteUser.getShopper_group_id());
 //                        perms = remoteUser.getPerms();
@@ -247,13 +249,16 @@ public class UsersSync implements ProcessAction {
 	        }
 
         } while (remoteUsers.length > 0 );
-		
+
         List<CustomerSync> localList = dlintegration.getCustomers();
 		
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         
         for (CustomerSync localCustomer : localList) {
-        	Date now = new Date();
+
+//                System.out.println("* "+localCustomer.getName());
+
+                Date now = new Date();
         	if (notToSync.contains(localCustomer.getTaxid())) {
         		continue;
         	}

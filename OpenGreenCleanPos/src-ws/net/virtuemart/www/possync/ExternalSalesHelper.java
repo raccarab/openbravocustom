@@ -324,27 +324,27 @@ public class ExternalSalesHelper {
         }
 
         String contact_title = "M";
-        String contact_first_name = "null";
+        String contact_first_name = hostname;
         String vendor_store_name = hostname;
         String vendor_min_pov = "";
         String vendor_city = "";
         String vendor_address_1 = "";
         String vendor_freeshipping = "";
         String vendor_state = "";
-        String vendor_full_image = "";
+        String vendor_full_image = "TiiTest_4c821fbdd6c01.jpg";
         String cdate = "";
-        String vendor_country = "";
+        String vendor_country = "BEL";
         String contact_phone_2 = "";
         String contact_fax = "";
         String contact_email = "POS" + wsPosid + "@beyours.be";
         String vendor_zip = "";
         String vendor_url = "";
         String contact_middle_name = "";
-        String vendor_store_desc = "";
+        String vendor_store_desc = "POS "+hostname;
         String vendor_thumb_image = "";
-        String vendor_accepted_currencies = "";
+        String vendor_accepted_currencies = "EUR";
         String vendor_currency = "";
-        String vendor_category_id = "";
+        String vendor_category_id = "1";
         String contact_phone_1 = "";
         String vendor_phone = "";
         String contact_last_name = "";
@@ -354,7 +354,7 @@ public class ExternalSalesHelper {
         String vendor_terms_of_service = "";
         String vendor_image_path = "";
         String vendor_address_2 = "";
-        String vendor_currency_display_style = "";
+        String vendor_currency_display_style = "1|&euro;|2|,||1|8";
         Vendor vendor = new Vendor(wsPosid, hostname, contact_last_name, contact_first_name, contact_middle_name, contact_title, contact_phone_1, contact_phone_2, contact_fax, contact_email, vendor_phone, vendor_address_1, vendor_address_2, vendor_city, vendor_state, vendor_country, vendor_zip, vendor_store_name, vendor_store_desc, vendor_category_id, vendor_thumb_image, vendor_full_image, vendor_currency, cdate, mdate, vendor_image_path, vendor_terms_of_service, vendor_url, vendor_min_pov, vendor_freeshipping, vendor_currency_display_style, vendor_accepted_currencies, vendor_address_format, vendor_date_format);
         AddVendorInput parameters = new AddVendorInput(wsLogin, vendor);
         usersProxy.addVendor(parameters);
