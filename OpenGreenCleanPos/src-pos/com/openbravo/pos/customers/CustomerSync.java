@@ -59,6 +59,7 @@ public class CustomerSync implements SerializableRead, Externalizable {
     protected String city;
     protected String region;
     protected String country;
+    protected String note;
   
     public CustomerSync() {
     	this.id=null;
@@ -271,7 +272,6 @@ public class CustomerSync implements SerializableRead, Externalizable {
         this.country = country;
     }
 
-//    ID,	SEARCHKEY,TAXID,NAME,ADDRESS,ADDRESS2,POSTAL,CITY,REGION,COUNTRY,FIRSTNAME,LASTNAME,EMAIL,PHONE,PHONE2,FAX,NOTES,CURDEBT
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         // esto es solo para serializar tickets que no estan en la bolsa de tickets pendientes
         id = (String) in.readObject();
@@ -283,17 +283,19 @@ public class CustomerSync implements SerializableRead, Externalizable {
         postal = (String) in.readObject();
         city = (String) in.readObject();
         region = (String) in.readObject();
+        country = (String) in.readObject();
         firstname = (String) in.readObject();
         lastname = (String) in.readObject();
         email = (String) in.readObject();
         phone = (String) in.readObject();
         phone2 = (String) in.readObject();
         fax = (String) in.readObject();
-//        curdate = (String) in.readObject();
+        note = (String) in.readObject();
+        curdate = (Date) in.readObject();
         curdebt = (String) in.readObject();
         
     }
-    
+
 	@Override
 	public void readValues(DataRead dr) throws BasicException {
         id = dr.getString(1);
@@ -305,13 +307,16 @@ public class CustomerSync implements SerializableRead, Externalizable {
         postal = dr.getString(7);
         city = dr.getString(8);
         region = dr.getString(9);
-        firstname = dr.getString(10);
-        lastname = dr.getString(11);
-        email = dr.getString(12);
-        phone = dr.getString(13);
-        phone2 = dr.getString(14);
-        fax = dr.getString(15);
-        curdebt = dr.getString(16);
+        country = dr.getString(10);
+        firstname = dr.getString(11);
+        lastname = dr.getString(12);
+        email = dr.getString(13);
+        phone = dr.getString(14);
+        phone2 = dr.getString(15);
+        fax = dr.getString(16);
+        note =  dr.getString(17);
+ //       curdate =  dr.getString(18);
+        curdebt = dr.getString(19);
 		
 	}
 

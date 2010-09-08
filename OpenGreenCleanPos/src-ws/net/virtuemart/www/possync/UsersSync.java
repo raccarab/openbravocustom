@@ -31,6 +31,9 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
 import java.rmi.RemoteException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.rpc.ServiceException;
 
 import net.virtuemart.www.VM_Categories.Categorie;
@@ -56,6 +59,7 @@ import com.openbravo.pos.inventory.TaxCategoryInfo;
 import com.openbravo.pos.ticket.CategoryInfo;
 import com.openbravo.pos.ticket.ProductInfoExt;
 import com.openbravo.pos.ticket.TaxInfo;
+import java.security.MessageDigest;
 import net.virtuemart.www.possync.DataLogicIntegration;
 import net.virtuemart.www.possync.ExternalSalesHelper;
 
@@ -268,12 +272,38 @@ public class UsersSync implements ProcessAction {
                     userAdd.setId(localCustomer.getTaxid());
                     userAdd.setFirstname(" ");
                     userAdd.setLastname(localCustomer.getName());
-                    userAdd.setPassword("407b3273beea2c061dbe7fc11b68de43");
-                    userAdd.setTitle("Mr");
+                    char[] pw = new char[8];
+                    int c  = 'A';
+                    int  r1 = 0;
+                    for (int i=0; i < 8; i++)
+                    {
+                      r1 = (int)(Math.random() * 3);
+                      switch(r1) {
+                        case 0: c = '0' +  (int)(Math.random() * 10); break;
+                        case 1: c = 'a' +  (int)(Math.random() * 26); break;
+                        case 2: c = 'A' +  (int)(Math.random() * 26); break;
+                      }
+                      pw[i] = (char)c;
+                    }
+                    String clave=new String(pw);
+                    byte[] password = {00};
+                    try {
+                            MessageDigest md5 = MessageDigest.getInstance("MD5");
+                            md5.update(clave.getBytes());
+                            password = md5.digest();
+
+                            userAdd.setPassword(password.toString());
+                    } catch (NoSuchAlgorithmException ex) {
+                        Logger.getLogger(UsersSync.class.getName()).log(Level.SEVERE, null, ex);
+                        userAdd.setPassword(clave);
+                    }
+                    userAdd.setTitle("M");
+
                     if (localCustomer.getEmail()==null || localCustomer.getEmail().trim().equals("") || localCustomer.getEmail().indexOf('@')==-1)
-                            userAdd.setEmail(localCustomer.getTaxid()+"@beyours.be");
+                            userAdd.setEmail(localCustomer.getTaxid()+"@laundrylocker.be");
                     else
                             userAdd.setEmail(localCustomer.getEmail()+"");
+
                     userAdd.setDescription(localCustomer.getNotes()+"");
                     userAdd.setAddress(localCustomer.getAddress()+"");
                     userAdd.setAddress2(localCustomer.getAddress2()+"");
@@ -281,8 +311,8 @@ public class UsersSync implements ProcessAction {
                     userAdd.setCity(localCustomer.getCity()+"");
                     userAdd.setCountry(localCustomer.getCountry()+"");
                     userAdd.setZipcode(localCustomer.getPostal()+"");
-                    userAdd.setPhone(localCustomer.getPhone2()+"");
-                    userAdd.setMobile(localCustomer.getPhone()+"");
+                    userAdd.setPhone(localCustomer.getPhone()+"");
+                    userAdd.setMobile(localCustomer.getPhone2()+"");
                     userAdd.setFax(" ");
                     try {
                             userAdd.setCdate(df.format(localCustomer.getCurdate()));
