@@ -89,6 +89,10 @@ public class JRootKiosk extends javax.swing.JFrame implements AppMessage {
             }
         });
     }
+
+    public JRootApp getRootapp() {
+        return m_rootapp;
+    }
     
     /** This method is called from within the constructor to
      * initialize the form.

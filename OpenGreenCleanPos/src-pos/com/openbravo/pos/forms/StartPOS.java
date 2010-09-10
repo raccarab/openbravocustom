@@ -18,17 +18,14 @@
 //    along with GreenPOS.  If not, see <http://www.gnu.org/licenses/>.
 package com.openbravo.pos.forms;
 
-import java.util.Locale;
-import java.util.UUID;
-
-import javax.swing.UIManager;
-
-import com.openbravo.data.gui.JMessageDialog;
+import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.MessageInf;
+import java.util.Locale;
+import javax.swing.UIManager;
 import com.openbravo.format.Formats;
 import com.openbravo.pos.instance.InstanceQuery;
 import com.openbravo.pos.ticket.TicketInfo;
-
+import java.awt.Cursor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -139,19 +136,50 @@ public class StartPOS {
 
                 String screenmode = config.getProperty("machine.screenmode");
 
-
+                JRootApp app;
 
                 if ("fullscreen".equals(screenmode)) {
                     JRootKiosk rootkiosk = new JRootKiosk();
                     rootkiosk.initFrame(config);
                     rootkiosk.setTitle("   >>> " + hostname + " <<< " + rootkiosk.getTitle());
+                    app = rootkiosk.getRootapp();
                 } else {
                     JRootFrame rootframe = new JRootFrame();
                     rootframe.initFrame(config);
 
                     rootframe.setTitle("   >>> " + hostname + " <<< " + rootframe.getTitle());
-
+                    app = rootframe.getRootapp();
                 }
+
+
+                if (TicketInfo.isWS()) {
+                    try {
+                         app.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+                            ProcessAction myProcess = (ProcessAction) app.getBean("net.virtuemart.www.possync.ProductsSyncCreate");
+                        // execute the proces
+                        try {
+                            MessageInf m = myProcess.execute();
+                            if (m != null) {
+                                // si devuelve un mensaje, lo muestro
+                                m.show(app);
+                            }
+                        } catch (BasicException eb) {
+
+                            // Si se produce un error lo muestro.
+                            JOptionPane.showMessageDialog(app, "Order Sync error");
+                            eb.printStackTrace();
+                        } finally {
+
+                            app.setCursor(Cursor.getDefaultCursor());
+                        }
+                    } catch (BeanFactoryException e) {
+                        JOptionPane.showMessageDialog(app, "Order Sync bean error");
+                        e.printStackTrace();
+                    }
+                }
+
+
 
             }
         });

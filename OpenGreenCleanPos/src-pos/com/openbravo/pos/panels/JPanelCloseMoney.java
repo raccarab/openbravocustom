@@ -31,24 +31,19 @@ import com.openbravo.data.loader.StaticSentence;
 import com.openbravo.data.loader.SerializerWriteBasic;
 import com.openbravo.format.Formats;
 import com.openbravo.basic.BasicException;
-import com.openbravo.data.gui.JMessageDialog;
 import com.openbravo.data.loader.Datas;
 import com.openbravo.data.gui.MessageInf;
 import com.openbravo.data.gui.TableRendererBasic;
-import com.openbravo.pos.forms.AppConfig;
 import com.openbravo.pos.forms.BeanFactoryApp;
 import com.openbravo.pos.forms.BeanFactoryException;
 import com.openbravo.pos.scripting.ScriptEngine;
 import com.openbravo.pos.scripting.ScriptException;
 import com.openbravo.pos.scripting.ScriptFactory;
 import com.openbravo.pos.forms.DataLogicSystem;
-import com.openbravo.pos.forms.JPrincipalApp;
 import com.openbravo.pos.forms.ProcessAction;
 import com.openbravo.pos.printer.TicketParser;
 import com.openbravo.pos.printer.TicketPrinterException;
 import com.openbravo.pos.ticket.TicketInfo;
-import net.virtuemart.www.possync.OrdersSync;
-import net.virtuemart.www.possync.OrdersSyncCreate;
 
 /**
  *
