@@ -313,7 +313,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 
     public List getTickets() throws BasicException {
         return new PreparedSentence(s
-                  	, "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE ( T.TICKETTYPE = 0 AND T.STATUS = 0 ) OR ( T.TICKETTYPE = 1 AND T.DATERETURN IS NULL )"
+                  	, "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE ( T.TICKETTYPE = 0 AND T.STATUS = 0 ) OR ( T.TICKETTYPE = 1 AND T.STATUS > 0 AND T.DATERETURN IS NULL )"
                   	, null
                   	, new SerializerReadClass(TicketInfo.class)).list();
     }
@@ -321,6 +321,14 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
     public List getTicketsPayments() throws BasicException {
         return new PreparedSentence(s
                   	, "SELECT STATUS FROM TICKETS WHERE TICKETTYPE = 2 AND DATERETURN IS NULL GROUP BY STATUS "
+                  	, null
+                  	, SerializerReadInteger.INSTANCE).list();
+    }
+
+        public List getTicketsReturned() throws BasicException {
+        return new PreparedSentence(s
+                  	, "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL AND DATERENDU>=(SELECT DATESTART FROM CLOSEDCASH WHERE DATEEND IS NULL )"
+                    //, "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL"
                   	, null
                   	, SerializerReadInteger.INSTANCE).list();
     }
@@ -428,7 +436,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 	public void execUpdateTicketsRefundPayment(final String tickettype, final String orderID ) throws BasicException {
 
                 final Date date = new Date();
-                final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 final String dateReturn = sdf.format(date);
 
 		new PreparedSentence(s, "UPDATE  TICKETS SET DATERETURN = ? WHERE STATUS = ? AND TICKETTYPE = ? ",

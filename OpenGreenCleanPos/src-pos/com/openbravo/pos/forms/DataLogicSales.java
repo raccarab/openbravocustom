@@ -315,7 +315,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
 
     public final void setRendu(final String id) throws BasicException {
         final Date date = new Date();
-                final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 final String dateReturn = sdf.format(date);
 
 

@@ -69,8 +69,9 @@ public class OrdersSync implements ProcessAction {
                 externalsales = new ExternalSalesHelper(dlsystem);
             }
 
-            if (!externalsales.checkConnection())
+            if (!externalsales.checkConnection()) 
                 return new MessageInf(MessageInf.SGN_WARNING, "System offline ? ", "Error connecting to website ");
+                
 
             try {
                 // CHECK POS ID
@@ -216,7 +217,7 @@ public class OrdersSync implements ProcessAction {
 
                         }
                         if (ticket.getTicketType() == TicketInfo.RECEIPT_REFUND)
-                            dlintegration.execUpdateTicketsRefundPayment(String.valueOf(ticket.getTicketType()), orderID);
+                            dlintegration.execUpdateTicketsRefundPayment(String.valueOf(ticket.getTicketType()),String.valueOf(ticket.getStatus()));
                         else if (ticket.getTicketType() == TicketInfo.RECEIPT_NORMAL)
                             dlintegration.execUpdateTicket(String.valueOf(ticket.getTicketId()),orderID);
 
@@ -239,12 +240,25 @@ public class OrdersSync implements ProcessAction {
                     if ((dd + dp) <= 0.0 ) {
                         externalsales.setPaid( String.valueOf(oid), null);
                         dlintegration.execUpdateTicketsRefundPayment(String.valueOf(TicketInfo.RECEIPT_PAYMENT), String.valueOf(oid));
+                        dlintegration.execUpdateTicketsRefundPayment(String.valueOf(TicketInfo.RECEIPT_REFUND), String.valueOf(oid));
                     }
 
                 }
-                return null;
             }
 
+            //RETURNS
+
+            List<Integer> renduids = dlintegration.getTicketsReturned();
+
+            if (renduids.size() > 0) {
+
+                for (Integer rid : renduids) {
+                   // List<Double> dd = dlintegration.getDebt(oid);
+                   System.out.println("*"+rid);
+                    externalsales.setRendu( String.valueOf(rid));
+                  
+                }
+            }
 
 
        

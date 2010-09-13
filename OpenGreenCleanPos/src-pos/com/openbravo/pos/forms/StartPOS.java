@@ -156,26 +156,27 @@ public class StartPOS {
                     try {
                          app.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-                            ProcessAction myProcess = (ProcessAction) app.getBean("net.virtuemart.www.possync.ProductsSyncCreate");
+                         ProcessAction myProcess = (ProcessAction) app.getBean("net.virtuemart.www.possync.ProductsSyncCreate");
                         // execute the proces
                         try {
                             MessageInf m = myProcess.execute();
                             if (m != null) {
                                 // si devuelve un mensaje, lo muestro
-                                m.show(app);
+                                //m.show(app);
                             }
                         } catch (BasicException eb) {
 
                             // Si se produce un error lo muestro.
-                            JOptionPane.showMessageDialog(app, "Order Sync error");
+                            JOptionPane.showMessageDialog(app, "Product Sync error");
                             eb.printStackTrace();
                         } finally {
-
                             app.setCursor(Cursor.getDefaultCursor());
+                            
                         }
                     } catch (BeanFactoryException e) {
-                        JOptionPane.showMessageDialog(app, "Order Sync bean error");
+                        JOptionPane.showMessageDialog(app, "Product Sync bean error");
                         e.printStackTrace();
+                        
                     }
                 }
 

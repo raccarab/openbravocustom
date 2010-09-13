@@ -159,13 +159,18 @@ public class ExternalSalesHelper {
             try {
                 final URL url = new URL(wsURL);
                 final URLConnection conn = url.openConnection();
-                conn.setReadTimeout(1000);
+                conn.setReadTimeout(3000);
                 conn.getContent();
                 return true;
             } catch (IOException ex) {
                 Logger.getLogger(ExternalSalesHelper.class.getName()).log(Level.SEVERE, null, ex);
                 
-            } 
+            }
+            try {
+                    Thread.currentThread().sleep(2000); //sleep for 1000 ms
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(OrdersSync.class.getName()).log(Level.SEVERE, null, ex);
+                }
         }
         
 
@@ -414,11 +419,35 @@ public class ExternalSalesHelper {
         if (date!=null) {
             dateR = df.format(date);
         }
-       
+
 
         String query =  " INSERT INTO #__{vm}_order_history ( order_id , order_status_code , date_added , customer_notified , comments ) "
                         +" VALUES ( '"+orderID+"', 'C', '"+dateR+"', '0', ''); ";
         String query3 = " UPDATE #__{vm}_orders SET order_status = 'C' WHERE order_id = "+orderID+";";
+
+
+        SQLRequest sqlr = new SQLRequest(wsLogin,query);
+        SQLRequest sqlr3 = new SQLRequest(wsLogin,query3);
+
+        try {
+           SQLResult[] results = queriesProxy.executeSQLQuery(sqlr);
+           results = queriesProxy.executeSQLQuery(sqlr3);
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean setRendu(String orderID) throws RemoteException {
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateR = df.format(new Date());
+        
+        String query =  " INSERT INTO #__{vm}_order_history ( order_id , order_status_code , date_added , customer_notified , comments ) "
+                        +" VALUES ( '"+orderID+"', 'S', '"+dateR+"', '0', ''); ";
+        String query3 = " UPDATE #__{vm}_orders SET order_status = 'S' WHERE order_id = "+orderID+" AND order_status = 'C';";
 
 
         SQLRequest sqlr = new SQLRequest(wsLogin,query);
@@ -445,7 +474,7 @@ public class ExternalSalesHelper {
         if (dateReturn!=null) {
             dateR = df.format(dateReturn);
             String query =  " INSERT INTO #__{vm}_order_history ( order_id , order_status_code , date_added , customer_notified , comments ) "
-                        +" VALUES ( '"+orderID+"', 'S', '"+dateR+"', '0', ''); ";
+                        +" VALUES ( '"+orderID+"', 'D', '"+dateR+"', '0', 'Date return'); ";
             SQLRequest sqlr = new SQLRequest(wsLogin,query);
             try {
                results = queriesProxy.executeSQLQuery(sqlr);

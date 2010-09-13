@@ -285,7 +285,14 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         m_oId = customer[0];
         m_jTaxID.setText((String) customer[1]);
         m_jSearchkey.setText((String) customer[2]);
-        m_jName.setText((String) customer[3]);
+
+        // This is to avoir problems with WS
+        String jName = (String) customer[3];
+        if (TicketInfo.isWS()) {
+          jName = jName.toUpperCase();
+        } 
+        m_jName.setText(jName);
+
         m_jNotes.setText((String) customer[4]);
         m_jVisible.setSelected(((Boolean) customer[5]).booleanValue());
         jcard.setText((String) customer[6]);

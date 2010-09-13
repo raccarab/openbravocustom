@@ -25,6 +25,7 @@ import com.openbravo.data.loader.DataWrite;
 import com.openbravo.data.loader.SerializableRead;
 import com.openbravo.data.loader.SerializableWrite;
 import com.openbravo.pos.payment.PaymentInfo;
+import com.openbravo.pos.ticket.TicketInfo;
 import com.openbravo.pos.ticket.TicketLineInfo;
 import com.openbravo.pos.util.StringUtils;
 
@@ -82,6 +83,10 @@ public class CustomerInfo implements SerializableRead, Serializable {
     }
     
     public String getName() {
+        // This is to avoir problems with WS
+        if (TicketInfo.isWS()) {
+          return name.toUpperCase();
+        }
         return name;
     }   
 

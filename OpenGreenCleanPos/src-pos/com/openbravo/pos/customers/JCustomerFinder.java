@@ -24,6 +24,7 @@ import com.openbravo.data.user.EditorCreator;
 import com.openbravo.data.user.ListProvider;
 import com.openbravo.data.user.ListProviderCreator;
 import com.openbravo.pos.forms.AppLocal;
+import com.openbravo.pos.ticket.TicketInfo;
 import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Dimension;
@@ -163,7 +164,14 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
             afilter[5] = null;
         } else {
             afilter[4] = QBFCompareEnum.COMP_RE;
-            afilter[5] = "%" + m_jtxtName.getText() + "%";
+
+            // This is to avoir problems with WS
+            if (TicketInfo.isWS()) {
+                afilter[5] = "%" + m_jtxtName.getText().toUpperCase() + "%";
+            } else {
+                afilter[5] = "%" + m_jtxtName.getText() + "%";
+            }
+
         }
 
          if (jcboAccount.getSelectedIndex()==0) {
