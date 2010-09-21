@@ -71,6 +71,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import org.apache.commons.lang.StringEscapeUtils;
 import sun.util.logging.resources.logging;
 
 public class UsersSync implements ProcessAction {
@@ -80,7 +81,43 @@ public class UsersSync implements ProcessAction {
     private DataLogicSales dlsales;
     private String warehouse;
     private ExternalSalesHelper externalsales;
-    
+
+    private static String encodeHTML(String s)
+    {
+        StringBuffer out = new StringBuffer();
+        for(int i=0; i<s.length(); i++)
+        {
+            char c = s.charAt(i);
+            if(c > 127 || c=='"' || c=='<' || c=='>')
+            {
+               out.append("&#"+(int)c+";");
+            }
+            else
+            {
+                out.append(c);
+            }
+        }
+        return out.toString();
+    }
+
+    private static String decodeHTML(String s)
+    {
+        StringBuffer out = new StringBuffer();
+        for(int i=0; i<s.length(); i++)
+        {
+            char c = s.charAt(i);
+            if(c > 127 || c=='"' || c=='<' || c=='>')
+            {
+               out.append("&#"+(int)c+";");
+            }
+            else
+            {
+                out.append(c);
+            }
+        }
+        return out.toString();
+    }
+
     /** Creates a new instance of ProductsSync */
     public UsersSync(DataLogicSystem dlsystem, DataLogicIntegration dlintegration, DataLogicSales dlsales,  String warehouse) {
         this.dlsystem = dlsystem;
@@ -144,6 +181,7 @@ public class UsersSync implements ProcessAction {
             do {
                 // retrieve users from VM
                 remoteUsers = externalsales.getUsersBySteps(step);
+//                remoteUsers = externalsales.getUsers();
                 step++;
 			
 	        if (remoteUsers == null){
@@ -161,8 +199,10 @@ public class UsersSync implements ProcessAction {
                         if (notToSync.contains(remoteUser.getLogin()))
                             continue;
                         
-                        if (!remoteUser.getShopper_group_id().equals("1"))
-                            continue;
+//                        if (!remoteUser.getShopper_group_id().equals("1")) {
+//                            notToSync.add(remoteUser.getLogin());
+//                            continue;
+//                        }
 // TODO : SYNC PEOPLE WITH DATABASE
 //System.out.println (remoteUser.getLogin()+" : "+remoteUser.getShopper_group_id());
 //                        perms = remoteUser.getPerms();
@@ -175,11 +215,11 @@ public class UsersSync implements ProcessAction {
 
 
                         cpt++;
-                        
+
 	            	String name = externalsales.encodeStringISO((remoteUser.getFirstname()+remoteUser.getLastname()).trim());
-	            	String firstname = externalsales.encodeStringISO(remoteUser.getFirstname());
-	            	String lastname = externalsales.encodeStringISO(remoteUser.getLastname());
-	            	String description = externalsales.encodeStringISO(remoteUser.getDescription());
+	            	String firstname =  externalsales.encodeStringISO(remoteUser.getFirstname());
+	            	String lastname =  externalsales.encodeStringISO(remoteUser.getLastname());
+	            	String description =  externalsales.encodeStringISO(remoteUser.getDescription());
 	            	String address = externalsales.encodeStringISO(remoteUser.getAddress());
 	            	String address2 = externalsales.encodeStringISO(remoteUser.getAddress2());
 	            	String city = externalsales.encodeStringISO(remoteUser.getCity());
@@ -200,6 +240,7 @@ public class UsersSync implements ProcessAction {
                         copyCustomer.setLastname(lastname);
 
                         copyCustomer.setTaxid(remoteUser.getLogin());
+
 	                copyCustomer.setSearchkey(remoteUser.getLogin()+name);
 	               
 	            	if (name==null || name.equals(""))
@@ -210,8 +251,8 @@ public class UsersSync implements ProcessAction {
                             description =" ";
 	                copyCustomer.setNotes(description);
 	                
-	                if (copyCustomer.getEmail()==null || copyCustomer.getEmail().trim().equals("") || copyCustomer.getEmail().indexOf('@')==-1)
-	                	copyCustomer.setEmail(remoteUser.getLogin()+"@beyours.be");
+	                if (copyCustomer.getEmail()==null || copyCustomer.getEmail().trim().equals("") || copyCustomer.getEmail().indexOf('@')<=0)
+	                	copyCustomer.setEmail(remoteUser.getLogin()+"@laundrylocker.be");
 	                else 
 	                	copyCustomer.setEmail(remoteUser.getEmail());
 	                
@@ -271,7 +312,19 @@ public class UsersSync implements ProcessAction {
                     userAdd.setLogin(localCustomer.getTaxid());
                     userAdd.setId(localCustomer.getTaxid());
                     userAdd.setFirstname(" ");
-                    userAdd.setLastname(localCustomer.getName());
+
+                    String tmpName = localCustomer.getName().trim();
+                    tmpName = tmpName.replace("'", "");
+                    
+                    while (tmpName.charAt(0)==' ') {
+                        tmpName = tmpName.substring(1);
+                    }
+
+
+                    System.out.println("'"+tmpName+"'");
+
+                    userAdd.setLastname(tmpName);
+
                     char[] pw = new char[8];
                     int c  = 'A';
                     int  r1 = 0;
@@ -299,10 +352,10 @@ public class UsersSync implements ProcessAction {
                     }
                     userAdd.setTitle("M");
 
-                    if (localCustomer.getEmail()==null || localCustomer.getEmail().trim().equals("") || localCustomer.getEmail().indexOf('@')==-1)
+                    if (localCustomer.getEmail()==null || localCustomer.getEmail().trim().equals("") || localCustomer.getEmail().indexOf('@')<=0)
                             userAdd.setEmail(localCustomer.getTaxid()+"@laundrylocker.be");
                     else
-                            userAdd.setEmail(localCustomer.getEmail()+"");
+                            userAdd.setEmail(localCustomer.getEmail());
 
                     userAdd.setDescription(localCustomer.getNotes()+"");
                     userAdd.setAddress(localCustomer.getAddress()+"");
@@ -328,6 +381,8 @@ public class UsersSync implements ProcessAction {
                     userAdd.setBank_sort_code("");
                     userAdd.setMdate(df.format(now));
                     userAdd.setShopper_group_id("1");
+
+                   
 
                     externalsales.addUser(userAdd);
 		}

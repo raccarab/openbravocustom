@@ -238,6 +238,7 @@ public class ProductsSync implements ProcessAction {
 	            	 String attID=null;
 	            	 String taxCatID="";
                          boolean ok = false;
+                         boolean incatalog=true;
 	            	 for (String att : pAtt) {
                                 AttributeSetInfo asi;
                                 if (att.equals("isScale")) {
@@ -245,6 +246,8 @@ public class ProductsSync implements ProcessAction {
                                 } else if (att.startsWith("Tax")) {
                                         taxCatID = taxCatsRev.get(att);
                                         ok=true;
+                                } else if (att.equals("hide")) {
+                                    incatalog=false;
                                 } else if (attMap.get(att)!=null) {
 
                                          attID = attMap.get(att);
@@ -277,7 +280,7 @@ public class ProductsSync implements ProcessAction {
 
                          //System.out.println(p.getName()+p.getTaxCategoryID());
 
-	                 dlintegration.syncProduct(p);  
+	                 dlintegration.syncProduct(p,incatalog);
 	                 
 	                 prodNotToSync.add(p.getCode());
 	                 

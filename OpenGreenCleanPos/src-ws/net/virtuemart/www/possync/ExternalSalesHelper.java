@@ -345,7 +345,7 @@ public class ExternalSalesHelper {
         String vendor_zip = "";
         String vendor_url = "";
         String contact_middle_name = "";
-        String vendor_store_desc = "POS "+hostname;
+        String vendor_store_desc = "";
         String vendor_thumb_image = "";
         String vendor_accepted_currencies = "EUR";
         String vendor_currency = "";
@@ -381,10 +381,13 @@ public class ExternalSalesHelper {
         try {
             orderstoupload.setLoginInfo(wsLogin);
           
+            System.out.println(">> "+orderstoupload.getCustomer_note());
+
             ReturnOutput ro = orderProxy.createOrder(orderstoupload);
             return ro.getOutputParam();
 
         } catch (IOException ioe) {
+            
             return "";
         }
 
@@ -476,8 +479,12 @@ public class ExternalSalesHelper {
             String query =  " INSERT INTO #__{vm}_order_history ( order_id , order_status_code , date_added , customer_notified , comments ) "
                         +" VALUES ( '"+orderID+"', 'D', '"+dateR+"', '0', 'Date return'); ";
             SQLRequest sqlr = new SQLRequest(wsLogin,query);
+           // String query3 = " UPDATE #__{vm}_orders SET order_status = 'S' WHERE order_id = "+orderID+" AND order_status = 'C';";
+           // SQLRequest sqlr3 = new SQLRequest(wsLogin,query3);
+
             try {
                results = queriesProxy.executeSQLQuery(sqlr);
+              // results = queriesProxy.executeSQLQuery(sqlr3);
 
             } catch (IOException ioe) {
                 ioe.printStackTrace();

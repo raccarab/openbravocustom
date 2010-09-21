@@ -182,6 +182,7 @@ public class OrdersSync implements ProcessAction {
                             pDesc += " <br/> " + line.getProductAttSetInstDesc();
                         }
                         products[j].setDescription(pDesc);
+                        System.out.println(products[j].getProduct_id()+" "+products[j].getDescription());
                     }
 
                     orders.setCoupon_code("0");
@@ -198,8 +199,8 @@ public class OrdersSync implements ProcessAction {
                         }
                     }
 
-                    totalpaid = ((Math.round(totalpaid * 100.0)) / 100.0);
-                    String note = ("TicketID."+String.valueOf(ticket.getTicketId()) + ".POS." + externalsales.getWsPosid() + ".TotalPaid." + totalpaid + ".Vendeur." + ticket.printUser());
+                    totalpaid = (Math.round(totalpaid * 100.0))/1.0;
+                    String note = ("TicketID."+String.valueOf(ticket.getTicketId()) + ".POS." + externalsales.getWsPosid() + ".TotalPaid." + (totalpaid/100) + ".Vendeur." + ticket.printUser());
  //                           + ".Date." + ticket.printDate() + ".DateRetour." + ticket.printDateReturn() + ".DateRendu." + ticket.printDateRendu());
 
                     orders.setCustomer_note(note);
@@ -211,13 +212,15 @@ public class OrdersSync implements ProcessAction {
 
                         externalsales.updateStatus(orderID,ticket.getDate(), ticket.getDateReturn());
 
-                        if (totalpaid >= Math.round((ticket.getTotal() * 100) / 100)) {
+                        if (totalpaid >= Math.round((ticket.getTotal() * 100))) {
 //PAYMENT
                              externalsales.setPaid(orderID,ticket.getDate() );
 
                         }
-                        if (ticket.getTicketType() == TicketInfo.RECEIPT_REFUND)
+                        if (ticket.getTicketType() == TicketInfo.RECEIPT_REFUND) {
                             dlintegration.execUpdateTicketsRefundPayment(String.valueOf(ticket.getTicketType()),String.valueOf(ticket.getStatus()));
+                            externalsales.setRendu(orderID);
+                        }
                         else if (ticket.getTicketType() == TicketInfo.RECEIPT_NORMAL)
                             dlintegration.execUpdateTicket(String.valueOf(ticket.getTicketId()),orderID);
 

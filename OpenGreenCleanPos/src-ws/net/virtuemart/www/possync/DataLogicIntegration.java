@@ -245,7 +245,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
         t.execute();        
     }      
     
-    public void syncProduct(final ProductInfoExt prod) throws BasicException {
+    public void syncProduct(final ProductInfoExt prod, final boolean incatalog) throws BasicException {
         
         Transaction t = new Transaction(s) {
             public Object transact() throws BasicException {
@@ -291,13 +291,14 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                                 setString(14, prod.getAttributeSetID());                               
                             }});
                 }
-                        
+
+                if (incatalog) {
                 // Insert in catalog
                 new StaticSentence(s, 
                         "INSERT INTO PRODUCTS_CAT(PRODUCT, CATORDER) VALUES ((SELECT ID FROM PRODUCTS WHERE CODE=?), NULL)",
                         SerializerWriteString.INSTANCE
                         ).exec(prod.getCode());   
-                
+                }
                 return null;        
             }
         };

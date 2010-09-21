@@ -291,7 +291,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         if (TicketInfo.isWS()) {
           jName = jName.toUpperCase();
         } 
-        m_jName.setText(jName);
+        m_jName.setText(jName.trim());
 
         m_jNotes.setText((String) customer[4]);
         m_jVisible.setSelected(((Boolean) customer[5]).booleanValue());
