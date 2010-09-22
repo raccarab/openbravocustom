@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
-    GreenPOS is a point of sales application designed for touch screens.
+<!--
+    GreenPressing POS is a point of sales application designed for touch screens.
     Copyright (C) 2008-2009 Openbravo, S.L.
     http://code.google.com/p/openbravocustom/
 
-    This file is part of GreenPOS.
+    This file is part of GreenPressing POS.
 
-    GreenPOS is free software: you can redistribute it and/or modify
+    GreenPressing POS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    GreenPOS is distributed in the hope that it will be useful,
+    GreenPressing POS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with GreenPOS.  If not, see <http://www.gnu.org/licenses/>.
+    along with GreenPressing POS.  If not, see <http://www.gnu.org/licenses/>.
  -->
 <output>
     <ticket>
@@ -49,23 +49,23 @@
             <text align ="center" length="42">Out</text>
             #end
         </line>
-        <line></line>    
+        <line></line>
         <line>
             <text align ="left" length="17">Item</text>
             <text align ="right" length="10">Price</text>
             <text align ="right" length="5"></text>
             <text align ="right" length="10">Value</text>
-        </line>      
+        </line>
         <line>
             <text>------------------------------------------</text>
-        </line>   
+        </line>
         #foreach ($inventoryline in $inventoryrecord.getLines())
         <line>
             <text align ="left" length="17">${inventoryline.printName()}</text>
             <text align ="right" length="10">${inventoryline.printPrice()}</text>
             <text align ="right" length="5">x${inventoryline.printMultiply()}</text>
             <text align ="right" length="10">${inventoryline.printSubValue()}</text>
-        </line> 
+        </line>
         #if ($inventoryline.productAttSetInstId)
         <line>
 	        <text align ="left" length="42">    ${inventoryline.productAttSetInstDesc}</text>
@@ -74,10 +74,10 @@
         #end
         <line>
             <text>------------------------------------------</text>
-        </line>   
-        <line></line>            
+        </line>
+        <line></line>
         <line>
             <text align="center" length="42">Thank you for your visit.</text>
-        </line>   
+        </line>
     </ticket>
 </output>

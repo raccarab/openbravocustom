@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    GreenPOS is a point of sales application designed for touch screens.
+    GreenPressing POS is a point of sales application designed for touch screens.
     Copyright (C) 2007-2009 Openbravo, S.L.
     http://code.google.com/p/openbravocustom/
 
-    This file is part of GreenPOS.
+    This file is part of GreenPressing POS.
 
-    GreenPOS is free software: you can redistribute it and/or modify
+    GreenPressing POS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    GreenPOS is distributed in the hope that it will be useful,
+    GreenPressing POS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with GreenPOS.  If not, see <http://www.gnu.org/licenses/>.
- -->
+    along with GreenPressing POS.  If not, see <http://www.gnu.org/licenses/>.
+-->
 <output>
     <display>
         <line>
@@ -26,78 +26,147 @@
             <text align="right" length="10">${ticket.printTotal()}</text>
         </line>
         <line>
-           <text align="center" length="20">Thank you.</text>
+            <text align="center" length="20">Thank you.</text>
         </line>
     </display>
     #set($list = ["1", "2", "3"])
     #foreach($item in $list)
     <ticket>
         #if ($item == "1")
-            <image>Printer.Ticket.Logo</image>
-            <line></line>
-            #if (${ticket.getHostname()} == "Ixelles")
-                <line>
-                    <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
-                </line>
-                <line>
-                    <text align="center" length="42">Square du Vieux Tilleul 8</text>
-                </line>
-                <line>
-                    <text align="center" length="42">1050 Bruxelles</text>
-                </line>
-                <line>
-                    <text align="center" length="42">Tel : 02/660.25.00</text>
-                </line>
-            #else
-                #if (${ticket.getHostname()} == "Fort-Jacos")
-                     <line>
-                        <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
-                    </line>
-                    <line>
-                        <text align="center" length="42">Chaussée de waterloo 1411</text>
-                    </line>
-                    <line>
-                        <text align="center" length="42">1180 Uccle</text>
-                    </line>
-                    <line>
-                        <text align="center" length="42">Tel : 02/375.06.79</text>
-                    </line>
-                #else
-                    #if (${ticket.getHostname()} == "Van-eik")
-                         <line>
-                            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
-                        </line>
-                        <line>
-                            <text align="center" length="42">Chaussée de waterloo 1411</text>
-                        </line>
-                        <line>
-                            <text align="center" length="42">1180 Uccle</text>
-                        </line>
-                        <line>
-                            <text align="center" length="42">Tel : 02/375.06.79</text>
-                        </line>
-                    #else
-                        #if (${ticket.getHostname()} == "Glaverbel")
-                             <line>
-                                <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
-                            </line>
-                            <line>
-                                <text align="center" length="42">Chaussée de waterloo 1411</text>
-                            </line>
-                            <line>
-                                <text align="center" length="42">1180 Uccle</text>
-                            </line>
-                            <line>
-                                <text align="center" length="42">Tel : 02/375.06.79</text>
-                            </line>
+        <image>Printer.Ticket.Logo</image>
+        <line></line>
+        #if (${ticket.getHostname()} == "Ixelles")
+        <line>
+            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+        </line>
+        <line>
+            <text align="center" length="42">Square du Vieux Tilleul 8</text>
+        </line>
+        <line>
+            <text align="center" length="42">1050 Bruxelles</text>
+        </line>
+        <line>
+            <text align="center" length="42">Tel : 02/660.25.00</text>
+        </line>
+        #else
+        #if (${ticket.getHostname()} == "Fort-Jacos")
+        <line>
+            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+        </line>
+        <line>
+            <text align="center" length="42">Chaussée de waterloo 1411</text>
+        </line>
+        <line>
+            <text align="center" length="42">1180 Uccle</text>
+        </line>
+        <line>
+            <text align="center" length="42">Tel : 02/375.06.79</text>
+        </line>
+        #else
+        #if (${ticket.getHostname()} == "Van-Eick")
+        <line>
+            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+        </line>
+        <line>
+            <text align="center" length="42" bold="true">Van-Eick</text>
+        </line>
+        <line>
+            <text align="center" length="42">Square du Vieux Tilleul 8</text>
+        </line>
+        <line>
+            <text align="center" length="42">1050 Bruxelles</text>
+        </line>
+        <line>
+            <text align="center" length="42">Tel : 02/660.25.00</text>
+        </line>
+        #else
+ #if (${ticket.getHostname()} == "Blue Tower")
+        <line>
+            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+        </line>
+        <line>
+            <text align="center" length="42" bold="true">Blue Tower</text>
+        </line>
 
-                        #end
-                    #end
-                 #end
+        #else
 
-            #end
-            
-            
+ 	#if (${ticket.getHostname()} == "Charleroi")
+        <line>
+            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+        </line>
+        <line>
+            <text align="center" length="42" bold="true">Charleroi</text>
+        </line>
+        <line>
+            <text align="center" length="42">Chaussée de charleroi 24-26</text>
+        </line>
+        <line>
+            <text align="center" length="42">1060 Bruxelles</text>
+        </line>
+        #else
+
+ 	#if (${ticket.getHostname()} == "Proxy")
+        <line>
+            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+        </line>
+        <line>
+            <text align="center" length="42" bold="true">Proxy Delhaize Airport Gardens</text>
+        </line>
+        <line>
+            <text align="center" length="42">Da vincilaan 2</text>
+        </line>
+        <line>
+            <text align="center" length="42">1930 Zaventem</text>
+        </line>
+        <line>
+            <text align="center" length="42">Tel : 02/725.25.92</text>
+        </line>
+        #else
+
+ 	#if (${ticket.getHostname()} == "Namur")
+        <line>
+            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+        </line>
+        <line>
+            <text align="center" length="42" bold="true">Rue de Namur 9 </text>
+        </line>
+        <line>
+            <text align="center" length="42">1000 Bruxelles</text>
+        </line>
+        <line>
+            <text align="center" length="42">www.greenandclean.be</text>
+        </line>
+        #else
+
+
+        #if (${ticket.getHostname()} == "Glaverbel")
+        <line>
+            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+        </line>
+        <line>
+            <text align="center" length="42" bold="true">Glaverbel</text>
+        </line>
+        <line>
+            <text align="center" length="42">Square du Vieux Tilleul 8</text>
+        </line>
+        <line>
+            <text align="center" length="42">1050 Bruxelles</text>
+        </line>
+        <line>
+            <text align="center" length="42">Tel : 02/660.25.00</text>
+        </line>
+
+        #end
+        #end
+	#end
+        #end
+	#end
+        #end
+	#end
+
+        #end
+
+
         #else
         <line></line>
         <line>
@@ -106,9 +175,9 @@
             <text align="left" length="12" bold="true">$item</text>
         </line>
         #end
-        #if (${ticket.ticketType} == 0)     
+        #if (${ticket.ticketType} == 0)
         <line>
-            <text align="left" length="20">Facture:</text>
+            <text align="left" length="20">Ticket :</text>
             <text align="right" length="22">${ticket.printId()}</text>
         </line>
         #end
@@ -133,7 +202,7 @@
             <text align="right" length="22">${ticket.printDate()}</text>
         </line>
         #end
-         #if ($ticket.getCustomer())
+        #if ($ticket.getCustomer())
         <line>
             <text align="left" length="15">Customer:</text>
             <text>${ticket.getCustomer().printName()}</text>
@@ -157,14 +226,14 @@
             <text align ="right" length="10">Value</text>
         </line>
         <line>
-             <text>------------------------------------------</text>
+            <text>------------------------------------------</text>
         </line>
         #foreach ($ticketline in $ticket.getLines())
         <line>
             #if ($ticketline.isProductCom())
-                <text align ="left" length="17">*${ticketline.printName()}</text>
+            <text align ="left" length="17">*${ticketline.printName()}</text>
             #else
-                <text align ="left" length="17">${ticketline.printName()}</text>
+            <text align ="left" length="17">${ticketline.printName()}</text>
             #end
             <text align ="right" length="10">${ticketline.printPriceTax()}</text>
             <text align ="right" length="5">x${ticketline.printMultiply()}</text>
@@ -172,26 +241,26 @@
         </line>
         #if ($ticketline.productAttSetInstId)
         <line>
-	        <text align ="left" length="42">    ${ticketline.productAttSetInstDesc}</text>
+            <text align ="left" length="42">    ${ticketline.productAttSetInstDesc}</text>
         </line>
         #end
         #end
         <line>
-             <text>------------------------------------------</text>
+            <text>------------------------------------------</text>
         </line>
 
         #if ($item == "1")
-	#foreach ($taxinfo in $taxes)
-	#set( $taxline = $ticket.getTaxLine($taxinfo))
+        #foreach ($taxinfo in $taxes)
+        #set( $taxline = $ticket.getTaxLine($taxinfo))
         #if ($taxline.getTax()>0)
-	<line>
-	<text align ="left" length="18">${taxline.getTaxInfo()}</text>
-	<text align ="right" length="12">${taxline.printSubTotal()}</text>
-	<text align ="right" length="12">${taxline.printTax()}</text>
-	</line>
+        <line>
+            <text align ="left" length="18">${taxline.getTaxInfo()}</text>
+            <text align ="right" length="12">${taxline.printSubTotal()}</text>
+            <text align ="right" length="12">${taxline.printTax()}</text>
+        </line>
         #end
-	#end
-	<line> </line>
+        #end
+        <line> </line>
         <line>
             <text align ="left" length="20">Total HTVA</text>
             <text align ="right" length="22">${ticket.printSubTotal()}</text>
@@ -207,31 +276,33 @@
             <text align ="right" length="22" bold="true">${ticket.printTotal()}</text>
         </line>
         #foreach ($paymentline in $ticket.payments)
-         #if ($paymentline.name == "cash")
+        #if ($paymentline.name == "cash")
         <line>
             <text bold="true">Cash</text>
         </line>
         <line>
-             <text align="left" length="22">Reçu:</text>
-             <text align ="right" length="20">${paymentline.printPaid()}</text>
-         </line>
+            <text align="left" length="22">Reçu:</text>
+            <text align ="right" length="20">${paymentline.printPaid()}</text>
+        </line>
         <line>
             <text align="left" length="22">Rendu:</text>
             <text align ="right" length="20">${paymentline.printChange()}</text>
         </line>
-         #end
-         #if ($paymentline.name == "cashrefund")
+        #end
+        #if ($paymentline.name == "cashrefund")
         <line>
             <text bold="true">Remboursement:</text>
-         </line>
+        </line>
         <line>
             <text align ="right" length="42">${paymentline.printTotal()}</text>
         </line>
-         #end
-         #if ($paymentline.name == "magcard")
+        #end
+        #if ($paymentline.name == "magcard")
         <line>
-            <text bold="true" length="22">Carte</text>
-            <text align ="right" length="20">${paymentline.printTotal()}</text>
+            <text bold="true">Carte</text>
+        </line>
+        <line>
+            <text align ="right" length="42">${paymentline.printTotal()}</text>
         </line>
         <line>
             <text align ="left" length="22">Number:</text>
@@ -249,64 +320,64 @@
             <text align ="left" length="22">Authorization:</text>
             <text>${paymentline.printAuthorization()}</text>
         </line>
-         #end
-         #if ($paymentline.name == "magcardrefund")
+        #end
+        #if ($paymentline.name == "magcardrefund")
         <line>
             <text bold="true">Mag card refund</text>
         </line>
         <line>
             <text align ="right" length="42">${paymentline.printTotal()}</text>
         </line>
-         #end
-         #if ($paymentline.name == "cheque")
+        #end
+        #if ($paymentline.name == "cheque")
         <line>
             <text bold="true">Cheque</text>
         </line>
         <line>
             <text align ="right" length="42">${paymentline.printTotal()}</text>
         </line>
-         #end
-         #if ($paymentline.name == "chequerefund")
+        #end
+        #if ($paymentline.name == "chequerefund")
         <line>
             <text bold="true">Cheque refund</text>
         </line>
         <line>
             <text align ="right" length="42">${paymentline.printTotal()}</text>
         </line>
-         #end
-         #if ($paymentline.name == "paperin")
+        #end
+        #if ($paymentline.name == "paperin")
         <line>
             <text bold="true">Note</text>
         </line>
         <line>
             <text align ="right" length="42">${paymentline.printTotal()}</text>
         </line>
-         #end
-         #if ($paymentline.name == "paperout")
+        #end
+        #if ($paymentline.name == "paperout")
         <line>
             <text bold="true">Note Refund</text>
         </line>
         <line>
             <text align ="right" length="42">${paymentline.printTotal()}</text>
         </line>
-         #end
-         #if ($paymentline.name == "free")
+        #end
+        #if ($paymentline.name == "free")
         <line>
             <text bold="true">Free</text>
         </line>
         <line>
             <text align ="right" length="42">${paymentline.printTotal()}</text>
         </line>
-         #end
-         #if ($paymentline.name == "debt")
+        #end
+        #if ($paymentline.name == "debt")
         <line>
             <text bold="true">Debt</text>
         </line>
         <line>
             <text align ="right" length="42">${paymentline.printTotal()}</text>
         </line>
-         #end
-         #end
+        #end
+        #end
         <line>
             <text align="left" length="15">Cashier:</text>
             <text>${ticket.printUser()}</text>
@@ -329,49 +400,71 @@
     #foreach ($ticketline in $ticket.getLinesTickets())
 
     <ticket printer="2">
- 	<line></line>
-	<line>
-            <text align="left" length="15">N°Facture:</text>
-            <text>${ticket.printId()}</text>
+        <line></line>
+        <line size="2">
+            <text align="left" length="25" bold="true">${ticket.printId()} - ${ticket.getHostname()}  </text>
         </line>
-        <line>
-            <text align="left" length="12">Date Retour:</text>
-            <text>${ticket.printDateReturn()}</text>
+        <line size="2">
+            <text align="left" length="25" bold="true">${ticketline.productAttSetInstDesc} - ${ticket.printDateReturn()}</text>
         </line>
-         #if ($ticket.getCustomer())
-        <line>
-            <text align="left" length="12">Client:</text>
-            <text>${ticket.getCustomer().printName()}</text>
-            <text align="right" length="5"></text>
-            <text>${ticket.getCustomer().printTaxid()}</text>
+        #if ($ticket.getCustomer())
+        <line size ="2">
+            <text align="left" length="25" bold="true">${ticket.getCustomer().printName()}</text>
         </line>
         #end
-        <line>
-            #if ($ticketline.isProductCom())
-		<text align="left" length="12">Produit:</text>
-                <text align ="left" length="13">*${ticketline.printName()}</text>
-            #else
-		<text align="left" length="12">Produit:</text>
-                <text align ="left" length="13">${ticketline.printName()}</text>
-            #end
-	</line>
-	<line>
-	    <text align="left" length="12">N pieces:</text>
-            <text align ="left" length="29">${ticketline.productAttSetInstDesc}</text>
+        <line size ="2">
+        #if ($ticketline.isProductCom())
+        <text align="left" length="1"></text>
+        <text align ="left" length="25">*${ticketline.printName()}</text>
+        #else
+        <text align="left" length="1"></text>
+        <text align ="left" length="25">${ticketline.printName()}</text>
 
+        #end
         </line>
-	<line></line>
+    </ticket>
 
-  </ticket>
-<cutreceipt/>
-            #end
+    <cutreceipt/>
+    #end
+
+    #if (${ticket.getHostname()} == "Van-Eick Zaventem")
+    <ticket printer="2">
+        <line>
+            <text align="right" length="42"> </text>
+        </line>
+        <line>
+            <text align="right" length="42"> </text>
+        </line>
+        <line>
+            <text align="right" length="42"> </text>
+        </line>
+        <line>
+            <text align="right" length="42"> </text>
+        </line>
+    </ticket>
+    #else
+    #end
+    <ticket printer="2">
+        <line>
+            <text align="left" length="42">      </text>
+        </line>
+        <line>
+            <text align="left" length="42">      </text>
+        </line>
+        <line>
+            <text align="left" length="42">      </text>
+        </line>
+        <line>
+            <text align="left" length="42">      </text>
+        </line>
+    </ticket>
     #foreach ($paymentline in $ticket.payments)
-     #if ($paymentline.name == "cash")
-    <opendrawer/>
-     #end
-     #if ($paymentline.name == "cashrefund")
-    <opendrawer/>
+        #if ($paymentline.name == "cash")
+        <opendrawer/>
+        #end
+        #if ($paymentline.name == "cashrefund")
+        <opendrawer/>
 
-     #end
+        #end
     #end
 </output>
