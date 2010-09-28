@@ -471,7 +471,11 @@ public class ExternalSalesHelper {
         
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateR = null;
+
         String dateC = df.format(new Date());
+        if (dateCreation!=null) {
+            dateC = df.format(dateCreation);
+        }
         boolean returnvalue = true;
        SQLResult[] results;
         if (dateReturn!=null) {
@@ -479,30 +483,29 @@ public class ExternalSalesHelper {
             String query =  " INSERT INTO #__{vm}_order_history ( order_id , order_status_code , date_added , customer_notified , comments ) "
                         +" VALUES ( '"+orderID+"', 'D', '"+dateR+"', '0', 'Date return'); ";
             SQLRequest sqlr = new SQLRequest(wsLogin,query);
-           // String query3 = " UPDATE #__{vm}_orders SET order_status = 'S' WHERE order_id = "+orderID+" AND order_status = 'C';";
-           // SQLRequest sqlr3 = new SQLRequest(wsLogin,query3);
 
             try {
                results = queriesProxy.executeSQLQuery(sqlr);
-              // results = queriesProxy.executeSQLQuery(sqlr3);
-
+            
             } catch (IOException ioe) {
                 ioe.printStackTrace();
                 returnvalue = false;
             }
 
         }
-        if (dateCreation!=null) {
-            dateC = df.format(dateCreation);
-        }
 
 
         String query2 = " UPDATE #__{vm}_order_history SET date_added = '"+dateC+"' WHERE order_status_code = 'P' AND order_status_history_id ="+orderID+"; ";
-  
+        String query3 = " UPDATE #__{vm}_orders SET cdate=UNIX_TIMESTAMP('"+dateC+"') WHERE order_id = "+orderID+";";
+
         SQLRequest sqlr2 = new SQLRequest(wsLogin,query2);
+        SQLRequest sqlr3 = new SQLRequest(wsLogin,query3);
 
         try {
+
            results = queriesProxy.executeSQLQuery(sqlr2);
+           results = queriesProxy.executeSQLQuery(sqlr3);
+
         } catch (IOException ioe) {
             ioe.printStackTrace();
             returnvalue = false;

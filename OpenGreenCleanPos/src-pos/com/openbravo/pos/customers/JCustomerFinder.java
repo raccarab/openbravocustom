@@ -155,7 +155,12 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
             afilter[3] = null;
         } else {
             afilter[2] = QBFCompareEnum.COMP_RE;
-            afilter[3] = "%" + m_jtxtSearchKey.getText() + "%";
+            
+            if (TicketInfo.isWS()) {
+                afilter[3] = "%" + m_jtxtSearchKey.getText().toUpperCase() + "%";
+            } else {
+                afilter[3] = "%" + m_jtxtSearchKey.getText() + "%";
+            }
         }
         
         // Name
