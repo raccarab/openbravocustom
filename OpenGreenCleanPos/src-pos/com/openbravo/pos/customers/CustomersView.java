@@ -361,15 +361,19 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
              throw new BasicException();
            // return null;
          }
+        String jName = m_jName.getText();
+        if (TicketInfo.isWS()) {
+          jName = jName.toUpperCase();
+        }
         if (m_jSearchkey.getText()==null || m_jSearchkey.getText().compareTo("")==0) {
-            m_jSearchkey.setText(m_jTaxID.getText()+" "+m_jName.getText());
+            m_jSearchkey.setText(m_jTaxID.getText()+" "+jName);
         }
 
         Object[] customer = new Object[23];
         customer[0] = m_oId == null ? UUID.randomUUID().toString() : m_oId;
         customer[1] = m_jTaxID.getText();
         customer[2] = m_jSearchkey.getText();
-        customer[3] = m_jName.getText();
+        customer[3] = jName;
         customer[4] = m_jNotes.getText();
         customer[5] = Boolean.valueOf(m_jVisible.isSelected());
         customer[6] = Formats.STRING.parseValue(jcard.getText()); // Format to manage NULL values

@@ -41,6 +41,7 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
         jtxtName.getDocument().addDocumentListener(dirty);
         jtxtPassword.getDocument().addDocumentListener(dirty);
         jtxtUrl.getDocument().addDocumentListener(dirty);
+        jtxtPaymentID.getDocument().addDocumentListener(dirty);
     }
     
     public boolean hasChanged() {
@@ -62,10 +63,12 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
             // La clave esta encriptada.
             AltEncrypter cypher = new AltEncrypter("cypherkey" + sERPUser);
             sERPPassword = cypher.decrypt(sERPPassword.substring(6));
-        }        
+        }
+
         jtxtName.setText(sERPUser);
         jtxtPassword.setText(sERPPassword);    
-        
+        jtxtPaymentID.setText(config.getProperty("ws.payid"));
+
         dirty.setDirty(false);
     }
     
@@ -77,6 +80,12 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
         config.setProperty("ws.user", jtxtName.getText());
         AltEncrypter cypher = new AltEncrypter("cypherkey" + jtxtName.getText());             
         config.setProperty("ws.password", "crypt:" + cypher.encrypt(new String(jtxtPassword.getPassword())));
+
+        String tmpPayID = jtxtPaymentID.getText();
+        if (tmpPayID.equals(""))
+            tmpPayID="1";
+        else
+            config.setProperty("ws.payid", tmpPayID);
 
         dirty.setDirty(false);
     }
@@ -98,6 +107,8 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
         jtxtName = new javax.swing.JTextField();
         jLabelProperties = new javax.swing.JLabel();
         jtxtPassword = new javax.swing.JPasswordField();
+        jLabelPayID = new javax.swing.JLabel();
+        jtxtPaymentID = new javax.swing.JTextField();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(AppLocal.getIntString("label.wsconfig")));
 
@@ -109,6 +120,14 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
         jLabelName.setText(bundle.getString("label.wsuser")); // NOI18N
 
         jLabelProperties.setText(bundle.getString("label.wspassword")); // NOI18N
+
+        jtxtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtPasswordActionPerformed(evt);
+            }
+        });
+
+        jLabelPayID.setText(bundle.getString("label.wspayid")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -132,7 +151,11 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelProperties, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelPayID, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtxtPaymentID, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(213, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -153,7 +176,11 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelProperties)
                     .addComponent(jtxtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPayID)
+                    .addComponent(jtxtPaymentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         jLabelId.getAccessibleContext().setAccessibleName("");
@@ -171,23 +198,29 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtxtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtPasswordActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelId;
     private javax.swing.JLabel jLabelName;
+    private javax.swing.JLabel jLabelPayID;
     private javax.swing.JLabel jLabelProperties;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jlabelUrl;
     private javax.swing.JTextField jtxtId;
     private javax.swing.JTextField jtxtName;
     private javax.swing.JPasswordField jtxtPassword;
+    private javax.swing.JTextField jtxtPaymentID;
     private javax.swing.JTextField jtxtUrl;
     // End of variables declaration//GEN-END:variables
     

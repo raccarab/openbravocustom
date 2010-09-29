@@ -81,6 +81,7 @@ public class UsersSync implements ProcessAction {
     private DataLogicSales dlsales;
     private String warehouse;
     private ExternalSalesHelper externalsales;
+    private static String defaultEmail = "@DONOTSENDME";
 
     private static String encodeHTML(String s)
     {
@@ -252,7 +253,7 @@ public class UsersSync implements ProcessAction {
 	                copyCustomer.setNotes(description);
 	                
 	                if (copyCustomer.getEmail()==null || copyCustomer.getEmail().trim().equals("") || copyCustomer.getEmail().indexOf('@')<=0)
-	                	copyCustomer.setEmail(remoteUser.getLogin()+"@laundrylocker.be");
+	                	copyCustomer.setEmail(remoteUser.getLogin()+defaultEmail);
 	                else 
 	                	copyCustomer.setEmail(remoteUser.getEmail());
 	                
@@ -353,7 +354,7 @@ public class UsersSync implements ProcessAction {
                     userAdd.setTitle("M");
 
                     if (localCustomer.getEmail()==null || localCustomer.getEmail().trim().equals("") || localCustomer.getEmail().indexOf('@')<=0)
-                            userAdd.setEmail(localCustomer.getTaxid()+"@laundrylocker.be");
+                            userAdd.setEmail(localCustomer.getTaxid()+defaultEmail);
                     else
                             userAdd.setEmail(localCustomer.getEmail());
 

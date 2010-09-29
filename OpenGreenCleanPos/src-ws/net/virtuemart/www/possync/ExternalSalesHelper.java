@@ -79,6 +79,7 @@ public class ExternalSalesHelper {
     private String wsPosid;
     private LoginInfo wsLogin;
     private String wsURL;
+    private String wsPayID;
     private String hostname;
     private String vm_path = "/administrator/components/com_vm_soa/services/VM_";
     private String vm_path_end = "Service.php";
@@ -124,6 +125,13 @@ public class ExternalSalesHelper {
 
         String user = config.getProperty("ws.user");
         wsLogin.setLogin(user);
+
+        wsPayID=config.getProperty("ws.payid");
+        if (wsPayID == null || wsPayID.equals("")) {
+            wsPayID="1";
+        }
+
+
         AltEncrypter cypher = new AltEncrypter("cypherkey" + user);
         try {
             String password = cypher.decrypt(config.getProperty("ws.password").substring(6));
@@ -141,6 +149,7 @@ public class ExternalSalesHelper {
             } else {
             }
         }
+
         categoriesProxy = new VM_CategoriesProxy(wsURL + CategoriesURL);
         orderProxy = new VM_OrderProxy(wsURL + OrderURL);
         usersProxy = new VM_UsersProxy(wsURL + UsersURL);
@@ -151,6 +160,10 @@ public class ExternalSalesHelper {
 
     public String getWsURL() {
         return wsURL;
+    }
+
+    public String getWsPayID() {
+        return wsPayID;
     }
 
     public boolean checkConnection() {

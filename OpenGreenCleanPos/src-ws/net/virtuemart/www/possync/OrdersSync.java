@@ -152,7 +152,7 @@ public class OrdersSync implements ProcessAction {
                     String userID = usersMap.get(ticket.getCustomerId());
 
                     orders = new CreateOrderInput();
-                    orders.setPayment_method_id("1");
+                    orders.setPayment_method_id(externalsales.getWsPayID());
                     orders.setPrice_including_tax(String.valueOf(ticket.getTotal()));
                     orders.setProduct_currency("EUR");
                     orders.setShipping_carrier_name("0");
