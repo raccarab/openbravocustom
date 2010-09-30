@@ -252,10 +252,7 @@ public class UsersSync implements ProcessAction {
                             description =" ";
 	                copyCustomer.setNotes(description);
 	                
-	                if (copyCustomer.getEmail()==null || copyCustomer.getEmail().trim().equals("") || copyCustomer.getEmail().indexOf('@')<=0)
-	                	copyCustomer.setEmail(remoteUser.getLogin()+defaultEmail);
-	                else 
-	                	copyCustomer.setEmail(remoteUser.getEmail());
+	                copyCustomer.setEmail(remoteUser.getEmail());
 	                
                         if (address==null || address.equals(""))
                             address =" ";
