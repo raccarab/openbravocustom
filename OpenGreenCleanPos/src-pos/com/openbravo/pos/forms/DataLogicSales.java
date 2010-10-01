@@ -243,7 +243,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
     }
     public final SentenceList getHostList() {
         return new StaticSentence(s
-            , "SELECT DISTINCT MONEY, HOST, HOSTSEQUENCE FROM `CLOSEDCASH` GROUP BY HOST"
+            , "SELECT DISTINCT MONEY, HOST, HOSTSEQUENCE FROM CLOSEDCASH GROUP BY HOST"
             , null
             , HostInfo.getSerializerRead());
     }

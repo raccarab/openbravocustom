@@ -295,6 +295,7 @@ public class JTicketsBagTicket extends JTicketsBag {
         m_jEdit = new javax.swing.JButton();
         m_jRefund = new javax.swing.JButton();
         m_jPrint = new javax.swing.JButton();
+        m_jPrint1 = new javax.swing.JButton();
         jDebt = new javax.swing.JButton();
         m_jRendu = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -374,6 +375,19 @@ public class JTicketsBagTicket extends JTicketsBag {
             }
         });
         m_jButtons.add(m_jPrint);
+
+        m_jPrint1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/yast_printer.png"))); // NOI18N
+        m_jPrint1.setText(AppLocal.getIntString("button.print")); // NOI18N
+        m_jPrint1.setFocusPainted(false);
+        m_jPrint1.setFocusable(false);
+        m_jPrint1.setMargin(new java.awt.Insets(8, 14, 8, 14));
+        m_jPrint1.setRequestFocusEnabled(false);
+        m_jPrint1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_jPrint1ActionPerformed(evt);
+            }
+        });
+        m_jButtons.add(m_jPrint1);
 
         jDebt.setPreferredSize(new java.awt.Dimension(44, 44));
         jDebt.addActionListener(new java.awt.event.ActionListener() {
@@ -777,6 +791,23 @@ private void jDebtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
         }
     }
 }//GEN-LAST:event_jDebtActionPerformed
+
+private void m_jPrint1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jPrint1ActionPerformed
+
+        if (m_ticket != null) {
+            try {
+                ScriptEngine script = ScriptFactory.getScriptEngine(ScriptFactory.VELOCITY);
+                script.put("ticket", m_ticket);
+                m_TTP2.printTicket(script.eval(m_dlSystem.getResourceAsXML("Printer.TicketPreview2")).toString());
+            } catch (ScriptException e) {
+                JMessageDialog.showMessage(this, new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.cannotprint"), e));
+            } catch (TicketPrinterException e) {
+                JMessageDialog.showMessage(this, new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.cannotprint"), e));
+            }
+        }
+    // TODO add your handling code here:
+}//GEN-LAST:event_m_jPrint1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
@@ -795,6 +826,7 @@ private void jDebtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
     private javax.swing.JPanel m_jOptions;
     private javax.swing.JPanel m_jPanelTicket;
     private javax.swing.JButton m_jPrint;
+    private javax.swing.JButton m_jPrint1;
     private javax.swing.JButton m_jRefund;
     private javax.swing.JButton m_jRendu;
     private com.openbravo.editor.JEditorIntegerPositive m_jTicketEditor;
