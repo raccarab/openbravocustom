@@ -379,7 +379,7 @@ public class JTicketsBagTicket extends JTicketsBag {
         m_jButtons.add(m_jPrint);
 
         m_jPrint1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/yast_printer.png"))); // NOI18N
-        m_jPrint1.setText(AppLocal.getIntString("button.print")); // NOI18N
+        m_jPrint1.setText(AppLocal.getIntString("button.print2")); // NOI18N
         m_jPrint1.setFocusPainted(false);
         m_jPrint1.setFocusable(false);
         m_jPrint1.setMargin(new java.awt.Insets(8, 14, 8, 14));
