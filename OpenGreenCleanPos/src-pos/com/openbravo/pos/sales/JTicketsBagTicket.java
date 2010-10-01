@@ -110,6 +110,7 @@ public class JTicketsBagTicket extends JTicketsBag {
         m_jEdit.setVisible(m_App.getAppUserView().getUser().hasPermission("sales.EditTicket"));
         m_jRefund.setVisible(m_App.getAppUserView().getUser().hasPermission("sales.RefundTicket"));
         m_jPrint.setVisible(m_App.getAppUserView().getUser().hasPermission("sales.PrintTicket"));
+        m_jPrint1.setVisible(m_App.getAppUserView().getUser().hasPermission("sales.PrintTicket"));
 
         //jDebt.setVisible(m_App.getAppUserView().getUser().hasPermission("sales.RefundTicket"));
         jDebt.setVisible(false);
@@ -255,6 +256,7 @@ public class JTicketsBagTicket extends JTicketsBag {
         }
         m_jRefund.setEnabled(m_ticket != null && m_ticket.getTicketType() == TicketInfo.RECEIPT_NORMAL && m_ticket.isRefundable());
         m_jPrint.setEnabled(m_ticket != null);
+        m_jPrint1.setEnabled(m_ticket != null);
 
         // Este deviceticket solo tiene una impresora, la de pantalla
         m_TP.getDevicePrinter("1").reset();
