@@ -633,6 +633,14 @@ public class TicketInfo implements SerializableRead, Externalizable {
     public String printId() {
         if (m_iTicketId > 0) {
             // valid ticket id
+            
+            if (isWS()) {
+               int posid = new Integer(posID);
+               posid*=10000000;
+               int tid = new Integer(m_iTicketId);
+
+               return String.valueOf(posid+tid);
+            } else
             return Formats.INT.formatValue(new Integer(m_iTicketId));
         } else {
             return "";

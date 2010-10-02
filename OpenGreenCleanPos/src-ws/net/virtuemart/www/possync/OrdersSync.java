@@ -200,7 +200,7 @@ public class OrdersSync implements ProcessAction {
                     }
 
                     totalpaid = (Math.round(totalpaid * 100.0))/1.0;
-                    String note = ("TicketID."+String.valueOf(ticket.getTicketId()) + ".POS." + externalsales.getWsPosid() + ".TotalPaid." + (totalpaid/100) + ".Vendeur." + ticket.printUser());
+                    String note = ("TicketID="+ticket.printId() + ",TotalPaid=" + (totalpaid/100) + ",Vendeur=" + ticket.printUser());
  //                           + ".Date." + ticket.printDate() + ".DateRetour." + ticket.printDateReturn() + ".DateRendu." + ticket.printDateRendu());
 
                     orders.setCustomer_note(note);

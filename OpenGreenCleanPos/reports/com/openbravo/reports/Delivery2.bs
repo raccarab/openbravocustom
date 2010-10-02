@@ -19,29 +19,29 @@
 
 report = new com.openbravo.pos.reports.PanelReportBean();
 
-report.setTitleKey("Menu.Ticket");
-report.setReport("/com/openbravo/reports/tickets");
-report.setResourceBundle("com/openbravo/reports/tickets_messages");
+report.setTitleKey("Menu.Delivery");
+report.setReport("/com/openbravo/reports/Delivery");
+report.setResourceBundle("com/openbravo/reports/Delivery_messages");
 
 
 report.setSentence("SELECT " +
                 "CUSTOMERS.SEARCHKEY, " +
                 "CUSTOMERS.NAME AS NAMECUST, " +
                 "TICKETS.TICKETID, " +
-                "RECEIPTS.DATENEW, " +
+                "TICKETS.DATERETURN, " +
                 "PRODUCTS.REFERENCE, " +
                 "PRODUCTS.NAME, " +
                 "SUM(TICKETLINES.UNITS) AS UNITS, " +
                 "SUM(TICKETLINES.UNITS * TICKETLINES.PRICE) AS TOTAL, " +
-                "SUM(TICKETLINES.UNITS * TICKETLINES.PRICE) * (TAXES.RATE) AS TOTALTAXE, " +
-                "TAXES.RATE, "+
-                "SUM(TICKETLINES.UNITS * TICKETLINES.PRICE) * (1.0 + TAXES.RATE) AS TOTPROD "+
-                "FROM TAXES, CLOSEDCASH INNER JOIN RECEIPTS ON CLOSEDCASH.MONEY = RECEIPTS.MONEY, TICKETS LEFT OUTER JOIN CUSTOMERS ON CUSTOMERS.ID = TICKETS.CUSTOMER, TICKETLINES LEFT OUTER JOIN PRODUCTS ON TICKETLINES.PRODUCT = PRODUCTS.ID " +
-                "WHERE TAXES.ID=TICKETLINES.TAXID AND RECEIPTS.ID = TICKETS.ID AND TICKETS.ID = TICKETLINES.TICKET AND ?(QBF_FILTER) " +
-                "GROUP BY TICKETS.TICKETID, CUSTOMERS.SEARCHKEY, PRODUCTS.REFERENCE, PRODUCTS.NAME , CUSTOMERS.NAME, RECEIPTS.DATENEW, TAXES.RATE " +
-                "ORDER BY TICKETS.TICKETID, CUSTOMERS.SEARCHKEY, PRODUCTS.REFERENCE, PRODUCTS.NAME");
-report.addParameter("RECEIPTS.DATENEW");
-report.addParameter("RECEIPTS.DATENEW");
+                "CLOSEDCASH.HOST, " +
+                "CLOSEDCASH.MONEY, " +
+                "RECEIPTS.MONEY " +
+                "FROM CLOSEDCASH INNER JOIN RECEIPTS ON CLOSEDCASH.MONEY = RECEIPTS.MONEY, TICKETS LEFT OUTER JOIN CUSTOMERS ON CUSTOMERS.ID = TICKETS.CUSTOMER, TICKETLINES LEFT OUTER JOIN PRODUCTS ON TICKETLINES.PRODUCT = PRODUCTS.ID " +
+                "WHERE RECEIPTS.ID = TICKETS.ID AND TICKETS.ID = TICKETLINES.TICKET AND PRODUCTS.TAXCAT = '001' AND ?(QBF_FILTER) " +
+                "GROUP BY TICKETS.TICKETID, CUSTOMERS.SEARCHKEY, PRODUCTS.REFERENCE, PRODUCTS.NAME, CLOSEDCASH.HOST, CUSTOMERS.NAME,CLOSEDCASH.HOST, TICKETS.DATERETURN,RECEIPTS.MONEY,CLOSEDCASH.MONEY " +
+                "ORDER BY CLOSEDCASH.HOST, TICKETS.TICKETID");
+report.addParameter("TICKETS.DATERETURN");
+report.addParameter("TICKETS.DATERETURN");
 report.addQBFFilter(new com.openbravo.pos.reports.JParamsDatesInterval());
 report.addParameter("CLOSEDCASH.HOST");
 report.addQBFFilter(new com.openbravo.pos.ticket.HostFilter());
@@ -49,14 +49,11 @@ report.addQBFFilter(new com.openbravo.pos.ticket.HostFilter());
 report.addField("SEARCHKEY", com.openbravo.data.loader.Datas.STRING);
 report.addField("NAMECUST", com.openbravo.data.loader.Datas.STRING);
 report.addField("TICKETID", com.openbravo.data.loader.Datas.STRING);
-report.addField("DATENEW", com.openbravo.data.loader.Datas.TIMESTAMP);
+report.addField("DATERETURN", com.openbravo.data.loader.Datas.TIMESTAMP);
 report.addField("REFERENCE", com.openbravo.data.loader.Datas.STRING);
 report.addField("NAME", com.openbravo.data.loader.Datas.STRING);
 report.addField("UNITS", com.openbravo.data.loader.Datas.DOUBLE);
 report.addField("TOTAL", com.openbravo.data.loader.Datas.DOUBLE);
-report.addField("TOTALTAXE", com.openbravo.data.loader.Datas.DOUBLE);
-report.addField("RATE", com.openbravo.data.loader.Datas.DOUBLE);
-report.addField("TOTPROD", com.openbravo.data.loader.Datas.DOUBLE);
-
+report.addField("HOST", com.openbravo.data.loader.Datas.STRING);
 
 report;

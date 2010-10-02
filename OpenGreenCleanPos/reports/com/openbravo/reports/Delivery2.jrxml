@@ -9,6 +9,14 @@
 	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
 	<parameter name="ARG" class="java.lang.Object" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT CUSTOMERS.SEARCHKEY, CUSTOMERS.NAME AS NAMECUST, TICKETS.TICKETID, TICKETS.DATERETURN, PRODUCTS.REFERENCE, PRODUCTS.NAME, SUM(TICKETLINES.UNITS) AS UNITS, SUM(TICKETLINES.UNITS * TICKETLINES.PRICE) AS TOTAL
+FROM TICKETS LEFT OUTER JOIN CUSTOMERS ON CUSTOMERS.ID = TICKETS.CUSTOMER, TICKETLINES LEFT OUTER JOIN PRODUCTS ON TICKETLINES.PRODUCT = PRODUCTS.ID
+WHERE TICKETS.ID = TICKETLINES.TICKET
+AND PRODUCTS.TAXCAT = '1'
+GROUP BY TICKETS.TICKETID, CUSTOMERS.SEARCHKEY, PRODUCTS.REFERENCE, PRODUCTS.NAME, CUSTOMERS.NAME, TICKETS.DATERETURN
+ORDER BY TICKETS.TICKETID]]>
+	</queryString>
 	<field name="SEARCHKEY" class="java.lang.String"/>
 	<field name="NAMECUST" class="java.lang.String"/>
 	<field name="TICKETID" class="java.lang.String"/>
@@ -17,7 +25,6 @@
 	<field name="NAME" class="java.lang.String"/>
 	<field name="UNITS" class="java.lang.Double"/>
 	<field name="TOTAL" class="java.lang.Double"/>
-	<field name="HOST" class="java.lang.String"/>
 	<variable name="BIGTOTAL" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{TOTAL}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Double(0.0)]]></initialValueExpression>
