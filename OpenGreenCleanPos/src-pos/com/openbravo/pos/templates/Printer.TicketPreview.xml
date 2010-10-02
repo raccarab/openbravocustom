@@ -202,10 +202,6 @@
              <text align="left" length="22">Reçu:</text>
              <text align ="right" length="20">${paymentline.printPaid()}</text>
          </line>
-        <line>
-            <text align="left" length="22">Rendu:</text>
-            <text align ="right" length="20">${paymentline.printChange()}</text>
-        </line>
          #end
          #if ($paymentline.name == "cashrefund")
         <line>
