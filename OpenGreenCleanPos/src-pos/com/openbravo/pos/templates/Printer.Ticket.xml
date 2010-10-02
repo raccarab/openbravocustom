@@ -90,7 +90,7 @@
 
         #else
 
- 	#if (${ticket.getHostname()} == "Charleroi")
+  #if (${ticket.getHostname()} == "Charleroi")
         <line>
             <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
         </line>
@@ -105,7 +105,7 @@
         </line>
         #else
 
- 	#if (${ticket.getHostname()} == "Proxy")
+  #if (${ticket.getHostname()} == "Proxy")
         <line>
             <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
         </line>
@@ -123,7 +123,7 @@
         </line>
         #else
 
- 	#if (${ticket.getHostname()} == "Namur")
+  #if (${ticket.getHostname()} == "Namur")
         <line>
             <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
         </line>
@@ -132,6 +132,18 @@
         </line>
         <line>
             <text align="center" length="42">1000 Bruxelles</text>
+        </line>
+        <line>
+            <text align="center" length="42">www.greenandclean.be</text>
+        </line>
+        #else
+
+ #if (${ticket.getHostname()} == "RTL")
+        <line>
+            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+        </line>
+        <line>
+            <text align="center" length="42" bold="true">RTL</text>
         </line>
         <line>
             <text align="center" length="42">www.greenandclean.be</text>
@@ -158,11 +170,12 @@
 
         #end
         #end
-	#end
+ #end
         #end
-	#end
+ #end
         #end
-	#end
+ #end
+ #end
 
         #end
 
