@@ -78,6 +78,10 @@
     <class name="/com/openbravo/reports/productsales.bs"/>
     <class name="/com/openbravo/reports/tickets.bs"/>
     <class name="/com/openbravo/reports/Delivery.bs"/>
+    <class name="com.openbravo.pos.forms.MenuMaintenance"/>
+    <class name="net.virtuemart.www.possync.ProductsSyncCreate"/>
+    <class name="net.virtuemart.www.possync.OrdersSyncCreate"/>
+    <class name="net.virtuemart.www.possync.UsersSyncCreate"/>
     <class name="Menu.ChangePassword"/>
     <class name="button.print"/>
     <class name="button.opendrawer"/>

@@ -73,4 +73,4 @@ CYGWIN*|MINGW32*) LIBRARYPATH=/lib/Windows/i368-mingw32;;
 esac
 
 # start GreenPOS
-java -cp $CP -Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel -Djava.library.path=$DIRNAME$LIBRARYPATH -Ddirname.path=$DIRNAME/ com.openbravo.pos.forms.StartPOS "$@"
+java -cp $CP -Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel -Djava.library.path=$DIRNAME$LIBRARYPATH -Ddirname.path=$DIRNAME/ com.openbravo.pos.forms.StartPOS "greenpos.props" "$@"

@@ -328,8 +328,8 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 
         public List getTicketsReturned() throws BasicException {
         return new PreparedSentence(s
-                  	, "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL AND DATERENDU>=(SELECT DATESTART FROM CLOSEDCASH WHERE DATEEND IS NULL AND HOST=? )"
-                    //, "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL"
+                  	, "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL AND DATERENDU>=(SELECT DATESTART FROM CLOSEDCASH WHERE DATEEND IS NULL OR HOST=? )"
+                       // , "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL"
                   	, SerializerWriteString.INSTANCE
                   	, SerializerReadInteger.INSTANCE).list(TicketInfo.getHostname());
     }
@@ -417,7 +417,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 
 	public void syncOrdersBefore()  throws BasicException {
 		new StaticSentence(s, "UPDATE TICKETS SET CUSTOMER = '0' WHERE CUSTOMER IS NULL").exec();
-		new StaticSentence(s, "UPDATE TICKETLINES SET PRODUCT = '0' WHERE PRODUCT IS NULL AND TAXID NOT LIKE '000'").exec();
+		new StaticSentence(s, "UPDATE TICKETLINES SET PRODUCT = '0' WHERE PRODUCT IS NULL").exec();
 		
 	}
 

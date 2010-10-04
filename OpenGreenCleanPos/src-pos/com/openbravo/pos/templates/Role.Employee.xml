@@ -52,4 +52,8 @@
     <class name="Menu.ChangePassword"/>
     <class name="button.print"/>
     <class name="button.opendrawer"/>
+    <class name="com.openbravo.pos.forms.MenuMaintenance"/>
+    <class name="net.virtuemart.www.possync.ProductsSyncCreate"/>
+    <class name="net.virtuemart.www.possync.OrdersSyncCreate"/>
+    <class name="net.virtuemart.www.possync.UsersSyncCreate"/>
 </permissions>

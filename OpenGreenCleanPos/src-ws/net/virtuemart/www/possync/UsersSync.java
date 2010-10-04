@@ -59,6 +59,7 @@ import com.openbravo.pos.inventory.TaxCategoryInfo;
 import com.openbravo.pos.ticket.CategoryInfo;
 import com.openbravo.pos.ticket.ProductInfoExt;
 import com.openbravo.pos.ticket.TaxInfo;
+import com.openbravo.pos.ticket.TicketInfo;
 import java.security.MessageDigest;
 import net.virtuemart.www.possync.DataLogicIntegration;
 import net.virtuemart.www.possync.ExternalSalesHelper;
@@ -217,6 +218,7 @@ public class UsersSync implements ProcessAction {
 
                         cpt++;
 
+                        
 	            	String name = externalsales.encodeStringISO((remoteUser.getFirstname()+remoteUser.getLastname()).trim());
 	            	String firstname =  externalsales.encodeStringISO(remoteUser.getFirstname());
 	            	String lastname =  externalsales.encodeStringISO(remoteUser.getLastname());
@@ -234,19 +236,19 @@ public class UsersSync implements ProcessAction {
 
                         if (firstname==null || firstname.equals(""))
                             firstname =" ";
-                        copyCustomer.setFirstname(firstname);
+                        copyCustomer.setFirstname(firstname.toUpperCase());
 
 	            	if (lastname==null || lastname.equals(""))
                             lastname =" ";
-                        copyCustomer.setLastname(lastname);
+                        copyCustomer.setLastname(lastname.toUpperCase());
 
                         copyCustomer.setTaxid(remoteUser.getLogin());
 
-	                copyCustomer.setSearchkey(remoteUser.getLogin()+name);
+	                copyCustomer.setSearchkey(remoteUser.getLogin()+name.toUpperCase());
 	               
 	            	if (name==null || name.equals(""))
                             name =" ";
-                        copyCustomer.setName(name);
+                        copyCustomer.setName(name.toUpperCase());
 
                         if (description==null || description.equals(""))
                             description =" ";
@@ -284,7 +286,16 @@ public class UsersSync implements ProcessAction {
                             zipcode =" ";
 	                copyCustomer.setPostal(zipcode);
 
-	                
+
+                        // SYNC ONLY EMAIL USER FOR OGONE
+	                if (TicketInfo.isWS()
+                            && TicketInfo.getPayID()==2
+                            && remoteUser.getEmail().contains("@DONOTSENDME")) {
+
+                            notToSync.add(copyCustomer.getTaxid());
+                            continue;
+                        }
+
 	                //Updates local user
 	                dlintegration.syncCustomer(copyCustomer);
 	                notToSync.add(copyCustomer.getTaxid());

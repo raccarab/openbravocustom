@@ -128,7 +128,20 @@ public class StartPOS {
                             TicketInfo.setPosID(posid);
 //                          UUID.setId(posid);
                         }
-                        
+
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (config.getProperty("ws.payid") != null) {
+                    try {
+                        int payid = Integer.parseInt(config.getProperty("ws.payid"));
+
+                        if (payid > 0) {
+                            TicketInfo.setPayID(payid);
+//                          UUID.setId(posid);
+                        }
+
                     } catch (NumberFormatException e) {
                         e.printStackTrace();
                     }

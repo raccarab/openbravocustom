@@ -69,6 +69,7 @@ public class TicketInfo implements SerializableRead, Externalizable {
 
    //posID for printing tickets
     private static int posID = 0;
+    private static int payID = 1;
 
     public static void setPosID(int posid) {
         posID = posid;
@@ -81,6 +82,15 @@ public class TicketInfo implements SerializableRead, Externalizable {
     public static Boolean isWS() {
         return posID>0;
     }
+
+    public static void setPayID(int payid) {
+        payID=payid;
+    }
+
+    public static int getPayID() {
+        return payID;
+    }
+
 
   // Hostname for printing tickets
     private static String Hostname;
