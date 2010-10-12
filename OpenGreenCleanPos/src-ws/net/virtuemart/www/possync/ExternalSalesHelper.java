@@ -37,9 +37,9 @@ import com.openbravo.basic.BasicException;
 import com.openbravo.pos.forms.AppConfig;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.DataLogicSystem;
+import com.openbravo.pos.ticket.TicketInfo;
 import com.openbravo.pos.util.AltEncrypter;
 import com.openbravo.pos.util.Base64Encoder;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.CharBuffer;
@@ -93,7 +93,6 @@ public class ExternalSalesHelper {
     private VM_ProductProxy productProxy;
     private VM_OrderProxy orderProxy;
     private VM_SQLQueriesProxy queriesProxy;
-    private AppConfig config;
     private static Logger logger = Logger.getLogger("com.openbravo.data.loader.PreparedSentence");
     private  CharsetEncoder encoderUTF;
     private  CharsetEncoder encoderISO;
@@ -114,19 +113,16 @@ public class ExternalSalesHelper {
         encoderUTF = charsetUTF.newEncoder();
         encoderISO = charsetISO.newEncoder();
 
-        config = new AppConfig();
-        config.load();
-
         wsLogin = new LoginInfo();
         // set WS.
-        wsURL = config.getProperty("ws.URL");
-        wsPosid = config.getProperty("ws.posid");
-        hostname = config.getProperty("machine.hostname");
+        wsURL = WSInfo.getWsurl();
+        wsPosid = WSInfo.getWsposid();
+        hostname = TicketInfo.getHostname();
 
-        String user = config.getProperty("ws.user");
+        String user = WSInfo.getWsuser();
         wsLogin.setLogin(user);
 
-        wsPayID=config.getProperty("ws.payid");
+        wsPayID=WSInfo.getWspayid();
         if (wsPayID == null || wsPayID.equals("")) {
             wsPayID="1";
         }
@@ -134,7 +130,7 @@ public class ExternalSalesHelper {
 
         AltEncrypter cypher = new AltEncrypter("cypherkey" + user);
         try {
-            String password = cypher.decrypt(config.getProperty("ws.password").substring(6));
+            String password = cypher.decrypt(WSInfo.getWspassword().substring(6));
             wsLogin.setPassword(password);
         } catch (NullPointerException npe) {
             throw new BasicException(AppLocal.getIntString("message.propsnotdefined"));
@@ -248,6 +244,8 @@ public class ExternalSalesHelper {
 
     // TO AVOID JAVA HEAP
     public User[] getUsersBySteps(int step) throws RemoteException {
+        
+        usersProxy = new VM_UsersProxy(wsURL + UsersURL);
         int bystep = 500;
 
         String start = String.valueOf(step * bystep);
@@ -383,7 +381,6 @@ public class ExternalSalesHelper {
             if (v.getVendor_name().equals(hostname)) {
 
                 this.wsPosid = v.getVendor_id();
-                config.setProperty("ws.posid", wsPosid);
 
             }
         }

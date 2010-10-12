@@ -23,12 +23,7 @@
 
 package net.virtuemart.www.possync;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.nio.CharBuffer;
-import java.nio.charset.CharacterCodingException;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
 import java.rmi.RemoteException;
 import java.security.NoSuchAlgorithmException;
@@ -36,44 +31,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.rpc.ServiceException;
 
-import net.virtuemart.www.VM_Categories.Categorie;
-import net.virtuemart.www.VM_Product.Produit;
-import net.virtuemart.www.VM_Product.UpdateProductInput;
-import net.virtuemart.www.VM_Product.VM_ProductProxy;
 import net.virtuemart.www.VM_Users.User;
-import net.virtuemart.www.externalsales.Product;
-import net.virtuemart.www.externalsales.ProductPlus;
 
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.MessageInf;
-import com.openbravo.data.loader.ImageUtils;
-import com.openbravo.data.loader.SentenceList;
 import com.openbravo.pos.customers.CustomerSync;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.DataLogicSales;
 import com.openbravo.pos.forms.DataLogicSystem;
 import com.openbravo.pos.forms.ProcessAction;
-import com.openbravo.pos.inventory.AttributeSetInfo;
-import com.openbravo.pos.inventory.MovementReason;
-import com.openbravo.pos.inventory.TaxCategoryInfo;
-import com.openbravo.pos.ticket.CategoryInfo;
-import com.openbravo.pos.ticket.ProductInfoExt;
-import com.openbravo.pos.ticket.TaxInfo;
 import com.openbravo.pos.ticket.TicketInfo;
 import java.security.MessageDigest;
-import net.virtuemart.www.possync.DataLogicIntegration;
-import net.virtuemart.www.possync.ExternalSalesHelper;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
-import org.apache.commons.lang.StringEscapeUtils;
-import sun.util.logging.resources.logging;
 
 public class UsersSync implements ProcessAction {
         
@@ -174,7 +147,9 @@ public class UsersSync implements ProcessAction {
 
 	@SuppressWarnings("unchecked")
 	private int syncCustomers() throws RemoteException, BasicException {
-		
+
+            dlintegration.syncCustomersBefore();
+
             ArrayList<String> notToSync = new ArrayList<String>();
             int step=0;
             User[] remoteUsers;
@@ -192,9 +167,7 @@ public class UsersSync implements ProcessAction {
 	        
 	        // if it found users
 	        if (remoteUsers.length > 0 ) {
-	            
-	        	// hide all users in local DB
-	            dlintegration. syncCustomersBefore();
+
 	            String perms;
 	            //loop on all users 
 	            for (User remoteUser : remoteUsers) {
@@ -218,8 +191,7 @@ public class UsersSync implements ProcessAction {
 
                         cpt++;
 
-                        
-	            	String name = externalsales.encodeStringISO((remoteUser.getFirstname()+remoteUser.getLastname()).trim());
+	            	String name = externalsales.encodeStringISO((remoteUser.getFirstname().trim()+" "+remoteUser.getLastname()).trim());
 	            	String firstname =  externalsales.encodeStringISO(remoteUser.getFirstname());
 	            	String lastname =  externalsales.encodeStringISO(remoteUser.getLastname());
 	            	String description =  externalsales.encodeStringISO(remoteUser.getDescription());

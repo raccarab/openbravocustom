@@ -30,6 +30,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.LookAndFeel;
+import net.virtuemart.www.possync.WSInfo;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.api.SubstanceSkin;
 
@@ -76,6 +77,14 @@ public class StartPOS {
                 String wspassword = config.getProperty("ws.password");
                 String wsurl = config.getProperty("ws.URL");
                 String wsposid = config.getProperty("ws.posid");
+                String wspayid = config.getProperty("ws.payid");
+
+                WSInfo.setWspassword(wspassword);
+                WSInfo.setWspayid(wspayid);
+                WSInfo.setWsposid(wsposid);
+                WSInfo.setWsurl(wsurl);
+                WSInfo.setWsuser(wsuser);
+
                 if (wsposid != null
                         && (wsuser == null || wsuser.equals("")
                         || wsurl.equals("") || wsurl == null
@@ -167,6 +176,7 @@ public class StartPOS {
 
                 if (TicketInfo.isWS()) {
                     try {
+
                          app.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
                          ProcessAction myProcess = (ProcessAction) app.getBean("net.virtuemart.www.possync.ProductsSyncCreate");

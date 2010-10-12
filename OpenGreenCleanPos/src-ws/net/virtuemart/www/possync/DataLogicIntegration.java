@@ -27,14 +27,12 @@ import java.util.List;
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.loader.DataParams;
 import com.openbravo.data.loader.DataRead;
-import com.openbravo.data.loader.Datas;
 import com.openbravo.data.loader.ImageUtils;
 import com.openbravo.data.loader.PreparedSentence;
 import com.openbravo.data.loader.SerializerRead;
 import com.openbravo.data.loader.SerializerReadClass;
 import com.openbravo.data.loader.SerializerReadDouble;
 import com.openbravo.data.loader.SerializerReadInteger;
-import com.openbravo.data.loader.SerializerWriteBasic;
 import com.openbravo.data.loader.SerializerWriteParams;
 import com.openbravo.data.loader.SerializerWriteString;
 import com.openbravo.data.loader.Session;
@@ -76,6 +74,10 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
     public void syncCustomersBefore() throws BasicException {
  // sync problems
  //       new StaticSentence(s, "UPDATE CUSTOMERS SET VISIBLE = " + s.DB.TRUE()).exec();
+        new StaticSentence(s, "DELETE FROM CUSTOMERS WHERE ID NOT LIKE '0' AND ID NOT IN (SELECT CUSTOMER FROM TICKETS GROUP BY CUSTOMER)").exec();
+ //ZAV
+ //       new StaticSentence(s, "UPDATE CUSTOMERS SET CURDEBT=0.0 WHERE ID NOT LIKE '0' AND CURDEBT > 0.0").exec();
+
     }
 
     public void syncCustomer(final CustomerSync customer) throws BasicException {
@@ -129,6 +131,29 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                                 setString(16, customer.getTaxid());
                                 setDouble(17, customer.getMaxdebt());
                             }});
+                       //ZAV CURDEBT 0,0001
+//                       new PreparedSentence(s,
+//                            "INSERT INTO CUSTOMERS(ID, SEARCHKEY, NAME, ADDRESS, ADDRESS2, POSTAL, CITY, REGION, COUNTRY, FIRSTNAME, LASTNAME, EMAIL, PHONE, PHONE2, NOTES, TAXID, MAXDEBT, VISIBLE, CURDEBT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + s.DB.TRUE() + ",-0.0001)",
+//                            SerializerWriteParams.INSTANCE
+//                            ).exec(new DataParams() { public void writeValues() throws BasicException {
+//                                setString(1, customer.getId());
+//                                setString(2, customer.getSearchkey());
+//                                setString(3, customer.getName());
+//                                setString(4, customer.getAddress());
+//                                setString(5, customer.getAddress2());
+//                                setString(6, customer.getPostal());
+//                                setString(7, customer.getCity());
+//                                setString(8, customer.getRegion());
+//                                setString(9, customer.getCountry());
+//                                setString(10, customer.getFirstname());
+//                                setString(11, customer.getLastname());
+//                                setString(12, customer.getEmail());
+//                                setString(13, customer.getPhone());
+//                                setString(14, customer.getPhone2());
+//                                setString(15, customer.getNotes());
+//                                setString(16, customer.getTaxid());
+//                                setDouble(17, customer.getMaxdebt());
+//                            }});
                 }
 
                 return null;
@@ -317,6 +342,13 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                   	, "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS FROM RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE ( T.TICKETTYPE = 0 AND T.STATUS = 0 ) OR ( T.TICKETTYPE = 1 AND T.STATUS > 0 AND T.DATERETURN IS NULL )"
                   	, null
                   	, new SerializerReadClass(TicketInfo.class)).list();
+    }
+
+    public List getTicketsByHostname(String hostname) throws BasicException {
+        return new PreparedSentence(s
+                 , "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS FROM CLOSEDCASH C, RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE C.MONEY=R.MONEY AND C.HOST LIKE ? AND ( T.TICKETTYPE = 0 AND T.STATUS = 0 ) OR ( T.TICKETTYPE = 1 AND T.STATUS > 0 AND T.DATERETURN IS NULL )"
+                 , SerializerWriteString.INSTANCE
+                , new SerializerReadClass(TicketInfo.class)).list(hostname);
     }
 
     public List getTicketsPayments() throws BasicException {

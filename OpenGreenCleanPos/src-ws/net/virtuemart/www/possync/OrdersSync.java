@@ -104,7 +104,7 @@ public class OrdersSync implements ProcessAction {
 
 
             // Obtenemos los tickets
-            List<TicketInfo> ticketlist = dlintegration.getTickets();
+            List<TicketInfo> ticketlist = dlintegration.getTicketsByHostname(TicketInfo.getHostname());
             
             if (ticketlist.size() == 0) {
                 return new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.zeroorders"));

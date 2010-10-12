@@ -487,7 +487,7 @@ public class JPanelCloseMoney extends JPanel implements JPanelView, BeanFactoryA
                         } catch (BasicException eb) {
 
                             // Si se produce un error lo muestro.
-                            JOptionPane.showMessageDialog(this, "Order Sync error");
+                            JOptionPane.showMessageDialog(this, "Order Sync Error : \r\n "+ eb.toString());
                             eb.printStackTrace();
                             return;
                         } finally {
@@ -495,7 +495,7 @@ public class JPanelCloseMoney extends JPanel implements JPanelView, BeanFactoryA
                             this.setCursor(Cursor.getDefaultCursor());
                         }
                     } catch (BeanFactoryException e) {
-                        JOptionPane.showMessageDialog(this, "Order Sync bean error");
+                        JOptionPane.showMessageDialog(this, "Bean Error");
                         e.printStackTrace();
                         return;
                     }
