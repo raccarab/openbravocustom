@@ -257,7 +257,7 @@ public class OrdersSync implements ProcessAction {
 
                 for (Integer rid : renduids) {
                    // List<Double> dd = dlintegration.getDebt(oid);
-                   System.out.println("*"+rid);
+                   //System.out.println("*"+rid);
                     externalsales.setRendu( String.valueOf(rid));
                   
                 }

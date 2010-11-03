@@ -360,7 +360,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 
         public List getTicketsReturned() throws BasicException {
         return new PreparedSentence(s
-                  	, "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL AND DATERENDU>=(SELECT DATESTART FROM CLOSEDCASH WHERE DATEEND IS NULL OR HOST=? )"
+                  	, "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL AND DATERENDU>=(SELECT DATESTART FROM CLOSEDCASH WHERE DATEEND IS NULL AND HOST LIKE ? )"
                        // , "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL"
                   	, SerializerWriteString.INSTANCE
                   	, SerializerReadInteger.INSTANCE).list(TicketInfo.getHostname());
