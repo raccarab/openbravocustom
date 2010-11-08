@@ -569,12 +569,14 @@ public class TicketInfo implements SerializableRead, Externalizable {
                  for (int j = 0; j < cpt; j++) {
 
                      String desc = " "+pieces+"/"+((int) totalPieces)+" P.";
+                     desc += ", "+oLine.getProductAttSetInstDesc();
                      TicketLineInfo newline = oLine.copyTicketLine();
                      newline.setProductAttSetInstDesc(desc);
 
                      newList.add(newline);
                      pieces++;
                  }
+
              }
          }
         return newList;

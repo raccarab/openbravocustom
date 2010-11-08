@@ -73,7 +73,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
      
     public void syncCustomersBefore() throws BasicException {
  // sync problems
- //       new StaticSentence(s, "UPDATE CUSTOMERS SET VISIBLE = " + s.DB.TRUE()).exec();
+        new StaticSentence(s, "UPDATE CUSTOMERS SET VISIBLE = " + s.DB.TRUE()).exec();
         new StaticSentence(s, "DELETE FROM CUSTOMERS WHERE ID NOT LIKE '0' AND ID NOT IN (SELECT CUSTOMER FROM TICKETS GROUP BY CUSTOMER)").exec();
  //ZAV
  //       new StaticSentence(s, "UPDATE CUSTOMERS SET CURDEBT=0.0 WHERE ID NOT LIKE '0' AND CURDEBT > 0.0").exec();
@@ -346,7 +346,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 
     public List getTicketsByHostname(String hostname) throws BasicException {
         return new PreparedSentence(s
-                 , "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS FROM CLOSEDCASH C, RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE C.MONEY=R.MONEY AND C.HOST LIKE ? AND ( T.TICKETTYPE = 0 AND T.STATUS = 0 ) OR ( T.TICKETTYPE = 1 AND T.STATUS > 0 AND T.DATERETURN IS NULL )"
+                 , "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS FROM CLOSEDCASH C, RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE C.MONEY=R.MONEY AND C.HOST LIKE ? AND ( ( T.TICKETTYPE = 0 AND T.STATUS = 0 ) OR ( T.TICKETTYPE = 1 AND T.STATUS > 0 AND T.DATERETURN IS NULL ) )"
                  , SerializerWriteString.INSTANCE
                 , new SerializerReadClass(TicketInfo.class)).list(hostname);
     }
@@ -358,12 +358,14 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                   	, SerializerReadInteger.INSTANCE).list();
     }
 
-        public List getTicketsReturned() throws BasicException {
+    public List getTicketsReturned() throws BasicException {
         return new PreparedSentence(s
-                  	, "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL AND DATERENDU>=(SELECT DATESTART FROM CLOSEDCASH WHERE DATEEND IS NULL AND HOST LIKE ? )"
-                       // , "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL"
-                  	, SerializerWriteString.INSTANCE
-                  	, SerializerReadInteger.INSTANCE).list(TicketInfo.getHostname());
+                  	//, "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL AND DATERENDU>=(SELECT DATESTART FROM CLOSEDCASH WHERE DATEEND IS NULL AND HOST LIKE ? )"
+                        //, SerializerWriteString.INSTANCE
+                  	//, SerializerReadInteger.INSTANCE).list(TicketInfo.getHostname());
+                        , "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL "
+                  	, null
+                        , SerializerReadInteger.INSTANCE).list();
     }
 
 /**

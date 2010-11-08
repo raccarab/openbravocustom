@@ -174,6 +174,7 @@ public class StartPOS {
                 }
 
 
+                //ZAV
                 if (TicketInfo.isWS()) {
                     try {
 

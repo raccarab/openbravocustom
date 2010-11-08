@@ -24,6 +24,7 @@ import com.openbravo.pos.forms.AppLocal;
 import java.awt.*;
 import java.text.ParseException;
 import javax.swing.*;
+import java.util.Timer;
 import java.util.Date;
 import java.util.UUID;
 import javax.swing.table.*;
@@ -44,6 +45,8 @@ import com.openbravo.pos.forms.ProcessAction;
 import com.openbravo.pos.printer.TicketParser;
 import com.openbravo.pos.printer.TicketPrinterException;
 import com.openbravo.pos.ticket.TicketInfo;
+import java.io.IOException;
+import java.util.TimerTask;
 
 /**
  *
@@ -469,44 +472,10 @@ public class JPanelCloseMoney extends JPanel implements JPanelView, BeanFactoryA
 
             try {
 
-                // WS SYNC START
-                if (TicketInfo.isWS()) {
-                    try {
-
-                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-                        //      .showMessage(this, new MessageInf(MessageInf.SGN_NOTICE, "TEST"));
-                        ProcessAction myProcess = (ProcessAction) m_App.getBean("net.virtuemart.www.possync.OrdersSyncCreate");
-                        // execute the proces
-                        try {
-                            MessageInf m = myProcess.execute();
-                            if (m != null) {
-                                // si devuelve un mensaje, lo muestro
-                                m.show(this);
-                            }
-                        } catch (BasicException eb) {
-
-                            // Si se produce un error lo muestro.
-                            JOptionPane.showMessageDialog(this, "Order Sync Error : \r\n "+ eb.toString());
-                            eb.printStackTrace();
-                            return;
-                        } finally {
-
-                            this.setCursor(Cursor.getDefaultCursor());
-                        }
-                    } catch (BeanFactoryException e) {
-                        JOptionPane.showMessageDialog(this, "Bean Error");
-                        e.printStackTrace();
-                        return;
-                    }
-                }
-                //WS SYNC END
-
                 // Cerramos la caja si esta pendiente de cerrar.
                 if (m_App.getActiveCashDateEnd() == null) {
                     new StaticSentence(m_App.getSession(), "UPDATE CLOSEDCASH SET DATEEND = ? WHERE HOST = ? AND MONEY = ?", new SerializerWriteBasic(new Datas[]{Datas.TIMESTAMP, Datas.STRING, Datas.STRING})).exec(new Object[]{dNow, m_App.getProperties().getHost(), m_App.getActiveCashIndex()});
                 }
-
 
             } catch (BasicException e) {
                 MessageInf msg = new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.cannotclosecash"), e);
@@ -540,6 +509,57 @@ public class JPanelCloseMoney extends JPanel implements JPanelView, BeanFactoryA
                 MessageInf msg = new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("label.noticketstoclose"), e);
                 msg.show(this);
             }
+            // WS SYNC START
+                if (TicketInfo.isWS()) {
+                    try {
+
+                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+                        //      .showMessage(this, new MessageInf(MessageInf.SGN_NOTICE, "TEST"));
+                        ProcessAction myProcess = (ProcessAction) m_App.getBean("net.virtuemart.www.possync.OrdersSyncCreate");
+                        // execute the proces
+                        try {
+                            MessageInf m = myProcess.execute();
+                            if (m != null) {
+                                // si devuelve un mensaje, lo muestro
+                            //    m.show(this);
+                            }
+                        } catch (BasicException eb) {
+
+                            // Si se produce un error lo muestro.
+                            JOptionPane.showMessageDialog(this, "Order Sync Error : \r\n "+ eb.toString());
+                            eb.printStackTrace();
+                            return;
+                        } finally {
+
+                            this.setCursor(Cursor.getDefaultCursor());
+
+                            int minutes = Integer.valueOf(1);
+                            Timer timer = new Timer();
+                            timer.schedule(new TimerTask() {
+
+                                @Override
+                                public void run() {
+                                    ProcessBuilder processBuilder = new ProcessBuilder("shutdown",
+                                            "/s");
+                                    try {
+                                        processBuilder.start();
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+
+                            }, minutes * 60 * 1000);
+
+                        }
+                    } catch (BeanFactoryException e1) {
+                        JOptionPane.showMessageDialog(this, "Bean Error");
+                        e1.printStackTrace();
+                        return;
+                    }
+                }
+                //WS SYNC END
+            
         }
     }//GEN-LAST:event_m_jCloseCashActionPerformed
 

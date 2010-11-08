@@ -232,12 +232,14 @@ public class OrdersSync implements ProcessAction {
 
             List<Integer> orderids = dlintegration.getTicketsPayments();
 
+            System.out.println(" >>>> "+ orderids.size());
+
             if (orderids.size() > 0) {
 
                 for (Integer oid : orderids) {
                    // List<Double> dd = dlintegration.getDebt(oid);
 
-                    double dd =  Math.round(dlintegration.getDebt(String.valueOf(oid))*100)/100;
+                   double dd =  Math.round(dlintegration.getDebt(String.valueOf(oid))*100)/100;
                    double dp = Math.round(dlintegration.getPaid(String.valueOf(oid))*100)/100;
 
                     if ((dd + dp) <= 0.0 ) {
@@ -250,20 +252,18 @@ public class OrdersSync implements ProcessAction {
             }
 
             //RETURNS
-
             List<Integer> renduids = dlintegration.getTicketsReturned();
 
             if (renduids.size() > 0) {
 
                 for (Integer rid : renduids) {
+
                    // List<Double> dd = dlintegration.getDebt(oid);
                    //System.out.println("*"+rid);
                     externalsales.setRendu( String.valueOf(rid));
                   
                 }
             }
-
-
        
         } catch (ServiceException e) {
             throw new BasicException(AppLocal.getIntString("message.serviceexception"), e);
