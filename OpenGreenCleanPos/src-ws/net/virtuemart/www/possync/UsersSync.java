@@ -259,7 +259,7 @@ public class UsersSync implements ProcessAction {
 	                copyCustomer.setPostal(zipcode);
 
 
-                        // SYNC ONLY EMAIL USER FOR OGONE
+                        // SYNC ONLY EMAIL USER FOR OGONE (ZAV)
 	                if (TicketInfo.isWS()
                             && TicketInfo.getPayID()==2
                             && remoteUser.getEmail().contains("@DONOTSENDME")) {

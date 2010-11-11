@@ -175,7 +175,7 @@ public class StartPOS {
 
 
                 //ZAV
-                if (TicketInfo.isWS()) {
+                if (TicketInfo.isWS() && TicketInfo.getPayID()!=2 ) {
                     try {
 
                          app.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));

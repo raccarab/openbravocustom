@@ -235,6 +235,7 @@ public class ProductsSync implements ProcessAction {
 	                 
 	            	 String[] pAtt = product.getCustom_attribute().split(";");
 	            	 boolean isScale=false;
+	            	 boolean isCom=false;
 	            	 String attID=null;
 	            	 String taxCatID="";
                          boolean ok = false;
@@ -242,6 +243,8 @@ public class ProductsSync implements ProcessAction {
 	            	 for (String att : pAtt) {
                                 AttributeSetInfo asi;
                                 if (att.equals("isScale")) {
+                                        isCom = true;
+                                } else if (att.equals("isCom")) {
                                         isScale = true;
                                 } else if (att.startsWith("Tax")) {
                                         taxCatID = taxCatsRev.get(att);
@@ -269,7 +272,7 @@ public class ProductsSync implements ProcessAction {
 	                 p.setReference(product.getDescription());
 	                 p.setCode(product.getProduct_sku());
 	                 p.setName(product.getName());
-	                 p.setCom(false);
+	                 p.setCom(isCom);
 	                 p.setScale(isScale);
 	                 p.setPriceBuy(1.0);
 	                 p.setAttributeSetID(attID);
@@ -321,9 +324,12 @@ public class ProductsSync implements ProcessAction {
 					attribute += ";"+attList.get(localProduct.getAttributeSetID());
 			
 				String remoteTaxid = remoteTaxes.get(localTaxes.get(localProduct.getTaxCategoryID()));
-	
+
 				if (localProduct.isScale()) {
 					attribute += ";isScale";
+				}
+				if (localProduct.isCom()) {
+					attribute += ";isCom";
 				}
 				
 				Produit produit = new Produit();

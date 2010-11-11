@@ -464,7 +464,15 @@ public class JPanelCloseMoney extends JPanel implements JPanelView, BeanFactoryA
     }// </editor-fold>//GEN-END:initComponents
 
     private void m_jCloseCashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jCloseCashActionPerformed
-        // TODO add your handling code here:
+
+        //PC SHUTDOWN TIMEOUT
+        int timeBeforeShuttingDown;
+        try {
+           timeBeforeShuttingDown = Integer.parseInt(m_App.getProperties().getProperty("ws.timeout"));
+        } catch (NumberFormatException nfe) {
+           timeBeforeShuttingDown = 0;
+        }
+        
         int res = JOptionPane.showConfirmDialog(this, AppLocal.getIntString("message.wannaclosecash"), AppLocal.getIntString("message.title"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (res == JOptionPane.YES_OPTION) {
 
@@ -534,23 +542,24 @@ public class JPanelCloseMoney extends JPanel implements JPanelView, BeanFactoryA
 
                             this.setCursor(Cursor.getDefaultCursor());
 
-                            int minutes = Integer.valueOf(1);
-                            Timer timer = new Timer();
-                            timer.schedule(new TimerTask() {
+                            if (timeBeforeShuttingDown>0) {
+                                int minutes = Integer.valueOf(timeBeforeShuttingDown);
+                                Timer timer = new Timer();
+                                timer.schedule(new TimerTask() {
 
-                                @Override
-                                public void run() {
-                                    ProcessBuilder processBuilder = new ProcessBuilder("shutdown",
-                                            "/s");
-                                    try {
-                                        processBuilder.start();
-                                    } catch (IOException e) {
-                                        throw new RuntimeException(e);
+                                    @Override
+                                    public void run() {
+                                        ProcessBuilder processBuilder = new ProcessBuilder("shutdown",
+                                                "/s");
+                                        try {
+                                            processBuilder.start();
+                                        } catch (IOException e) {
+                                            throw new RuntimeException(e);
+                                        }
                                     }
-                                }
 
-                            }, minutes * 60 * 1000);
-
+                                }, minutes * 60 * 1000);
+                            }
                         }
                     } catch (BeanFactoryException e1) {
                         JOptionPane.showMessageDialog(this, "Bean Error");
