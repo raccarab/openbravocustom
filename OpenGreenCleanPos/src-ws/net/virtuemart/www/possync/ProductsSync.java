@@ -239,18 +239,16 @@ public class ProductsSync implements ProcessAction {
 	            	 String attID=null;
 	            	 String taxCatID="";
                          boolean ok = false;
-                         boolean incatalog=true;
+                         boolean incatalog=false;
 	            	 for (String att : pAtt) {
                                 AttributeSetInfo asi;
                                 if (att.equals("isScale")) {
-                                        isCom = true;
-                                } else if (att.equals("isCom")) {
                                         isScale = true;
+                                } else if (att.equals("isCom")) {
+                                        isCom = true;
                                 } else if (att.startsWith("Tax")) {
                                         taxCatID = taxCatsRev.get(att);
                                         ok=true;
-                                } else if (att.equals("hide")) {
-                                    incatalog=false;
                                 } else if (attMap.get(att)!=null) {
 
                                          attID = attMap.get(att);
@@ -281,12 +279,17 @@ public class ProductsSync implements ProcessAction {
 	                 p.setTaxCategoryID(taxCatID);
 	                 p.setImage(ImageUtils.readImage(image));
 
-                         //System.out.println(p.getName()+p.getTaxCategoryID());
-
-	                 dlintegration.syncProduct(p,incatalog);
-	                 
+                         
 	                 prodNotToSync.add(p.getCode());
-	                 
+
+                         if (product.getProduct_publish().equals("Y")) {
+
+                             //System.out.println(p.getName()+" "+p.getTaxCategoryID()+" > '"+product.getProduct_publish()+"'");
+                             incatalog=true;
+                         } 
+
+                         dlintegration.syncProduct(p,incatalog);
+                         
 	                 
 	                 // Synchronization of stock          
 //	                 if (product instanceof ProductPlus) {
