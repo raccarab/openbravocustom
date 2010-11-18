@@ -54,6 +54,8 @@ import net.virtuemart.www.VM_Categories.Categorie;
 import net.virtuemart.www.VM_Categories.GetAllCategoriesInput;
 import net.virtuemart.www.VM_Categories.VM_CategoriesProxy;
 import net.virtuemart.www.VM_Order.CreateOrderInput;
+import net.virtuemart.www.VM_Order.Order;
+import net.virtuemart.www.VM_Order.OrderRequest;
 import net.virtuemart.www.VM_Order.ReturnOutput;
 import net.virtuemart.www.VM_Order.VM_OrderProxy;
 import net.virtuemart.www.VM_Product.GetAllProductsInput;
@@ -359,7 +361,7 @@ public class ExternalSalesHelper {
         String vendor_store_desc = "";
         String vendor_thumb_image = "";
         String vendor_accepted_currencies = "EUR";
-        String vendor_currency = "";
+        String vendor_currency = "EUR";
         String vendor_category_id = "1";
         String contact_phone_1 = "";
         String vendor_phone = "";
@@ -421,12 +423,21 @@ public class ExternalSalesHelper {
             ioe.printStackTrace();
             throw new RemoteException("getOrderID ");
         }
+    }
 
+    public boolean getOrderStatus (String oid) throws RemoteException {
+        OrderRequest para = new OrderRequest(wsLogin, oid, "2010-01-01 00:00:00", "2110-01-01 00:00:00");
+        Order ord = orderProxy.getOrder(para);
+
+        return ord.getOrder_status().equals("S");
         
     }
 
     public boolean setPaid(String orderID, Date date) throws RemoteException {
 
+        if (getOrderStatus(orderID))
+            return true;
+        
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateR = df.format(new Date());
         if (date!=null) {

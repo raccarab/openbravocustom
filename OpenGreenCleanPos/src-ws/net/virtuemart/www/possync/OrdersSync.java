@@ -84,20 +84,20 @@ public class OrdersSync implements ProcessAction {
                 }
             }
 
-            // SYNC PRODUCTS
-            System.gc();
-            System.runFinalization();
-            ProductsSync bean = new ProductsSync(dlsystem, dlintegration, dlsales, "0");
-            bean.execute();
-            System.gc();
-            System.runFinalization();
-
-
-            // SYNC USERS
-            UsersSync usc = new UsersSync(dlsystem, dlintegration, dlsales, "0");
-            usc.execute();
-            System.gc();
-            System.runFinalization();
+//            // SYNC PRODUCTS
+//            System.gc();
+//            System.runFinalization();
+//            ProductsSync bean = new ProductsSync(dlsystem, dlintegration, dlsales, "0");
+//            bean.execute();
+//            System.gc();
+//            System.runFinalization();
+//
+//
+//            // SYNC USERS
+//            UsersSync usc = new UsersSync(dlsystem, dlintegration, dlsales, "0");
+//            usc.execute();
+//            System.gc();
+//            System.runFinalization();
 
 
             dlintegration.syncOrdersBefore();

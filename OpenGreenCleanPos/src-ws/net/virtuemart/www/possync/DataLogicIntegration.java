@@ -365,12 +365,13 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 
     public List getTicketsReturned() throws BasicException {
         return new PreparedSentence(s
-                  	//, "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL AND DATERENDU>=(SELECT DATESTART FROM CLOSEDCASH WHERE DATEEND IS NULL AND HOST LIKE ? )"
-                        //, SerializerWriteString.INSTANCE
-                  	//, SerializerReadInteger.INSTANCE).list(TicketInfo.getHostname());
-                        , "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL "
-                  	, null
-                        , SerializerReadInteger.INSTANCE).list();
+                  	//, "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL AND TICKETTYPE = 0 AND DATERENDU>=(SELECT DATESTART FROM CLOSEDCASH WHERE DATEEND IS NULL AND HOST LIKE ? )"
+                        , "SELECT STATUS FROM TICKETS T LEFT JOIN RECEIPTS R ON T.ID = R.ID WHERE T.DATERENDU IS NOT NULL AND T.TICKETTYPE = 0 AND MONEY IN ( SELECT MONEY FROM closedcash WHERE HOST LIKE ? )"
+                        , SerializerWriteString.INSTANCE
+                  	, SerializerReadInteger.INSTANCE).list(TicketInfo.getHostname());
+                        //, "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL AND TICKETTYPE = 0"
+                  	//, null
+                        //, SerializerReadInteger.INSTANCE).list();
     }
 
 /**
