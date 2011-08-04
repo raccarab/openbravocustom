@@ -61,6 +61,7 @@ import com.openbravo.pos.ticket.TicketInfo;
 import com.openbravo.pos.ticket.TicketLineInfo;
 import com.openbravo.pos.util.JRPrinterAWT300;
 import com.openbravo.pos.util.ReportUtils;
+import com.sun.tools.internal.jxc.gen.config.Config;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
@@ -552,7 +553,11 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     
     private void incProduct(double dPor, ProductInfoExt prod) {
         // precondicion: prod != null
-        addTicketLine(prod, dPor, prod.getPriceSell());       
+
+        addTicketLine(prod, dPor, prod.getPriceSell());
+        if (Boolean.valueOf(m_App.getProperties().getProperty("label.popupattr")).booleanValue() &&  prod.getAttributeSetID()!=null) {
+            this.jEditAttributesActionPerformed(null);
+        }
     }
        
     protected void buttonTransition(ProductInfoExt prod) {

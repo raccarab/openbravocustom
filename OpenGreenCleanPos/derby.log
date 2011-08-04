@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-2010-10-11 13:52:02.409 GMT:
- Booting Derby version The Apache Software Foundation - Apache Derby - 10.6.1.0 - (938214): instance a816c00e-012b-9b8f-ec7a-00000463f5d0 
-on database directory /Users/Tii/greenpos-database   with class loader sun.misc.Launcher$AppClassLoader@5acac268
+2011-08-04 15:55:50.946 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.6.1.0 - (938214): instance a816c00e-0131-9582-01ac-000007716c20 
+on database directory /Users/Tii/greenpos-database   with class loader sun.misc.Launcher$AppClassLoader@535ff48b
 
 Database Class Loader started - derby.database.classpath=''

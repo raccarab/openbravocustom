@@ -55,5 +55,5 @@ public abstract class JTicketsBag extends JPanel {
         } else { // "simple"
             return new JTicketsBagSimple(app, panelticket);
         }
-    }   
+    }
 }

@@ -30,6 +30,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.LookAndFeel;
+import net.virtuemart.www.possync.SyncThread;
 import net.virtuemart.www.possync.WSInfo;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.api.SubstanceSkin;
@@ -173,34 +174,38 @@ public class StartPOS {
                     app = rootframe.getRootapp();
                 }
 
-
                 //ZAV
-                if (TicketInfo.isWS() && TicketInfo.getPayID()!=2 ) {
-                    try {
+                if (TicketInfo.isWS() ) {
 
-                         app.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-                         ProcessAction myProcess = (ProcessAction) app.getBean("net.virtuemart.www.possync.ProductsSyncCreate");
-                        // execute the proces
+                    if (Boolean.valueOf(config.getProperty("label.wsproductstart"))) {
                         try {
-                            MessageInf m = myProcess.execute();
-                            if (m != null) {
-                                // si devuelve un mensaje, lo muestro
-                                //m.show(app);
-                            }
-                        } catch (BasicException eb) {
+                            // app.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-                            // Si se produce un error lo muestro.
-                            JOptionPane.showMessageDialog(app, "Product Sync error");
-                            eb.printStackTrace();
-                        } finally {
-                            app.setCursor(Cursor.getDefaultCursor());
-                            
+                             ProcessAction myProcess = (ProcessAction) app.getBean("net.virtuemart.www.possync.ProductsSyncCreate");
+                              SyncThread p = new SyncThread(myProcess, app);
+                              p.setDaemon (true);
+                              p.start();
+                              
+                        } catch (BeanFactoryException e) {
+                            JOptionPane.showMessageDialog(app, "Product Sync bean error");
+                            e.printStackTrace();
+
                         }
-                    } catch (BeanFactoryException e) {
-                        JOptionPane.showMessageDialog(app, "Product Sync bean error");
-                        e.printStackTrace();
-                        
+                    }
+                    if (Boolean.valueOf(config.getProperty("label.wsuserstart"))) {
+                        try {
+                             //app.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+                             ProcessAction myProcess = (ProcessAction) app.getBean("net.virtuemart.www.possync.UsersSyncCreate");
+                             SyncThread p = new SyncThread(myProcess, app);
+                              p.setDaemon (true);
+                              p.start();
+
+                        } catch (BeanFactoryException e) {
+                            JOptionPane.showMessageDialog(app, "Users Sync bean error");
+                            e.printStackTrace();
+
+                        }
                     }
                 }
 

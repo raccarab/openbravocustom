@@ -281,7 +281,8 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
         jtxtMachineHostname.setText(config.getProperty("machine.hostname"));
         jScaleDivider.setText(config.getProperty("machine.scaledivider"));
         jchkTakeAway.setSelected(Boolean.valueOf(config.getProperty("label.takeaway")).booleanValue());
-
+        jchkPopupAttr.setSelected(Boolean.valueOf(config.getProperty("label.popupattr")).booleanValue());
+        
         String lafclass = config.getProperty("swing.defaultlaf");
         jcboLAF.setSelectedItem(null);
         for (int i = 0; i < jcboLAF.getItemCount(); i++) {
@@ -393,6 +394,8 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
         config.setProperty("machine.hostname", jtxtMachineHostname.getText());
         config.setProperty("machine.scaledivider", jScaleDivider.getText());
         config.setProperty("label.takeaway", Boolean.toString(jchkTakeAway.isSelected()));
+        config.setProperty("label.popupattr", Boolean.toString(jchkPopupAttr.isSelected()));
+
         config.setProperty("machine.printerenabled", comboValue(jcboPrintEnabled.getSelectedItem()));
 
         LAFInfo laf = (LAFInfo) jcboLAF.getSelectedItem();
@@ -621,6 +624,7 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
         jchkTakeAway = new javax.swing.JCheckBox();
         jcboPrintEnabled = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
+        jchkPopupAttr = new javax.swing.JCheckBox();
 
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(AppLocal.getIntString("Label.CashMachine"))); // NOI18N
 
@@ -1022,6 +1026,14 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
 
         jLabel8.setText(AppLocal.getIntString("Label.PrintSelected")); // NOI18N
 
+        jchkPopupAttr.setText(AppLocal.getIntString("label.popupattr")); // NOI18N
+        jchkPopupAttr.setActionCommand("PopUpAttr");
+        jchkPopupAttr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jchkPopupAttrActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
@@ -1092,11 +1104,15 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
                                 .addComponent(jcboMachineScanner, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(m_jScannerParams, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
-                    .addComponent(jchkTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcboPrintEnabled, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel13Layout.createSequentialGroup()
+                            .addComponent(jchkTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jchkPopupAttr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel13Layout.createSequentialGroup()
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jcboPrintEnabled, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
@@ -1165,7 +1181,9 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
                             .addComponent(cboPrinters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(m_jScannerParams, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jchkTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jchkTakeAway, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jchkPopupAttr, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -1269,6 +1287,10 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
         // TODO add your handling code here:
     }//GEN-LAST:event_jcboPrintEnabledActionPerformed
 
+    private void jchkPopupAttrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jchkPopupAttrActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jchkPopupAttrActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cboPrinters;
     private javax.swing.JLabel jLabel1;
@@ -1328,6 +1350,7 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
     private javax.swing.JComboBox jcboSerialScale;
     private javax.swing.JComboBox jcboSerialScanner;
     private javax.swing.JComboBox jcboTicketsBag;
+    private javax.swing.JCheckBox jchkPopupAttr;
     private javax.swing.JCheckBox jchkTakeAway;
     private javax.swing.JLabel jlblConnDisplay;
     private javax.swing.JLabel jlblConnPrinter;

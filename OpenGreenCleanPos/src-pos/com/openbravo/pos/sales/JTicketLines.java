@@ -163,9 +163,13 @@ public class JTicketLines extends javax.swing.JPanel {
         Rectangle oRect = m_jTicketTable.getCellRect(i, 0, true);
         m_jTicketTable.scrollRectToVisible(oRect);
     }
-    
+
     public int getSelectedIndex() {
         return m_jTicketTable.getSelectionModel().getMinSelectionIndex(); // solo sera uno, luego no importa...
+    }
+
+    public int getLastIndex() {
+        return m_jTicketTable.getSelectionModel().getMaxSelectionIndex();
     }
     
     public void selectionDown() {

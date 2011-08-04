@@ -167,19 +167,24 @@ public class OrdersSync implements ProcessAction {
 
                     for (int j = 0; j < ticket.getLines().size(); j++) {
                         TicketLineInfo line = ticket.getLines().get(j);
-                        String pDesc = line.getProductName();
+                       // String pDesc = line.getProductName();
+                        String pDesc = "";
                         products[j] = new Product();
 
                         if (line.getProductID().equals("0")) {
+                            pDesc = line.getProductName();
                             products[j].setProduct_id(productsMap.get(line.getProductID()));
                             products[j].setQuantity(String.valueOf(line.getMultiply() * line.getPriceTax() * 100));
-                            pDesc += " " + String.valueOf(line.getMultiply()) + " > " + line.getPriceTax();
+                            //pDesc += " " + String.valueOf(line.getMultiply()) + " > " + line.getPriceTax();
                         } else {
                             products[j].setProduct_id(productsMap.get(line.getProductID()));
                             products[j].setQuantity(String.valueOf(line.getMultiply()));
                         }
                         if (line.getProductAttSetInstDesc() != null && !line.getProductAttSetInstDesc().equals("")) {
-                            pDesc += " <br/> " + line.getProductAttSetInstDesc();
+                           if (pDesc.equalsIgnoreCase("")) {
+                                pDesc += ", ";
+                           }
+                           pDesc += line.getProductAttSetInstDesc();
                         }
                         products[j].setDescription(pDesc);
                         System.out.println(products[j].getProduct_id()+" "+products[j].getDescription());

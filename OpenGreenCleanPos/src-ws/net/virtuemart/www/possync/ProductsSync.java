@@ -252,6 +252,7 @@ public class ProductsSync implements ProcessAction {
                                 } else if (attMap.get(att)!=null) {
 
                                          attID = attMap.get(att);
+                                         //System.out.println("* "+attID);
                                 }
                          }
                          if (ok==false)
@@ -284,7 +285,7 @@ public class ProductsSync implements ProcessAction {
 
                          if (product.getProduct_publish().equals("Y")) {
 
-                             //System.out.println(p.getName()+" "+p.getTaxCategoryID()+" > '"+product.getProduct_publish()+"'");
+                            // System.out.println(p.getName()+" "+p.getTaxCategoryID()+" > '"+product.getProduct_publish()+"'");
                              incatalog=true;
                          } 
 

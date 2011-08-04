@@ -39,6 +39,7 @@ import com.openbravo.pos.util.Hashcypher;
 //import com.l2fprod.common.swing.JTaskPane;
 //import com.l2fprod.common.swing.JTaskPaneGroup;
 import com.openbravo.pos.util.StringUtils;
+import net.virtuemart.www.possync.SyncThread;
 import org.jdesktop.swingx.JXTaskPane;
 import org.jdesktop.swingx.JXTaskPaneContainer;
 
@@ -395,45 +396,22 @@ public class JPrincipalApp extends javax.swing.JPanel implements AppUserView {
         System.gc();
         System.runFinalization();
 
-        m_appview.waitCursorBegin();
-
         if (m_appuser.hasPermission(sTaskClass)) {
             try {
-this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
- 
-
-             //   WaitDialog wd = new WaitDialog();
-             //   wd.setVisible(true);
-                
                 ProcessAction myProcess = (ProcessAction) m_appview.getBean(sTaskClass);
 
-                try {
-                    MessageInf m = myProcess.execute();
-                    if (m != null) {
-                        // si devuelve un mensaje, lo muestro
-              //          wd.setVisible(false);
+                 SyncThread p = new SyncThread(myProcess,m_appview);
+                 p.setDaemon (true);
+                 p.start();
 
-                        JMessageDialog.showMessage(JPrincipalApp.this, m);
-                    }
-
-
-
-                } catch (BasicException eb) {
-                    // Si se produce un error lo muestro.
-                    JMessageDialog.showMessage(JPrincipalApp.this, new MessageInf(eb));            
-                } finally {
-  this.setCursor(Cursor.getDefaultCursor());
-
-                }
             } catch (BeanFactoryException e) {
                 JMessageDialog.showMessage(JPrincipalApp.this, new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("Label.LoadError"), e));            
             }                    
         } else  {
             // No hay permisos para ejecutar la accion...
             JMessageDialog.showMessage(JPrincipalApp.this, new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("message.notpermissions")));            
-        }
-        m_appview.waitCursorEnd();    
+        }   
     }
     
     /** This method is called from within the constructor to

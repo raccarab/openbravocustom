@@ -193,7 +193,6 @@ public class JTicketsBagShared extends JTicketsBag {
     }// </editor-fold>//GEN-END:initComponents
 
     private void m_jListTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jListTicketsActionPerformed
-
         
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
