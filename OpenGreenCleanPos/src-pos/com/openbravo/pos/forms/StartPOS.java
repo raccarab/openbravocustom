@@ -182,7 +182,7 @@ public class StartPOS {
                             // app.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
                              ProcessAction myProcess = (ProcessAction) app.getBean("net.virtuemart.www.possync.ProductsSyncCreate");
-                              SyncThread p = new SyncThread(myProcess, app);
+                              SyncThread p = new SyncThread(myProcess);
                               p.setDaemon (true);
                               p.start();
                               
@@ -197,7 +197,8 @@ public class StartPOS {
                              //app.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
                              ProcessAction myProcess = (ProcessAction) app.getBean("net.virtuemart.www.possync.UsersSyncCreate");
-                             SyncThread p = new SyncThread(myProcess, app);
+                             SyncThread p = new SyncThread(myProcess);
+
                               p.setDaemon (true);
                               p.start();
 

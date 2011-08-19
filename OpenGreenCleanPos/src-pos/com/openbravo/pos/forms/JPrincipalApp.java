@@ -401,7 +401,7 @@ public class JPrincipalApp extends javax.swing.JPanel implements AppUserView {
 
                 ProcessAction myProcess = (ProcessAction) m_appview.getBean(sTaskClass);
 
-                 SyncThread p = new SyncThread(myProcess,m_appview);
+                 SyncThread p = new SyncThread(myProcess);
                  p.setDaemon (true);
                  p.start();
 

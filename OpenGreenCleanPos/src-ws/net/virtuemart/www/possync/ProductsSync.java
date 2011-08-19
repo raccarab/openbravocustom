@@ -79,7 +79,7 @@ public class ProductsSync implements ProcessAction {
                 try {
                     externalsales.checkPosID();
                 } catch (RemoteException re1) {
-                    return new MessageInf(MessageInf.SGN_WARNING, "Error while checking pos id ", re.toString());
+                    return new MessageInf(MessageInf.SGN_WARNING, "ERROR POS ID", re.toString());
                 }
             }
 
