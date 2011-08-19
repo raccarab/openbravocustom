@@ -50,7 +50,6 @@ public class SyncThread extends Thread {
                 this.pa = pa;
 
                 this.frame = new JFrame("GreenPOS WS");
-                this.frame.setSize(400, 400);
                 
                 this.frame.setLayout(new SpringLayout());
                 this.frame.setResizable(false);
@@ -59,7 +58,7 @@ public class SyncThread extends Thread {
                 //Add the ubiquitous "Hello World" label.
                 this.label = new JTextArea("Sync in progress ...");
 
-                this.label.setPreferredSize(new Dimension(180,70));
+                this.label.setPreferredSize(new Dimension(300,40));
                 this.label.setOpaque(true);
                 this.label.setBackground(Color.green);
                 this.label.setAlignmentX(JLabel.CENTER);
@@ -70,7 +69,7 @@ public class SyncThread extends Thread {
                 Icon ic = new ImageIcon(this.ii);
                 this.imageLabel = new JLabel(ic);
                 this.frame.getContentPane().add(this.imageLabel);
-                this.frame.setPreferredSize(new Dimension(180, 270));
+                this.frame.setPreferredSize(new Dimension(300, 170));
 
                 //Display the window.
                 this.frame.pack();
