@@ -47,6 +47,7 @@ import com.openbravo.pos.printer.TicketPrinterException;
 import com.openbravo.pos.ticket.TicketInfo;
 import java.io.IOException;
 import java.util.TimerTask;
+import net.virtuemart.www.possync.SyncThread;
 
 /**
  *
@@ -519,53 +520,39 @@ public class JPanelCloseMoney extends JPanel implements JPanelView, BeanFactoryA
             }
             // WS SYNC START
                 if (TicketInfo.isWS()) {
-                    try {
-
-                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-                        //      .showMessage(this, new MessageInf(MessageInf.SGN_NOTICE, "TEST"));
-                        ProcessAction myProcess = (ProcessAction) m_App.getBean("net.virtuemart.www.possync.OrdersSyncCreate");
-                        // execute the proces
                         try {
-                            MessageInf m = myProcess.execute();
-                            if (m != null) {
-                                // si devuelve un mensaje, lo muestro
-                            //    m.show(this);
-                            }
-                        } catch (BasicException eb) {
+                            // app.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-                            // Si se produce un error lo muestro.
-                            JOptionPane.showMessageDialog(this, "Order Sync Error : \r\n "+ eb.toString());
-                            eb.printStackTrace();
-                            return;
-                        } finally {
+                             ProcessAction myProcess = (ProcessAction) m_App.getBean("net.virtuemart.www.possync.OrdersSyncCreate");
+                              SyncThread p = new SyncThread(myProcess,"Orders");
+                              p.setDaemon (true);
+                              p.start();
+                              
+                        } catch (BeanFactoryException e) {
+                            //JOptionPane.showMessageDialog(m_App, "Order Sync bean error");
+                            e.printStackTrace();
 
-                            this.setCursor(Cursor.getDefaultCursor());
-
-                            if (timeBeforeShuttingDown>0) {
-                                int minutes = Integer.valueOf(timeBeforeShuttingDown);
-                                Timer timer = new Timer();
-                                timer.schedule(new TimerTask() {
-
-                                    @Override
-                                    public void run() {
-                                        ProcessBuilder processBuilder = new ProcessBuilder("shutdown",
-                                                "/s");
-                                        try {
-                                            processBuilder.start();
-                                        } catch (IOException e) {
-                                            throw new RuntimeException(e);
-                                        }
-                                    }
-
-                                }, minutes * 60 * 1000);
-                            }
                         }
-                    } catch (BeanFactoryException e1) {
-                        JOptionPane.showMessageDialog(this, "Bean Error");
-                        e1.printStackTrace();
-                        return;
-                    }
+
+
+                        if (timeBeforeShuttingDown>0) {
+                            int minutes = Integer.valueOf(timeBeforeShuttingDown);
+                            Timer timer = new Timer();
+                            timer.schedule(new TimerTask() {
+
+                                @Override
+                                public void run() {
+                                    ProcessBuilder processBuilder = new ProcessBuilder("shutdown",
+                                            "/s");
+                                    try {
+                                        processBuilder.start();
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+
+                            }, minutes * 60 * 1000);
+                        }
                 }
                 //WS SYNC END
             
