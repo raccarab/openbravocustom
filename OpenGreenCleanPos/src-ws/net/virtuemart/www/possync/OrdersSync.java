@@ -36,6 +36,7 @@ import net.virtuemart.www.VM_Users.User;
 
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.MessageInf;
+import com.openbravo.pos.forms.AppConfig;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.DataLogicSales;
 import com.openbravo.pos.forms.DataLogicSystem;
@@ -85,42 +86,45 @@ public class OrdersSync implements ProcessAction {
             }
 
             // SYNC PRODUCTS
-            System.gc();
-            System.runFinalization();
-            ProductsSync bean = new ProductsSync(dlsystem, dlintegration, dlsales, "0");
-            bean.execute();
-            System.gc();
-            System.runFinalization();
-
+            if (WSInfo.isWsproductpre()) {
+                System.gc();
+                System.runFinalization();
+                ProductsSync bean = new ProductsSync(dlsystem, dlintegration, dlsales, "0");
+                bean.execute();
+                System.gc();
+                System.runFinalization();
+            }
 
             // SYNC USERS
-            UsersSync usc = new UsersSync(dlsystem, dlintegration, dlsales, "0");
-            usc.execute();
-            System.gc();
-            System.runFinalization();
+            if (WSInfo.isWsuserpre()) {
+                System.gc();
+                System.runFinalization();
+                UsersSync usc = new UsersSync(dlsystem, dlintegration, dlsales, "0");
+                usc.execute();
+                System.gc();
+                System.runFinalization();
+            }
 
-
+            
             dlintegration.syncOrdersBefore();
 
 
+            
             // Obtenemos los tickets
             List<TicketInfo> ticketlist = dlintegration.getTicketsByHostname(TicketInfo.getHostname());
-            
+
             if (ticketlist.size() == 0) {
-                return new MessageInf(MessageInf.SGN_NOTICE, AppLocal.getIntString("message.zeroorders"));
+                return new MessageInf(MessageInf.SGN_SUCCESS, AppLocal.getIntString("message.syncordersok"), AppLocal.getIntString("message.zeroorders"));
             } else {
                 for (TicketInfo ticket : ticketlist) {
                     ticket.setLines(dlintegration.getTicketLines(ticket.getId()));
                     ticket.setPayments(dlintegration.getTicketPayments(ticket.getId()));
                 }
-                
                 HashMap<String, String> usersMap = new HashMap<String, String>();
 
                 List<UserInfo> localUsers;
                 User[] remoteUsers = externalsales.getUsers();
-
                 localUsers = dlintegration.getUsers();
-
                 for (UserInfo localUser : localUsers) {
                     for (User user : remoteUsers) {
                         if (user.getLogin().equals(localUser.getName())) {
@@ -129,7 +133,7 @@ public class OrdersSync implements ProcessAction {
                         }
                     }
                 }
-
+System.out.println("**");
                 HashMap<String, String> productsMap = new HashMap<String, String>();
 
                 Produit[] remoteProducts = externalsales.getProductsCatalog();

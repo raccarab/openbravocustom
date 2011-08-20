@@ -42,7 +42,7 @@ import org.jvnet.substance.api.SubstanceSkin;
 public class StartPOS {
 
     private static Logger logger = Logger.getLogger("com.openbravo.pos.forms.StartPOS");
-
+    
     /** Creates a new instance of StartPOS */
     private StartPOS() {
     }
@@ -79,12 +79,16 @@ public class StartPOS {
                 String wsurl = config.getProperty("ws.URL");
                 String wsposid = config.getProperty("ws.posid");
                 String wspayid = config.getProperty("ws.payid");
+                boolean wsproductpre = Boolean.valueOf( config.getProperty("label.wsproductpre"));
+                boolean wsuserpre = Boolean.valueOf( config.getProperty("label.wsuserpre"));
 
                 WSInfo.setWspassword(wspassword);
                 WSInfo.setWspayid(wspayid);
                 WSInfo.setWsposid(wsposid);
                 WSInfo.setWsurl(wsurl);
                 WSInfo.setWsuser(wsuser);
+                WSInfo.setWsproductpre(wsproductpre);
+                WSInfo.setWsuserpre(wsuserpre);
 
                 if (wsposid != null
                         && (wsuser == null || wsuser.equals("")
@@ -182,7 +186,7 @@ public class StartPOS {
                             // app.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
                              ProcessAction myProcess = (ProcessAction) app.getBean("net.virtuemart.www.possync.ProductsSyncCreate");
-                              SyncThread p = new SyncThread(myProcess);
+                              SyncThread p = new SyncThread(myProcess,"Products");
                               p.setDaemon (true);
                               p.start();
                               
@@ -197,7 +201,7 @@ public class StartPOS {
                              //app.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
                              ProcessAction myProcess = (ProcessAction) app.getBean("net.virtuemart.www.possync.UsersSyncCreate");
-                             SyncThread p = new SyncThread(myProcess);
+                             SyncThread p = new SyncThread(myProcess,"Users");
 
                               p.setDaemon (true);
                               p.start();

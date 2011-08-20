@@ -16,6 +16,26 @@ public class WSInfo {
     public static String wsurl;
     public static String wsposid;
     public static String wspayid;
+    private static boolean wsuserpre;
+    private static boolean wsproductpre;
+
+    public static boolean isWsproductpre() {
+        return wsproductpre;
+    }
+
+    public static void setWsproductpre(boolean wsproductpre) {
+        WSInfo.wsproductpre = wsproductpre;
+    }
+
+    public static boolean isWsuserpre() {
+        return wsuserpre;
+    }
+
+    public static void setWsuserpre(boolean wsuserpre) {
+        WSInfo.wsuserpre = wsuserpre;
+    }
+
+    
 
     public static String getWspassword() {
         return wspassword;
