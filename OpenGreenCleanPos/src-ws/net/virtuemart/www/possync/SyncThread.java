@@ -65,8 +65,6 @@ public class SyncThread extends Thread {
                 this.frame.repaint();
                 this.frame.setResizable(false);
 
-                this.frame.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-
                 //Add the ubiquitous "Hello World" label.
                 this.label = new JTextArea("");
 
@@ -103,6 +101,7 @@ public class SyncThread extends Thread {
                 }
             }
 
+            this.frame.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
             this.ii = ImageLoader.getImage(SyncThread.class, "sync.gif");
             this.imageLabel.setIcon(new ImageIcon(this.ii));
             

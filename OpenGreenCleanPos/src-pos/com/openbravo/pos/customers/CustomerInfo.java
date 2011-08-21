@@ -84,7 +84,7 @@ public class CustomerInfo implements SerializableRead, Serializable {
     
     public String getName() {
         // This is to avoir problems with WS
-        if (TicketInfo.isWS()) {
+        if (name!=null && TicketInfo.isWS()) {
           return name.toUpperCase();
         }
         return name;
