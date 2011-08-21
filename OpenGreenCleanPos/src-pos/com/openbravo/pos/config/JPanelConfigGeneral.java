@@ -130,6 +130,7 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
 
         jcboMachineScreenmode.addItem("window");
         jcboMachineScreenmode.addItem("fullscreen");
+        jcboMachineScreenmode.addItem("maximized");
 
         jcboTicketsBag.addItem("simple");
         jcboTicketsBag.addItem("standard");
@@ -633,6 +634,12 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
         jLabel2.setText(AppLocal.getIntString("label.looknfeel")); // NOI18N
 
         jLabel6.setText(AppLocal.getIntString("Label.MachineScreen")); // NOI18N
+
+        jcboMachineScreenmode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcboMachineScreenmodeActionPerformed(evt);
+            }
+        });
 
         jLabel16.setText(AppLocal.getIntString("Label.Ticketsbag")); // NOI18N
 
@@ -1290,6 +1297,10 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
     private void jchkPopupAttrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jchkPopupAttrActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jchkPopupAttrActionPerformed
+
+    private void jcboMachineScreenmodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcboMachineScreenmodeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcboMachineScreenmodeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cboPrinters;

@@ -28,6 +28,7 @@ import com.openbravo.pos.ticket.TicketInfo;
 import java.awt.Cursor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.LookAndFeel;
 import net.virtuemart.www.possync.SyncThread;
@@ -173,6 +174,9 @@ public class StartPOS {
                 } else {
                     JRootFrame rootframe = new JRootFrame();
                     rootframe.initFrame(config);
+                    
+                    if ("maximized".equals(screenmode))
+                        rootframe.setExtendedState(rootframe.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
                     rootframe.setTitle("   >>> " + hostname + " <<< " + rootframe.getTitle());
                     app = rootframe.getRootapp();

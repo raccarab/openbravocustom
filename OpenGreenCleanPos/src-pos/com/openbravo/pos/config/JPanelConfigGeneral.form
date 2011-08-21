@@ -274,6 +274,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jcboMachineScreenmode">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcboMachineScreenmodeActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel16">
           <Properties>
