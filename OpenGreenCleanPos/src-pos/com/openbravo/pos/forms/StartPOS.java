@@ -178,7 +178,7 @@ public class StartPOS {
                     if ("maximized".equals(screenmode))
                         rootframe.setExtendedState(rootframe.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
-                    rootframe.setTitle("   >>> " + hostname + " <<< " + rootframe.getTitle());
+                    rootframe.setTitle(" * " + hostname + " *   " + rootframe.getTitle());
                     app = rootframe.getRootapp();
                 }
 
