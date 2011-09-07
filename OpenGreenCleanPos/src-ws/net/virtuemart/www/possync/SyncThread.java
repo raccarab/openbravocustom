@@ -82,17 +82,15 @@ public class SyncThread extends Thread {
 
          }
 
-         public void run() {
-
+         public void run() {         
 
             this.label.setBackground(Color.orange);
             this.label.setText("Waiting : Already in progress\n\r"+this.name);
+            this.frame.setLocation(Count.getCount()*10,Count.getCount()*40);
             this.frame.repaint();
-         
-                
+
+
             while (Count.isLocked()) {
-               this.frame.setLocation(this.frame.getLocation().x,190);
-               this.frame.repaint();
 
                 try {
                     this.sleep(3000);
@@ -100,7 +98,7 @@ public class SyncThread extends Thread {
                     Logger.getLogger(SyncThread.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
+            Count.incCount();
             this.frame.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
             this.ii = ImageLoader.getImage(SyncThread.class, "sync.gif");
             this.imageLabel.setIcon(new ImageIcon(this.ii));
@@ -109,7 +107,6 @@ public class SyncThread extends Thread {
             this.label.setText("Sync in progress ...\n\r"+this.name);
             this.frame.repaint();
 
-            Count.incCount();
             try {
 
                 MessageInf m = pa.execute();
@@ -187,4 +184,8 @@ final class Count implements Serializable {
          public static void decCount() {
             count--;
          }
+
+    static int getCount() {
+        return count;
+    }
 }
