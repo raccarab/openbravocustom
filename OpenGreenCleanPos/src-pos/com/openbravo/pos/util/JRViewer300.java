@@ -1146,18 +1146,18 @@ public class JRViewer300 extends javax.swing.JPanel implements JRHyperlinkListen
 						try
 						{
 							
-							btnPrint.setEnabled(false);
-							JRViewer300.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+//							btnPrint.setEnabled(false);
+							//JRViewer300.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 							JasperPrintManager.printReport(jasperPrint, true);
 						}
 						catch (Exception ex)
 						{
 							ex.printStackTrace();
-							JOptionPane.showMessageDialog(JRViewer300.this, getBundleString("error.printing"));
+//							JOptionPane.showMessageDialog(JRViewer300.this, getBundleString("error.printing"));
 						}
 						finally
 						{
-							JRViewer300.this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+							//JRViewer300.this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 							btnPrint.setEnabled(true);
 						}
 					}
