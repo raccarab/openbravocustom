@@ -101,6 +101,7 @@ public class ProductsSync implements ProcessAction {
         } catch (ServiceException e) {            
             throw new BasicException(AppLocal.getIntString("message.serviceexception"), e);
         } catch (RemoteException e){
+            //e.printStackTrace();
             throw new BasicException(AppLocal.getIntString("message.remoteexception"), e);
         } catch (MalformedURLException e){
             throw new BasicException(AppLocal.getIntString("message.malformedurlexception"), e);

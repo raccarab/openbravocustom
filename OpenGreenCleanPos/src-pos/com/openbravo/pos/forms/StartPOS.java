@@ -18,14 +18,11 @@
 //    along with GreenPOS.  If not, see <http://www.gnu.org/licenses/>.
 package com.openbravo.pos.forms;
 
-import com.openbravo.basic.BasicException;
-import com.openbravo.data.gui.MessageInf;
 import java.util.Locale;
 import javax.swing.UIManager;
 import com.openbravo.format.Formats;
 import com.openbravo.pos.instance.InstanceQuery;
 import com.openbravo.pos.ticket.TicketInfo;
-import java.awt.Cursor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -80,8 +77,9 @@ public class StartPOS {
                 String wsurl = config.getProperty("ws.URL");
                 String wsposid = config.getProperty("ws.posid");
                 String wspayid = config.getProperty("ws.payid");
-                boolean wsproductpre = Boolean.valueOf( config.getProperty("label.wsproductpre"));
-                boolean wsuserpre = Boolean.valueOf( config.getProperty("label.wsuserpre"));
+                boolean wsproductpre = Boolean.valueOf( config.getProperty("ws.productpre"));
+                boolean wsuserpre = Boolean.valueOf( config.getProperty("ws.userpre"));
+                boolean wsdeletert = Boolean.valueOf( config.getProperty("ws.deletert"));
 
                 WSInfo.setWspassword(wspassword);
                 WSInfo.setWspayid(wspayid);
@@ -90,6 +88,7 @@ public class StartPOS {
                 WSInfo.setWsuser(wsuser);
                 WSInfo.setWsproductpre(wsproductpre);
                 WSInfo.setWsuserpre(wsuserpre);
+                WSInfo.setDeleteReturneTicket(wsdeletert);
 
                 if (wsposid != null
                         && (wsuser == null || wsuser.equals("")
@@ -145,7 +144,7 @@ public class StartPOS {
                         }
 
                     } catch (NumberFormatException e) {
-                        e.printStackTrace();
+                        logger.log(Level.WARNING, "WS not working", e);
                     }
                 }
                 if (config.getProperty("ws.payid") != null) {
@@ -158,7 +157,7 @@ public class StartPOS {
                         }
 
                     } catch (NumberFormatException e) {
-                        e.printStackTrace();
+                        logger.log(Level.WARNING, "PayID error", e);
                     }
                 }
 
@@ -185,7 +184,7 @@ public class StartPOS {
                 //ZAV
                 if (TicketInfo.isWS() ) {
 
-                    if (Boolean.valueOf(config.getProperty("label.wsproductstart"))) {
+                    if (Boolean.valueOf(config.getProperty("ws.productstart"))) {
                         try {
                             // app.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
@@ -196,11 +195,9 @@ public class StartPOS {
                               
                         } catch (BeanFactoryException e) {
                             JOptionPane.showMessageDialog(app, "Product Sync bean error");
-                            e.printStackTrace();
-
                         }
                     }
-                    if (Boolean.valueOf(config.getProperty("label.wsuserstart"))) {
+                    if (Boolean.valueOf(config.getProperty("ws.userstart"))) {
                         try {
                              //app.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
@@ -212,8 +209,6 @@ public class StartPOS {
 
                         } catch (BeanFactoryException e) {
                             JOptionPane.showMessageDialog(app, "Users Sync bean error");
-                            e.printStackTrace();
-
                         }
                     }
                 }

@@ -36,7 +36,6 @@ import net.virtuemart.www.VM_Users.User;
 
 import com.openbravo.basic.BasicException;
 import com.openbravo.data.gui.MessageInf;
-import com.openbravo.pos.forms.AppConfig;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.forms.DataLogicSales;
 import com.openbravo.pos.forms.DataLogicSystem;
@@ -71,8 +70,7 @@ public class OrdersSync implements ProcessAction {
             }
 
             if (!externalsales.checkConnection()) 
-                return new MessageInf(MessageInf.SGN_WARNING, "System offline ? ", "Error connecting to website ");
-                
+                return new MessageInf(MessageInf.SGN_WARNING, "System offline ? ", "Error connecting to website ");               
 
             try {
                 // CHECK POS ID
@@ -105,16 +103,13 @@ public class OrdersSync implements ProcessAction {
                 System.runFinalization();
             }
 
-            
             dlintegration.syncOrdersBefore();
-
-
             
             // Obtenemos los tickets
             List<TicketInfo> ticketlist = dlintegration.getTicketsByHostname(TicketInfo.getHostname());
 
             if (ticketlist.size() == 0) {
-                return new MessageInf(MessageInf.SGN_SUCCESS, AppLocal.getIntString("message.syncordersok"), AppLocal.getIntString("message.zeroorders"));
+               // return new MessageInf(MessageInf.SGN_SUCCESS, AppLocal.getIntString("message.syncordersok"), AppLocal.getIntString("message.zeroorders"));
             } else {
                 for (TicketInfo ticket : ticketlist) {
                     ticket.setLines(dlintegration.getTicketLines(ticket.getId()));
@@ -133,7 +128,6 @@ public class OrdersSync implements ProcessAction {
                         }
                     }
                 }
-System.out.println("**");
                 HashMap<String, String> productsMap = new HashMap<String, String>();
 
                 Produit[] remoteProducts = externalsales.getProductsCatalog();
@@ -191,7 +185,7 @@ System.out.println("**");
                            pDesc += line.getProductAttSetInstDesc();
                         }
                         products[j].setDescription(pDesc);
-                        System.out.println(products[j].getProduct_id()+" "+products[j].getDescription());
+                        //System.out.println(products[j].getProduct_id()+" "+products[j].getDescription());
                     }
 
                     orders.setCoupon_code("0");
@@ -224,7 +218,6 @@ System.out.println("**");
                         if (totalpaid >= Math.round((ticket.getTotal() * 100))) {
 //PAYMENT
                              externalsales.setPaid(orderID,ticket.getDate() );
-
                         }
                         if (ticket.getTicketType() == TicketInfo.RECEIPT_REFUND) {
                             dlintegration.execUpdateTicketsRefundPayment(String.valueOf(ticket.getTicketType()),String.valueOf(ticket.getStatus()));
@@ -232,7 +225,6 @@ System.out.println("**");
                         }
                         else if (ticket.getTicketType() == TicketInfo.RECEIPT_NORMAL)
                             dlintegration.execUpdateTicket(String.valueOf(ticket.getTicketId()),orderID);
-
                     }
                 }
             }
@@ -241,7 +233,7 @@ System.out.println("**");
 
             List<Integer> orderids = dlintegration.getTicketsPayments();
 
-            System.out.println(" >>>> "+ orderids.size());
+            //System.out.println(" >>>> "+ orderids.size());
 
             if (orderids.size() > 0) {
 
@@ -256,7 +248,6 @@ System.out.println("**");
                         dlintegration.execUpdateTicketsRefundPayment(String.valueOf(TicketInfo.RECEIPT_PAYMENT), String.valueOf(oid));
                         dlintegration.execUpdateTicketsRefundPayment(String.valueOf(TicketInfo.RECEIPT_REFUND), String.valueOf(oid));
                     }
-
                 }
             }
 
@@ -266,11 +257,7 @@ System.out.println("**");
             if (renduids.size() > 0) {
 
                 for (Integer rid : renduids) {
-
-                   // List<Double> dd = dlintegration.getDebt(oid);
-                   //System.out.println("*"+rid);
-                    externalsales.setRendu( String.valueOf(rid));
-                  
+                   externalsales.setRendu( String.valueOf(rid));
                 }
             }
        
@@ -281,6 +268,35 @@ System.out.println("**");
         } catch (MalformedURLException e) {
             throw new BasicException(AppLocal.getIntString("message.malformedurlexception"), e);
         }
+
+// DELETE OLD RETURNED TICKETS
+        if (WSInfo.isWsdeletert()) {
+            try {
+
+                List<TicketInfo> ticketlist = dlintegration.getTicketsToDelete();
+           
+                System.out.println("> "+ticketlist.size());
+
+                if (ticketlist.size() > 0) {
+
+                    for (TicketInfo ticket : ticketlist) {
+
+                        System.out.println("deleting "+ticket.getId()+" "+ticket.getDateRendu()+" "+ticket.getStatus());
+
+                        ticket.setLines(dlintegration.getTicketLines(ticket.getId()));
+                        ticket.setPayments(dlintegration.getTicketPayments(ticket.getId()));
+
+                        dlsales.deleteTicket(ticket, "0");
+
+                    }
+                }
+            } catch (BasicException be) {
+                  System.out.println("Error deleting !");
+                  be.printStackTrace();
+            }
+
+        }
+
         return new MessageInf(MessageInf.SGN_SUCCESS, AppLocal.getIntString("message.syncordersok"), AppLocal.getIntString("message.syncordersinfo", cpt));
     }
 

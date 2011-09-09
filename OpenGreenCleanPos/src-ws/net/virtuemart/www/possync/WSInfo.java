@@ -18,6 +18,15 @@ public class WSInfo {
     public static String wspayid;
     private static boolean wsuserpre;
     private static boolean wsproductpre;
+    private static boolean wsdeletert;
+
+    public static boolean isWsdeletert() {
+        return wsdeletert;
+    }
+
+    public static void setDeleteReturneTicket(boolean wsdeletert) {
+        WSInfo.wsdeletert=wsdeletert;
+    }
 
     public static boolean isWsproductpre() {
         return wsproductpre;
@@ -76,5 +85,4 @@ public class WSInfo {
     public static void setWsuser(String wsuser) {
         WSInfo.wsuser = wsuser;
     }
-
 }
