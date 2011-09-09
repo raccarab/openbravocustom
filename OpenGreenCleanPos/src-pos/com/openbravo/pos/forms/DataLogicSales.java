@@ -730,7 +730,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
         };
     }
 
-    public final SentenceExec getPaymentMovementInsert() {
+   public final SentenceExec getPaymentMovementInsert() {
         return new SentenceExecTransaction(s) {
             public int execInTransaction(Object params) throws BasicException {
                 new PreparedSentence(s
