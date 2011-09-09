@@ -146,6 +146,7 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
         jcboMachinePrinter.addItem("surepos");
         jcboMachinePrinter.addItem("plain");
         jcboMachinePrinter.addItem("javapos");
+        jcboMachinePrinter.addItem("bash");
         jcboMachinePrinter.addItem("Not defined");
 
         jcboConnPrinter.addItem("serial");
@@ -171,6 +172,7 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
         jcboMachinePrinter2.addItem("surepos");
         jcboMachinePrinter2.addItem("plain");
         jcboMachinePrinter2.addItem("javapos");
+        jcboMachinePrinter2.addItem("bash");
         jcboMachinePrinter2.addItem("Not defined");
 
         jcboConnPrinter2.addItem("serial");
@@ -196,6 +198,7 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
         jcboMachinePrinter3.addItem("surepos");
         jcboMachinePrinter3.addItem("plain");
         jcboMachinePrinter3.addItem("javapos");
+        jcboMachinePrinter3.addItem("bash");
         jcboMachinePrinter3.addItem("Not defined");
 
         jcboConnPrinter3.addItem("serial");

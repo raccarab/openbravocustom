@@ -28,7 +28,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="49" max="32767" attributes="0"/>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,6 +50,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jchkWSDeleteRT" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jlabelUrl" min="-2" pref="207" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -92,16 +93,16 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="jchkWSProductsStart" max="32767" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jchkWSUsersStart" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jchkWSUsersPre" alignment="0" pref="537" max="32767" attributes="0"/>
-                              <Component id="jchkWSProductsPre" alignment="1" pref="537" max="32767" attributes="0"/>
+                              <Component id="jchkWSUsersPre" alignment="0" pref="526" max="32767" attributes="0"/>
+                              <Component id="jchkWSProductsPre" alignment="1" pref="526" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -141,12 +142,14 @@
                       <Component id="jchkWSProductsStart" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="jchkWSProductsPre" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="5" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jchkWSUsersStart" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jchkWSUsersPre" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jchkWSDeleteRT" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelTimeout" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jtxtTimeOut" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -219,9 +222,6 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jchkWSProductsStart">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pos_messages.properties" key="label.popupattr" replaceFormat="AppLocal.getIntString(&quot;{key}&quot;)"/>
-            </Property>
             <Property name="label" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="pos_messages.properties" key="label.wsproductstart" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
@@ -232,9 +232,6 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jchkWSUsersPre">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pos_messages.properties" key="label.popupattr" replaceFormat="AppLocal.getIntString(&quot;{key}&quot;)"/>
-            </Property>
             <Property name="actionCommand" type="java.lang.String" value="PopUpAttr"/>
             <Property name="label" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="pos_messages.properties" key="label.wsuserpre" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
@@ -246,9 +243,6 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jchkWSProductsPre">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pos_messages.properties" key="label.popupattr" replaceFormat="AppLocal.getIntString(&quot;{key}&quot;)"/>
-            </Property>
             <Property name="actionCommand" type="java.lang.String" value="PopUpAttr"/>
             <Property name="label" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="pos_messages.properties" key="label.wsproductpre" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
@@ -260,14 +254,25 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jchkWSUsersStart">
           <Properties>
-            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="pos_messages.properties" key="label.popupattr" replaceFormat="AppLocal.getIntString(&quot;{key}&quot;)"/>
-            </Property>
             <Property name="actionCommand" type="java.lang.String" value="PopUpAttr"/>
             <Property name="label" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
               <ResourceString bundle="pos_messages.properties" key="label.wsuserstart" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jchkWSUsersStartActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="jchkWSDeleteRT">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Delete returned tickets"/>
+            <Property name="actionCommand" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="pos_messages.properties" key="DeleteRT" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jchkWSDeleteRTActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -429,8 +429,11 @@ public class ExternalSalesHelper {
         OrderRequest para = new OrderRequest(wsLogin, oid, "2010-01-01 00:00:00", "2110-01-01 00:00:00");
         Order ord = orderProxy.getOrder(para);
 
-        return ord.getOrder_status().equals("S");
-        
+        try {
+            return ord.getOrder_status().equals("S");
+        } catch (java.lang.NullPointerException npe) {
+            return true;
+        }
     }
 
     public boolean setPaid(String orderID, Date date) throws RemoteException {

@@ -58,10 +58,11 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
         jtxtUrl.setText(config.getProperty("ws.URL"));
         jtxtId.setText(config.getProperty("ws.posid"));
         jtxtTimeOut.setText(config.getProperty("ws.timeout"));
-        jchkWSUsersStart.setSelected(Boolean.valueOf(config.getProperty("label.wsuserstart")).booleanValue());
-        jchkWSProductsPre.setSelected(Boolean.valueOf(config.getProperty("label.wsproductpre")).booleanValue());
-        jchkWSUsersPre.setSelected(Boolean.valueOf(config.getProperty("label.wsuserpre")).booleanValue());
-        jchkWSProductsStart.setSelected(Boolean.valueOf(config.getProperty("label.wsproductstart")).booleanValue());
+        jchkWSUsersStart.setSelected(Boolean.valueOf(config.getProperty("ws.userstart")).booleanValue());
+        jchkWSProductsPre.setSelected(Boolean.valueOf(config.getProperty("ws.productpre")).booleanValue());
+        jchkWSUsersPre.setSelected(Boolean.valueOf(config.getProperty("ws.userpre")).booleanValue());
+        jchkWSProductsStart.setSelected(Boolean.valueOf(config.getProperty("ws.productstart")).booleanValue());
+        jchkWSDeleteRT.setSelected(Boolean.valueOf(config.getProperty("ws.deletert")).booleanValue());
         
         String sERPUser = config.getProperty("ws.user");
         String sERPPassword = config.getProperty("ws.password");
@@ -83,11 +84,12 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
         config.setProperty("ws.URL", jtxtUrl.getText());
         config.setProperty("ws.posid", jtxtId.getText());
         config.setProperty("ws.timeout", jtxtTimeOut.getText());
-        config.setProperty("label.wsuserstart", Boolean.toString(jchkWSUsersStart.isSelected()));
-        config.setProperty("label.wsproductpre", Boolean.toString(jchkWSProductsPre.isSelected()));
-        config.setProperty("label.wsuserpre", Boolean.toString(jchkWSUsersPre.isSelected()));
-        config.setProperty("label.wsproductstart", Boolean.toString(jchkWSProductsStart.isSelected()));
-        
+        config.setProperty("ws.userstart", Boolean.toString(jchkWSUsersStart.isSelected()));
+        config.setProperty("ws.productpre", Boolean.toString(jchkWSProductsPre.isSelected()));
+        config.setProperty("ws.userpre", Boolean.toString(jchkWSUsersPre.isSelected()));
+        config.setProperty("ws.productstart", Boolean.toString(jchkWSProductsStart.isSelected()));
+        config.setProperty("ws.deletert", Boolean.toString(jchkWSDeleteRT.isSelected()));
+
         config.setProperty("ws.user", jtxtName.getText());
         AltEncrypter cypher = new AltEncrypter("cypherkey" + jtxtName.getText());             
         config.setProperty("ws.password", "crypt:" + cypher.encrypt(new String(jtxtPassword.getPassword())));
@@ -126,6 +128,7 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
         jchkWSUsersPre = new javax.swing.JCheckBox();
         jchkWSProductsPre = new javax.swing.JCheckBox();
         jchkWSUsersStart = new javax.swing.JCheckBox();
+        jchkWSDeleteRT = new javax.swing.JCheckBox();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(AppLocal.getIntString("label.wsconfig")));
 
@@ -149,7 +152,6 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
         java.util.ResourceBundle bundle1 = java.util.ResourceBundle.getBundle("pos_messages"); // NOI18N
         jLabelTimeout.setText(bundle1.getString("label.wstimeout")); // NOI18N
 
-        jchkWSProductsStart.setText(AppLocal.getIntString("label.popupattr")); // NOI18N
         jchkWSProductsStart.setLabel(bundle1.getString("label.wsproductstart")); // NOI18N
         jchkWSProductsStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,7 +159,6 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
             }
         });
 
-        jchkWSUsersPre.setText(AppLocal.getIntString("label.popupattr")); // NOI18N
         jchkWSUsersPre.setActionCommand("PopUpAttr");
         jchkWSUsersPre.setLabel(bundle1.getString("label.wsuserpre")); // NOI18N
         jchkWSUsersPre.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +167,6 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
             }
         });
 
-        jchkWSProductsPre.setText(AppLocal.getIntString("label.popupattr")); // NOI18N
         jchkWSProductsPre.setActionCommand("PopUpAttr");
         jchkWSProductsPre.setLabel(bundle1.getString("label.wsproductpre")); // NOI18N
         jchkWSProductsPre.addActionListener(new java.awt.event.ActionListener() {
@@ -175,9 +175,21 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
             }
         });
 
-        jchkWSUsersStart.setText(AppLocal.getIntString("label.popupattr")); // NOI18N
         jchkWSUsersStart.setActionCommand("PopUpAttr");
         jchkWSUsersStart.setLabel(bundle1.getString("label.wsuserstart")); // NOI18N
+        jchkWSUsersStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jchkWSUsersStartActionPerformed(evt);
+            }
+        });
+
+        jchkWSDeleteRT.setText("Delete returned tickets");
+        jchkWSDeleteRT.setActionCommand(bundle1.getString("DeleteRT")); // NOI18N
+        jchkWSDeleteRT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jchkWSDeleteRTActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -186,6 +198,7 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jchkWSDeleteRT)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jlabelUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -218,13 +231,13 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jchkWSProductsStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                .addGap(18, 18, 18))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jchkWSUsersStart)
-                                .addGap(20, 20, 20)))
+                                .addGap(38, 38, 38)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jchkWSUsersPre, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
-                            .addComponent(jchkWSProductsPre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE))))
+                            .addComponent(jchkWSUsersPre, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                            .addComponent(jchkWSProductsPre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -253,11 +266,13 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jchkWSProductsStart, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jchkWSProductsPre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jchkWSUsersStart)
                     .addComponent(jchkWSUsersPre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jchkWSDeleteRT)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTimeout)
                     .addComponent(jtxtTimeOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -280,7 +295,7 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
@@ -301,6 +316,14 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
     private void jchkWSProductsPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jchkWSProductsPreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jchkWSProductsPreActionPerformed
+
+    private void jchkWSDeleteRTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jchkWSDeleteRTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jchkWSDeleteRTActionPerformed
+
+    private void jchkWSUsersStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jchkWSUsersStartActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jchkWSUsersStartActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -310,6 +333,7 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
     private javax.swing.JLabel jLabelProperties;
     private javax.swing.JLabel jLabelTimeout;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JCheckBox jchkWSDeleteRT;
     private javax.swing.JCheckBox jchkWSProductsPre;
     private javax.swing.JCheckBox jchkWSProductsStart;
     private javax.swing.JCheckBox jchkWSUsersPre;
