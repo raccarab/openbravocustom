@@ -54,9 +54,9 @@ public class SyncThread extends Thread {
          public SyncThread(ProcessAction pa, String name) {
                 this.pa = pa;
                 this.name=name;
-                
+
                 this.frame = new JFrame("GreenPOS WS");
-                
+
                 this.frame.setLayout(new SpringLayout());
                 this.ii = ImageLoader.getImage(SyncThread.class, "wait.gif");
                 Icon ic = new ImageIcon(this.ii);
@@ -82,7 +82,7 @@ public class SyncThread extends Thread {
 
          }
 
-         public void run() {         
+         public void run() {
 
             this.label.setBackground(Color.orange);
             this.label.setText("Waiting : Already in progress\n\r"+this.name);
@@ -102,7 +102,7 @@ public class SyncThread extends Thread {
             this.frame.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
             this.ii = ImageLoader.getImage(SyncThread.class, "sync.gif");
             this.imageLabel.setIcon(new ImageIcon(this.ii));
-            
+
             this.label.setBackground(Color.yellow);
             this.label.setText("Sync in progress ...\n\r"+this.name);
             this.frame.repaint();
@@ -110,7 +110,7 @@ public class SyncThread extends Thread {
             try {
 
                 MessageInf m = pa.execute();
-                
+
                 this.ii = ImageLoader.getImage(SyncThread.class, "end.gif");
                 this.imageLabel.setIcon(new ImageIcon(this.ii));
 
