@@ -213,27 +213,27 @@ public class OrdersSync implements ProcessAction {
                     if (!orderID.equals("")) {
                         cpt++;
 
+                        // Set status as orderID from the website (correlation)
                         externalsales.updateStatus(orderID,ticket.getDate(), ticket.getDateReturn());
 
+
                         if (totalpaid >= Math.round((ticket.getTotal() * 100))) {
-//PAYMENT
+                            //Payment made set as paid on website
                              externalsales.setPaid(orderID,ticket.getDate() );
                         }
                         if (ticket.getTicketType() == TicketInfo.RECEIPT_REFUND) {
+                            //The ticket is a refund, Add return date locally and update website status
                             dlintegration.execUpdateTicketsRefundPayment(String.valueOf(ticket.getTicketType()),String.valueOf(ticket.getStatus()));
                             externalsales.setRendu(orderID);
                         }
                         else if (ticket.getTicketType() == TicketInfo.RECEIPT_NORMAL)
+                            // Normal ticket > Update status to website orderId
                             dlintegration.execUpdateTicket(String.valueOf(ticket.getTicketId()),orderID);
                     }
                 }
             }
-
-              //PAYMENTS
-
+            //PAYMENTS
             List<Integer> orderids = dlintegration.getTicketsPayments();
-
-            //System.out.println(" >>>> "+ orderids.size());
 
             if (orderids.size() > 0) {
 
@@ -244,7 +244,9 @@ public class OrdersSync implements ProcessAction {
                    double dp = Math.round(dlintegration.getPaid(String.valueOf(oid))*100)/100;
 
                     if ((dd + dp) <= 0.0 ) {
+                        //for each ticket of paid type set paid on website
                         externalsales.setPaid( String.valueOf(oid), null);
+                        // then update the date return to know it was updated on the website
                         dlintegration.execUpdateTicketsRefundPayment(String.valueOf(TicketInfo.RECEIPT_PAYMENT), String.valueOf(oid));
                         dlintegration.execUpdateTicketsRefundPayment(String.valueOf(TicketInfo.RECEIPT_REFUND), String.valueOf(oid));
                     }
@@ -252,12 +254,21 @@ public class OrdersSync implements ProcessAction {
             }
 
             //RETURNS
-            List<Integer> renduids = dlintegration.getTicketsReturned();
+            List<TicketInfo> ticketlistr = dlintegration.getTicketsReturned();
 
-            if (renduids.size() > 0) {
+            if (ticketlistr.size() > 0) {
 
-                for (Integer rid : renduids) {
-                   externalsales.setRendu( String.valueOf(rid));
+                for (TicketInfo ticket : ticketlistr) {
+                   //each returned tickets are updated as returned on the website
+                   if (ticket.getTicketType()==0 && externalsales.setRendu( String.valueOf(ticket.getStatus())) ) {
+                         if (WSInfo.isWsdeletert()) {
+                              dlsales.deleteTicket(ticket, "0");
+                         }
+                   } else {
+                       if (WSInfo.isWsdeletert()) {
+                              dlsales.deleteTicket(ticket, "0");
+                         }
+                   }
                 }
             }
        
@@ -270,32 +281,32 @@ public class OrdersSync implements ProcessAction {
         }
 
 // DELETE OLD RETURNED TICKETS
-        if (WSInfo.isWsdeletert()) {
-            try {
-
-                List<TicketInfo> ticketlist = dlintegration.getTicketsToDelete();
-           
-                System.out.println("> "+ticketlist.size());
-
-                if (ticketlist.size() > 0) {
-
-                    for (TicketInfo ticket : ticketlist) {
-
-                        System.out.println("deleting "+ticket.getId()+" "+ticket.getDateRendu()+" "+ticket.getStatus());
-
-                        ticket.setLines(dlintegration.getTicketLines(ticket.getId()));
-                        ticket.setPayments(dlintegration.getTicketPayments(ticket.getId()));
-
-                        dlsales.deleteTicket(ticket, "0");
-
-                    }
-                }
-            } catch (BasicException be) {
-                  System.out.println("Error deleting !");
-                  be.printStackTrace();
-            }
-
-        }
+//        if (WSInfo.isWsdeletert()) {
+//            try {
+//
+//                List<TicketInfo> ticketlist = dlintegration.getTicketsToDelete();
+//
+//                System.out.println("> "+ticketlist.size());
+//
+//                if (ticketlist.size() > 0) {
+//
+//                    for (TicketInfo ticket : ticketlist) {
+//
+//                        System.out.println("deleting "+ticket.getId()+" "+ticket.getDateRendu()+" "+ticket.getStatus());
+//
+//                        ticket.setLines(dlintegration.getTicketLines(ticket.getId()));
+//                        ticket.setPayments(dlintegration.getTicketPayments(ticket.getId()));
+//
+//                        dlsales.deleteTicket(ticket, "0");
+//
+//                    }
+//                }
+//            } catch (BasicException be) {
+//                  System.out.println("Error deleting !");
+//                  be.printStackTrace();
+//            }
+//
+//        }
 
         return new MessageInf(MessageInf.SGN_SUCCESS, AppLocal.getIntString("message.syncordersok"), AppLocal.getIntString("message.syncordersinfo", cpt));
     }

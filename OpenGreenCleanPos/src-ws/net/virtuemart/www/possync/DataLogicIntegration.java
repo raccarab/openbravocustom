@@ -366,17 +366,22 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
     public List getTicketsReturned() throws BasicException {
         return new PreparedSentence(s
                   	//, "SELECT STATUS FROM TICKETS WHERE DATERENDU IS NOT NULL AND TICKETTYPE = 0 AND DATERENDU>=(SELECT DATESTART FROM CLOSEDCASH WHERE DATEEND IS NULL AND HOST LIKE ? )"
-                        , "SELECT STATUS FROM TICKETS T LEFT JOIN RECEIPTS R ON T.ID = R.ID WHERE T.DATERENDU IS NOT NULL AND T.TICKETTYPE = 0 AND T.STATUS = 0 AND MONEY IN ( SELECT MONEY FROM closedcash WHERE HOST LIKE ? )"
-                        , SerializerWriteString.INSTANCE
-                  	, SerializerReadInteger.INSTANCE).list(TicketInfo.getHostname());
-    }
-
-    public List getTicketsToDelete() throws BasicException {
-        return new PreparedSentence(s
-                        , "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS FROM CLOSEDCASH C, RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID WHERE C.MONEY=R.MONEY AND C.HOST LIKE ? AND T.DATERENDU IS NOT NULL AND T.TICKETTYPE = 0 AND T.STATUS > 0 "
+                        , "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS "
+                        + "FROM CLOSEDCASH C, RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID "
+                        + "WHERE C.MONEY=R.MONEY AND C.HOST LIKE ? AND ( T.DATERENDU IS NOT NULL AND T.TICKETTYPE = 0 AND T.STATUS > 0 ) "
+                        + "OR ( T.DATERETURN IS NOT NULL AND T.TICKETTYPE > 0 AND T.STATUS > 0 )"
                         , SerializerWriteString.INSTANCE
                   	, new SerializerReadClass(TicketInfo.class)).list(TicketInfo.getHostname());
     }
+//
+//    public List getTicketsToDelete() throws BasicException {
+//        return new PreparedSentence(s
+//                        , "SELECT T.ID, T.TICKETTYPE, T.TICKETID, R.DATENEW, R.MONEY, R.ATTRIBUTES, P.ID, P.NAME, T.CUSTOMER, T.DATERETURN, T.DATERENDU, T.STATUS "
+//                        + "FROM CLOSEDCASH C, RECEIPTS R JOIN TICKETS T ON R.ID = T.ID LEFT OUTER JOIN PEOPLE P ON T.PERSON = P.ID "
+//                        + "WHERE C.MONEY=R.MONEY AND C.HOST LIKE ? AND T.DATERENDU IS NOT NULL AND T.TICKETTYPE = 0 AND T.STATUS > 0 "
+//                        , SerializerWriteString.INSTANCE
+//                  	, new SerializerReadClass(TicketInfo.class)).list(TicketInfo.getHostname());
+//    }
 
 
 /**
