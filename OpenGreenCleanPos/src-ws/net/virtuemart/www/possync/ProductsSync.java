@@ -232,7 +232,7 @@ public class ProductsSync implements ProcessAction {
 //							
 //					 }
 
-//	                 System.out.println(product.getName()+" "+product.getProduct_categories()+" "+catListRev.get(remCat));
+	                 System.out.println(product.getName()+" "+product.getProduct_categories()+" "+catListRev.get(remCat));
 	                 
 	            	 String[] pAtt = product.getCustom_attribute().split(";");
 	            	 boolean isScale=false;
@@ -286,7 +286,7 @@ public class ProductsSync implements ProcessAction {
 
                          if (product.getProduct_publish().equals("Y")) {
 
-                            // System.out.println(p.getName()+" "+p.getTaxCategoryID()+" > '"+product.getProduct_publish()+"'");
+                             System.out.println(p.getName()+" "+p.getTaxCategoryID()+" > '"+product.getProduct_publish()+"'");
                              incatalog=true;
                          } 
 
@@ -389,7 +389,7 @@ public class ProductsSync implements ProcessAction {
 				} catch (RemoteException e) {
 //					externalsales.updateProduct(produit);
 				}
-//				System.out.println(produit.getCustom_attribute());
+				System.out.println(produit.getCustom_attribute());
 				
 			}
 			
