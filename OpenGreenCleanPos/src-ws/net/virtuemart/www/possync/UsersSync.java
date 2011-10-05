@@ -182,7 +182,7 @@ public class UsersSync implements ProcessAction {
 //System.out.println (remoteUser.getLogin()+" : "+remoteUser.getShopper_group_id());
 //                        perms = remoteUser.getPerms();
 //                        if (!perms.equals("shopper")){
-//                            System.out.println (remoteUser.getLogin()+" : "+remoteUser.getPerms());
+                            System.out.println (remoteUser.getLogin()+" : "+remoteUser.getPerms());
 //
 //
 //                            continue;
@@ -274,6 +274,7 @@ public class UsersSync implements ProcessAction {
 	            }
 	        }
 
+
         } while (remoteUsers.length > 0 );
 
         List<CustomerSync> localList = dlintegration.getCustomers();
@@ -282,7 +283,7 @@ public class UsersSync implements ProcessAction {
         
         for (CustomerSync localCustomer : localList) {
 
-//                System.out.println("* "+localCustomer.getName());
+                System.out.println("* "+localCustomer.getName());
 
                 Date now = new Date();
         	if (notToSync.contains(localCustomer.getTaxid())) {

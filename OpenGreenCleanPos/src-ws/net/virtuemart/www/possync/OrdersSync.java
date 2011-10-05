@@ -69,8 +69,9 @@ public class OrdersSync implements ProcessAction {
                 externalsales = new ExternalSalesHelper(dlsystem);
             }
 
-            if (!externalsales.checkConnection()) 
-                return new MessageInf(MessageInf.SGN_WARNING, "System offline ? ", "Error connecting to website ");               
+            if (!externalsales.checkConnection()) {
+                return new MessageInf(MessageInf.SGN_WARNING, "System offline ? ", "Error connecting to website ");
+            }
 
             try {
                 // CHECK POS ID
@@ -104,12 +105,12 @@ public class OrdersSync implements ProcessAction {
             }
 
             dlintegration.syncOrdersBefore();
-            
+
             // Obtenemos los tickets
             List<TicketInfo> ticketlist = dlintegration.getTicketsByHostname(TicketInfo.getHostname());
 
             if (ticketlist.size() == 0) {
-               // return new MessageInf(MessageInf.SGN_SUCCESS, AppLocal.getIntString("message.syncordersok"), AppLocal.getIntString("message.zeroorders"));
+                // return new MessageInf(MessageInf.SGN_SUCCESS, AppLocal.getIntString("message.syncordersok"), AppLocal.getIntString("message.zeroorders"));
             } else {
                 for (TicketInfo ticket : ticketlist) {
                     ticket.setLines(dlintegration.getTicketLines(ticket.getId()));
@@ -165,24 +166,33 @@ public class OrdersSync implements ProcessAction {
 
                     for (int j = 0; j < ticket.getLines().size(); j++) {
                         TicketLineInfo line = ticket.getLines().get(j);
-                       // String pDesc = line.getProductName();
+                        // String pDesc = line.getProductName();
                         String pDesc = "";
                         products[j] = new Product();
 
-                        if (line.getProductID().equals("0")) {
+                        System.out.println("> " + line.getProductName());
+
+                        try {
+                            if (line.getProductID().equals("0")) {
+                                pDesc = line.getProductName();
+                                products[j].setProduct_id(productsMap.get(line.getProductID()));
+                                products[j].setQuantity(String.valueOf(line.getMultiply() * line.getPriceTax() * 100));
+                                //pDesc += " " + String.valueOf(line.getMultiply()) + " > " + line.getPriceTax();
+                            } else {
+                                products[j].setProduct_id(productsMap.get(line.getProductID()));
+                                products[j].setQuantity(String.valueOf(line.getMultiply()));
+                            }
+                        } catch (NullPointerException npe) {
                             pDesc = line.getProductName();
-                            products[j].setProduct_id(productsMap.get(line.getProductID()));
+                            products[j].setProduct_id(productsMap.get("0"));
                             products[j].setQuantity(String.valueOf(line.getMultiply() * line.getPriceTax() * 100));
-                            //pDesc += " " + String.valueOf(line.getMultiply()) + " > " + line.getPriceTax();
-                        } else {
-                            products[j].setProduct_id(productsMap.get(line.getProductID()));
-                            products[j].setQuantity(String.valueOf(line.getMultiply()));
+
                         }
                         if (line.getProductAttSetInstDesc() != null && !line.getProductAttSetInstDesc().equals("")) {
-                           if (pDesc.equalsIgnoreCase("")) {
+                            if (pDesc.equalsIgnoreCase("")) {
                                 pDesc += ", ";
-                           }
-                           pDesc += line.getProductAttSetInstDesc();
+                            }
+                            pDesc += line.getProductAttSetInstDesc();
                         }
                         products[j].setDescription(pDesc);
                         //System.out.println(products[j].getProduct_id()+" "+products[j].getDescription());
@@ -202,9 +212,9 @@ public class OrdersSync implements ProcessAction {
                         }
                     }
 
-                    totalpaid = (Math.round(totalpaid * 100.0))/1.0;
-                    String note = ("TicketID="+ticket.printId() + ",TotalPaid=" + (totalpaid/100) + ",Vendeur=" + ticket.printUser());
- //                           + ".Date." + ticket.printDate() + ".DateRetour." + ticket.printDateReturn() + ".DateRendu." + ticket.printDateRendu());
+                    totalpaid = (Math.round(totalpaid * 100.0)) / 1.0;
+                    String note = ("TicketID=" + ticket.printId() + ",TotalPaid=" + (totalpaid / 100) + ",Vendeur=" + ticket.printUser());
+                    //                           + ".Date." + ticket.printDate() + ".DateRetour." + ticket.printDateReturn() + ".DateRendu." + ticket.printDateRendu());
 
                     orders.setCustomer_note(note);
 
@@ -214,21 +224,21 @@ public class OrdersSync implements ProcessAction {
                         cpt++;
 
                         // Set status as orderID from the website (correlation)
-                        externalsales.updateStatus(orderID,ticket.getDate(), ticket.getDateReturn());
+                        externalsales.updateStatus(orderID, ticket.getDate(), ticket.getDateReturn());
 
 
                         if (totalpaid >= Math.round((ticket.getTotal() * 100))) {
                             //Payment made set as paid on website
-                             externalsales.setPaid(orderID,ticket.getDate() );
+                            externalsales.setPaid(orderID, ticket.getDate());
                         }
                         if (ticket.getTicketType() == TicketInfo.RECEIPT_REFUND) {
                             //The ticket is a refund, Add return date locally and update website status
-                            dlintegration.execUpdateTicketsRefundPayment(String.valueOf(ticket.getTicketType()),String.valueOf(ticket.getStatus()));
+                            dlintegration.execUpdateTicketsRefundPayment(String.valueOf(ticket.getTicketType()), String.valueOf(ticket.getStatus()));
                             externalsales.setRendu(orderID);
+                        } else if (ticket.getTicketType() == TicketInfo.RECEIPT_NORMAL) // Normal ticket > Update status to website orderId
+                        {
+                            dlintegration.execUpdateTicket(String.valueOf(ticket.getTicketId()), orderID);
                         }
-                        else if (ticket.getTicketType() == TicketInfo.RECEIPT_NORMAL)
-                            // Normal ticket > Update status to website orderId
-                            dlintegration.execUpdateTicket(String.valueOf(ticket.getTicketId()),orderID);
                     }
                 }
             }
@@ -238,14 +248,14 @@ public class OrdersSync implements ProcessAction {
             if (orderids.size() > 0) {
 
                 for (Integer oid : orderids) {
-                   // List<Double> dd = dlintegration.getDebt(oid);
+                    // List<Double> dd = dlintegration.getDebt(oid);
 
-                   double dd =  Math.round(dlintegration.getDebt(String.valueOf(oid))*100)/100;
-                   double dp = Math.round(dlintegration.getPaid(String.valueOf(oid))*100)/100;
+                    double dd = Math.round(dlintegration.getDebt(String.valueOf(oid)) * 100) / 100;
+                    double dp = Math.round(dlintegration.getPaid(String.valueOf(oid)) * 100) / 100;
 
-                    if ((dd + dp) <= 0.0 ) {
+                    if ((dd + dp) <= 0.0) {
                         //for each ticket of paid type set paid on website
-                        externalsales.setPaid( String.valueOf(oid), null);
+                        externalsales.setPaid(String.valueOf(oid), null);
                         // then update the date return to know it was updated on the website
                         dlintegration.execUpdateTicketsRefundPayment(String.valueOf(TicketInfo.RECEIPT_PAYMENT), String.valueOf(oid));
                         dlintegration.execUpdateTicketsRefundPayment(String.valueOf(TicketInfo.RECEIPT_REFUND), String.valueOf(oid));
@@ -259,19 +269,19 @@ public class OrdersSync implements ProcessAction {
             if (ticketlistr.size() > 0) {
 
                 for (TicketInfo ticket : ticketlistr) {
-                   //each returned tickets are updated as returned on the website
-                   if (ticket.getTicketType()==0 && externalsales.setRendu( String.valueOf(ticket.getStatus())) ) {
-                         if (WSInfo.isWsdeletert()) {
-                              dlsales.deleteTicket(ticket, "0");
-                         }
-                   } else {
-                       if (WSInfo.isWsdeletert()) {
-                              dlsales.deleteTicket(ticket, "0");
-                         }
-                   }
+                    //each returned tickets are updated as returned on the website
+                    if (ticket.getTicketType() == 0 && externalsales.setRendu(String.valueOf(ticket.getStatus()))) {
+                        if (WSInfo.isWsdeletert()) {
+                            dlsales.deleteTicket(ticket, "0");
+                        }
+                    } else {
+                        if (WSInfo.isWsdeletert()) {
+                            dlsales.deleteTicket(ticket, "0");
+                        }
+                    }
                 }
             }
-       
+
         } catch (ServiceException e) {
             throw new BasicException(AppLocal.getIntString("message.serviceexception"), e);
         } catch (RemoteException e) {

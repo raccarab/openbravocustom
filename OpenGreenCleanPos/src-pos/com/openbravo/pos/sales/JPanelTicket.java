@@ -61,7 +61,6 @@ import com.openbravo.pos.ticket.TicketInfo;
 import com.openbravo.pos.ticket.TicketLineInfo;
 import com.openbravo.pos.util.JRPrinterAWT300;
 import com.openbravo.pos.util.ReportUtils;
-import com.sun.tools.internal.jxc.gen.config.Config;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.HashMap;
