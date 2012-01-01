@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    GreenPressing POS is a point of sales application designed for touch screens.
+    GreenPOS is a point of sales application designed for touch screens.
     Copyright (C) 2007-2009 Openbravo, S.L.
     http://code.google.com/p/openbravocustom/
 
-    This file is part of GreenPressing POS.
+    This file is part of GreenPOS.
 
-    GreenPressing POS is free software: you can redistribute it and/or modify
+    GreenPOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    GreenPressing POS is distributed in the hope that it will be useful,
+    GreenPOS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with GreenPressing POS.  If not, see <http://www.gnu.org/licenses/>.
+    along with GreenPOS.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <output>
     <display>
@@ -34,152 +34,22 @@
     <ticket>
         #if ($item == "1")
         <image>Printer.Ticket.Logo</image>
-        <line></line>
-        #if (${ticket.getHostname()} == "Ixelles")
+        <line></line>        
         <line>
-            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+            <text align="center" length="42" bold="true">GREEN POS</text>
         </line>
         <line>
-            <text align="center" length="42">Square du Vieux Tilleul 8</text>
+            <text align="center" length="10">${ticket.getHostname()}</text>
         </line>
         <line>
-            <text align="center" length="42">1050 Bruxelles</text>
+            <text align="center" length="42">${ticket.getAddress()}</text>
         </line>
         <line>
-            <text align="center" length="42">Tel : 02/660.25.00</text>
-        </line>
-        #else
-        #if (${ticket.getHostname()} == "Fort-Jacos")
-        <line>
-            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
+            <text align="center" length="42">${ticket.getCity()}</text>
         </line>
         <line>
-            <text align="center" length="42">Chaussée de waterloo 1411</text>
+            <text align="center" length="42">${ticket.getPhone()}</text>
         </line>
-        <line>
-            <text align="center" length="42">1180 Uccle</text>
-        </line>
-        <line>
-            <text align="center" length="42">Tel : 02/375.06.79</text>
-        </line>
-        #else
-        #if (${ticket.getHostname()} == "Van-Eick")
-        <line>
-            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
-        </line>
-        <line>
-            <text align="center" length="42" bold="true">Van-Eick</text>
-        </line>
-        <line>
-            <text align="center" length="42">Square du Vieux Tilleul 8</text>
-        </line>
-        <line>
-            <text align="center" length="42">1050 Bruxelles</text>
-        </line>
-        <line>
-            <text align="center" length="42">Tel : 02/660.25.00</text>
-        </line>
-        #else
- #if (${ticket.getHostname()} == "Blue Tower")
-        <line>
-            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
-        </line>
-        <line>
-            <text align="center" length="42" bold="true">Blue Tower</text>
-        </line>
-
-        #else
-
-  #if (${ticket.getHostname()} == "Charleroi")
-        <line>
-            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
-        </line>
-        <line>
-            <text align="center" length="42" bold="true">Charleroi</text>
-        </line>
-        <line>
-            <text align="center" length="42">Chaussée de charleroi 24-26</text>
-        </line>
-        <line>
-            <text align="center" length="42">1060 Bruxelles</text>
-        </line>
-        #else
-
-  #if (${ticket.getHostname()} == "Proxy")
-        <line>
-            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
-        </line>
-        <line>
-            <text align="center" length="42" bold="true">Proxy Delhaize Airport Gardens</text>
-        </line>
-        <line>
-            <text align="center" length="42">Da vincilaan 2</text>
-        </line>
-        <line>
-            <text align="center" length="42">1930 Zaventem</text>
-        </line>
-        <line>
-            <text align="center" length="42">Tel : 02/725.25.92</text>
-        </line>
-        #else
-
-  #if (${ticket.getHostname()} == "Namur")
-        <line>
-            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
-        </line>
-        <line>
-            <text align="center" length="42" bold="true">Rue de Namur 9 </text>
-        </line>
-        <line>
-            <text align="center" length="42">1000 Bruxelles</text>
-        </line>
-        <line>
-            <text align="center" length="42">www.greenandclean.be</text>
-        </line>
-        #else
-
- #if (${ticket.getHostname()} == "RTL")
-        <line>
-            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
-        </line>
-        <line>
-            <text align="center" length="42" bold="true">RTL</text>
-        </line>
-        <line>
-            <text align="center" length="42">www.greenandclean.be</text>
-        </line>
-        #else
-
-
-        #if (${ticket.getHostname()} == "Glaverbel")
-        <line>
-            <text align="center" length="42" bold="true">GREEN AND CLEAN</text>
-        </line>
-        <line>
-            <text align="center" length="42" bold="true">Glaverbel</text>
-        </line>
-        <line>
-            <text align="center" length="42">Square du Vieux Tilleul 8</text>
-        </line>
-        <line>
-            <text align="center" length="42">1050 Bruxelles</text>
-        </line>
-        <line>
-            <text align="center" length="42">Tel : 02/660.25.00</text>
-        </line>
-
-        #end
-        #end
- #end
-        #end
- #end
-        #end
- #end
- #end
-
-        #end
-
-
         #else
         <line></line>
         <line>

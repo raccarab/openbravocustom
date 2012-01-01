@@ -28,14 +28,17 @@ public class DevicePrinterFile implements DevicePrinter {
     
     private String m_sName;
     private String m_sDescription;
+    private String m_cutreceipt;
     private BufferedWriter out;
     private String m_ticketPath;
     
     /** Creates a new instance of DevicePrinterNull */
-    public DevicePrinterFile() {
+    public DevicePrinterFile(String filename, String cutreceipt) {
         m_sName = AppLocal.getIntString("Printer.File");
-        m_sDescription = "File tmp.txt";
-        m_ticketPath = "PRINTER/ticket.txt";
+        m_sDescription = "Bash printing";
+        m_cutreceipt = cutreceipt;
+        m_ticketPath = filename;
+//        m_ticketPath = "PRINTER/ticket.txt";
         // TODO : better file handling
 //        boolean success = (new File("PRINTER")).mkdirs();
 //        if (!success) {
@@ -56,14 +59,14 @@ public class DevicePrinterFile implements DevicePrinter {
     }
     
     public void beginReceipt() {
-        try {
-            this.out = new BufferedWriter(new FileWriter(new File(this.m_ticketPath), true));
-            this.out.newLine();
-            this.out.append("-----*CUT*-----");
-            this.out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            this.out = new BufferedWriter(new FileWriter(new File(this.m_ticketPath), true));
+//            this.out.newLine();
+//            this.out.append(m_cutreceipt);
+//            this.out.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
     public void printBarCode(String type, String position, String code) {        
     }    
@@ -86,6 +89,7 @@ public class DevicePrinterFile implements DevicePrinter {
 
             this.out.close();
 
+            this.out.flush();
             //System.out.println("'"+sText+"' >"+sText.length());
             //int returnCode = process.waitFor();
             
@@ -96,6 +100,17 @@ public class DevicePrinterFile implements DevicePrinter {
     public void endLine() {
     }
     public void endReceipt() {
+        try {
+            this.out = new BufferedWriter(new FileWriter(new File(this.m_ticketPath), true));
+            this.out.newLine();
+            this.out.append(m_cutreceipt);
+            this.out.close();
+            
+            this.out.flush();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public void openDrawer() {
     }

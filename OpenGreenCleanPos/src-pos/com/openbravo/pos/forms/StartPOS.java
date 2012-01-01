@@ -132,6 +132,12 @@ public class StartPOS {
                 // For printing the Hostname in the ticke
                 String hostname = config.getProperty("machine.hostname");
                 TicketInfo.setHostname(hostname);
+                String phone = config.getProperty("machine.phone");
+                TicketInfo.setPhone(phone);
+                String address = config.getProperty("machine.address");
+                TicketInfo.setAddress(address);
+                String city = config.getProperty("machine.city");
+                TicketInfo.setCity(city);
 
 
                 if (config.getProperty("ws.posid") != null) {

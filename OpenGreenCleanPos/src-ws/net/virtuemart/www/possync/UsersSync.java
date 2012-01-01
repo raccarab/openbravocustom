@@ -182,7 +182,7 @@ public class UsersSync implements ProcessAction {
 //System.out.println (remoteUser.getLogin()+" : "+remoteUser.getShopper_group_id());
 //                        perms = remoteUser.getPerms();
 //                        if (!perms.equals("shopper")){
-                            System.out.println (remoteUser.getLogin()+" : "+remoteUser.getPerms());
+//                            System.out.println (remoteUser.getLogin()+" : "+remoteUser.getPerms());
 //
 //
 //                            continue;
@@ -282,9 +282,6 @@ public class UsersSync implements ProcessAction {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         
         for (CustomerSync localCustomer : localList) {
-
-                System.out.println("* "+localCustomer.getName());
-
                 Date now = new Date();
         	if (notToSync.contains(localCustomer.getTaxid())) {
         		continue;
@@ -301,9 +298,6 @@ public class UsersSync implements ProcessAction {
                     while (tmpName.charAt(0)==' ') {
                         tmpName = tmpName.substring(1);
                     }
-
-
-                    System.out.println("'"+tmpName+"'");
 
                     userAdd.setLastname(tmpName);
 

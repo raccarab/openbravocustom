@@ -167,7 +167,7 @@ public class DeviceTicket {
                 } else if ("plain".equals(sPrinterType)) {
                     addPrinter(sPrinterIndex, new DevicePrinterPlain(pws.getPrinterWritter(sPrinterParam1, sPrinterParam2)));
                 } else if ("bash".equals(sPrinterType)) {
-                    addPrinter(sPrinterIndex, new DevicePrinterFile());
+                    addPrinter(sPrinterIndex, new DevicePrinterFile(sPrinterParam1, sPrinterParam2));
                 } else if ("javapos".equals(sPrinterType)) {
                     addPrinter(sPrinterIndex, new DevicePrinterJavaPOS(sPrinterParam1, sPrinterParam2));
                 }

@@ -1,0 +1,35 @@
+
+GREEN POS
+Tii
+Rue Franklin, 10
+1000  Bruxelles
+Tel: 02/222.22.22
+Ticket:
+Date  :
+an 1, 2012 11:36:30 PM
+Article
+Prix
+Qte
+Total
+------------------------------------------
+A-Anorak
+$11.50
+x1
+$11.50
+A-Anorak Duvet
+$17.25
+x1
+$17.25
+A-Anorak
+$11.50
+x1
+$11.50
+------------------------------------------
+Total.
+$40.25
+Cashier:
+Administrator
+Green and Clean vous remercie de votre
+confiance. Voir nos conditions de vente
+affichées en magasin.
+-----*CUT*-----

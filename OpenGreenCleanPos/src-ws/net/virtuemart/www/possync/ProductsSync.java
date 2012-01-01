@@ -112,7 +112,7 @@ public class ProductsSync implements ProcessAction {
 		 
 			HashMap notToSync = new HashMap();
 	       
-		// Sync categories.
+		// Sync categories : download.
 			Categorie[] cats = externalsales.getCategories();
 			
 			for (Categorie categorie : cats) {
@@ -134,6 +134,11 @@ public class ProductsSync implements ProcessAction {
 			
 			for (CategoryInfo localCat : localCats) {
 				
+                                
+                                if (dlintegration.getCategoryCount(localCat.getName())==0.0){
+                                    continue;
+                                }
+                                    
 				if (notToSync.containsKey(localCat.getName())) {
 					continue;
 				}
@@ -231,9 +236,7 @@ public class ProductsSync implements ProcessAction {
 //						}
 //							
 //					 }
-
-	                 System.out.println(product.getName()+" "+product.getProduct_categories()+" "+catListRev.get(remCat));
-	                 
+ 
 	            	 String[] pAtt = product.getCustom_attribute().split(";");
 	            	 boolean isScale=false;
 	            	 boolean isCom=false;
@@ -251,16 +254,12 @@ public class ProductsSync implements ProcessAction {
                                         taxCatID = taxCatsRev.get(att);
                                         ok=true;
                                 } else if (attMap.get(att)!=null) {
-
                                          attID = attMap.get(att);
-                                         //System.out.println("* "+attID);
                                 }
                          }
                          if (ok==false)
                              continue;
-	            	 //String taxCat = 
-	    	                  
-	            	 //System.out.println("* " + catListRev.get(product.getProduct_categories()));
+
 	            	 // Synchonization of products
 	            	 String image = "";
 	            	 if (product.getImage()!=null && !product.getImage().equalsIgnoreCase(""))
@@ -285,9 +284,7 @@ public class ProductsSync implements ProcessAction {
 	                 prodNotToSync.add(p.getCode());
 
                          if (product.getProduct_publish().equals("Y")) {
-
-                             System.out.println(p.getName()+" "+p.getTaxCategoryID()+" > '"+product.getProduct_publish()+"'");
-                             incatalog=true;
+                            incatalog=true;
                          } 
 
                          dlintegration.syncProduct(p,incatalog);
@@ -389,7 +386,6 @@ public class ProductsSync implements ProcessAction {
 				} catch (RemoteException e) {
 //					externalsales.updateProduct(produit);
 				}
-				System.out.println(produit.getCustom_attribute());
 				
 			}
 			

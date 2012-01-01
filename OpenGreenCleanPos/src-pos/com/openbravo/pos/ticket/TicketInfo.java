@@ -94,9 +94,36 @@ public class TicketInfo implements SerializableRead, Externalizable {
 
   // Hostname for printing tickets
     private static String Hostname;
+    private static String Phone;
+    private static String Address;
+
+    public static String getAddress() {
+        return Address;
+    }
+
+    public static void setAddress(String Address) {
+        TicketInfo.Address = Address;
+    }
+
+    public static String getCity() {
+        return City;
+    }
+
+    public static void setCity(String City) {
+        TicketInfo.City = City;
+    }
+
+    public static String getPhone() {
+        return Phone;
+    }
+
+    public static void setPhone(String Phone) {
+        TicketInfo.Phone = Phone;
+    }
+    private static String City;
 
     public static void setHostname(String name) {
-        Hostname=name;
+        TicketInfo.Hostname=name;
     }
 
     public static String getHostname() {

@@ -52,6 +52,8 @@ import com.openbravo.pos.ticket.TicketLineInfo;
 import com.openbravo.pos.ticket.UserInfo;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -422,7 +424,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
     }
 
     public double getPaid(String status) throws BasicException {
-        System.out.println(status);
+        //System.out.println(status);
         PreparedSentence p = new PreparedSentence(s
                   	, "SELECT SUM(P.TOTAL) FROM TICKETS T LEFT JOIN PAYMENTS P ON P.RECEIPT = T.ID WHERE T.STATUS = ? AND ( T.TICKETTYPE = 2 OR T.TICKETTYPE = 1 ) AND P.TOTAL < 0.0 "
                         , SerializerWriteString.INSTANCE
@@ -500,4 +502,34 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
 
                 	}});
 	}
+
+//    public boolean isCategoryEmpty(String name) {
+//        try {
+//          return new PreparedSentence(s
+//                 , "SELECT P.NAME FROM CATEGORIES C INNER JOIN PRODUCTS P ON P.CATEGORY = C.ID AND C.NAME = '?' "
+//                , SerializerWriteString.INSTANCE
+//                , new SerializerReadClass(TicketLineInfo.class)).list(name).isEmpty();
+//        } catch (BasicException ex) {
+//            ex.printStackTrace();
+//            return true;
+//        }
+//    }
+    
+    public double getCategoryCount(String name) {
+       try {
+            PreparedSentence p = new PreparedSentence(s
+                        //   , "SELECT SUM(P.TOTAL) FROM TICKETS T LEFT JOIN PAYMENTS P ON P.RECEIPT = T.ID WHERE T.STATUS = ? AND T.TICKETTYPE = 0 AND P.PAYMENT LIKE 'debt' GROUP BY STATUS"
+                  	 ,  "SELECT COUNT(P.ID) FROM CATEGORIES C INNER JOIN PRODUCTS P ON P.CATEGORY = C.ID AND C.NAME = ? "
+                            , SerializerWriteString.INSTANCE
+                            , SerializerReadDouble.INSTANCE);
+            Double d = (Double) p.find(name);
+            
+            return d == null ? 0.0 : d.doubleValue();
+            
+        } catch (BasicException ex) {
+            
+            ex.printStackTrace();
+        }
+       return 0.0;
+    }
 }
