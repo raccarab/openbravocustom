@@ -24,6 +24,7 @@ import java.awt.Component;
 import com.openbravo.pos.forms.AppConfig;
 import com.openbravo.pos.forms.AppLocal;
 import com.openbravo.pos.util.AltEncrypter;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -43,6 +44,9 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
         jtxtUrl.getDocument().addDocumentListener(dirty);
         jtxtPaymentID.getDocument().addDocumentListener(dirty);
         jtxtTimeOut.getDocument().addDocumentListener(dirty);
+        jComboBoxWS.addItem("OFF");
+        jComboBoxWS.addItem("Virtuemart 1.7");
+        jComboBoxWS.addItem("Virtuemart 2.0");
     }
     
     public boolean hasChanged() {
@@ -64,6 +68,16 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
         jchkWSProductsStart.setSelected(Boolean.valueOf(config.getProperty("ws.productstart")).booleanValue());
         jchkWSDeleteRT.setSelected(Boolean.valueOf(config.getProperty("ws.deletert")).booleanValue());
         
+        try {
+            String wstype = config.getProperty("ws.type");
+
+            if (wstype.trim().equals("") || wstype==null)
+                jComboBoxWS.setSelectedIndex(0);
+            else
+                jComboBoxWS.setSelectedItem(wstype);
+        } catch (NullPointerException nppe) {
+            jComboBoxWS.setSelectedIndex(0);
+        }
         String sERPUser = config.getProperty("ws.user");
         String sERPPassword = config.getProperty("ws.password");
         if (sERPUser != null && sERPPassword != null && sERPPassword.startsWith("crypt:")) {
@@ -79,6 +93,10 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
         dirty.setDirty(false);
     }
     
+    private String comboValue(Object value) {
+        return value == null ? "" : value.toString();
+    }
+    
     public void saveProperties(AppConfig config) {
         
         config.setProperty("ws.URL", jtxtUrl.getText());
@@ -90,6 +108,8 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
         config.setProperty("ws.productstart", Boolean.toString(jchkWSProductsStart.isSelected()));
         config.setProperty("ws.deletert", Boolean.toString(jchkWSDeleteRT.isSelected()));
 
+        config.setProperty("ws.type", comboValue( jComboBoxWS.getSelectedItem()));
+        
         config.setProperty("ws.user", jtxtName.getText());
         AltEncrypter cypher = new AltEncrypter("cypherkey" + jtxtName.getText());             
         config.setProperty("ws.password", "crypt:" + cypher.encrypt(new String(jtxtPassword.getPassword())));
@@ -129,6 +149,8 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
         jchkWSProductsPre = new javax.swing.JCheckBox();
         jchkWSUsersStart = new javax.swing.JCheckBox();
         jchkWSDeleteRT = new javax.swing.JCheckBox();
+        jComboBoxWS = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(AppLocal.getIntString("label.wsconfig")));
 
@@ -136,6 +158,12 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
         jlabelUrl.setText(bundle.getString("label.wsurl")); // NOI18N
 
         jLabelId.setText(bundle.getString("label.wsid")); // NOI18N
+
+        jtxtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtIdActionPerformed(evt);
+            }
+        });
 
         jLabelName.setText(bundle.getString("label.wsuser")); // NOI18N
 
@@ -191,6 +219,15 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
             }
         });
 
+        jComboBoxWS.setEditable(true);
+        jComboBoxWS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxWSActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("WebService");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -204,10 +241,6 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtxtUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabelId, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtxtName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,7 +248,7 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabelProperties, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabelPayID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelTimeout, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+                            .addComponent(jLabelTimeout, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -237,12 +270,25 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
                                 .addGap(38, 38, 38)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jchkWSUsersPre, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
-                            .addComponent(jchkWSProductsPre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE))))
+                            .addComponent(jchkWSProductsPre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelId, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxWS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxWS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelId, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -295,7 +341,7 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
@@ -324,9 +370,48 @@ public class JPanelConfigWS extends javax.swing.JPanel implements PanelConfig {
     private void jchkWSUsersStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jchkWSUsersStartActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jchkWSUsersStartActionPerformed
+
+private void jComboBoxWSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxWSActionPerformed
+    
+    JComboBox cb = (JComboBox)evt.getSource();
+    Object newItem = cb.getSelectedItem();
+    if (newItem.toString().equals("OFF")) {
+        jtxtId.setEnabled(false);
+        jtxtName.setEnabled(false);
+        jtxtPassword.setEnabled(false);
+        jtxtUrl.setEnabled(false);
+        jtxtPaymentID.setEnabled(false);
+        jtxtTimeOut.setEnabled(false);
+        jchkWSDeleteRT.setEnabled(false);
+        jchkWSProductsPre.setEnabled(false);
+        jchkWSProductsStart.setEnabled(false);
+        jchkWSUsersPre.setEnabled(false);
+        jchkWSUsersStart.setEnabled(false);
+    } else {
+        jtxtId.setEnabled(true);
+        jtxtName.setEnabled(true);
+        jtxtPassword.setEnabled(true);
+        jtxtUrl.setEnabled(true);
+        jtxtPaymentID.setEnabled(true);
+        jtxtTimeOut.setEnabled(true);
+        jchkWSDeleteRT.setEnabled(true);
+        jchkWSProductsPre.setEnabled(true);
+        jchkWSProductsStart.setEnabled(true);
+        jchkWSUsersPre.setEnabled(true);
+        jchkWSUsersStart.setEnabled(true);
+        
+    }
+        
+}//GEN-LAST:event_jComboBoxWSActionPerformed
+
+private void jtxtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtIdActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_jtxtIdActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox jComboBoxWS;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelId;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelPayID;

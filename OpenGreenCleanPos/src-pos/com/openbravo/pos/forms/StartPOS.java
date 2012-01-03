@@ -70,34 +70,7 @@ public class StartPOS {
 
                 AppConfig config = new AppConfig(args);
                 config.load();
-
-                // set WS.
-                String wsuser = config.getProperty("ws.user");
-                String wspassword = config.getProperty("ws.password");
-                String wsurl = config.getProperty("ws.URL");
-                String wsposid = config.getProperty("ws.posid");
-                String wspayid = config.getProperty("ws.payid");
-                boolean wsproductpre = Boolean.valueOf( config.getProperty("ws.productpre"));
-                boolean wsuserpre = Boolean.valueOf( config.getProperty("ws.userpre"));
-                boolean wsdeletert = Boolean.valueOf( config.getProperty("ws.deletert"));
-
-                WSInfo.setWspassword(wspassword);
-                WSInfo.setWspayid(wspayid);
-                WSInfo.setWsposid(wsposid);
-                WSInfo.setWsurl(wsurl);
-                WSInfo.setWsuser(wsuser);
-                WSInfo.setWsproductpre(wsproductpre);
-                WSInfo.setWsuserpre(wsuserpre);
-                WSInfo.setDeleteReturneTicket(wsdeletert);
-
-                if (wsposid != null
-                        && (wsuser == null || wsuser.equals("")
-                        || wsurl.equals("") || wsurl == null
-                        || wspassword.equals("") || wspassword == null)) {
-                    JOptionPane.showMessageDialog(null, "Config Error ! : Please configure Web Service correctly !");
-
-                }
-
+                
                 // set Locale.
                 String slang = config.getProperty("user.language");
                 String scountry = config.getProperty("user.country");
@@ -139,34 +112,67 @@ public class StartPOS {
                 String city = config.getProperty("machine.city");
                 TicketInfo.setCity(city);
 
+ // set WS.
+                try {
+                    String wstype = config.getProperty("ws.type");
+                     if (!wstype.trim().isEmpty() && wstype!=null && !wstype.equals("OFF")) {
+                        String wsuser = config.getProperty("ws.user");
+                        String wspassword = config.getProperty("ws.password");
+                        String wsurl = config.getProperty("ws.URL");
+                        String wsposid = config.getProperty("ws.posid");
+                        String wspayid = config.getProperty("ws.payid");
+                        boolean wsproductpre = Boolean.valueOf( config.getProperty("ws.productpre"));
+                        boolean wsuserpre = Boolean.valueOf( config.getProperty("ws.userpre"));
+                        boolean wsdeletert = Boolean.valueOf( config.getProperty("ws.deletert"));
 
-                if (config.getProperty("ws.posid") != null) {
-                    try {
-                        int posid = Integer.parseInt(config.getProperty("ws.posid"));
+                        WSInfo.setWspassword(wspassword);
+                        WSInfo.setWspayid(wspayid);
+                        WSInfo.setWsposid(wsposid);
+                        WSInfo.setWsurl(wsurl);
+                        WSInfo.setWsuser(wsuser);
+                        WSInfo.setWsproductpre(wsproductpre);
+                        WSInfo.setWsuserpre(wsuserpre);
+                        WSInfo.setDeleteReturneTicket(wsdeletert);
 
-                        if (posid > 0) {
-                            TicketInfo.setPosID(posid);
-//                          UUID.setId(posid);
+                        if (wsposid != null
+                                && (wsuser == null || wsuser.equals("")
+                                || wsurl.equals("") || wsurl == null
+                                || wspassword.equals("") || wspassword == null)) {
+                            JOptionPane.showMessageDialog(null, "Config Error ! : Please configure Web Service correctly !");
+
                         }
 
-                    } catch (NumberFormatException e) {
-                        logger.log(Level.WARNING, "WS not working", e);
-                    }
-                }
-                if (config.getProperty("ws.payid") != null) {
-                    try {
-                        int payid = Integer.parseInt(config.getProperty("ws.payid"));
+                        if (config.getProperty("ws.posid") != null) {
+                            try {
+                                int posid = Integer.parseInt(config.getProperty("ws.posid"));
 
-                        if (payid > 0) {
-                            TicketInfo.setPayID(payid);
-//                          UUID.setId(posid);
+                                if (posid > 0) {
+                                    TicketInfo.setPosID(posid);
+        //                          UUID.setId(posid);
+                                }
+
+                            } catch (NumberFormatException e) {
+                                logger.log(Level.WARNING, "WS not working", e);
+                            }
                         }
+                        if (config.getProperty("ws.payid") != null) {
+                            try {
+                                int payid = Integer.parseInt(config.getProperty("ws.payid"));
 
-                    } catch (NumberFormatException e) {
-                        logger.log(Level.WARNING, "PayID error", e);
-                    }
+                                if (payid > 0) {
+                                    TicketInfo.setPayID(payid);
+        //                          UUID.setId(posid);
+                                }
+
+                            } catch (NumberFormatException e) {
+                                logger.log(Level.WARNING, "PayID error", e);
+                            }
+                        }  
+                    }   
+                } catch (Exception eeee) {
+                    // NO WEB SERVICE
                 }
-
+                
                 String screenmode = config.getProperty("machine.screenmode");
 
                 JRootApp app;
@@ -174,7 +180,7 @@ public class StartPOS {
                 if ("fullscreen".equals(screenmode)) {
                     JRootKiosk rootkiosk = new JRootKiosk();
                     rootkiosk.initFrame(config);
-                    rootkiosk.setTitle("   >>> " + hostname + " <<< " + rootkiosk.getTitle());
+                    rootkiosk.setTitle("[" + hostname + "] " + rootkiosk.getTitle());
                     app = rootkiosk.getRootapp();
                 } else {
                     JRootFrame rootframe = new JRootFrame();
@@ -183,7 +189,7 @@ public class StartPOS {
                     if ("maximized".equals(screenmode))
                         rootframe.setExtendedState(rootframe.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
-                    rootframe.setTitle(" * " + hostname + " *   " + rootframe.getTitle());
+                    rootframe.setTitle("[ " + hostname + "] " + rootframe.getTitle());
                     app = rootframe.getRootapp();
                 }
 

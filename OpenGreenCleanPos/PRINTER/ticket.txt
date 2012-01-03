@@ -33,3 +33,20 @@ Green and Clean vous remercie de votre
 confiance. Voir nos conditions de vente
 affichées en magasin.
 -----*CUT*-----
+Receipt sample.
+You can change this template
+in the resources panel
+Date:     Jan 3, 2012 8:25:00 PM
+Reason:   (in) purchase
+Location: General
+In
+Item
+Price
+Value
+------------------------------------------
+A-Anorak
+x1
+$1.00
+------------------------------------------
+Thank you for your visit.
+-----*CUT*-----

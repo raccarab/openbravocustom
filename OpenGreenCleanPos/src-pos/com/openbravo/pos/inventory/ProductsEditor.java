@@ -541,22 +541,15 @@ public class ProductsEditor extends JPanel implements EditorRecord {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        m_jRef = new javax.swing.JTextField();
-        m_jName = new javax.swing.JTextField();
         m_jTitle = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         m_jCode = new javax.swing.JTextField();
-        m_jImage = new com.openbravo.data.gui.JImageEditor();
         jLabel3 = new javax.swing.JLabel();
         m_jPriceBuy = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         m_jPriceSell = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        m_jCategory = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         m_jTax = new javax.swing.JComboBox();
         m_jmargin = new javax.swing.JTextField();
@@ -565,6 +558,10 @@ public class ProductsEditor extends JPanel implements EditorRecord {
         m_jCodetype = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
         m_jAtt = new javax.swing.JComboBox();
+        m_jName = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        m_jRef = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         m_jstockcost = new javax.swing.JTextField();
@@ -581,82 +578,77 @@ public class ProductsEditor extends JPanel implements EditorRecord {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAttributes = new javax.swing.JTextArea();
+        m_jImage = new com.openbravo.data.gui.JImageEditor();
+        m_jCategory = new javax.swing.JComboBox();
 
         setLayout(null);
 
-        jLabel1.setText(AppLocal.getIntString("label.prodref")); // NOI18N
-        add(jLabel1);
-        jLabel1.setBounds(220, 0, 70, 16);
-
-        jLabel2.setText(AppLocal.getIntString("label.prodname")); // NOI18N
-        add(jLabel2);
-        jLabel2.setBounds(360, 0, 40, 20);
-        add(m_jRef);
-        m_jRef.setBounds(290, 0, 70, 28);
-        add(m_jName);
-        m_jName.setBounds(400, 0, 190, 28);
-
-        m_jTitle.setFont(new java.awt.Font("SansSerif", 3, 18));
+        m_jTitle.setFont(new java.awt.Font("SansSerif", 3, 18)); // NOI18N
+        m_jTitle.setForeground(new java.awt.Color(0, 181, 117));
         add(m_jTitle);
-        m_jTitle.setBounds(0, 0, 210, 30);
+        m_jTitle.setBounds(200, 0, 230, 20);
 
         jPanel1.setLayout(null);
 
         jLabel6.setText(AppLocal.getIntString("label.prodbarcode")); // NOI18N
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 20, 150, 16);
+        jLabel6.setBounds(10, 70, 150, 16);
         jPanel1.add(m_jCode);
-        m_jCode.setBounds(160, 20, 170, 28);
-        jPanel1.add(m_jImage);
-        m_jImage.setBounds(340, 20, 200, 180);
+        m_jCode.setBounds(160, 70, 170, 28);
 
         jLabel3.setText(AppLocal.getIntString("label.prodpricebuy")); // NOI18N
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(10, 50, 150, 16);
+        jLabel3.setBounds(10, 100, 150, 16);
 
         m_jPriceBuy.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jPanel1.add(m_jPriceBuy);
-        m_jPriceBuy.setBounds(160, 50, 80, 28);
+        m_jPriceBuy.setBounds(160, 100, 80, 28);
 
         jLabel4.setText(AppLocal.getIntString("label.prodpricesell")); // NOI18N
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(10, 80, 150, 16);
+        jLabel4.setBounds(10, 130, 150, 16);
 
         m_jPriceSell.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jPanel1.add(m_jPriceSell);
-        m_jPriceSell.setBounds(160, 80, 80, 28);
-
-        jLabel5.setText(AppLocal.getIntString("label.prodcategory")); // NOI18N
-        jPanel1.add(jLabel5);
-        jLabel5.setBounds(10, 170, 150, 16);
-        jPanel1.add(m_jCategory);
-        m_jCategory.setBounds(160, 170, 170, 20);
+        m_jPriceSell.setBounds(160, 130, 80, 28);
 
         jLabel7.setText(AppLocal.getIntString("label.taxcategory")); // NOI18N
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(10, 140, 150, 16);
+        jLabel7.setBounds(10, 190, 150, 16);
         jPanel1.add(m_jTax);
-        m_jTax.setBounds(160, 140, 170, 20);
+        m_jTax.setBounds(160, 190, 170, 20);
 
         m_jmargin.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jPanel1.add(m_jmargin);
-        m_jmargin.setBounds(250, 80, 80, 28);
+        m_jmargin.setBounds(250, 130, 80, 28);
 
         m_jPriceSellTax.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jPanel1.add(m_jPriceSellTax);
-        m_jPriceSellTax.setBounds(160, 110, 80, 28);
+        m_jPriceSellTax.setBounds(160, 160, 80, 28);
 
         jLabel16.setText(AppLocal.getIntString("label.prodpriceselltax")); // NOI18N
         jPanel1.add(jLabel16);
-        jLabel16.setBounds(10, 110, 150, 16);
+        jLabel16.setBounds(10, 160, 150, 16);
         jPanel1.add(m_jCodetype);
-        m_jCodetype.setBounds(250, 40, 80, 20);
+        m_jCodetype.setBounds(250, 90, 80, 40);
 
         jLabel13.setText(AppLocal.getIntString("label.attributes")); // NOI18N
         jPanel1.add(jLabel13);
-        jLabel13.setBounds(10, 200, 150, 16);
+        jLabel13.setBounds(10, 220, 150, 16);
         jPanel1.add(m_jAtt);
-        m_jAtt.setBounds(160, 200, 170, 20);
+        m_jAtt.setBounds(160, 220, 170, 20);
+        jPanel1.add(m_jName);
+        m_jName.setBounds(160, 40, 190, 28);
+
+        jLabel2.setText(AppLocal.getIntString("label.prodname")); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(10, 40, 40, 20);
+        jPanel1.add(m_jRef);
+        m_jRef.setBounds(160, 10, 190, 30);
+
+        jLabel1.setText(AppLocal.getIntString("label.prodref")); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(10, 10, 70, 30);
 
         jTabbedPane1.addTab(AppLocal.getIntString("label.prodgeneral"), jPanel1); // NOI18N
 
@@ -678,17 +670,17 @@ public class ProductsEditor extends JPanel implements EditorRecord {
         jPanel2.add(m_jstockvolume);
         m_jstockvolume.setBounds(160, 50, 80, 28);
         jPanel2.add(m_jScale);
-        m_jScale.setBounds(160, 140, 80, 23);
+        m_jScale.setBounds(160, 180, 80, 23);
         jPanel2.add(m_jComment);
-        m_jComment.setBounds(160, 110, 80, 23);
+        m_jComment.setBounds(160, 150, 80, 23);
 
         jLabel18.setText(AppLocal.getIntString("label.prodorder")); // NOI18N
         jPanel2.add(jLabel18);
-        jLabel18.setBounds(250, 80, 60, 16);
+        jLabel18.setBounds(10, 80, 60, 16);
 
         m_jCatalogOrder.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jPanel2.add(m_jCatalogOrder);
-        m_jCatalogOrder.setBounds(310, 80, 80, 28);
+        m_jCatalogOrder.setBounds(160, 80, 80, 28);
 
         m_jInCatalog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -696,19 +688,19 @@ public class ProductsEditor extends JPanel implements EditorRecord {
             }
         });
         jPanel2.add(m_jInCatalog);
-        m_jInCatalog.setBounds(160, 80, 50, 23);
+        m_jInCatalog.setBounds(160, 120, 50, 23);
 
         jLabel8.setText(AppLocal.getIntString("label.prodincatalog")); // NOI18N
         jPanel2.add(jLabel8);
-        jLabel8.setBounds(10, 80, 150, 16);
+        jLabel8.setBounds(10, 120, 150, 16);
 
         jLabel11.setText(AppLocal.getIntString("label.prodaux")); // NOI18N
         jPanel2.add(jLabel11);
-        jLabel11.setBounds(10, 110, 150, 16);
+        jLabel11.setBounds(10, 150, 150, 16);
 
         jLabel12.setText(AppLocal.getIntString("label.prodscale")); // NOI18N
         jPanel2.add(jLabel12);
-        jLabel12.setBounds(10, 140, 150, 16);
+        jLabel12.setBounds(10, 180, 150, 16);
 
         jTabbedPane1.addTab(AppLocal.getIntString("label.prodstock"), jPanel2); // NOI18N
 
@@ -721,12 +713,15 @@ public class ProductsEditor extends JPanel implements EditorRecord {
         jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jTabbedPane1.addTab(AppLocal.getIntString("label.properties"), jPanel3); // NOI18N
+        jTabbedPane1.addTab("Image", m_jImage);
 
         add(jTabbedPane1);
-        jTabbedPane1.setBounds(20, 30, 560, 280);
+        jTabbedPane1.setBounds(20, 30, 390, 300);
+        add(m_jCategory);
+        m_jCategory.setBounds(20, 0, 170, 20);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void m_jInCatalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jInCatalogActionPerformed
+private void m_jInCatalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jInCatalogActionPerformed
  
         if (m_jInCatalog.isSelected()) {
             m_jCatalogOrder.setEnabled(true);   
@@ -734,8 +729,7 @@ public class ProductsEditor extends JPanel implements EditorRecord {
             m_jCatalogOrder.setEnabled(false);   
             m_jCatalogOrder.setText(null);   
         }
-
-    }//GEN-LAST:event_m_jInCatalogActionPerformed
+}//GEN-LAST:event_m_jInCatalogActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -749,7 +743,6 @@ public class ProductsEditor extends JPanel implements EditorRecord {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

@@ -59,6 +59,7 @@ class ScriptEngineBeanshell implements ScriptEngine {
         try {
             return i.eval(src);  
         } catch (EvalError e) {
+            System.out.println(src);
             throw new ScriptException(e.getMessage(), e);
         }        
     }   

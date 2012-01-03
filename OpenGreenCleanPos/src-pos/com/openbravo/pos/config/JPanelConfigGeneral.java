@@ -668,6 +668,12 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
 
         jLabel2.setText(AppLocal.getIntString("label.looknfeel")); // NOI18N
 
+        jcboLAF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcboLAFActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText(AppLocal.getIntString("Label.MachineScreen")); // NOI18N
 
         jcboMachineScreenmode.addActionListener(new java.awt.event.ActionListener() {
@@ -1398,6 +1404,10 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
     private void jcboMachineScreenmodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcboMachineScreenmodeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcboMachineScreenmodeActionPerformed
+
+private void jcboLAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcboLAFActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_jcboLAFActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cboPrinters;

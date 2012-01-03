@@ -90,11 +90,11 @@ public class AppConfig implements AppProperties {
     private String getLocalHostName() {
         try {
             return java.net.InetAddress.getLocalHost().getHostName();
-        } catch (java.net.UnknownHostException eUH) {
+        } catch ( Exception ehd ) {
             return "localhost";
         }
     }
-   
+    
     public boolean delete() {
         loadDefault();
         return configfile.delete();
@@ -161,7 +161,7 @@ public class AppConfig implements AppProperties {
         m_propsconfig.setProperty("user.country", l.getCountry());
         m_propsconfig.setProperty("user.variant", l.getVariant());     
         
-        m_propsconfig.setProperty("swing.defaultlaf", System.getProperty("swing.defaultlaf", "org.jvnet.substance.skin.BusinessBlueSteelSkin"));
+        m_propsconfig.setProperty("swing.defaultlaf", System.getProperty("swing.defaultlaf", "org.jvnet.substance.skin.MistSilverSkin"));
         
         m_propsconfig.setProperty("machine.printer", "screen");
         m_propsconfig.setProperty("machine.printer.2", "Not defined");

@@ -196,7 +196,7 @@ public class JPrincipalApp extends javax.swing.JPanel implements AppUserView {
             addAction(new ChangePasswordAction("/com/openbravo/images/yast_security.png", "Menu.ChangePassword"));
         }       
         public void addExitAction() {            
-            addAction(new ExitAction("/com/openbravo/images/gohome.png", "Menu.Exit"));
+            addAction(new ExitAction("/com/openbravo/images/exit.png", "Menu.Exit"));
         }
         
         private void addAction(Action act) {
