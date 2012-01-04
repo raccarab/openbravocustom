@@ -1,0 +1,57 @@
+//    GreenPOS is a point of sales application designed for touch screens.
+//    Copyright (C) 2007-2009 Openbravo, S.L.
+//    http://code.google.com/p/openbravocustom/
+//
+//    This file is part of GreenPOS.
+//
+//    GreenPOS is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    GreenPOS is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with GreenPOS.  If not, see <http://www.gnu.org/licenses/>.
+
+report = new com.openbravo.pos.reports.PanelReportBean();
+
+report.setTitleKey("Menu.Delivery");
+report.setReport("/com/openbravo/reports/Delivery");
+report.setResourceBundle("com/openbravo/reports/Delivery_messages");
+
+
+report.setSentence("SELECT " +
+                "CUSTOMERS.SEARCHKEY, " +
+                "CUSTOMERS.NAME AS NAMECUST, " +
+                "TICKETS.TICKETID, " +
+                "TICKETS.DATERETURN, " +
+                "PRODUCTS.REFERENCE, " +
+                "PRODUCTS.NAME, " +
+                "SUM(TICKETLINES.UNITS) AS UNITS, " +
+                "SUM(TICKETLINES.UNITS * TICKETLINES.PRICE) AS TOTAL, " +
+                "CLOSEDCASH.HOST " +
+                "FROM CLOSEDCASH INNER JOIN RECEIPTS ON CLOSEDCASH.MONEY = RECEIPTS.MONEY, TICKETS LEFT OUTER JOIN CUSTOMERS ON CUSTOMERS.ID = TICKETS.CUSTOMER, TICKETLINES LEFT OUTER JOIN PRODUCTS ON TICKETLINES.PRODUCT = PRODUCTS.ID  " +
+                "WHERE RECEIPTS.ID = TICKETS.ID AND TICKETS.ID = TICKETLINES.TICKET AND PRODUCTS.TAXCAT = '1' AND ?(QBF_FILTER) " +
+                "GROUP BY TICKETS.TICKETID, CUSTOMERS.SEARCHKEY, PRODUCTS.REFERENCE, PRODUCTS.NAME, CLOSEDCASH.HOST, CUSTOMERS.NAME , TICKETS.DATERETURN " +
+                "ORDER BY CLOSEDCASH.HOST, TICKETS.TICKETID");
+report.addParameter("TICKETS.DATERETURN");
+report.addParameter("TICKETS.DATERETURN");
+report.addQBFFilter(new com.openbravo.pos.reports.JParamsDatesInterval());
+report.addParameter("CLOSEDCASH.HOST");
+report.addQBFFilter(new com.openbravo.pos.ticket.HostFilter());
+
+report.addField("SEARCHKEY", com.openbravo.data.loader.Datas.STRING);
+report.addField("NAMECUST", com.openbravo.data.loader.Datas.STRING);
+report.addField("TICKETID", com.openbravo.data.loader.Datas.STRING);
+report.addField("DATERETURN", com.openbravo.data.loader.Datas.TIMESTAMP);
+report.addField("REFERENCE", com.openbravo.data.loader.Datas.STRING);
+report.addField("NAME", com.openbravo.data.loader.Datas.STRING);
+report.addField("UNITS", com.openbravo.data.loader.Datas.DOUBLE);
+report.addField("TOTAL", com.openbravo.data.loader.Datas.DOUBLE);
+report.addField("HOST", com.openbravo.data.loader.Datas.STRING);
+
+report;
