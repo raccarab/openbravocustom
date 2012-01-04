@@ -93,18 +93,22 @@ public class Hashcypher {
 
     
     public static String changePassword(Component parent, String sOldPassword) {
-        
-        String sPassword = JPasswordDialog.showEditPassword(parent,                 
+        try {
+            String sPassword = JPasswordDialog.showEditPassword(parent,                 
                 AppLocal.getIntString("Label.Password"), 
                 AppLocal.getIntString("label.passwordold"),
                 new ImageIcon(Hashcypher.class.getResource("/com/openbravo/images/password.png")));
-        if (sPassword != null) {
-            if (Hashcypher.authenticate(sPassword, sOldPassword)) {
-                return changePassword(parent);               
-            } else {
-                JOptionPane.showMessageDialog(parent, AppLocal.getIntString("message.BadPassword"), AppLocal.getIntString("message.title"), JOptionPane.WARNING_MESSAGE);
-           }
+            if (sPassword != null) {
+                if (Hashcypher.authenticate(sPassword, sOldPassword)) {
+                    return changePassword(parent);               
+                } else {
+                    JOptionPane.showMessageDialog(parent, AppLocal.getIntString("message.BadPassword"), AppLocal.getIntString("message.title"), JOptionPane.WARNING_MESSAGE);
+               }
+            } 
+        } catch (NullPointerException npe) {
+            
         }
+       
         return null;
     }
 }
