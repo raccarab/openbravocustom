@@ -450,7 +450,7 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
         String sMachinePrinter2 = comboValue(jcboMachinePrinter2.getSelectedItem());
         if ("epson".equals(sMachinePrinter2) || "tmu220".equals(sMachinePrinter2) || "star".equals(sMachinePrinter2) || "ithaca".equals(sMachinePrinter2) || "surepos".equals(sMachinePrinter2)) {
             config.setProperty("machine.printer.2", sMachinePrinter2 + ":" + comboValue(jcboConnPrinter2.getSelectedItem()) + "," + comboValue(jcboSerialPrinter2.getSelectedItem()));
-        } else if ("javapos".equals(sMachinePrinter2) || "bash".equals(sMachinePrinter) ) {
+        } else if ("javapos".equals(sMachinePrinter2) || "bash".equals(sMachinePrinter2) ) {
             config.setProperty("machine.printer.2", sMachinePrinter2 + ":" + m_jtxtJPOSPrinter2.getText() + "," + m_jtxtJPOSDrawer2.getText());
         } else if ("printer".equals(sMachinePrinter2)) {
             config.setProperty("machine.printer.2", sMachinePrinter2 + ":" + printer2printerparams.getParameters());
@@ -462,7 +462,7 @@ public class JPanelConfigGeneral extends javax.swing.JPanel implements PanelConf
         String sMachinePrinter3 = comboValue(jcboMachinePrinter3.getSelectedItem());
         if ("epson".equals(sMachinePrinter3) || "tmu220".equals(sMachinePrinter3) || "star".equals(sMachinePrinter3) || "ithaca".equals(sMachinePrinter3) || "surepos".equals(sMachinePrinter3)) {
             config.setProperty("machine.printer.3", sMachinePrinter3 + ":" + comboValue(jcboConnPrinter3.getSelectedItem()) + "," + comboValue(jcboSerialPrinter3.getSelectedItem()));
-        } else if ("javapos".equals(sMachinePrinter2) || "bash".equals(sMachinePrinter) ) {
+        } else if ("javapos".equals(sMachinePrinter3) || "bash".equals(sMachinePrinter3) ) {
             config.setProperty("machine.printer.3", sMachinePrinter3 + ":" + m_jtxtJPOSPrinter3.getText() + "," + m_jtxtJPOSDrawer3.getText());
         } else if ("printer".equals(sMachinePrinter3)) {
             config.setProperty("machine.printer.3", sMachinePrinter3 + ":" + printer3printerparams.getParameters());

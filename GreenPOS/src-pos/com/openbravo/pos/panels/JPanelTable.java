@@ -85,9 +85,10 @@ public abstract class JPanelTable extends JPanel implements JPanelView, BeanFact
             }
 
             
-            JPanel insidePanel = new JPanel(new GridLayout());
+            JPanel insidePanel = new JPanel();
 
-            
+            insidePanel.setLayout(new GridLayout());
+    
             // el panel este
             ListCellRenderer cr = getListCellRenderer();
             if (cr != null) {
@@ -114,7 +115,7 @@ public abstract class JPanelTable extends JPanel implements JPanelView, BeanFact
             if (c != null) {
                 c.applyComponentOrientation(getComponentOrientation());
                 toolbar.add(c);
-            }
+            }  
             
             container.add(insidePanel,BorderLayout.CENTER);
 

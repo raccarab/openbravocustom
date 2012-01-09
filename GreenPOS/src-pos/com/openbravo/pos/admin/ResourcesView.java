@@ -199,7 +199,7 @@ public class ResourcesView extends JPanel implements EditorRecord {
 
         m_jContainer.setLayout(new java.awt.CardLayout());
 
-        m_jText.setFont(new java.awt.Font("DialogInput", 0, 12));
+        m_jText.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
         jScrollPane1.setViewportView(m_jText);
 
         m_jContainer.add(jScrollPane1, "text");

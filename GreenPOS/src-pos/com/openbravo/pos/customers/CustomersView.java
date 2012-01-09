@@ -475,6 +475,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
         jLabel8.setText(AppLocal.getIntString("label.searchkey")); // NOI18N
 
         m_jSearchkey.setEnabled(false);
+        m_jSearchkey.setMaximumSize(new java.awt.Dimension(14, 68));
 
         jLabel3.setText(AppLocal.getIntString("label.name")); // NOI18N
 
@@ -783,7 +784,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(m_jSearchkey, javax.swing.GroupLayout.PREFERRED_SIZE, 22, Short.MAX_VALUE))
+                    .addComponent(m_jSearchkey, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -816,7 +817,7 @@ public class CustomersView extends javax.swing.JPanel implements EditorRecord {
                     .addComponent(jButton3))
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addGap(38, 38, 38))
         );
 
         jButton1.getAccessibleContext().setAccessibleName("jGenerateKey");
