@@ -179,7 +179,7 @@ public class UsersSync implements ProcessAction {
 //                            continue;
 //                        }
 // TODO : SYNC PEOPLE WITH DATABASE
-//System.out.println (remoteUser.getLogin()+" : "+remoteUser.getShopper_group_id());
+System.out.println (remoteUser.getLogin()+" "+remoteUser.getLastname()+" : "+remoteUser.getShopper_group_id());
 //                        perms = remoteUser.getPerms();
 //                        if (!perms.equals("shopper")){
 //                            System.out.println (remoteUser.getLogin()+" : "+remoteUser.getPerms());
@@ -191,17 +191,17 @@ public class UsersSync implements ProcessAction {
 
                         cpt++;
 
-	            	String name = externalsales.encodeStringISO((remoteUser.getFirstname().trim()+" "+remoteUser.getLastname()).trim());
-	            	String firstname =  externalsales.encodeStringISO(remoteUser.getFirstname());
-	            	String lastname =  externalsales.encodeStringISO(remoteUser.getLastname());
-	            	String description =  externalsales.encodeStringISO(remoteUser.getDescription());
-	            	String address = externalsales.encodeStringISO(remoteUser.getAddress());
-	            	String address2 = externalsales.encodeStringISO(remoteUser.getAddress2());
-	            	String city = externalsales.encodeStringISO(remoteUser.getCity());
-	            	String country = externalsales.encodeStringISO(remoteUser.getCountry());
-                        String phone = externalsales.encodeStringISO(remoteUser.getPhone());
-                        String mobile = externalsales.encodeStringISO(remoteUser.getMobile());
-	            	String zipcode = externalsales.encodeStringISO(remoteUser.getZipcode());
+	            	String name = externalsales.encodeString((remoteUser.getFirstname().trim()+" "+remoteUser.getLastname()).trim());
+	            	String firstname =  externalsales.encodeString(remoteUser.getFirstname());
+	            	String lastname =  externalsales.encodeString(remoteUser.getLastname());
+	            	String description =  externalsales.encodeString(remoteUser.getDescription());
+	            	String address = externalsales.encodeString(remoteUser.getAddress());
+	            	String address2 = externalsales.encodeString(remoteUser.getAddress2());
+	            	String city = externalsales.encodeString(remoteUser.getCity());
+	            	String country = externalsales.encodeString(remoteUser.getCountry());
+                        String phone = externalsales.encodeString(remoteUser.getPhone());
+                        String mobile = externalsales.encodeString(remoteUser.getMobile());
+	            	String zipcode = externalsales.encodeString(remoteUser.getZipcode());
                         CharsetEncoder encoder = externalsales.getEncoder();
 	            	
 	            	CustomerSync copyCustomer = new CustomerSync(remoteUser.getId());
@@ -244,7 +244,7 @@ public class UsersSync implements ProcessAction {
                             country ="Belgium";
 	                copyCustomer.setCountry(country);
 
-	                copyCustomer.setMaxdebt(1000.0);
+	                copyCustomer.setMaxdebt(10000.0);
 
                         if (phone==null || phone.equals(""))
                             phone=" ";

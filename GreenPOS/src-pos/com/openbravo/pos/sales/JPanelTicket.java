@@ -1302,7 +1302,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jButtons.add(jRebateTotal);
 
         jAddPercent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/btnplus.png"))); // NOI18N
-        jAddPercent.setToolTipText("Supplément totale");
+        jAddPercent.setToolTipText("SupplÃ©ment totale");
         jAddPercent.setPreferredSize(new java.awt.Dimension(46, 35));
         jAddPercent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1310,6 +1310,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
             }
         });
         m_jButtons.add(jAddPercent);
+        jAddPercent.getAccessibleContext().setAccessibleDescription("Total extra");
 
         jTakeAway.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/launch.png"))); // NOI18N
         jTakeAway.setText("TakeAway");

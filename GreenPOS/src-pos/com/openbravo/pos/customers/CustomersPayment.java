@@ -51,7 +51,7 @@ import javax.swing.JOptionPane;
  * @author  adrianromero
  */
 public class CustomersPayment extends javax.swing.JPanel implements JPanelView, BeanFactoryApp {
-
+    
     private AppView app;
     private DataLogicCustomers dlcustomers;
     private DataLogicSales dlsales;
@@ -271,9 +271,12 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         btnCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/kuser.png"))); // NOI18N
+        btnCustomer.setText("List");
         btnCustomer.setFocusPainted(false);
         btnCustomer.setFocusable(false);
-        btnCustomer.setMargin(new java.awt.Insets(8, 14, 8, 14));
+        btnCustomer.setMaximumSize(new java.awt.Dimension(100, 40));
+        btnCustomer.setMinimumSize(new java.awt.Dimension(100, 40));
+        btnCustomer.setPreferredSize(new java.awt.Dimension(100, 40));
         btnCustomer.setRequestFocusEnabled(false);
         btnCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -283,9 +286,12 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
         jPanel6.add(btnCustomer);
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/filesave.png"))); // NOI18N
+        btnSave.setText("Save");
         btnSave.setFocusPainted(false);
         btnSave.setFocusable(false);
-        btnSave.setMargin(new java.awt.Insets(8, 14, 8, 14));
+        btnSave.setMaximumSize(new java.awt.Dimension(100, 40));
+        btnSave.setMinimumSize(new java.awt.Dimension(100, 40));
+        btnSave.setPreferredSize(new java.awt.Dimension(100, 40));
         btnSave.setRequestFocusEnabled(false);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,11 +301,13 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
         jPanel6.add(btnSave);
         jPanel6.add(jSeparator1);
 
-        btnPay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/greenled.png"))); // NOI18N
+        btnPay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/btnminus.png"))); // NOI18N
         btnPay.setText(AppLocal.getIntString("button.pay")); // NOI18N
         btnPay.setFocusPainted(false);
         btnPay.setFocusable(false);
-        btnPay.setMargin(new java.awt.Insets(8, 14, 8, 14));
+        btnPay.setMaximumSize(new java.awt.Dimension(100, 40));
+        btnPay.setMinimumSize(new java.awt.Dimension(100, 40));
+        btnPay.setPreferredSize(new java.awt.Dimension(100, 40));
         btnPay.setRequestFocusEnabled(false);
         btnPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,12 +316,12 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
         });
         jPanel6.add(btnPay);
 
-        btnCredit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/kdmconfig.png"))); // NOI18N
-        btnCredit.setText("Créditer compte");
+        btnCredit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/openbravo/images/btnplus.png"))); // NOI18N
+        btnCredit.setText("Add credit");
         btnCredit.setActionCommand("btnCredit");
-        btnCredit.setMaximumSize(new java.awt.Dimension(103, 42));
-        btnCredit.setMinimumSize(new java.awt.Dimension(103, 42));
-        btnCredit.setPreferredSize(new java.awt.Dimension(103, 42));
+        btnCredit.setMaximumSize(new java.awt.Dimension(100, 40));
+        btnCredit.setMinimumSize(new java.awt.Dimension(100, 40));
+        btnCredit.setPreferredSize(new java.awt.Dimension(100, 40));
         btnCredit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreditActionPerformed(evt);
@@ -443,7 +451,7 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCurdate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -476,7 +484,7 @@ public class CustomersPayment extends javax.swing.JPanel implements JPanelView, 
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtCurdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         add(jPanel1, java.awt.BorderLayout.CENTER);

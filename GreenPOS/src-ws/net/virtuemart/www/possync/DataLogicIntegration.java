@@ -76,10 +76,10 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
     public void syncCustomersBefore() throws BasicException {
  // sync problems
         new StaticSentence(s, "UPDATE CUSTOMERS SET VISIBLE = " + s.DB.TRUE()).exec();
-        new StaticSentence(s, "DELETE FROM CUSTOMERS WHERE ID NOT LIKE '0' AND ID NOT IN (SELECT CUSTOMER FROM TICKETS GROUP BY CUSTOMER)").exec();
+        new StaticSentence(s, "DELETE FROM CUSTOMERS WHERE ID NOT LIKE '0' AND ( CURDEBT IS NULL OR CURDEBT = 0.0 ) AND ID NOT IN (SELECT CUSTOMER FROM TICKETS GROUP BY CUSTOMER)").exec();
  //ZAV
-        if (TicketInfo.getPayID()==2)
-            new StaticSentence(s, "UPDATE CUSTOMERS SET CURDEBT=0.0 WHERE ID NOT LIKE '0' AND CURDEBT > 0.0").exec();
+       // if (TicketInfo.getPayID()==2)
+       //     new StaticSentence(s, "UPDATE CUSTOMERS SET CURDEBT=0.0 WHERE ID NOT LIKE '0' AND CURDEBT > 0.0").exec();
 
     }
 
@@ -110,32 +110,6 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                                 setString(14, customer.getName());
                                 setString(15, customer.getTaxid());
                             }}) == 0) {
-
-                     if (TicketInfo.getPayID()==2) {
-                                           //ZAV CURDEBT 0,0001
-                       new PreparedSentence(s,
-                            "INSERT INTO CUSTOMERS(ID, SEARCHKEY, NAME, ADDRESS, ADDRESS2, POSTAL, CITY, REGION, COUNTRY, FIRSTNAME, LASTNAME, EMAIL, PHONE, PHONE2, NOTES, TAXID, MAXDEBT, VISIBLE, CURDEBT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + s.DB.TRUE() + ",-0.0001)",
-                            SerializerWriteParams.INSTANCE
-                            ).exec(new DataParams() { public void writeValues() throws BasicException {
-                                setString(1, customer.getId());
-                                setString(2, customer.getSearchkey());
-                                setString(3, customer.getName());
-                                setString(4, customer.getAddress());
-                                setString(5, customer.getAddress2());
-                                setString(6, customer.getPostal());
-                                setString(7, customer.getCity());
-                                setString(8, customer.getRegion());
-                                setString(9, customer.getCountry());
-                                setString(10, customer.getFirstname());
-                                setString(11, customer.getLastname());
-                                setString(12, customer.getEmail());
-                                setString(13, customer.getPhone());
-                                setString(14, customer.getPhone2());
-                                setString(15, customer.getNotes());
-                                setString(16, customer.getTaxid());
-                                setDouble(17, customer.getMaxdebt());
-                            }});
-                } else {
                 		
                     // If not updated, try to insert
                     new PreparedSentence(s,
@@ -161,7 +135,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
                                 setDouble(17, customer.getMaxdebt());
                             }});
                             }
-                }
+               
 
                 return null;
             }

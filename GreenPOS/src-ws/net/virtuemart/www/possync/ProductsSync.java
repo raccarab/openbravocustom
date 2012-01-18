@@ -117,7 +117,7 @@ public class ProductsSync implements ProcessAction {
 			
 			for (Categorie categorie : cats) {
 
-				CategoryInfo addCategory = new CategoryInfo(categorie.getId(), externalsales.encodeStringISO(categorie.getName()), null);
+				CategoryInfo addCategory = new CategoryInfo(categorie.getId(), externalsales.encodeString(categorie.getName()), null);
 				try {
 					dlintegration.syncCategory(addCategory);
 					

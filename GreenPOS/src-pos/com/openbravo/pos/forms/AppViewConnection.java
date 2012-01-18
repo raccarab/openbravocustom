@@ -44,6 +44,7 @@ public class AppViewConnection {
                
         try{
 
+            //System.out.println(props.getProperty("db.driver"));
             // register the database driver
             if (isJavaWebStart()) {
                 Class.forName(props.getProperty("db.driver"), true, Thread.currentThread().getContextClassLoader());
@@ -63,15 +64,15 @@ public class AppViewConnection {
              return new Session(props.getProperty("db.URL"), sDBUser,sDBPassword);     
 
         } catch (InstantiationException e) {
-            throw new BasicException(AppLocal.getIntString("message.databasedrivererror"), e);
+            throw new BasicException(AppLocal.getIntString("message.databasedrivererror" + " "), e);
         } catch (IllegalAccessException eIA) {
-            throw new BasicException(AppLocal.getIntString("message.databasedrivererror"), eIA);
+            throw new BasicException(AppLocal.getIntString("message.databasedrivererror" + " *eIA* "), eIA);
         } catch (MalformedURLException eMURL) {
-            throw new BasicException(AppLocal.getIntString("message.databasedrivererror"), eMURL);
+            throw new BasicException(AppLocal.getIntString("message.databasedrivererror" + " *eMURL* "), eMURL);
         } catch (ClassNotFoundException eCNF) {
-            throw new BasicException(AppLocal.getIntString("message.databasedrivererror"), eCNF);
+            throw new BasicException(AppLocal.getIntString("message.databasedrivererror" + " *eCNF* "), eCNF);
         } catch (SQLException eSQL) {
-            throw new BasicException(AppLocal.getIntString("message.databaseconnectionerror"), eSQL);
+            throw new BasicException(AppLocal.getIntString("message.databaseconnectionerror" + " *eSQL* "), eSQL);
         }   
     }
 

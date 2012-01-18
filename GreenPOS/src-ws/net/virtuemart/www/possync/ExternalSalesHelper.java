@@ -219,14 +219,15 @@ public class ExternalSalesHelper {
             return toEncode;
         }
     }
+//
+//    public String encodeStringISO (String toEncode) {
+//        try {
+//            return new String(encoderISO.encode(CharBuffer.wrap(toEncode.toCharArray())).array());
+//        } catch (CharacterCodingException ex) {
+//            return toEncode;
+//        }
+//    }
 
-    public String encodeStringISO (String toEncode) {
-        try {
-            return new String(encoderISO.encode(CharBuffer.wrap(toEncode.toCharArray())).array());
-        } catch (CharacterCodingException ex) {
-            return toEncode;
-        }
-    }
     /**
      * PUBLIC
      * @param produit
