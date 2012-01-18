@@ -179,7 +179,7 @@ public class UsersSync implements ProcessAction {
 //                            continue;
 //                        }
 // TODO : SYNC PEOPLE WITH DATABASE
-System.out.println (remoteUser.getLogin()+" "+remoteUser.getLastname()+" : "+remoteUser.getShopper_group_id());
+System.out.println ("> "+remoteUser.getLogin()+" "+remoteUser.getLastname()+" : "+remoteUser.getShopper_group_id());
 //                        perms = remoteUser.getPerms();
 //                        if (!perms.equals("shopper")){
 //                            System.out.println (remoteUser.getLogin()+" : "+remoteUser.getPerms());
@@ -257,7 +257,6 @@ System.out.println (remoteUser.getLogin()+" "+remoteUser.getLastname()+" : "+rem
                         if (zipcode==null || zipcode.equals(""))
                             zipcode =" ";
 	                copyCustomer.setPostal(zipcode);
-
 
                         // SYNC ONLY EMAIL USER FOR OGONE (ZAV)
 	                if (TicketInfo.isWS()
@@ -358,7 +357,9 @@ System.out.println (remoteUser.getLogin()+" "+remoteUser.getLastname()+" : "+rem
                     userAdd.setMdate(df.format(now));
                     userAdd.setShopper_group_id("1");
 
-                   
+                  System.out.println (userAdd.getLogin()+" "+userAdd.getLastname()+" : "+userAdd.getShopper_group_id());
+
+ 
 
                     externalsales.addUser(userAdd);
 		}

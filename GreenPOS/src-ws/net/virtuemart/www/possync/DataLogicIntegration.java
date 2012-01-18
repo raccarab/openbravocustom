@@ -76,7 +76,7 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
     public void syncCustomersBefore() throws BasicException {
  // sync problems
         new StaticSentence(s, "UPDATE CUSTOMERS SET VISIBLE = " + s.DB.TRUE()).exec();
-        new StaticSentence(s, "DELETE FROM CUSTOMERS WHERE ID NOT LIKE '0' AND ( CURDEBT IS NULL OR CURDEBT = 0.0 ) AND ID NOT IN (SELECT CUSTOMER FROM TICKETS GROUP BY CUSTOMER)").exec();
+        new StaticSentence(s, "DELETE FROM CUSTOMERS WHERE ID NOT LIKE '0' AND ID NOT IN (SELECT CUSTOMER FROM TICKETS GROUP BY CUSTOMER)").exec();
  //ZAV
        // if (TicketInfo.getPayID()==2)
        //     new StaticSentence(s, "UPDATE CUSTOMERS SET CURDEBT=0.0 WHERE ID NOT LIKE '0' AND CURDEBT > 0.0").exec();
