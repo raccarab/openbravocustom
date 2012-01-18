@@ -202,8 +202,7 @@ System.out.println ("> "+remoteUser.getLogin()+" "+remoteUser.getLastname()+" : 
                         String phone = externalsales.encodeString(remoteUser.getPhone());
                         String mobile = externalsales.encodeString(remoteUser.getMobile());
 	            	String zipcode = externalsales.encodeString(remoteUser.getZipcode());
-                        CharsetEncoder encoder = externalsales.getEncoder();
-	            	
+                       
 	            	CustomerSync copyCustomer = new CustomerSync(remoteUser.getId());
 
                         if (firstname==null || firstname.equals(""))
@@ -276,12 +275,17 @@ System.out.println ("> "+remoteUser.getLogin()+" "+remoteUser.getLastname()+" : 
 
         } while (remoteUsers.length > 0 );
 
+System.out.println("***");
+
         List<CustomerSync> localList = dlintegration.getCustomers();
 		
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         
         for (CustomerSync localCustomer : localList) {
-                Date now = new Date();
+
+System.out.println (localCustomer.getTaxid()+" "+localCustomer.getName());
+
+            Date now = new Date();
         	if (notToSync.contains(localCustomer.getTaxid())) {
         		continue;
         	}
@@ -356,10 +360,6 @@ System.out.println ("> "+remoteUser.getLogin()+" "+remoteUser.getLastname()+" : 
                     userAdd.setBank_sort_code("");
                     userAdd.setMdate(df.format(now));
                     userAdd.setShopper_group_id("1");
-
-                  System.out.println (userAdd.getLogin()+" "+userAdd.getLastname()+" : "+userAdd.getShopper_group_id());
-
- 
 
                     externalsales.addUser(userAdd);
 		}

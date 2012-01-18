@@ -83,12 +83,7 @@ public abstract class JPanelTable extends JPanel implements JPanelView, BeanFact
                 c.applyComponentOrientation(getComponentOrientation());
                 add(c, BorderLayout.NORTH);
             }
-
-            
-            JPanel insidePanel = new JPanel();
-
-            insidePanel.setLayout(new GridLayout());
-    
+               
             // el panel este
             ListCellRenderer cr = getListCellRenderer();
             if (cr != null) {
@@ -98,16 +93,15 @@ public abstract class JPanelTable extends JPanel implements JPanelView, BeanFact
                     
                 if (cr != null) nl.setCellRenderer(cr);
                 
-                //container.add(nl, java.awt.BorderLayout.LINE_START);
-                insidePanel.add(nl);
+                container.add(nl, java.awt.BorderLayout.LINE_START);
+                
             }
                         
             // Add the editor
             c = getEditor().getComponent();
             if (c != null) {
                 c.applyComponentOrientation(getComponentOrientation());                
-                //container.add(c, BorderLayout.CENTER);            
-                insidePanel.add(c);            
+                container.add(c, BorderLayout.CENTER);                       
             }
 
             // add toolbar extras
@@ -117,8 +111,6 @@ public abstract class JPanelTable extends JPanel implements JPanelView, BeanFact
                 toolbar.add(c);
             }  
             
-            container.add(insidePanel,BorderLayout.CENTER);
-
             // La Toolbar
             c = new JLabelDirty(dirty);
             c.applyComponentOrientation(getComponentOrientation());
