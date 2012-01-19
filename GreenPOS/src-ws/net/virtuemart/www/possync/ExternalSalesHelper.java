@@ -213,11 +213,12 @@ public class ExternalSalesHelper {
     }
 
     public String encodeString (String toEncode) {
-        try {
-            return new String(encoderUTF.encode(CharBuffer.wrap(toEncode.toCharArray())).array());
-        } catch (CharacterCodingException ex) {
-            return toEncode;
-        }
+        //try {
+            //return new String(encoderUTF.encode(CharBuffer.wrap(toEncode.toCharArray())).array());
+            return new String(toEncode.toCharArray());
+        //} catch (CharacterCodingException ex) {
+        //    return toEncode;
+        //}
     }
 //
 //    public String encodeStringISO (String toEncode) {

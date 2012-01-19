@@ -50,3 +50,97 @@ $1.00
 ------------------------------------------
 Thank you for your visit.
 -----*CUT*-----
+GREEN POS
+Tii
+Rue Franklin, 10
+1000  Bruxelles
+Tel: 02/222.22.22
+Ticket:
+Date  :
+an 19, 2012 4:08:52 PM
+Customer:
+GREEN POS
+Tii
+Rue Franklin, 10
+1000  Bruxelles
+Tel: 02/222.22.22
+Ticket:
+Date  :
+an 19, 2012 4:10:18 PM
+Customer:
+ADAM LEVY
+adamlevy42@gmail.com
+Article
+Prix
+Qte
+Total
+------------------------------------------
+Drap de lit
+$3.95
+x1
+$3.95
+Essuie de bain
+$4.50
+x1
+$4.50
+------------------------------------------
+Total.
+$8.45
+Cashier:
+Administrator
+Green and Clean vous remercie de votre
+confiance. Voir nos conditions de vente
+affichées en magasin.
+-----*CUT*-----
+GREEN POS
+Tii
+Rue Franklin, 10
+1000  Bruxelles
+Tel: 02/222.22.22
+Ticket:
+Date  :
+an 19, 2012 4:11:17 PM
+Article
+Prix
+Qte
+Total
+------------------------------------------
+A-Blouson
+$13.90
+x1
+$13.90
+------------------------------------------
+Total.
+$13.90
+Cashier:
+Administrator
+Green and Clean vous remercie de votre
+confiance. Voir nos conditions de vente
+affichées en magasin.
+-----*CUT*-----
+GREEN POS
+Tii
+Rue Franklin, 10
+1000  Bruxelles
+Tel: 02/222.22.22
+Ticket:
+Date  :
+an 19, 2012 4:14:00 PM
+Article
+Prix
+Qte
+Total
+------------------------------------------
+A-Blouson
+$13.90
+x1
+$13.90
+------------------------------------------
+Total.
+$13.90
+Cashier:
+Administrator
+Green and Clean vous remercie de votre
+confiance. Voir nos conditions de vente
+affichées en magasin.
+-----*CUT*-----
