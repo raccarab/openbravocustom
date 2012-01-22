@@ -210,8 +210,6 @@ public class ProductsSync implements ProcessAction {
 			}
 			HashMap<Double, String> remoteTaxes = externalsales.getTaxes();
 
-
-			
 			 Produit[] products = externalsales.getProductsCatalog();
 
 	         if (products == null) {
@@ -388,6 +386,8 @@ public class ProductsSync implements ProcessAction {
 				}
 				
 			}
+                        
+                        dlintegration.syncProductsAfter();
 			
          return products.length;
 

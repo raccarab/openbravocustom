@@ -146,6 +146,10 @@ public class DataLogicIntegration extends BeanFactoryDataSingle {
     
     public void syncProductsBefore() throws BasicException {
         new StaticSentence(s, "DELETE FROM PRODUCTS_CAT").exec();
+    } 
+    
+    public void syncProductsAfter() throws BasicException {
+        new StaticSentence(s, "DELETE FROM CATEGORIES WHERE ID NOT IN ( SELECT CATEGORY  FROM PRODUCTS GROUP BY CATEGORY )").exec();
     }   
     
     public void syncTaxCategory(final TaxCategoryInfo taxcat) throws BasicException {
