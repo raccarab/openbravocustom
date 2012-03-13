@@ -606,7 +606,10 @@ private void m_jRenduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         toPay = currentCustomer.getCurdebt();
     }
 
-    if (toPay > 0.0) {
+    //TODO ROUNDED
+    long checkPay = Math.round(toPay);
+    
+    if (checkPay > 0) {
         JPaymentSelect paymentdialog;
         paymentdialog = JPaymentSelectCustomer.getDialog(this);
         paymentdialog.init(m_App);

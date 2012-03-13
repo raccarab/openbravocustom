@@ -51,6 +51,7 @@ public class CustomerInfo implements SerializableRead, Serializable {
     protected String taxid;
     protected String name;
     protected String curdebt;
+    protected String email;
 
     private static Logger logger = Logger.getLogger("com.openbravo.pos.ticket.TicketInfo");
     
@@ -60,6 +61,7 @@ public class CustomerInfo implements SerializableRead, Serializable {
         this.searchkey = null;
         this.taxid = null;
         this.name = null;
+        this.email = null;
     }
     
     public String getId() {
@@ -93,6 +95,14 @@ public class CustomerInfo implements SerializableRead, Serializable {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public String getEmail() {
+        return email;
+    }   
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String printTaxid() {
         return StringUtils.encodeXML(taxid);
@@ -106,23 +116,35 @@ public class CustomerInfo implements SerializableRead, Serializable {
     public String toString() {
  //       if (this.curdebt != null && (!this.curdebt.equals("0"))) {
         String value = "";
+        String email = "";
+        if (! getEmail().endsWith("@DONOTSENDME")) {
+            email=getEmail();
+        }
         if (this.curdebt == null || this.curdebt.equals("0")) {
-            value= getName();
+           value = "<html><table>" +
+                   "<tr><td width=\"200\">"+ " "+ getName() +" </td>" +
+                   "<td width=\"200\" align=\"center\" >"+ " "+ email +"</td>"
+                +"</tr></table></html>";
             
         } else {
+            if (TicketInfo.isWS()) {
+                
+            }
             if ( this.curdebt.substring(0, 1).equals("-") ) {
 
                  value = "<html><table>" +
-                   "<tr><td width=\"300\">"+ " "+ getName() +" " +"</td>" +
-                   "<td width=\"80\" BGCOLOR=\"#aaffaa\">"+ "[ CREDIT : " +"</td>"+
-                   "<td align=\"right\" width=\"120\" BGCOLOR=\"#aaffaa\">"+ this.curdebt.substring(1) +" ]" +"</td>"
+                   "<tr><td width=\"200\">"+ " "+ getName() +" </td>" +
+                   "<td width=\"200\" align=\"center\" >"+ " "+ email +"</td>"+
+                   "<td width=\"35\" BGCOLOR=\"#aaffaa\">"+ "[ C : " +"</td>"+
+                   "<td align=\"right\" width=\"55\" BGCOLOR=\"#aaffaa\">"+ this.curdebt.substring(1) +" ]" +"</td>"
                 +"</tr></table></html>";
 
             } else {
                 value = "<html><table>" +
-                   "<tr><td width=\"300\">"+ " "+ getName() +" " +"</td>" +
-                   "<td width=\"80\" BGCOLOR=\"#ff8899\">"+ "[ DEBT : " +"</td>"+
-                   "<td align=\"right\" width=\"120\" BGCOLOR=\"#ff8899\">"+ this.curdebt +" ]" +"</td>"
+                   "<tr><td width=\"200\">"+ " "+ getName() +" </td>" +
+                   "<td width=\"200\" align=\"center\" >"+ " "+ email +"</td>"+
+                   "<td width=\"35\" BGCOLOR=\"#ff8899\">"+ "[ D : " +"</td>"+
+                   "<td align=\"right\" width=\"55\" BGCOLOR=\"#ff8899\">"+ this.curdebt +" ]" +"</td>"
                 +"</tr></table></html>";
             }
         }

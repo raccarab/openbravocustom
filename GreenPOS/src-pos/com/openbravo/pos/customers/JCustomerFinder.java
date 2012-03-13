@@ -108,6 +108,7 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
             m_jtxtTaxID.activate();    
             
             cleanSearch();
+            
         } else {
             
             m_jtxtTaxID.setText(customer.getTaxid());
@@ -334,10 +335,10 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
                                 .addComponent(m_jtxtName, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                                .addComponent(jcboAccount, 0, 139, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                                .addComponent(jcboAccount, 0, 138, Short.MAX_VALUE)
                                 .addGap(71, 71, 71)))
-                        .addGap(11, 11, 11))))
+                        .addGap(80, 80, 80))))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,7 +423,7 @@ public class JCustomerFinder extends javax.swing.JDialog implements EditorCreato
         getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-617)/2, (screenSize.height-527)/2, 617, 527);
+        setBounds((screenSize.width-610)/2, (screenSize.height-527)/2, 610, 527);
     }// </editor-fold>//GEN-END:initComponents
     private void jcmdOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmdOKActionPerformed
 
